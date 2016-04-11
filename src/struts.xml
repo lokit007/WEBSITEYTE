@@ -1,0 +1,393 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		<!-- trang chu -->
+		<action name="trang-chu" class="controller.TrangChuActionSupport">
+			<result name="thanh-cong">TrangChu.jsp</result>
+		</action>
+		<action name="menu-bar" class="controller.TrangChuActionSupport" method="LoadMenuBar">
+			<result name="thanh-cong">files/MenuBar.jsp</result>
+		</action>
+		<!-- trang dich vu -->
+		<action name="dich-vu" class="controller.DichVuActionSupport" >
+			<result name="thanh-cong">DichVu.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dich-vu-them" class="controller.DichVuActionSupport" method="LoadThem" >
+			<result name="thanh-cong">DichVuThem.jsp</result>
+		</action>
+		<action name="dang-dich-vu-moi" class="controller.DangDichVuActionSupport" >
+			<result name="input">DangDichVu.jsp</result>
+		</action>
+		<action name="dang-dich-vu" class="controller.DangDichVuActionSupport" method="DangDichVu" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">DangDichVu.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
+			<result name="that-bai">DangDichVu.jsp</result>
+		</action>
+		<action name="chi-tiet-dich-vu" class="controller.XemDichVuActionSupport" >
+			<result name="thanh-cong">XemDichVu.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dang-ky-dich-vu" class="controller.DangKyDichVuActionSupport" >
+			<result name="input">XemDichVu.jsp</result>
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<!-- trang nhu cau -->
+		<action name="nhu-cau" class="controller.NhuCauActionSupport" >
+			<result name="thanh-cong">NhuCau.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="nhu-cau-them" class="controller.NhuCauActionSupport" method="LoadThem" >
+			<result name="thanh-cong">NhuCauThem.jsp</result>
+		</action>
+		<action name="chi-tiet-nhu-cau" class="controller.XemNhuCauActionSupport" >
+			<result name="thanh-cong">XemNhuCau.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dang-ky-nhu-cau" class="controller.DangKyNhuCauActionSupport" >
+			<result name="input">XemNhuCau.jsp</result>
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="dang-nhu-cau-moi" class="controller.DangDichVuActionSupport" >
+			<result name="input">DangNhuCau.jsp</result>
+		</action>
+		<action name="dang-nhu-cau" class="controller.DangNhuCauActionSupport" method="DangNhuCau" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">DangNhuCau.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
+			<result name="that-bai">DangNhuCau.jsp</result>
+		</action>
+		<!-- dang nhap -->
+		<action name="dang-nhap" class="controller.DangNhapActionSupport" >
+			<result name="input">DangNhap.jsp</result>
+			<result name="login-ok" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dangnhap-action" class="controller.DangNhapActionSupport" method="DangNhapClient" >
+			<result name="input">DangNhap.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
+			<result name="that-bai">DangNhap.jsp</result>
+		</action>
+		<action name="dang-nhap-action" class="controller.DangNhapActionSupport" method="DangNhapModal" >
+			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<!-- dang ky -->
+		<action name="dang-ky-action" class="controller.DangNhapActionSupport" method="DangKyClient" >
+			<result name="input">DangNhap.jsp</result>
+			<result name="thanh-cong" type="redirect">CapNhatThongTin.jsp</result>
+			<result name="that-bai">DangNhap.jsp</result>
+		</action>
+		<!-- dang xuat -->
+		<action name="dang-xuat" class="controller.DangNhapActionSupport" method="DangXuatClient" >
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
+		</action>
+		<!-- Loi span -->
+		<action name="loi-bai-dang" class="controller.LoiBaiDangAcctionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<!-- chia se -->
+		<action name="chia-se" class="controller.ChiaSeActionSupport" >
+			<result name="thanh-cong">ChiaSe.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="chia-se-them" class="controller.ChiaSeActionSupport" >
+			<result name="thanh-cong">ChiaSeThem.jsp</result>
+		</action>
+		<action name="bai-viet" class="controller.XemChiaSeActionSupport" >
+			<result name="thanh-cong">XemChiaSe.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<!-- lien he mail -->
+		<action name="gui-lien-he" class="controller.LienHeActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<!-- binh luan -->
+		<action name="binh-luan" class="controller.BinhLuanActionSupport">
+			<result name="thanh-cong">dataBinhLuan.jsp</result>
+		</action>
+		<action name="nhan-mail" class="controller.NhanMailActionSupport" method="DangKyMail" >
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="check-dangky-dv" class="controller.DangKyDichVuActionSupport" method="CheckDangKy" >
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="nha-cung-cap" class="controller.NhaCungCapActionSupport" >
+			<result name="thanh-cong">NhaCungCap.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="danh-gia" class="controller.NhaCungCapActionSupport" method="DanhGia">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<!-- trang cá nhân -->
+		<action name="trang-ca-nhan" class="controller.TrangCaNhanActionSupport">
+			<result name="thanh-cong">ThongTinCaNhan.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="capnhat-canhan" class="controller.TrangCaNhanActionSupport" method="CapNhatThongTin">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="dang-ky-ncc" class="controller.NhaCungCapActionSupport" method="ShowDangKy">
+			<result name="thanh-cong">DangKyNhaCungCap.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dangky-ncc" class="controller.NhaCungCapActionSupport" method="DangKy">
+			<result name="thanh-cong">DangKyNhaCungCap.jsp</result>
+			<result name="that-bai">DangKyNhaCungCap.jsp</result>
+		</action>
+	</package>
+	
+	<!-- trang admin -->
+	<package name="admin" extends="struts-default" namespace="/admin">
+		<!-- trang chu -->
+		<action name="trang-chu" class="controller.admin.TrangChuActionSupport">
+			<result name="thanh-cong">TrangChu.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<!-- dang nhap -->
+		<action name="dang-nhap" class="controller.admin.DangNhapActionSupport" >
+			<result name="input">DangNhap.jsp</result>
+			<result name="login-ok" type="redirect">DangNhap.jsp</result>
+		</action>
+		<action name="login" class="controller.admin.DangNhapActionSupport" method="DangNhapAdmin" >
+			<result name="input">DangNhap.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
+			<result name="that-bai">DangNhap.jsp</result>
+		</action>
+		<!-- danh muc -->
+		<action name="danh-muc" class="controller.admin.DanhMucActionSupport">
+			<result name="thanh-cong">DanhMuc.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="them-danhmuc" class="controller.admin.XulyDanhMucActionSupport" method="themDanhMuc">
+			<result name="thanh-cong" type="redirect">danh-muc.action</result>
+			<result name="that-bai">DanhMuc.jsp</result>
+		</action>
+		<action name="show-danhmuc" class="controller.admin.XulyDanhMucActionSupport" method="showDanhMuc">
+			<result name="thanh-cong">dataDanhMuc.jsp</result>
+		</action>
+		<action name="capnhat-danhmuc" class="controller.admin.XulyDanhMucActionSupport" method="capNhatDanhMuc">
+			<result name="thanh-cong" type="redirect">danh-muc.action</result>
+			<result name="that-bai">DanhMuc.jsp</result>
+		</action>
+		<action name="xoa-danhmuc" class="controller.admin.XulyDanhMucActionSupport" method="xoaDanhMuc">
+			<result name="thanh-cong" type="redirect">danh-muc.action</result>
+			<result name="that-bai">DanhMuc.jsp</result>
+		</action>
+		<!-- dich vu -->
+		<action name="dich-vu" class="controller.admin.DichVuActionSupport">
+			<result name="thanh-cong">DichVu.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="chi-tiet-dich-vu" class="controller.admin.XulyDichVuActionSupport">
+			<result name="thanh-cong">XemDuyetDichVu.jsp</result>
+			<result name="that-bai" type="redirect">dich-vu.action</result>
+		</action>
+		<action name="xoa-dichvu" class="controller.admin.XulyDichVuActionSupport" method="XoaDichVu">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="dang-dich-vu-moi" class="controller.admin.XulyDichVuActionSupport" >
+			<result name="that-bai">DangDichVu.jsp</result>
+		</action>
+		<action name="dang-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="DangDichVu" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">DangDichVu.jsp</result>
+			<result name="thanh-cong" type="redirect">dich-vu.action</result>
+			<result name="that-bai">DangDichVu.jsp</result>
+		</action>
+		<action name="thong-tin-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="ThongTin">
+			<result name="thanh-cong">CapNhatDichVu.jsp</result>
+			<result name="that-bai" type="redirect">dich-vu.action</result>
+		</action>
+		<action name="cap-nhat-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="CapNhatDichVu" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">CapNhatDichVu.jsp</result>
+			<result name="thanh-cong" type="redirect">dich-vu.action</result>
+			<result name="that-bai">CapNhatDichVu.jsp</result>
+		</action>
+		<!-- chia se -->
+		<action name="chia-se" class="controller.admin.ChiaSeActionSupport">
+			<result name="thanh-cong">ChiaSe.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="chi-tiet-chia-se" class="controller.admin.XulyChiaSeActionSupport">
+			<result name="thanh-cong">XemDuyetChiaSe.jsp</result>
+			<result name="that-bai" type="redirect">chia-se.action</result>
+		</action>
+		<action name="xoa-chiase" class="controller.admin.XulyChiaSeActionSupport" method="XoaBaiViet">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="dang-chia-se-moi" class="controller.admin.XulyChiaSeActionSupport" >
+			<result name="that-bai">DangChiaSe.jsp</result>
+		</action>
+		<action name="dang-chia-se" class="controller.admin.XulyChiaSeActionSupport" method="DangBaiViet" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">DangChiaSe.jsp</result>
+			<result name="thanh-cong" type="redirect">chia-se.action</result>
+			<result name="that-bai">DangChiaSe.jsp</result>
+		</action>
+		<action name="thong-tin-chia-se" class="controller.admin.XulyChiaSeActionSupport" method="ThongTin">
+			<result name="thanh-cong">CapNhatChiaSe.jsp</result>
+			<result name="that-bai" type="redirect">chia-se.action</result>
+		</action>
+		<action name="cap-nhat-chia-se" class="controller.admin.XulyChiaSeActionSupport" method="CapNhatBaiViet" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">CapNhatChiaSe.jsp</result>
+			<result name="thanh-cong" type="redirect">chia-se.action</result>
+			<result name="that-bai">CapNhatChiaSe.jsp</result>
+		</action>
+		<!-- nhu cau -->
+		<action name="nhu-cau" class="controller.admin.NhuCauActionSupport">
+			<result name="thanh-cong">NhuCau.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="chi-tiet-nhu-cau" class="controller.admin.XulyNhuCauActionSupport">
+			<result name="thanh-cong">XemDuyetNhuCau.jsp</result>
+			<result name="that-bai" type="redirect">nhu-cau.action</result>
+		</action>
+		<action name="xoa-nhucau" class="controller.admin.XulyNhuCauActionSupport" method="XoaNhuCau">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="dang-nhu-cau-moi" class="controller.admin.XulyNhuCauActionSupport" >
+			<result name="that-bai">DangNhuCau.jsp</result>
+		</action>
+		<action name="dang-nhu-cau" class="controller.admin.XulyNhuCauActionSupport" method="DangNhuCau" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">DangNhuCau.jsp</result>
+			<result name="thanh-cong" type="redirect">nhu-cau.action</result>
+			<result name="that-bai">DangNhuCau.jsp</result>
+		</action>
+		<action name="thong-tin-nhu-cau" class="controller.admin.XulyNhuCauActionSupport" method="ThongTin">
+			<result name="thanh-cong">CapNhatNhuCau.jsp</result>
+			<result name="that-bai" type="redirect">nhu-cau.action</result>
+		</action>
+		<action name="cap-nhat-nhu-cau" class="controller.admin.XulyNhuCauActionSupport" method="CapNhatNhuCau" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">CapNhatNhuCau.jsp</result>
+			<result name="thanh-cong" type="redirect">nhu-cau.action</result>
+			<result name="that-bai">CapNhatNhuCau.jsp</result>
+		</action>
+		<!-- ho tro online -->
+		<action name="ho-tro" class="controller.admin.LienHeActionSupport">
+			<result name="thanh-cong">LienHe.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="dung-hotro" class="controller.admin.LienHeActionSupport" method="DungHoTro">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<!-- thanh vien -->
+		<action name="thanh-vien-quantri" class="controller.admin.ThanhVienActionSupport" method="QuanTriVien">
+			<result name="thanh-cong">ThanhVienQuanTri.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="thanh-vien-nhacungcap" class="controller.admin.ThanhVienActionSupport" method="NhaCungCap">
+			<result name="thanh-cong">ThanhVienNCC.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="thanh-vien-nguoidung" class="controller.admin.ThanhVienActionSupport" method="NguoiDung">
+			<result name="thanh-cong">ThanhVienNguoiDung.jsp</result>
+			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
+		</action>
+		<action name="khoa-taikhoan" class="controller.admin.XulyTaiKhoanActionSupport" method="XulyNguoiDung">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<!-- nha cung cap -->
+		<action name="chi-tiet-nhacungcap" class="controller.admin.XulyNhaCungCapActionSupport" method="ChiTiet">
+			<result name="thanh-cong">XemDuyetNCC.jsp</result>
+			<result name="that-bai" type="redirect">thanh-vien-nhacungcap.action</result>
+		</action>
+		<action name="them-nhacungcap" class="controller.admin.XulyNhaCungCapActionSupport" method="ThemNhaCungCap" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">ThemNhaCungCap.jsp</result>
+			<result name="thanh-cong" type="redirect">thanh-vien-nhacungcap.action</result>
+			<result name="that-bai">ThemNhaCungCap.jsp</result>
+		</action>
+		<action name="thong-tin-nhacungcap" class="controller.admin.XulyNhaCungCapActionSupport" method="ChiTietNCC">
+			<result name="thanh-cong">CapNhatNhaCungCap.jsp</result>
+			<result name="that-bai" type="redirect">thanh-vien-nhacungcap.action</result>
+		</action>
+		<action name="sua-nhacungcap" class="controller.admin.XulyNhaCungCapActionSupport" method="CapNhatNhaCungCap" >
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">CapNhatNhaCungCap.jsp</result>
+			<result name="thanh-cong" type="redirect">thanh-vien-nhacungcap.action</result>
+			<result name="that-bai">CapNhatNhaCungCap.jsp</result>
+		</action>
+		<action name="xoa-nhacungcap" class="controller.admin.XulyNhaCungCapActionSupport" method="XoaNhaCungCap">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="them-quantrivien" class="controller.admin.XulyQuanTriActionSupport" method="ThemQuanTri">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="xoa-quantrivien" class="controller.admin.XulyQuanTriActionSupport" method="XoaQuanTri">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="show-quantri" class="controller.admin.XulyQuanTriActionSupport" method="ThongTinQuanTri">
+			<result name="thanh-cong">dataQuanTri.jsp</result>
+		</action>
+		<action name="capnhat-quantri" class="controller.admin.XulyQuanTriActionSupport" method="CapNhatQuanTri">
+			<result name="thanh-cong" type="redirect">thanh-vien-quantri.action</result>
+			<result name="that-bai">thanh-vien-quantri.action</result>
+		</action>
+		<action name="cap-nhat" class="controller.admin.CapNhatActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+	</package>
+</struts>
+
