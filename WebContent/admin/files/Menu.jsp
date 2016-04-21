@@ -29,7 +29,7 @@
 					<li <%= path.equals("/admin/ChiaSe.jsp")?"class='active'":"" %>><a href="thanh-vien-nguoidung.action"><i class="fa fa-user"></i> Người dùng thường</a></li>
 				</ul>
 			</li>
-			<li <%= path.equals("/admin/TaiNguyen.jsp")?"class='active'":"" %>><a href="TaiNguyen.jsp"><i class="fa fa-database"></i> Quản lý tài nguyên</a></li>
+			<li <%= path.equals("/admin/HeThong.jsp")?"class='active'":"" %>><a href="he-thong.action"><i class="fa fa-database"></i> Quản lý tài nguyên</a></li>
 			<li <%= path.equals("/admin/ThongKe.jsp")?"class='active'":"" %>><a href="ThongKe.jsp"><i class="fa fa-bar-chart"></i> Thống kê hệ thống</a></li>
 		</ul>
 		<s:div cssClass="div-show-content" id="load-60">

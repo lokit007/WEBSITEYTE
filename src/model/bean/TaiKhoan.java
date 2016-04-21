@@ -5,6 +5,7 @@ public class TaiKhoan {
 	private String matKhau;
 	private String hoTen;
 	private String diaChi;
+	private String location;
 	private String dienThoai;
 	private String email;
 	private String tinhTrang;
@@ -24,6 +25,20 @@ public class TaiKhoan {
 		this.ngayThamGia = ngayThamGia;
 	}
 
+	public TaiKhoan(String idTaiKhoan, String matKhau, String hoTen, String diaChi, String dienThoai,
+			String email, String tinhTrang, String ngayThamGia, String location) {
+		super();
+		this.idTaiKhoan = idTaiKhoan;
+		this.matKhau = matKhau;
+		this.hoTen = hoTen;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.email = email;
+		this.tinhTrang = tinhTrang;
+		this.ngayThamGia = ngayThamGia;
+		this.location = location;
+	}
+	
 	public TaiKhoan() {
 		super();
 	}
@@ -98,6 +113,14 @@ public class TaiKhoan {
 
 	public void setLoaiTaiKhoan(String loaiTaiKhoan) {
 		this.loaiTaiKhoan = loaiTaiKhoan;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 }

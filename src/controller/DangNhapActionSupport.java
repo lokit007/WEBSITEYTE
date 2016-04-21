@@ -20,6 +20,7 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 	private String matKhauLai;
 	private String hoTen;
 	private String diaChi;
+	private String location;
 	private String dienThoai;
 	private String email;
 	
@@ -70,7 +71,7 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 			if(ValidateBO.CheckExist(this.taiKhoan, this.email)) {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				TaiKhoan user = new TaiKhoan(this.taiKhoan, this.matKhau, this.hoTen, this.diaChi
-						, this.dienThoai, this.email, "TK mới", sdf.format(new Date()));
+						, this.dienThoai, this.email, "TK mới", sdf.format(new Date()), location);
 				if(ValidateBO.CheckAccountExist(user)){
 					request.getSession().setAttribute("user", user);
 					request.getSession().setAttribute("login", true);
@@ -153,6 +154,14 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }

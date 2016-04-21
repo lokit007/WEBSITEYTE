@@ -7,6 +7,7 @@ public class NhaCungCap {
 	private String chungChi;
 	private String fileKem;
 	private int danhGia;
+	private String loaiNCC;
 	
 	public NhaCungCap(int idNhaCungCap, TaiKhoan taiKhoan, String gioiThieu, String chungChi, String fileKem,
 			int danhGia) {
@@ -69,6 +70,14 @@ public class NhaCungCap {
 
 	public void setDanhGia(int danhGia) {
 		this.danhGia = danhGia;
+	}
+
+	public String getLoaiNCC() {
+		return loaiNCC;
+	}
+
+	public void setLoaiNCC(String loaiNCC) {
+		this.loaiNCC = loaiNCC;
 	}
 	
 }

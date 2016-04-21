@@ -52,7 +52,8 @@
 			url : 'menu-bar.action',
 			type : 'POST',
 			success:function(data, textStatus, jqXHR){
-				$("#div-content-right").before(data);
+				/* $("#div-content-right").before(data); */
+				$("#div-content-right").after(data);
 			}
 		});
 	});

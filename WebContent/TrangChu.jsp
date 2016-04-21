@@ -34,7 +34,7 @@
 							</s:div>
 						</s:iterator>
 					</s:subset>
-					<s:subset start="0" source="listDVTT">
+					<s:subset start="1" source="listDVTT">
 						<s:iterator>
 							<s:div cssClass="div-content-home-main-item">
 							<s:a href="chi-tiet-dich-vu.action?idDichVu=%{ idDichVu}">
@@ -105,7 +105,7 @@
 							</s:div>
 						</s:iterator>
 					</s:subset>
-					<s:subset start="0" source="listDVTN">
+					<s:subset start="1" source="listDVTN">
 						<s:iterator>
 							<s:div cssClass="div-content-home-main-item">
 							<s:a href="chi-tiet-dich-vu.action?idDichVu=%{ idDichVu}">
@@ -185,9 +185,10 @@
 			</s:if>
 			<!-- kết thúc content -->
 		</s:div>
+		<!-- ajax load menubar here -->
 		<s:div cssClass="clear"></s:div>
 	</s:div>
-	<s:div cssClass="div-quangcao">
+	<s:div cssClass="div-quangcao-last">
 		<img src="http://placehold.it/234x60">
 		<img src="http://placehold.it/234x60">
 		<img src="http://placehold.it/234x60">

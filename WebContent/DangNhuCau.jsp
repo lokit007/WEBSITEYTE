@@ -27,8 +27,61 @@
 	});
 </script>
 <title>Đăng ký nhu cầu dịch vụ</title>
+<script>
+	var autocomplete;
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */
+		(document.getElementById('diaDiem')), {
+			types : [ 'geocode' ]
+		});
+	}
+
+	function errorHandler(err) {
+		if (err.code == 1) {
+			alert("Error: Access is denied!");
+		} else if (err.code == 2) {
+			alert("Error: Position is unavailable!");
+		}
+	}
+	function getLocation() {
+		if (navigator.geolocation) {
+			// timeout at 60000 milliseconds (60 seconds)
+			var options = {
+				timeout : 60000
+			};
+			navigator.geolocation.getCurrentPosition(XemThu, errorHandler,
+					options);
+		} else {
+			alert("Sorry, browser does not support geolocation!");
+		}
+	}
+	function XemThu(position) {
+		$.ajax({
+			url : "https://maps.googleapis.com/maps/api/geocode/json",
+			type : "get",
+			dateType : "json",
+			data : {
+				latlng : position.coords.latitude + ','
+						+ position.coords.longitude,
+				sensor : false,
+				language : 'vi'
+			},
+			success : function(result, textStatus) {
+				if($("#diaDiem").val()=='')
+					$("#diaDiem").val(result.results[0].formatted_address);
+			}
+		});
+	}
+</script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
+	async defer></script>
 </head>
-<body>
+<body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
 	<s:div id="div-content">
 		<!-- ajax load menubar -->
@@ -66,15 +119,15 @@
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:label value="Cá nhân/tổ chức yêu cầu" for="nhaCungCap"></s:label>
-					<s:textfield name="nhaCungCap" cssClass="form-control"></s:textfield>
+					<s:textfield name="nhaCungCap" cssClass="form-control" value="%{ #session.user.hoTen}"></s:textfield>
 					<br>
 					<s:label value="Địa điểm mong muốn" for="diaDiem"></s:label>
-					<s:textfield name="diaDiem" cssClass="form-control"></s:textfield>
+					<s:textfield id="diaDiem" name="diaDiem" cssClass="form-control" value="%{ #session.user.diaChi}"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
 							<s:label value="Điện thoại" for="dienThoai"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control"></s:textfield>
+							<s:textfield name="dienThoai" cssClass="form-control" value="%{ #session.user.dienThoai}"></s:textfield>
 							<br>
 							<s:label value="Ngày bắt đầu đăng ký" for="ngayBatDau"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"
@@ -82,7 +135,7 @@
 						</s:div>
 						<s:div cssClass="div-col-50">
 							<s:label value="Email" for="email"></s:label>
-							<s:textfield name="email" cssClass="form-control"></s:textfield>
+							<s:textfield name="email" cssClass="form-control" value="%{ #session.user.email}"></s:textfield>
 							<br>
 							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc"

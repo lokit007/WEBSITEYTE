@@ -16,6 +16,9 @@
 		String path = request.getServletPath();
 	%>
 	<s:div id="div-header-menu">
+		<div id="menu-mob">
+		  	<i class="fa fa-bars"></i> Trang chủ <i class="fa fa-search" id="icon-search"></i>
+		</div>
 		<ul>
 			<li <%=path.equals("/TrangChu.jsp") ? "class='active'" : ""%>><s:a
 					href="trang-chu.action">
@@ -48,6 +51,7 @@
 					</button>
 				</form>
 			</li>
+			<s:div cssClass="clear"></s:div>
 		</ul>
 	</s:div>
 </s:div>

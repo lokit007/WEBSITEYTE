@@ -79,15 +79,15 @@
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:label value="Nhà cung cấp" for="nhaCungCap"></s:label>
-					<s:textfield name="nhaCungCap" cssClass="form-control"></s:textfield>
+					<s:textfield name="nhaCungCap" cssClass="form-control" value="%{ #session.user.hoTen}"></s:textfield>
 					<br>
 					<s:label value="Địa điểm triển khai dịch vụ" for="diaDiem"></s:label>
-					<s:textfield name="diaDiem" cssClass="form-control"></s:textfield>
+					<s:textfield name="diaDiem" cssClass="form-control" value="%{ #session.user.diaChi}"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
 							<s:label value="Điện thoại" for="dienThoai"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control"></s:textfield>
+							<s:textfield name="dienThoai" cssClass="form-control" value="%{ #session.user.dienThoai}"></s:textfield>
 							<br>
 							<s:label value="Ngày bắt đầu" for="ngayBatDau"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"
@@ -95,7 +95,7 @@
 						</s:div>
 						<s:div cssClass="div-col-50">
 							<s:label value="Email" for="email"></s:label>
-							<s:textfield name="email" cssClass="form-control"></s:textfield>
+							<s:textfield name="email" cssClass="form-control" value="%{ #session.user.email}"></s:textfield>
 							<br>
 							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc"

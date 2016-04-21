@@ -49,8 +49,20 @@
 					<s:label value="Giới thiệu nhà cung cấp" for="gioiThieu"></s:label><span class="sp-quantrong"> * </span>
 					<s:textarea name="gioiThieu" cssClass="ckeditor"></s:textarea>
 					<br>
-					<s:label value="Chứng chỉ hành nghề" for="chungChi"></s:label><span class="sp-quantrong"> * </span>
-					<s:textfield name="chungChi" cssClass="form-control"></s:textfield>
+					<!-- 
+						Chứng chỉ hành nghề y, dược tư nhân có các loại sau:
+						1. Chứng chỉ hành nghề y:
+						    a) Chứng chỉ hành nghề khám, chữa bệnh;
+						    b) Chứng chỉ hành nghề dịch vụ y tế;
+						2. Chứng chỉ hành nghề y dược học cổ truyền:
+							a) Chứng chỉ hành nghề khám, chữa bệnh bằng y dược học cổ truyền;
+							b) Chứng chỉ hành nghề  thuốc y học cổ truyền;
+						3. Chứng chỉ hành nghề dược;
+						4. Chứng chỉ hành nghề vắc xin, sinh phẩm y tế.
+					 -->
+					<s:select list="{'Chứng chỉ hành nghề khám bệnh, chữa bệnh', 'Chứng chỉ hành nghề dược', 'Văn bằng y tế'}"
+						headerValue="----- Chọn loại chứng chỉ hành nghê -----" headerKey=""
+						name="chungChi" cssClass="form-control"></s:select>
 					<br>
 					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề" for="userImage"></s:label><span class="sp-quantrong"> * </span>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>

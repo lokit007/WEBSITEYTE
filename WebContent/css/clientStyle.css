@@ -97,7 +97,7 @@ div#div-content-left {
     width: 25%;
     margin-right: 1%;
     padding: 1%;
-    float: left;
+    float: right;
 }
 div#div-content-right {
     width: 74%;
@@ -521,5 +521,176 @@ span#bl-nhan {
     border-left: 2px dashed gray;
     padding-left: 10px;
 }
+/* màn hình <480 */
+@media only screen and (max-width: 480px){
+	div#div-header-logo {
+	    width: 100%;
+	}
+	div#div-header-logo img {
+	    width: 95%;
+	    margin: 5px;
+	}
+	div#menu-mob {
+	    font-size: 1.5em;
+	    font-weight: bold;
+	    padding: 10px;
+	}
+	div#div-header-menu ul {
+	    position: absolute;
+	    background-color: darkgray;
+	    margin: -5px 0px 0px 0px;
+	    /* display: inherit; */
+	    display: none;
+	    border-bottom: 1px solid;
+	}
+	i#icon-search {
+	    float: right;
+	}
+	div#div-content-right {
+	    width: 100%;
+	}
+	div#div-content-left {
+	    width: 100%;
+	}
+	.div-content-home-main-active {
+	    width: 100%;
+	}
+	.div-content-home-main-active div {
+	    margin-top: 0px;
+	    height: auto;
+	}
+	.div-content-home-main-item {
+	    width: 100%;
+	}
+	.div-quangcao img {
+	    width: 99%;
+	}
+	.div-content-home-main-tin {
+	    width: 100%;
+	}
+	div#div-footer {
+	    padding: 5px;
+	}
+	label.footer-title {
+	    border-bottom: 1px dashed;
+	}
+	.div-footer-item {
+	    width: 100%;
+	    margin-bottom: 5px;
+	}
+	.div-quangcao-last {
+	    text-align: center;
+	}
+	.div-quangcao-last img {
+	    width: 48%;
+	    margin: 1px;
+	}
+	div#info-taikhoan {
+	    width: 95%;
+	}
+	div#info-capchart {
+	    width: 100%;
+	}
+}
+/* 480 < màn hình <1024 */
+@media only screen and (min-width: 481px) and (max-width: 1023px){
+	div#div-header-logo {
+	    width: 100%;
+	}
+	img#img-logo {
+	    width: 49%;
+	    margin: 5px;
+	}
+	div#div-header-logo img {
+	    width: 45%;
+	}
+	div#menu-mob {
+	    display: none;
+	}
+	div#div-header-menu {
+	    font-size: 10px;
+	}
+	div#div-header-menu ul {
+	    margin: 0px;
+	    width: 100%;
+	}
+	form#f-timkiem {
+	    position: absolute;
+	    width: 100%;
+	    left: 0px;
+	    margin-top: 47px;
+	}
+	input#txtFind {
+	    width: 95%;
+	}
+	div#div-content {
+	    margin-top: 50px;
+	}
+	.div-content-home-main-active {
+	    width: 100%;
+	}
+	.div-content-home-main-item {
+	    width: 100%;
+	}
+	.div-quangcao img {
+	    width: 100%;
+	}
+	.div-content-home-main-tin {
+	    width: 100%;
+	}
+	.div-quangcao-last {
+	    text-align: center;
+	    margin: 5px;
+	}
+	.div-quangcao-last img {
+	    margin-top: 5px;
+	}
+	div#div-footer {
+	    padding: 5px;
+	}
+	.div-footer-item {
+	    margin-top: 5px;
+	}
+	.div-show-title {
+	    display: inline-table;
+	    width: 100%;
+	}
+	
+}
+/* màn hình >=1024 */
+@media all and (min-width: 1024px){
+	div#menu-mob {
+	    display: none;
+	}
+	div#div-header-menu ul {
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	.div-quangcao img {
+	    max-width: 100%;
+	}
+	div#div-content-right {
+	    margin-left: 5px;
+	}
+	div#div-content-left {
+	    margin-right: 0px;
+	}
+	.div-quangcao-last {
+	    text-align: center;
+	    margin: 5px;
+	}
+	.div-quangcao-last img {
+	    margin-bottom: 5px;
+	}
+	.div-content-home-main-active img {
+	    height: 400px;
+	}
+	.div-content-home-main-tin img {
+	    max-height: 75px;
+	}
+}
+
+
+
 
 

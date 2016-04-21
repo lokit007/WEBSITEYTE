@@ -292,7 +292,7 @@
 				hoTen : "Nhập họ tên/tổ chức!",
 				dienThoai : {
 					required : "Nhập điện thoại liên hệ!",
-					digits : "Số điện thoại khồn đúng!"
+					digits : "Số điện thoại không đúng!"
 				},
 				email : {
 					required : "Nhập email liên hệ!",

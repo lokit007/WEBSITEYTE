@@ -3,7 +3,8 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="default" extends="struts-default">
+	<constant name="struts.ui.theme" value="simple" />
+	<package name="default" extends="struts-default,json-default">
 		<!-- trang chu -->
 		<action name="trang-chu" class="controller.TrangChuActionSupport">
 			<result name="thanh-cong">TrangChu.jsp</result>
@@ -151,8 +152,11 @@
 			<result name="thanh-cong">DangKyNhaCungCap.jsp</result>
 			<result name="that-bai">DangKyNhaCungCap.jsp</result>
 		</action>
+		<action name="ban-do" class="controller.BanDoActionSupport">
+			<result name="thanh-cong">BanDo.jsp</result>
+			<result name="that-bai">BanDo.jsp</result>
+		</action>
 	</package>
-	
 	<!-- trang admin -->
 	<package name="admin" extends="struts-default" namespace="/admin">
 		<!-- trang chu -->
@@ -385,6 +389,26 @@
 			<result name="that-bai">thanh-vien-quantri.action</result>
 		</action>
 		<action name="cap-nhat" class="controller.admin.CapNhatActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="he-thong" class="controller.admin.HeThongActionSupport">
+			<result name="thanh-cong">HeThong.jsp</result>
+			<result name="that-bai">HeThong.jsp</result>
+		</action>
+		<action name="capnhat-thongtin" class="controller.admin.HeThongActionSupport" method="CapNhatThongTin">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="capnhat-noiquy" class="controller.admin.HeThongActionSupport" method="CapNhatNoiQuy">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="capquyen-quantri" class="controller.admin.QuanTriActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="xoa-capquyen" class="controller.admin.QuanTriActionSupport" method="HuyQuyenQuanTri">
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>

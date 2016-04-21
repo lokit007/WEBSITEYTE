@@ -13,12 +13,15 @@ import model.bean.TaiKhoan;
 public class TaiKhoanDAO {
 
 	DataBaseDAO db = new DataBaseDAO();
+	
 	public void closeConnect() {
 		db.closeConnection();
 	}
+	
 	public String getMemu() {
 		return db.getMenu();
 	}
+	
 	public ArrayList<TaiKhoan> getDanhSachTaiKhoan(String listSelect, String txtFind, int page) throws SQLException {
 		txtFind = FormatData.FormatInputData(txtFind);
 		String sql = "";
@@ -65,6 +68,7 @@ public class TaiKhoanDAO {
 		}
 		return list;
 	}
+
 	public TaiKhoan getTaiKhoan(String taiKhoan, String matKhau) {
 		String sql = "select TAIKHOAN.TaiKhoan, MatKhau, HoTen, DiaChi, "
 				+ "DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan from TAIKHOAN "
@@ -91,6 +95,7 @@ public class TaiKhoanDAO {
 		}
 		return null;
 	}
+
 	public boolean checkMail(String email) {
 		String sql = "select 1 from TAIKHOAN where Email like '" + email + "'";
 		ResultSet rs = db.getResultSet(sql);
@@ -103,6 +108,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean checkTaiKhoan(String taiKhoan) {
 		String sql = "select 1 from TAIKHOAN where TaiKhoan like '" + taiKhoan + "'";
 		ResultSet rs = db.getResultSet(sql);
@@ -115,6 +121,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean themTaiKhoan(TaiKhoan user) {
 		String sql = "insert into TAIKHOAN values ('"+FormatData.FormatInputData(user.getIdTaiKhoan())
 			+"', '"+FormatData.FormatInputData(user.getMatKhau())
@@ -122,12 +129,14 @@ public class TaiKhoanDAO {
 			+"', N'"+FormatData.FormatInputData(user.getDiaChi())
 			+"', '"+FormatData.FormatInputData(user.getDienThoai())
 			+"', '"+FormatData.FormatInputData(user.getEmail())
-			+"', N'TK mới', GETDATE(), N'Người dùng')";
+			+"', N'TK mới', GETDATE(), N'Người dùng', '"+user.getLocation()+"')";
 		return db.updateData(sql);
 	}
+
 	public boolean khoaNguoiDung(String idTaiKhoan, String tinhTrang) {
 		return db.updateData("update TAIKHOAN set TinhTrang=N'"+tinhTrang+"' where TaiKhoan like '"+idTaiKhoan+"'");
 	}
+
 	public List<NhaCungCap> getDanhSachNCC(String txtFind, int page) throws SQLException {
 		txtFind = FormatData.FormatInputData(txtFind);
 		String sql = "select IdNhaCungCap, GioiThieuChuyenMon, ChungChi, FileKem, DanhGia, TAIKHOAN.TaiKhoan, "
@@ -164,6 +173,7 @@ public class TaiKhoanDAO {
 		}
 		return list;
 	}
+
 	public NhaCungCap getNhaCungCap(String idNhaCungCap) throws SQLException {
 		String sql = "select top 1 IdNhaCungCap, GioiThieuChuyenMon, ChungChi, FileKem, DanhGia, TAIKHOAN.TaiKhoan, "
 				+"MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan from NHACUNGCAP "
@@ -192,6 +202,7 @@ public class TaiKhoanDAO {
 		}
 		return null;
 	}
+
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh) {
 		String sql = "{call themNCC(?,?,?,?,?,?,?,?,?,?) }";
@@ -222,6 +233,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
@@ -259,6 +271,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean CapNhatNhaCungCap(String id, String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh) {
 		String sql = "{call capNhatNCC(?,?,?,?,?,?,?,?,?,?) }";
@@ -289,6 +302,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean CapNhatNhaCungCap(String id, String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
@@ -326,9 +340,11 @@ public class TaiKhoanDAO {
 		}
 		return false;
 	}
+
 	public boolean XoaNhaCungCap(String idNhaCungCap) {
 		return db.updateData("delete from NHACUNGCAP where IdNhaCungCap='"+idNhaCungCap+"'");
 	}
+
 	public boolean ThemTaiKhoan(String idTaiKhoan, String matKhau, String hoTen, String diaChi, 
 			String dienThoai, String email,String loaiTaiKhoan) {
 		String sql = "";
@@ -347,9 +363,11 @@ public class TaiKhoanDAO {
 		}
 		return db.updateData(sql);
 	}
+
 	public boolean XoaQuanTri(String idTaiKhoan) {
 		return db.updateData("delete from TAIKHOAN where TaiKhoan='"+idTaiKhoan+"'");
 	}
+
 	public TaiKhoan getTaiKhoan(String idTaiKhoan) {
 		String sql = "select TAIKHOAN.TaiKhoan, MatKhau, HoTen, DiaChi, "
 				+ "DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan from TAIKHOAN "
@@ -376,10 +394,12 @@ public class TaiKhoanDAO {
 		}
 		return null;
 	}
+
 	public boolean CapNhatQuanTri(String idTaiKhoan, String hoTen, String diaChi, String dienThoai, String email) {
 		return db.updateData("update TAIKHOAN set HoTen=N'"+hoTen+"', DiaChi=N'"+diaChi
 				+"', DienThoai='"+dienThoai+"', Email='"+email+"' where TaiKhoan='"+idTaiKhoan+"'");
 	}
+
 	public List<NhaCungCap> getNCCMoi() throws SQLException {
 		String sql = "select IdNhaCungCap, GioiThieuChuyenMon, ChungChi, FileKem, DanhGia, TAIKHOAN.TaiKhoan, "
 				+"MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan, "
@@ -410,7 +430,7 @@ public class TaiKhoanDAO {
 			}
 		return list;
 	}
-	
+
 	public boolean setDanhGia(String idNhaCungCap, int danhGia) {
 		return db.updateData("update NHACUNGCAP set DanhGia=Round((DanhGia+'"+danhGia+"')/2+0.5, 0) where IdNhaCungCap='"+idNhaCungCap+"';");
 	}
