@@ -86,4 +86,44 @@ public class QuanTriDAO {
 		return db.updateData(sql);
 	}
 
+	public boolean CapNhatQuyenHan(String taiKhoan, String nameCol, boolean valCheck) {
+		taiKhoan = FormatData.FormatInputData(taiKhoan);
+		String sql = "update QUANTRI set "+nameCol+"='"+valCheck+"' where TaiKhoan like '"+taiKhoan+"'";
+		return db.updateData(sql);
+	}
+
+	public QuanTri getQuanTri(String taiKhoan, String matKhau) throws SQLException {
+		taiKhoan = FormatData.FormatInputData(taiKhoan);
+		matKhau = FormatData.FormatInputData(matKhau);
+		String sql = "select QUANTRI.TaiKhoan, MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, "
+				+ "NgayThamGia, LoaiTaiKhoan, Location, DanhMuc, DichVu, NhuCau, ChiaSe, NhaCungCap, "
+				+ "TaiNguyen, ThongKe from QUANTRI inner join TAIKHOAN on QUANTRI.TaiKhoan=TAIKHOAN.TaiKhoan "
+				+ "where TAIKHOAN.TaiKhoan like '"+taiKhoan+"' and MatKhau like '"+matKhau+"' ";
+		ResultSet rs = db.getResultSet(sql);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		if(rs.next()){
+			QuanTri quanTri = new QuanTri();
+			TaiKhoan user = new TaiKhoan();
+			user.setIdTaiKhoan(rs.getString("TaiKhoan"));
+			user.setMatKhau(rs.getString("MatKhau"));
+			user.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			user.setDiaChi(FormatData.FormatOutputData(rs.getString("DiaChi")));
+			user.setDienThoai(rs.getString("DienThoai"));
+			user.setEmail(rs.getString("Email"));
+			user.setTinhTrang(rs.getString("TinhTrang"));
+			user.setNgayThamGia(sdf.format(rs.getTimestamp("NgayThamGia")));
+			user.setLoaiTaiKhoan(rs.getString("LoaiTaiKhoan"));
+			quanTri.setTaiKhoan(user);
+			quanTri.setDanhMuc(rs.getBoolean("DanhMuc"));
+			quanTri.setDichVu(rs.getBoolean("DichVu"));
+			quanTri.setNhuCau(rs.getBoolean("NhuCau"));
+			quanTri.setChiaSe(rs.getBoolean("ChiaSe"));
+			quanTri.setNhaCungCap(rs.getBoolean("NhaCungCap"));
+			quanTri.setTaiNguyen(rs.getBoolean("TaiNguyen"));
+			quanTri.setThongKe(rs.getBoolean("ThongKe"));
+			return quanTri;
+		}
+		return null;
+	}
+
 }

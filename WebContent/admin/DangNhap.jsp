@@ -17,7 +17,7 @@
 	  	<br><s:label value="Mật khẩu : " for="matKhau"></s:label>
 		<s:password name="matKhau" cssClass="form-control"></s:password>
 		<br>
-		<input type="submit" value="Đăng nhập" />
+		<input type="submit" value="Đăng nhập" style="width: 100%;"/>
 	</form>
 </body>
 </html>

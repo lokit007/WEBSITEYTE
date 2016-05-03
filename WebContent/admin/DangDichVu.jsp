@@ -27,8 +27,66 @@
 	});
 </script>
 <title>Đăng ký phát hành dịch vụ</title>
+<script>
+	var placeSearch, autocomplete;
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */
+		(document.getElementById('diaChi')), {
+			types : [ 'geocode' ]
+		});
+		// fill data khi chọn
+		autocomplete.addListener('place_changed', fillInAddress);
+	}
+
+	function fillInAddress(){
+		var p = autocomplete.getPlace().geometry.location;
+	}
+	
+	function errorHandler(err) {
+		if (err.code == 1) {
+			alert("Error: Access is denied!");
+		} else if (err.code == 2) {
+			alert("Error: Position is unavailable!");
+		}
+	}
+	function getLocation() {
+		if (navigator.geolocation) {
+			// timeout at 60000 milliseconds (60 seconds)
+			var options = {
+				timeout : 60000
+			};
+			navigator.geolocation.getCurrentPosition(XemThu, errorHandler,
+					options);
+		} else {
+			alert("Sorry, browser does not support geolocation!");
+		}
+	}
+	function XemThu(position) {
+		$.ajax({
+			url : "https://maps.googleapis.com/maps/api/geocode/json",
+			type : "get",
+			dateType : "json",
+			data : {
+				latlng : position.coords.latitude + ','
+						+ position.coords.longitude,
+				sensor : false,
+				language : 'vi'
+			},
+			success : function(result, textStatus) {
+				$("#diaChi").val(result.results[0].formatted_address);
+			}
+		});
+	}
+</script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
+	async defer></script>
 </head>
-<body>
+<body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
 	<label id="lb-title"><i class="fa fa-heartbeat"></i> Thêm mới dịch vụ y tế</label>
 	<button class="btn btn-default btn-xs" id="btn-them" onclick="history.go(-1);" ><i class="fa fa-undo"></i> Quay lại</button>
@@ -74,24 +132,22 @@
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:label value="Nhà cung cấp" for="nhaCungCap"></s:label>
-					<s:textfield name="nhaCungCap" cssClass="form-control"></s:textfield>
+					<%-- <s:textfield name="nhaCungCap" cssClass="form-control"></s:textfield> --%>
+					<s:select list="listNCC" name="nhaCungCap" cssClass="form-control"
+						listKey="idNhaCungCap" listValue="taiKhoan.hoTen"
+						headerKey="" headerValue="--- Chọn nhà cung cấp dịch vụ ---"
+					></s:select>
 					<br>
 					<s:label value="Địa điểm triển khai dịch vụ" for="diaDiem"></s:label>
-					<s:textfield name="diaDiem" cssClass="form-control"></s:textfield>
+					<s:textfield id="diaChi" name="diaDiem" cssClass="form-control"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Điện thoại" for="dienThoai"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control"></s:textfield>
-							<br>
 							<s:label value="Ngày bắt đầu" for="ngayBatDau"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"
 								cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Email" for="email"></s:label>
-							<s:textfield name="email" cssClass="form-control"></s:textfield>
-							<br>
 							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc"
 								cssClass="form-control"></s:textfield>

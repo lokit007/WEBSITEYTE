@@ -79,10 +79,30 @@ public class HeThongDAO {
 		quyDinhDangDichVu = FormatData.FormatInputData(quyDinhDangDichVu);
 		quyDinhDangNhuCau = FormatData.FormatInputData(quyDinhDangNhuCau);
 		boolean result = false;
-		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+noiQuyThanhVien+"' where TaiNguyen=N'Nội Quy Đăng Ký Thành Viên'");
-		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+quyDinhDangDichVu+"' where TaiNguyen=N'Quy Định Đăng Nhu Cầu'");
-		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+quyDinhDangNhuCau+"' where TaiNguyen=N'Quy Định Phát Hành Dịch Vụ'");
+		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+noiQuyThanhVien+"' where TaiNguyen like N'Nội Quy Đăng Ký Thành Viên'");
+		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+quyDinhDangDichVu+"' where TaiNguyen like N'Quy Định Đăng Nhu Cầu'");
+		result = result|db.updateData("update TAINGUYEN set GiaTri=N'"+quyDinhDangNhuCau+"' where TaiNguyen like N'Quy Định Phát Hành Dịch Vụ'");
 		return result;
+	}
+
+	public boolean ThemLienKet(String tenWebsite, String diaChiWeb) {
+		tenWebsite = FormatData.FormatInputData(tenWebsite);
+		diaChiWeb = FormatData.FormatInputData(diaChiWeb);
+		String sql = "insert into TAINGUYEN values (N'"+tenWebsite+"', N'"+diaChiWeb+"')";
+		return db.updateData(sql);
+	}
+
+	public boolean CapNhatLienKet(String tenWebsite, String diaChiWeb) {
+		tenWebsite = FormatData.FormatInputData(tenWebsite);
+		diaChiWeb = FormatData.FormatInputData(diaChiWeb);
+		String sql = "update TAINGUYEN set GiaTri=N'"+diaChiWeb+"' where TaiNguyen like N'"+tenWebsite+"'";
+		return db.updateData(sql);
+	}
+
+	public boolean XoaLienKet(String tenWebsite) {
+		tenWebsite = FormatData.FormatInputData(tenWebsite);
+		String sql = "delete from TAINGUYEN where TaiNguyen like N'"+tenWebsite+"'";
+		return db.updateData(sql);
 	}
 
 }

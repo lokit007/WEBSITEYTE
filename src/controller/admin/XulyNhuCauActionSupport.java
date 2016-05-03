@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bean.BinhLuan;
 import model.bean.DanhMuc;
 import model.bean.DichVu;
+import model.bean.QuanTri;
 import model.bo.BinhLuanBO;
 import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
@@ -74,29 +75,36 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	}
 	
 	public String DangNhuCau(){
-		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
-		try {
-			File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
-			FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
-			this.hinhAnh = this.userImageFileName;
-		} catch (IOException e) {
-			this.hinhAnh = "bridge.jpg";
-		} catch (Exception e) {
-			this.hinhAnh = "bridge.jpg";
-		}
-		DichVuBO dichVuBO = new DichVuBO();
 		String result = "that-bai";
-		if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
-				 || ValidateBO.CheckEmpty(danhMuc+"")
-				 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
-				 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
-			addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
-			result = "that-bai";
-		} else if(dichVuBO.clientThemDichVu(tenDichVu, moTa, danhMuc, null, hinhAnh, "Taikhoan002", 
-				nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc, "Nhu cầu", diaDiem))
-			result = "thanh-cong";
-		else addActionError("Đăng nhu cầu không thành công.");
-		dichVuBO.closeConnect();
+		QuanTri admin = (QuanTri)servletRequest.getSession().getAttribute("admin");
+		if(admin==null || (admin!=null && !admin.isNhuCau())){
+			addActionError("Bạn không đủ quyền hạn để thực hiện thao tác này!");
+		} else {
+			this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
+			try {
+				File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
+				FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
+				this.hinhAnh = this.userImageFileName;
+			} catch (IOException e) {
+				this.hinhAnh = "bridge.jpg";
+			} catch (Exception e) {
+				this.hinhAnh = "bridge.jpg";
+			}
+			DichVuBO dichVuBO = new DichVuBO();
+			if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
+					 || ValidateBO.CheckEmpty(danhMuc+"")
+					 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
+					 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
+				addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
+				result = "that-bai";
+			} else { 
+				if(dichVuBO.clientThemDichVu(tenDichVu, moTa, danhMuc, null, hinhAnh, admin.getTaiKhoan().getIdTaiKhoan(), 
+					nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc, "Nhu cầu", diaDiem))
+					result = "thanh-cong";
+				else addActionError("Đăng nhu cầu không thành công.");
+			}
+			dichVuBO.closeConnect();
+		}
 		return result;
 	}
 	

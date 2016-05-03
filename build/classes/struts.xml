@@ -4,7 +4,7 @@
 
 <struts>
 	<constant name="struts.ui.theme" value="simple" />
-	<package name="default" extends="struts-default,json-default">
+	<package name="default" extends="struts-default">
 		<!-- trang chu -->
 		<action name="trang-chu" class="controller.TrangChuActionSupport">
 			<result name="thanh-cong">TrangChu.jsp</result>
@@ -404,11 +404,43 @@
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>
+		<action name="them-lienket" class="controller.admin.HeThongActionSupport" method="ThemLienKet">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="capnhat-lienket" class="controller.admin.HeThongActionSupport" method="CapNhatLienKet">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="xoa-lienket" class="controller.admin.HeThongActionSupport" method="XoaLienKet">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
 		<action name="capquyen-quantri" class="controller.admin.QuanTriActionSupport">
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>
 		<action name="xoa-capquyen" class="controller.admin.QuanTriActionSupport" method="HuyQuyenQuanTri">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="capnhat-quyenhan" class="controller.admin.QuanTriActionSupport" method="CapNhatQuyenHan">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="thong-ke" class="controller.admin.ThongKeBaoCaoActionSupport">
+			<result name="thanh-cong">ThongKe.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="quang-cao" class="controller.admin.QuanCaoActionSupport">
+			<result name="thanh-cong">QuangCao.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="xoa-quangcao" class="controller.admin.XulyQuangCaoActionSupport" method="XoaQuangCao">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="xoa-khachhang" class="controller.admin.XulyQuangCaoActionSupport" method="XoaKhachHang">
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>

@@ -1,6 +1,5 @@
 package controller.admin;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,8 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 	private String quyDinhDangDichVu;
 	private String quyDinhDangNhuCau;
 	//liên kết
-	private HashMap<String, String> lienKet = new HashMap<String, String>();
+	private String tenWebsite;
+	private String diaChiWeb;
 	//phân quyền
 	private List<QuanTri> listQuanTri;
 	private List<TaiKhoan> listTaiKhoan;
@@ -95,6 +95,51 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 			request.getSession().setAttribute("TaiNguyen", this.taiNguyen);
 		}
 		heThongBO.closeConnect();
+		return result;
+	}
+	
+	public String ThemLienKet(){
+		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
+		String result = "thanh-cong";
+		if(!"".equals(tenWebsite)&&!"".equals(diaChiWeb)){
+			HeThongBO heThongBO = new HeThongBO();
+			if(heThongBO.ThemLienKet(tenWebsite, diaChiWeb)){
+				this.taiNguyen = (TaiNguyen)request.getSession().getAttribute("TaiNguyen");
+				this.taiNguyen.getLienKet().put(tenWebsite, diaChiWeb);
+				request.getSession().setAttribute("TaiNguyen", this.taiNguyen);
+			}
+			heThongBO.closeConnect();
+		}
+		return result;
+	}
+	
+	public String CapNhatLienKet(){
+		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
+		String result = "thanh-cong";
+		if(!"".equals(tenWebsite)&&!"".equals(diaChiWeb)){
+			HeThongBO heThongBO = new HeThongBO();
+			if(heThongBO.CapNhatLienKet(tenWebsite, diaChiWeb)){
+				this.taiNguyen = (TaiNguyen)request.getSession().getAttribute("TaiNguyen");
+				this.taiNguyen.getLienKet().put(tenWebsite, diaChiWeb);
+				request.getSession().setAttribute("TaiNguyen", this.taiNguyen);
+			}
+			heThongBO.closeConnect();
+		}
+		return result;
+	}
+	
+	public String XoaLienKet(){
+		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
+		String result = "thanh-cong";
+		if(!"".equals(tenWebsite)){
+			HeThongBO heThongBO = new HeThongBO();
+			if(heThongBO.XoaLienKet(tenWebsite)){
+				this.taiNguyen = (TaiNguyen)request.getSession().getAttribute("TaiNguyen");
+				this.taiNguyen.getLienKet().remove(tenWebsite);
+				request.getSession().setAttribute("TaiNguyen", this.taiNguyen);
+			}
+			heThongBO.closeConnect();
+		}
 		return result;
 	}
 	
@@ -195,12 +240,20 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		this.quyDinhDangNhuCau = quyDinhDangNhuCau;
 	}
 
-	public HashMap<String, String> getLienKet() {
-		return lienKet;
+	public String getTenWebsite() {
+		return tenWebsite;
 	}
 
-	public void setLienKet(HashMap<String, String> lienKet) {
-		this.lienKet = lienKet;
+	public void setTenWebsite(String tenWebsite) {
+		this.tenWebsite = tenWebsite;
+	}
+
+	public String getDiaChiWeb() {
+		return diaChiWeb;
+	}
+
+	public void setDiaChiWeb(String diaChiWeb) {
+		this.diaChiWeb = diaChiWeb;
 	}
 
 	public List<QuanTri> getListQuanTri() {

@@ -121,4 +121,14 @@ public class TaiKhoanBO {
 		return taiKhoanDAO.CapNhatTrangThai(idKey, chanState);
 	}
 
+	public List<NhaCungCap> getListNhaCungCap() {
+		try {
+			return taiKhoanDAO.getListNhaCungCap();
+		} catch (SQLException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }

@@ -42,6 +42,16 @@ span.sluong {
     color: #EA332F;
     margin-right: 5px;
 }
+div.error {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    background-color: bisque;
+}
+div.sussec {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    background-color: lawngreen;
+}
 /* dang nhap */
 form#f-dangnhap {
     width: 300px;
@@ -186,6 +196,24 @@ div#div-state ul li a span {
 }
 
 /* kết thúc menu state */
+/* model */
+/* danh mục */
+.modal-header {
+    background-color: lightgray;
+    text-align: center;
+}
+.modal-title {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.close:hover {
+    background-color: gray;
+    padding: 1px 5px;
+    border-radius: 10px;
+}
+.modal-header .close {
+    width: 20px;
+}
 /* nội dung chính */
 div#div-content {
     position: inherit;
@@ -408,6 +436,15 @@ img.MultiFile-preview {
     width: 49%;
     float: left;
     margin-right: 1%;
+}
+/* quang cao */
+.select-khach {
+    width: 90%;
+    float: left;
+}
+.add-khach {
+    width: 8%;
+    float: right;
 }
 /* kết thúc nội dung chính */
 

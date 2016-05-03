@@ -9,6 +9,8 @@ import model.bo.QuanTriBO;
 public class QuanTriActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String taiKhoan;
+	private String nameCol;
+	private boolean valCheck;
 	private boolean danhMuc;
 	private boolean dichVu;
 	private boolean nhuCau;
@@ -51,12 +53,45 @@ public class QuanTriActionSupport extends ActionSupport {
 		return result;
 	}
 	
+	public String CapNhatQuyenHan(){
+		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "four");
+		String result = "thanh-cong";
+		if(!"".equals(taiKhoan)){
+			QuanTriBO quanTriBO = new QuanTriBO();
+			if(!quanTriBO.CapNhatQuyenHan(taiKhoan, nameCol, valCheck)){
+				result = "that-bai";
+				addActionError("Cập nhật quyền quản trị thất bại!");
+			}
+			quanTriBO.closeConnect();
+		} else {
+			result = "that-bai";
+			addActionError("Cập nhật quyền quản trị thất bại!");
+		}
+		return result;
+	}
+	
 	public String getTaiKhoan() {
 		return taiKhoan;
 	}
 
 	public void setTaiKhoan(String taiKhoan) {
 		this.taiKhoan = taiKhoan;
+	}
+
+	public String getNameCol() {
+		return nameCol;
+	}
+
+	public void setNameCol(String nameCol) {
+		this.nameCol = nameCol;
+	}
+
+	public boolean isValCheck() {
+		return valCheck;
+	}
+
+	public void setValCheck(boolean valCheck) {
+		this.valCheck = valCheck;
 	}
 
 	public boolean isDanhMuc() {

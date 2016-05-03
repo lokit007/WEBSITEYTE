@@ -70,6 +70,8 @@ public class TaiKhoanDAO {
 	}
 
 	public TaiKhoan getTaiKhoan(String taiKhoan, String matKhau) {
+		taiKhoan = FormatData.FormatInputData(taiKhoan);
+		matKhau = FormatData.FormatInputData(matKhau);
 		String sql = "select TAIKHOAN.TaiKhoan, MatKhau, HoTen, DiaChi, "
 				+ "DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan from TAIKHOAN "
 				+ "where TAIKHOAN.TaiKhoan like '"+taiKhoan+"' and MatKhau like '"+matKhau+"' ";
@@ -449,6 +451,37 @@ public class TaiKhoanDAO {
 	
 	public boolean CapNhatTrangThai(String idKey, String chanState) {
 		return db.updateData("update TAIKHOAN set TinhTrang=N'"+chanState+"' where TaiKhoan='"+idKey+"'");
+	}
+
+	public List<NhaCungCap> getListNhaCungCap() throws SQLException {
+		String sql = "select IdNhaCungCap, GioiThieuChuyenMon, ChungChi, FileKem, DanhGia, TAIKHOAN.TaiKhoan, "
+				+"MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan, "
+				+"ROW_NUMBER() OVER (ORDER BY TAIKHOAN.TaiKhoan desc) AS Row from NHACUNGCAP "
+				+"inner join TAIKHOAN on NHACUNGCAP.TaiKhoan=TAIKHOAN.TaiKhoan "
+				+"where ( LoaiTaiKhoan like N'Nhà cung cấp' or LoaiTaiKhoan like N'admin' ) and TinhTrang like N'TK mới'";
+			ArrayList<NhaCungCap> list = new ArrayList<NhaCungCap>();
+			ResultSet rs = db.getResultSet(sql);
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			while(rs.next()){
+				NhaCungCap ncc = new NhaCungCap();
+				ncc.setIdNhaCungCap(rs.getInt("IdNhaCungCap"));
+				ncc.setGioiThieu(FormatData.FormatOutputData(rs.getString("GioiThieuChuyenMon")));
+				ncc.setChungChi(FormatData.FormatOutputData(rs.getString("ChungChi")));
+				ncc.setFileKem(FormatData.FormatOutputData(rs.getString("FileKem")));
+				ncc.setDanhGia(rs.getInt("DanhGia"));
+				TaiKhoan taiKhoan = new TaiKhoan();
+				taiKhoan.setIdTaiKhoan(rs.getString("TaiKhoan"));
+				taiKhoan.setMatKhau(rs.getString("MatKhau"));
+				taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+				taiKhoan.setDiaChi(FormatData.FormatOutputData(rs.getString("DiaChi")));
+				taiKhoan.setDienThoai(rs.getString("DienThoai"));
+				taiKhoan.setEmail(rs.getString("Email"));
+				taiKhoan.setTinhTrang(rs.getString("TinhTrang"));
+				taiKhoan.setNgayThamGia(sdf.format(rs.getTimestamp("NgayThamGia")));
+				ncc.setTaiKhoan(taiKhoan);
+				list.add(ncc);
+			}
+		return list;
 	}
  
 }

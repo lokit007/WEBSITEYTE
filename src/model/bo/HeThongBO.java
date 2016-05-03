@@ -32,4 +32,16 @@ public class HeThongBO {
 		return heThongDAO.CapNhatNoiQuy(noiQuyThanhVien, quyDinhDangDichVu, quyDinhDangNhuCau);
 	}
 
+	public boolean ThemLienKet(String tenWebsite, String diaChiWeb) {
+		return heThongDAO.ThemLienKet(tenWebsite, diaChiWeb);
+	}
+
+	public boolean CapNhatLienKet(String tenWebsite, String diaChiWeb) {
+		return heThongDAO.CapNhatLienKet(tenWebsite, diaChiWeb);
+	}
+
+	public boolean XoaLienKet(String tenWebsite) {
+		return heThongDAO.XoaLienKet(tenWebsite);
+	}
+
 }

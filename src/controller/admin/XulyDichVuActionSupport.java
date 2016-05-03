@@ -15,10 +15,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bean.BinhLuan;
 import model.bean.DanhMuc;
 import model.bean.DichVu;
-import model.bean.TaiKhoan;
+import model.bean.NhaCungCap;
+import model.bean.QuanTri;
 import model.bo.BinhLuanBO;
 import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
+import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
 public class XulyDichVuActionSupport extends ActionSupport implements ServletRequestAware {
@@ -27,12 +29,11 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	private String tenDichVu;
 	private int danhMuc;
 	private List<DanhMuc> list = new ArrayList<DanhMuc>();
+	private List<NhaCungCap> listNCC = new ArrayList<NhaCungCap>();
 	private String moTa;
 	private String noiDung;
 	private String hinhAnh;
 	private String nhaCungCap;
-	private String dienThoai;
-	private String email;
 	private String ngayBatDau;
 	private String ngayKetThuc;
 	private String loaiHinh;
@@ -44,7 +45,7 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	private HttpServletRequest servletRequest;
 	private DichVu dichVu;
 	private List<BinhLuan> listBinhLuan;
-	
+	// Load thông tin dịch vụ
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -57,7 +58,7 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		if(this.dichVu==null) result = "that-bai";
 		return result;
 	}
-
+	// Xóa dịch vụ
 	public String XoaDichVu(){
 		String result = "thanh-cong";
 		if(idDichVu<1) {
@@ -73,9 +74,10 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		}
 		return result;
 	}
-	
+	// Đăng dịch vụ mới
 	public String DangDichVu(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
+		System.out.println("Xem : " + hinhAnh);
 		try {
 			File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
 			FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
@@ -87,21 +89,29 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		}
 		DichVuBO dichVuBO = new DichVuBO();
 		String result = "that-bai";
-		TaiKhoan user = (TaiKhoan)servletRequest.getSession().getAttribute("user");
-		if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
+		QuanTri user = (QuanTri)servletRequest.getSession().getAttribute("admin");
+		if(user==null || (user!=null&&!user.isDichVu())){
+			addActionError("Bạn không đủ quyền hạn thực hiện thao tác này!");
+			result = "that-bai";
+		} else if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
 				 || ValidateBO.CheckEmpty(danhMuc+"") || ValidateBO.CheckEmpty(noiDung)
-				 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
+				 || ValidateBO.CheckEmpty(nhaCungCap)
 				 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
 			addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
 			result = "that-bai";
-		} else if(dichVuBO.clientThemDichVu(tenDichVu, moTa, danhMuc, noiDung, hinhAnh, user.getIdTaiKhoan(), 
-				nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc, loaiHinh, diaDiem))
-			result = "thanh-cong";
-		else addActionError("Đăng dịch vụ không thành công.");
+		} else {
+			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
+			NhaCungCap ncc = taiKhoanBO.getNhaCungCap(nhaCungCap);
+			if(dichVuBO.themDichVu(tenDichVu, moTa, danhMuc, noiDung, hinhAnh, ncc.getTaiKhoan().getIdTaiKhoan(), ncc.getTaiKhoan().getHoTen(), 
+					ncc.getTaiKhoan().getDienThoai(), ncc.getTaiKhoan().getEmail(), ngayBatDau, ngayKetThuc, loaiHinh, diaDiem))
+				result = "thanh-cong";
+			else addActionError("Đăng dịch vụ không thành công.");
+			taiKhoanBO.closeConnect();
+		}
 		dichVuBO.closeConnect();
 		return result;
 	}
-	
+	// Thông tin dịch vụ
 	public String ThongTin(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -114,7 +124,7 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		if(this.dichVu==null) result = "that-bai";
 		return result;
 	}
-	
+	// Cập nhật dịch vụ
 	public String CapNhatDichVu(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
 		try {
@@ -130,14 +140,20 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		String result = "that-bai";
 		if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
 				 || ValidateBO.CheckEmpty(danhMuc+"") || ValidateBO.CheckEmpty(noiDung)
-				 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
+				 || ValidateBO.CheckEmpty(nhaCungCap)
 				 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
 			addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
 			result = "that-bai";
-		} else if(dichVuBO.capNhatDichVu(idDichVu+"", tenDichVu, moTa, danhMuc+"", noiDung, 
-				hinhAnh, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc))
-			result = "thanh-cong";
-		else addActionError("Cập nhật dịch vụ không thành công.");
+		} else {
+			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
+			NhaCungCap ncc = taiKhoanBO.getNhaCungCap(nhaCungCap);
+			if(dichVuBO.capNhatDichVu(idDichVu+"", tenDichVu, moTa, danhMuc+"", noiDung, 
+					ncc.getTaiKhoan().getIdTaiKhoan(), ncc.getTaiKhoan().getHoTen(), 
+					ncc.getTaiKhoan().getDienThoai(), ncc.getTaiKhoan().getEmail(),
+					ngayBatDau, ngayKetThuc))
+				result = "thanh-cong";
+			else addActionError("Cập nhật dịch vụ không thành công.");
+		}
 		dichVuBO.closeConnect();
 		return result;
 	}
@@ -230,22 +246,6 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		this.nhaCungCap = nhaCungCap;
 	}
 
-	public String getDienThoai() {
-		return dienThoai;
-	}
-
-	public void setDienThoai(String dienThoai) {
-		this.dienThoai = dienThoai;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getNgayBatDau() {
 		return ngayBatDau;
 	}
@@ -301,5 +301,14 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	public void setUserImageFileName(String userImageFileName) {
 		this.userImageFileName = userImageFileName;
 	}
-	
+	public List<NhaCungCap> getListNCC() {
+		TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
+		this.listNCC = taiKhoanBO.getListNhaCungCap();
+		taiKhoanBO.closeConnect();
+		return listNCC;
+	}
+	public void setListNCC(List<NhaCungCap> listNCC) {
+		this.listNCC = listNCC;
+	}
+
 }

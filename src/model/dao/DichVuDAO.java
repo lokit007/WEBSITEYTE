@@ -59,30 +59,33 @@ public class DichVuDAO {
 		return db.getMenu();
 	}
 
-	public boolean themDichVu(String tenDichVu, String moTa, String danhMuc, String noiDung, String hinhAnh,
-			String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
-		String sql = "{call themDichVu(?,?,?,?,?,?,?,?,?,?,?,?) }";
+	public boolean themDichVu(String tenDichVu, String moTa, int danhMuc, String noiDung, String hinhAnh,
+			String taiKhoan, String nhaCungCap, String dienThoai, String email, String ngayBatDau, 
+			String ngayKetThuc, String loaiHinh, String diaDiem) {
+		String sql = "{call themDichVu(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
 			CallableStatement cstm = db.getCallableStatement(sql);
 			//Cập nhật tham số đầu vào
 			cstm.setString(1, tenDichVu);
 			cstm.setString(2, moTa);
-			cstm.setString(3, danhMuc);
+			cstm.setString(3, danhMuc+"");
 			cstm.setString(4, noiDung);
 			cstm.setString(5, hinhAnh);
-			cstm.setString(6, "");
+			cstm.setString(6, taiKhoan);
 			cstm.setString(7, nhaCungCap);
 			cstm.setString(8, dienThoai);
 			cstm.setString(9, email);
-			cstm.setString(10, ngayBatDau);
-			cstm.setString(11, ngayKetThuc);
+			cstm.setString(10, FormatData.FormatDate(ngayBatDau));
+			cstm.setString(11, FormatData.FormatDate(ngayKetThuc));
+			cstm.setString(12, loaiHinh);
+			cstm.setString(13, diaDiem);
 			//Cập nhật tham số đầu ra
-			cstm.registerOutParameter(12, java.sql.Types.INTEGER);
+			cstm.registerOutParameter(14, java.sql.Types.INTEGER);
 			//Thực thi
-			cstm.executeUpdate();
+			cstm.executeUpdate(); 
 			//Lấy kết quả trả về
-			int result = cstm.getInt(12);
+			int result = cstm.getInt(14);
 			if(result > -1) {
 				return true;
 			}

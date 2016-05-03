@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bean.BaiViet;
 import model.bean.BinhLuan;
 import model.bean.DanhMuc;
+import model.bean.QuanTri;
 import model.bo.BinhLuanBO;
 import model.bo.ChiaSeBO;
 import model.bo.DanhMucBO;
@@ -68,27 +69,32 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 	}
 	
 	public String DangBaiViet(){
-		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
-		try {
-			File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
-			FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
-			this.hinhAnh = this.userImageFileName;
-		} catch (IOException e) {
-			this.hinhAnh = "bridge.jpg";
-		} catch (Exception e) {
-			this.hinhAnh = "bridge.jpg";
-		}
-		ChiaSeBO baiVietBO = new ChiaSeBO();
 		String result = "that-bai";
-		if(ValidateBO.CheckEmpty(tenBaiViet) || ValidateBO.CheckEmpty(moTa)
-				 || ValidateBO.CheckEmpty(danhMuc+"") || ValidateBO.CheckEmpty(noiDung)
-				 || ValidateBO.CheckEmpty(tacGia)){
-			addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
-			result = "that-bai";
-		} else if(baiVietBO.ThemChiaSe(tenBaiViet, moTa, danhMuc, noiDung, hinhAnh, "Taikhoan002", tacGia))
-			result = "thanh-cong";
-		else addActionError("Đăng bài viết không thành công.");
-		baiVietBO.closeConnect();
+		QuanTri admin = (QuanTri)servletRequest.getSession().getAttribute("admin");
+		if(admin==null || (admin!=null && !admin.isNhuCau())){
+			addActionError("Bạn không đủ quyền hạn để thực hiện thao tác này!");
+		} else {
+			this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
+			try {
+				File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
+				FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
+				this.hinhAnh = this.userImageFileName;
+			} catch (IOException e) {
+				this.hinhAnh = "bridge.jpg";
+			} catch (Exception e) {
+				this.hinhAnh = "bridge.jpg";
+			}
+			ChiaSeBO baiVietBO = new ChiaSeBO();
+			if(ValidateBO.CheckEmpty(tenBaiViet) || ValidateBO.CheckEmpty(moTa)
+					 || ValidateBO.CheckEmpty(danhMuc+"") || ValidateBO.CheckEmpty(noiDung)
+					 || ValidateBO.CheckEmpty(tacGia)){
+				addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
+				result = "that-bai";
+			} else if(baiVietBO.ThemChiaSe(tenBaiViet, moTa, danhMuc, noiDung, hinhAnh, admin.getTaiKhoan().getIdTaiKhoan(), tacGia))
+				result = "thanh-cong";
+			else addActionError("Đăng bài viết không thành công.");
+			baiVietBO.closeConnect();
+		}
 		return result;
 	}
 	

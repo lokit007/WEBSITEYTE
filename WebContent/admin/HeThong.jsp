@@ -113,33 +113,18 @@ div#test form {
 			<s:div id="two" label="Biên soạn quy định" theme="ajax">
    				<form id="f-noiquy">
    					<s:label value="Quy định đăng ký thành viên"></s:label>
-					<s:textarea name="noiQuyThanhVien" cssClass="ckeditor" value="%{ taiNguyen.noiQuyThanhVien}"></s:textarea>
+					<s:textarea id="noiQuyThanhVien" name="noiQuyThanhVien" cssClass="ckeditor" value="%{ taiNguyen.noiQuyThanhVien}"></s:textarea>
 					<br>
 					<s:label value="Quy định phát hành dịch vụ"></s:label>
-					<s:textarea name="quyDinhDangDichVu" cssClass="ckeditor" value="%{ taiNguyen.quyDinhDangDichVu}"></s:textarea>
+					<s:textarea id="quyDinhDangDichVu" name="quyDinhDangDichVu" cssClass="ckeditor" value="%{ taiNguyen.quyDinhDangDichVu}"></s:textarea>
 					<br>
 					<s:label value="Quy định đăng tải nhu cầu"></s:label>
-					<s:textarea name="quyDinhDangNhuCau" cssClass="ckeditor" value="%{ taiNguyen.quyDinhDangNhuCau}"></s:textarea>
+					<s:textarea id="quyDinhDangNhuCau" name="quyDinhDangNhuCau" cssClass="ckeditor" value="%{ taiNguyen.quyDinhDangNhuCau}"></s:textarea>
 					<br><s:submit value="Cập nhật nội quy"
 						cssClass="btn btn-primary form-control"></s:submit>
    				</form>
 			</s:div>
 			<s:div id="three" label="Các trang liên kết" theme="ajax">
-    			<form class="f-timkiem" action="danh-muc.action" method="get">
-					<label for="txtFind">Tìm kiếm : </label>
-					<input type="text" id="txtFind" name="txtFind" placeholder="Nội dung cần tìm ..." value="<%= request.getParameter("txtFind")==null?"":FormatData.toUTF8(request.getParameter("txtFind")) %>">
-					<button>Lọc dữ liệu</button>
-				</form>
-				<s:if test="hasActionErrors()">
-					<s:div cssClass="bg-danger" cssStyle="padding: 5px;">
-						<s:actionerror/>
-					</s:div>
-				</s:if>
-				<s:if test="hasActionMessage()"> 
-					<s:div cssClass="bg-success" cssStyle="padding: 5px;">
-						<s:actionmessage/>
-					</s:div>
-				</s:if>
 				<s:div>
 					<table class="table sortable table-hover table-responsive">
 						<thead>
@@ -154,16 +139,28 @@ div#test form {
 							<tr>
 								<td> <s:property value="key"/> </td>
 								<td><a href="${ value}" target="blank"><s:property value="value"/></a></td>
-								<td class="td-10">
-									<button type="button" class="btn btn-primary btn-xs"
-										onclick="CapNhat('${ key }');">
-										Sửa</button>
-									<button type="button" class="btn btn-primary btn-xs"
-										onclick="XoaDanhMuc('${ key }');">
-										Xóa</button>
+								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
+									<i class="fa fa-trash-o i-delete" onclick="XoaLienKet('${ key}');" aria-hidden="true" title="Xóa liên kết"> Xóa </i>
 								</td>
 							</tr>
 						</s:iterator>
+							<tr id="row-add-lienket">
+								<td colspan="9"><i class="fa fa-pencil" style="cursor: pointer;" aria-hidden="true" onclick="ThemLienKet(1);"> Thêm liên kết mới</i></td>
+							</tr>
+							<tr id="row-action-add-lienket" style="display: none;">
+								<form id="f-add-lienket">
+								<td>
+									<input type="text" name="tenWebsite" style="width: 100%;" placeholder="Tên trang liên kết ..."/>
+								</td>
+								<td>
+									<input type="text" name="diaChiWeb" style="width: 100%;" placeholder="Địa chỉ website ..."/>
+								</td>
+								<td style="width: 180px; text-align: center;">
+									<i class="fa fa-share-square-o i-add" aria-hidden="true" title="Thêm mới" style="margin-right: 5px;" onclick="$('#f-add-lienket').submit();"> Thêm </i>
+									<i class="fa fa-trash-o i-delete" aria-hidden="true" title="Hủy thao tác" onclick="ThemLienKet(0);"> Hủy </i>
+								</td>
+								</form>
+							</tr>
 						</tbody>
 					</table>
 				</s:div>
@@ -198,13 +195,13 @@ div#test form {
 						<s:iterator value="listQuanTri">
 							<tr>
 								<td>[<s:property value="taiKhoan.idTaiKhoan"/>] <s:property value="taiKhoan.hoTen"/> </td>
-								<td><s:checkbox name="danhMuc" value="%{ danhMuc}" title="Cho phép/Ngừng quản lý danh mục"></s:checkbox></td>
-								<td><s:checkbox name="dichVu" value="%{ dichVu}" title="Cho phép/Ngừng quản lý dịch vụ"></s:checkbox></td>
-								<td><s:checkbox name="nhuCau" value="%{ nhuCau}" title="Cho phép/Ngừng quản lý nhu cầu"></s:checkbox></td>
-								<td><s:checkbox name="chiaSe" value="%{ chiaSe}" title="Cho phép/Ngừng quản lý bài viết chia sẻ"></s:checkbox></td>
-								<td><s:checkbox name="nhaCungCap" value="%{ nhaCungCap}" title="Cho phép/Ngừng quản lý nhà cung cấp"></s:checkbox></td>
-								<td><s:checkbox name="taiNguyen" value="%{ taiNguyen}" title="Cho phép/Ngừng quản lý tài nguyên hệ thống"></s:checkbox></td>
-								<td><s:checkbox name="thongke" value="%{ thongKe}" title="Cho phép/Ngừng quản lý thông kê báo cáo"></s:checkbox></td>
+								<td><s:checkbox name="danhMuc" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'DanhMuc', this);" value="%{ danhMuc}" title="Cho phép/Ngừng quản lý danh mục"></s:checkbox></td>
+								<td><s:checkbox name="dichVu" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'DichVu', this);" value="%{ dichVu}" title="Cho phép/Ngừng quản lý dịch vụ"></s:checkbox></td>
+								<td><s:checkbox name="nhuCau" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'NhuCau', this);" value="%{ nhuCau}" title="Cho phép/Ngừng quản lý nhu cầu"></s:checkbox></td>
+								<td><s:checkbox name="chiaSe" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'ChiaSe', this);" value="%{ chiaSe}" title="Cho phép/Ngừng quản lý bài viết chia sẻ"></s:checkbox></td>
+								<td><s:checkbox name="nhaCungCap" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'NhaCungCap', this);" value="%{ nhaCungCap}" title="Cho phép/Ngừng quản lý nhà cung cấp"></s:checkbox></td>
+								<td><s:checkbox name="taiNguyen" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'TaiNguyen', this);" value="%{ taiNguyen}" title="Cho phép/Ngừng quản lý tài nguyên hệ thống"></s:checkbox></td>
+								<td><s:checkbox name="thongke" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'ThongKe', this);" value="%{ thongKe}" title="Cho phép/Ngừng quản lý thông kê báo cáo"></s:checkbox></td>
 								<td style="cursor: pointer; width: 40px; text-align: center;">
 									<i class="fa fa-trash-o i-delete" aria-hidden="true" onclick="XoaQuanTriVien('${ taiKhoan.idTaiKhoan}')"></i>
 								</td>
@@ -251,6 +248,39 @@ function ThemQuanTri(i){
 		$("#row-action-add").attr("style", "display: table-row;");
 	}
 }
+function ThemLienKet(i){
+	if(i==0){
+		$("#row-add-lienket").attr("style", "display: table-row;");
+		$("#row-action-add-lienket").attr("style", "display: none;");
+	} else {
+		$("#row-add-lienket").attr("style", "display: none;");
+		$("#row-action-add-lienket").attr("style", "display: table-row;");
+	}
+}
+function CapNhatQuyenHan(id, col, o){
+	$.ajax({
+		url : "capnhat-quyenhan.action",
+		type : "post",
+		data : {
+			taiKhoan : id,
+			nameCol : col,
+			valCheck : $(o).is(":checked")
+		},
+		beforeSend : function(){
+		     $("#while-load").attr("style", "display: inline-block;");
+		},
+		success : function(result) {
+			$("#while-load").attr("style", "display: none;");
+			if(result.indexOf("thất bại")>-1){
+            	alert("Xin lỗi! Không thể xóa quản trị viên này.");
+            	window.location.reload(true);
+            }
+		},
+		error : function(xhr, status, error) {
+			$("#while-load").attr("style", "display: none;");
+		}
+	});
+}
 function XoaQuanTriVien(id){
 	if (confirm("Xóa quản trị viên " + id + " này không???") == true) {
 		$.ajax({
@@ -266,6 +296,31 @@ function XoaQuanTriVien(id){
 				$("#while-load").attr("style", "display: none;");
 				if(result.indexOf("thất bại")>-1){
 	            	alert("Xin lỗi! Không thể xóa quản trị viên này.");
+	            } else {
+	            	window.location.reload(true);
+	            }
+			},
+			error : function(xhr, status, error) {
+				$("#while-load").attr("style", "display: none;");
+			}
+		});
+	}
+}
+function XoaLienKet(id){
+	if (confirm("Bạn muốn xóa liên kết đến " + id + " không???") == true) {
+		$.ajax({
+			url : "xoa-lienket.action",
+			type : "post",
+			data : {
+				tenWebsite : id
+			},
+			beforeSend : function(){
+			     $("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				$("#while-load").attr("style", "display: none;");
+				if(result.indexOf("thất bại")>-1){
+	            	alert("Lỗi! Không xóa được liên kết!");
 	            } else {
 	            	window.location.reload(true);
 	            }
@@ -332,7 +387,11 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: 'capnhat-noiquy.action',
-            data: frm.serialize(),
+            data: {
+            	noiQuyThanhVien : CKEDITOR.instances.noiQuyThanhVien.getData(),
+        		quyDinhDangDichVu : CKEDITOR.instances.quyDinhDangDichVu.getData(),
+        		quyDinhDangNhuCau : CKEDITOR.instances.quyDinhDangNhuCau.getData()
+            },
             success: function (data) {
             	if(data.indexOf("thất bại")>-1){
 	            	alert("Cập nhật nội quy thất bại.");
@@ -344,24 +403,30 @@ $(document).ready(function() {
         });
         ev.preventDefault();
     });
-  //cập nhật nội quy
-	var fqt = $('#f-add-quantri');
-	fqt.submit(function (ev) {
-        $.ajax({
-            type: "POST",
-            url: 'capquyen-quantri.action',
-            data: fqt.serialize(),
-            success: function (data) {
-            	if(data.indexOf("thất bại")>-1){
-	            	alert("Cập nhật nội quy thất bại.");
-	            } else {
-	            	alert("Cập nhật thành công.");
-	            	location.reload(true);
-	            }
-            }
-        });
-        ev.preventDefault();
-    });
+  	//thêm quản trị hệ thống
+	AjaxUpdateData('f-add-quantri', 'capquyen-quantri.action', 'Thêm quản trị thành công!', 'Thêm quản trị thất bại!');
+	//thêm liên kết mới
+	AjaxUpdateData('f-add-lienket', 'them-lienket.action', 'Thêm liên kết thành công!', 'Thêm liên kết thất bại!');
 });
+	//xử lý ajax cập nhật dữ liệu
+	function AjaxUpdateData(idForm, url, megOk, MegEr){
+		var form = $('#'+idForm);
+		form.submit(function (ev) {
+	        $.ajax({
+	            type: "POST",
+	            url: url,
+	            data: form.serialize(),
+	            success: function (data) {
+	            	if(data.indexOf("thất bại")>-1){
+		            	alert(MegEr);
+		            } else {
+		            	alert(megOk);
+		            	location.reload(true);
+		            }
+	            }
+	        });
+	        ev.preventDefault();
+	    });
+	}
 </script>
 </html>

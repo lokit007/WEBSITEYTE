@@ -27,6 +27,29 @@
 	});
 </script>
 <title>Đăng ký phát hành dịch vụ</title>
+<script>
+	var placeSearch, autocomplete;
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */
+		(document.getElementById('diaChi')), {
+			types : [ 'geocode' ]
+		});
+		// fill data khi chọn
+		autocomplete.addListener('place_changed', fillInAddress);
+	}
+
+	function fillInAddress(){
+		var p = autocomplete.getPlace().geometry.location;
+	}
+	
+</script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
+	async defer></script>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -77,24 +100,23 @@
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:label value="Nhà cung cấp" for="nhaCungCap"></s:label>
-					<s:textfield name="nhaCungCap" cssClass="form-control" value="%{ dichVu.baiViet.tenTacGia}"></s:textfield>
+					<%-- <s:textfield name="nhaCungCap" cssClass="form-control" value="%{ dichVu.baiViet.tenTacGia}"></s:textfield> --%>
+					<s:select list="listNCC" name="nhaCungCap" cssClass="form-control"
+						listKey="idNhaCungCap" listValue="taiKhoan.hoTen"
+						headerKey="" headerValue="--- Chọn nhà cung cấp dịch vụ ---"
+						value="dichVu.idNhaCungCap" >
+					</s:select>
 					<br>
 					<s:label value="Địa điểm triển khai dịch vụ" for="diaDiem"></s:label>
-					<s:textfield name="diaDiem" cssClass="form-control" value="%{ dichVu.diaChiTrienKhai}"></s:textfield>
+					<s:textfield id="diaChi" name="diaDiem" cssClass="form-control" value="%{ dichVu.diaChiTrienKhai}"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Điện thoại" for="dienThoai"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control" value="%{ dichVu.dienThoaiLienHe}"></s:textfield>
-							<br>
 							<s:label value="Ngày bắt đầu" for="ngayBatDau"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau" value="%{ dichVu.ngayBatDau}"
 								cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Email" for="email"></s:label>
-							<s:textfield name="email" cssClass="form-control" value="%{ dichVu.emailLienHe}"></s:textfield>
-							<br>
 							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc" value="%{ dichVu.ngayKetThuc}"
 								cssClass="form-control"></s:textfield>

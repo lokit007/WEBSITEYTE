@@ -1,5 +1,6 @@
 package model.bo;
 
+import model.bean.QuanTri;
 import model.bean.TaiKhoan;
 import model.dao.DichVuDAO;
 import model.dao.NhanMailDAO;
@@ -67,6 +68,12 @@ public class ValidateBO {
 		boolean result = dichVuDAO.ChekDangKy(idDichVu, email);
 		dichVuDAO.closeConnect();
 		return result;
+	}
+	public static QuanTri CheckAdminLogin(String taiKhoan, String matKhau) {
+		QuanTriBO quanTriBO = new QuanTriBO();
+		QuanTri admin = quanTriBO.getQuanTri(taiKhoan, matKhau);
+		quanTriBO.closeConnect();
+		return admin;
 	}
 	
 }

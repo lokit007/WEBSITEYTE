@@ -32,9 +32,11 @@ public class DichVuBO {
 		return "file";
 	}
 
-	public boolean themDichVu(String tenDichVu, String moTa, String danhMuc, String noiDung, String hinhAnh,
-			String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
-		return dichVuDAO.themDichVu(tenDichVu, moTa, danhMuc, noiDung, hinhAnh, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc);
+	public boolean themDichVu(String tenDichVu, String moTa, int danhMuc, String noiDung, String hinhAnh,
+			String taiKhoan, String nhaCungCap, String dienThoai, String email, String ngayBatDau, 
+			String ngayKetThuc, String loaiHinh, String diaDiem) {
+		return dichVuDAO.themDichVu(tenDichVu, moTa, danhMuc, noiDung, hinhAnh, taiKhoan, nhaCungCap, 
+				dienThoai, email, ngayBatDau, ngayKetThuc, loaiHinh, diaDiem);
 	}
 
 	public boolean capNhatDichVu(String idDichVu, String tenDichVu, String moTa, String danhMuc, String noiDung,

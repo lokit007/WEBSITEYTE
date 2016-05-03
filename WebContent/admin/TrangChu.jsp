@@ -12,6 +12,7 @@
 	<label id="lb-title"><i class="fa fa-cogs"></i> Quản lý hệ thống dịch vụ y tế - Sở y tế Huế</label>
 	<div id="div-content">
 			<!-- Dịch vụ mới -->
+			<s:if test="#session.admin.dichVu">
 			<h4>Các dịch vụ cần xử lý</h4>
 			<table class="table sortable table-hover table-responsive">
 				<thead>
@@ -58,7 +59,9 @@
 				</s:iterator>
 				</tbody>
 			</table>
+			</s:if>
 			<!-- Nhà cung cấp mới -->
+			<s:if test="#session.admin.nhaCungCap">
 			<hr>
 			<h4>Xét duyệt, xử lý nhà cung cấp</h4>
 			<table class="table sortable table-hover table-responsive">
@@ -92,7 +95,9 @@
 				</s:iterator>
 				</tbody>
 			</table>
+			</s:if>
 			<!-- Nhu cầu mới -->
+			<s:if test="#session.admin.nhuCau">
 			<hr>
 			<h4>Nhu cầu mới</h4>
 			<table class="table sortable table-hover table-responsive">
@@ -128,6 +133,7 @@
 				</s:iterator>
 				</tbody>
 			</table>
+			</s:if>
 	</div>
 </body>
 </html>

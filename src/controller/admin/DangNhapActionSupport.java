@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import model.bean.TaiKhoan;
+import model.bean.QuanTri;
 import model.bo.ValidateBO;
 
 public class DangNhapActionSupport extends ActionSupport implements ServletRequestAware {
@@ -34,11 +34,13 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 			addActionError("Xin vui lòng nhập đầy đủ thông tin!");
 			return "that-bai";
 		}
-		TaiKhoan admin = ValidateBO.CheckAccountExist(this.taiKhoan, this.matKhau);
+		QuanTri admin = ValidateBO.CheckAdminLogin(this.taiKhoan, this.matKhau);
 		if(admin==null) {
 			addActionError("Tài khoản hoặc mật khẩu không chính xác!");
 			return "that-bai";
-		} else if(admin.getLoaiTaiKhoan().equals("admin")||admin.getLoaiTaiKhoan().equals("root")) {
+		} else if(admin.getTaiKhoan().getLoaiTaiKhoan().equals("admin")
+				||admin.getTaiKhoan().getLoaiTaiKhoan().equals("root")
+				||admin.getTaiKhoan().getLoaiTaiKhoan().equals("Nhà cung cấp")) {
 			request.getSession().setAttribute("admin", admin);
 			request.getSession().setAttribute("login", "true");
 		} else {
@@ -48,7 +50,7 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 		return "thanh-cong";
 	}
 	
-	public String  DangXuatClient() {
+	public String  DangXuatAdmin() {
 		this.request.getSession().removeAttribute("admin");
 		this.request.getSession().removeAttribute("login");
 		this.request.getSession().invalidate();
@@ -71,6 +73,7 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 		this.matKhau = matKhau;
 	}
 
+	
 	@Override
 	public void setServletRequest(HttpServletRequest req) {
 		this.request = req;

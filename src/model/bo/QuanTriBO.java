@@ -41,8 +41,21 @@ public class QuanTriBO {
 	}
 
 	public boolean HuyQuyenQuanTri(String taiKhoan) {
-		// TODO Auto-generated method stub
 		return quanTriDAO.HuyQuyenQuanTri(taiKhoan);
+	}
+
+	public boolean CapNhatQuyenHan(String taiKhoan, String nameCol, boolean valCheck) {
+		return quanTriDAO.CapNhatQuyenHan(taiKhoan, nameCol, valCheck);
+	}
+
+	public QuanTri getQuanTri(String taiKhoan, String matKhau) {
+		try {
+			return quanTriDAO.getQuanTri(taiKhoan, matKhau);
+		} catch (SQLException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
