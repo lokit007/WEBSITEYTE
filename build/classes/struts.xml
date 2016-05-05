@@ -164,6 +164,7 @@
 			<result name="thanh-cong">TrangChu.jsp</result>
 			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
 		</action>
+		
 		<!-- dang nhap -->
 		<action name="dang-nhap" class="controller.admin.DangNhapActionSupport" >
 			<result name="input">DangNhap.jsp</result>
@@ -174,6 +175,7 @@
 			<result name="thanh-cong" type="redirect">trang-chu.action</result>
 			<result name="that-bai">DangNhap.jsp</result>
 		</action>
+		
 		<!-- danh muc -->
 		<action name="danh-muc" class="controller.admin.DanhMucActionSupport">
 			<result name="thanh-cong">DanhMuc.jsp</result>
@@ -194,6 +196,7 @@
 			<result name="thanh-cong" type="redirect">danh-muc.action</result>
 			<result name="that-bai">DanhMuc.jsp</result>
 		</action>
+		
 		<!-- dich vu -->
 		<action name="dich-vu" class="controller.admin.DichVuActionSupport">
 			<result name="thanh-cong">DichVu.jsp</result>
@@ -203,7 +206,7 @@
 			<result name="thanh-cong">XemDuyetDichVu.jsp</result>
 			<result name="that-bai" type="redirect">dich-vu.action</result>
 		</action>
-		<action name="xoa-dichvu" class="controller.admin.XulyDichVuActionSupport" method="XoaDichVu">
+		<action name="xoa-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="XoaDichVu">
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>
@@ -234,6 +237,15 @@
 			<result name="thanh-cong" type="redirect">dich-vu.action</result>
 			<result name="that-bai">CapNhatDichVu.jsp</result>
 		</action>
+		<action name="vi-pham-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="BaoViPham">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="cap-phep-dich-vu" class="controller.admin.XulyDichVuActionSupport" method="CapPhatDichVu">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		
 		<!-- chia se -->
 		<action name="chia-se" class="controller.admin.ChiaSeActionSupport">
 			<result name="thanh-cong">ChiaSe.jsp</result>
@@ -386,7 +398,7 @@
 		</action>
 		<action name="capnhat-quantri" class="controller.admin.XulyQuanTriActionSupport" method="CapNhatQuanTri">
 			<result name="thanh-cong" type="redirect">thanh-vien-quantri.action</result>
-			<result name="that-bai">thanh-vien-quantri.action</result>
+			<result name="that-bai" type="redirect">thanh-vien-quantri.action</result>
 		</action>
 		<action name="cap-nhat" class="controller.admin.CapNhatActionSupport">
 			<result name="thanh-cong">Result.jsp</result>

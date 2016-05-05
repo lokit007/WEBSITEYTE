@@ -12,8 +12,8 @@
 	<label id="lb-title"><i class="fa fa-cogs"></i> Quản lý hệ thống dịch vụ y tế - Sở y tế Huế</label>
 	<div id="div-content">
 			<!-- Dịch vụ mới -->
-			<s:if test="#session.admin.dichVu">
-			<h4>Các dịch vụ cần xử lý</h4>
+			<s:if test="#session.admin.dichVu and listDV.size()>0">
+			<h4><i class="fa fa-check" aria-hidden="true"></i> Các dịch vụ cần xử lý</h4>
 			<table class="table sortable table-hover table-responsive">
 				<thead>
 					<tr>
@@ -47,23 +47,26 @@
 							<s:if test="baiViet.tinhTrang=='Mới đăng'">
 								<img alt="Dịch vụ mới" src="images/new-icon.png">
 							</s:if>
+							<s:elseif test="baiViet.tinhTrang=='Vi phạm'">
+								<i class="fa fa-exclamation-triangle" style="color: #FFC107;" aria-hidden="true"></i>
+							</s:elseif>
 						</td>
 						<td class="td-15"> <s:property value="ngayBatDau"/> </td>
 						<td class="td-20"> <s:property value="baiViet.tenTacGia"/> </td>
 						<td class="td-20"> <s:property value="emailLienHe"/> </td>
 						<td class="td-15">
 							<a href="chi-tiet-dich-vu.action?idDichVu=${ idDichVu }" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
-							<a href="#" onclick="XoaDichVu('${ idDichVu }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+							<a style="cursor: pointer;" onclick="XoaDichVu('${ idDichVu }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</s:iterator>
 				</tbody>
 			</table>
+			<hr>
 			</s:if>
 			<!-- Nhà cung cấp mới -->
-			<s:if test="#session.admin.nhaCungCap">
-			<hr>
-			<h4>Xét duyệt, xử lý nhà cung cấp</h4>
+			<s:if test="#session.admin.nhaCungCap and listNCC.size()>0">
+			<h4><i class="fa fa-check" aria-hidden="true"></i> Xét duyệt, xử lý nhà cung cấp</h4>
 			<table class="table sortable table-hover table-responsive">
 				<thead>
 					<tr>
@@ -95,11 +98,11 @@
 				</s:iterator>
 				</tbody>
 			</table>
+			<hr>
 			</s:if>
 			<!-- Nhu cầu mới -->
-			<s:if test="#session.admin.nhuCau">
-			<hr>
-			<h4>Nhu cầu mới</h4>
+			<s:if test="#session.admin.nhuCau and listNC.size()>0">
+			<h4><i class="fa fa-check" aria-hidden="true"></i> Nhu cầu mới</h4>
 			<table class="table sortable table-hover table-responsive">
 				<thead>
 					<tr>

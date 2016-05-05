@@ -42,12 +42,13 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 	public String execute(){
 		String result = "thanh-cong";
 		ChiaSeBO baiVietBO = new ChiaSeBO();
-		BinhLuanBO binhLuanBO = new BinhLuanBO();
 		this.baiViet = baiVietBO.getChiaSe(this.idBaiViet+"");
-		if(this.baiViet!=null)
+		if(this.baiViet!=null){
+			BinhLuanBO binhLuanBO = new BinhLuanBO();
 			this.listBinhLuan = binhLuanBO.getListBinhLuan(baiViet.getIdBaiViet()+"");
+			binhLuanBO.closeConnect();
+		}
 		baiVietBO.closeConnect();
-		binhLuanBO.closeConnect();
 		if(this.baiViet==null) result = "that-bai";
 		return result;
 	}

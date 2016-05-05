@@ -27,6 +27,7 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 	private String taiKhoan;
 	private String hoTen;
 	private String diaChi;
+	private String location;
 	private String dienThoai;
 	private String email;
 	private String gioiThieu;
@@ -83,12 +84,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		} else {
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 			if(check){
-				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, dienThoai, email, gioiThieu, chungChi,
+				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
 						hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype)){
 					result = "thanh-cong";
 				}
 			} else {
-				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, dienThoai, email, gioiThieu, chungChi,
+				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
 						hinhAnh)){
 					result = "thanh-cong";
 				}

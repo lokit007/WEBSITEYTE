@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.bean.DangKyDichVu;
 import model.bean.DichVu;
 import model.dao.DichVuDAO;
 
@@ -40,8 +41,8 @@ public class DichVuBO {
 	}
 
 	public boolean capNhatDichVu(String idDichVu, String tenDichVu, String moTa, String danhMuc, String noiDung,
-			String hinhAnh, String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
-		return dichVuDAO.capNhatDichVu(idDichVu, tenDichVu, moTa, danhMuc, noiDung, hinhAnh, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc);
+			String hinhAnh, String taiKhoan, String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
+		return dichVuDAO.capNhatDichVu(idDichVu, tenDichVu, moTa, danhMuc, noiDung, hinhAnh, taiKhoan, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc);
 	}
 
 	public DichVu getDichVu(String id, int quyen) {
@@ -211,6 +212,18 @@ public class DichVuBO {
 	public List<DichVu> getNhuCauDang(String idTaiKhoan) {
 		try {
 			return dichVuDAO.getNhuCauDang(idTaiKhoan);
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
+
+	public List<DangKyDichVu> getDanhSachDangKy(int idDichVu) {
+		try {
+			return dichVuDAO.getDanhSachDangKy(idDichVu);
 		} catch (SQLException e) {
 			System.out.println("Loi 1 : " + e.toString());
 			return null;

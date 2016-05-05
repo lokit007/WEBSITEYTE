@@ -54,15 +54,15 @@ public class TaiKhoanBO {
 		}
 	}
 
-	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
+	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh) {
-		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, dienThoai, email, gioiThieu, chungChi, hinhAnh);
+		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi, hinhAnh);
 	}
 
-	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
+	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
-		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, dienThoai, email, gioiThieu, chungChi,
+		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
 				hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype);
 	}
 
@@ -82,8 +82,8 @@ public class TaiKhoanBO {
 		return taiKhoanDAO.XoaNhaCungCap(idNhaCungCap);
 	}
 
-	public boolean ThemTaiKhoan(String idTaiKhoan, String matKhau, String hoTen, String diaChi, String dienThoai, String email, String loaiTaiKhoan) {
-		return taiKhoanDAO.ThemTaiKhoan(idTaiKhoan, matKhau, hoTen, diaChi, dienThoai, email,loaiTaiKhoan);
+	public boolean ThemTaiKhoan(String idTaiKhoan, String matKhau, String hoTen, String diaChi, String dienThoai, String email, String loaiTaiKhoan, String location) {
+		return taiKhoanDAO.ThemTaiKhoan(idTaiKhoan, matKhau, hoTen, diaChi, dienThoai, email,loaiTaiKhoan, location);
 	}
 
 	public boolean XoaQuanTri(String idTaiKhoan) {

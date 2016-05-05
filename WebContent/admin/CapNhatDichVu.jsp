@@ -7,11 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<script type="text/javascript" src="../js/jquery.MultiFile.js"></script>
-<script src="../js/jquery.validate.js" type="text/javascript"></script>
-<script src="../ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="../css/datepicker.css">
-<script src="../js/bootstrap-datepicker.js"></script>
+<script src="../js/jquery.MultiFile.js" type="text/javascript"></script>
+<script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/xulynghiepvu.js" type="text/javascript"></script>
+<script src="js/loadlocaltion.js" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="js/validateform.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#ngayBatDau').datepicker({
@@ -27,29 +31,6 @@
 	});
 </script>
 <title>Đăng ký phát hành dịch vụ</title>
-<script>
-	var placeSearch, autocomplete;
-
-	function initAutocomplete() {
-		// Create the autocomplete object, restricting the search to geographical
-		// location types.
-		autocomplete = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */
-		(document.getElementById('diaChi')), {
-			types : [ 'geocode' ]
-		});
-		// fill data khi chọn
-		autocomplete.addListener('place_changed', fillInAddress);
-	}
-
-	function fillInAddress(){
-		var p = autocomplete.getPlace().geometry.location;
-	}
-	
-</script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
-	async defer></script>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -71,24 +52,12 @@
 					<s:label value="Tên dịch vụ" for="tenDichVu"></s:label>
 					<s:textfield name="tenDichVu" cssClass="form-control" value="%{ dichVu.baiViet.tenBaiViet}"></s:textfield>
 					<br>
-					<s:div cssClass="div-col-100">
-						<s:div cssClass="div-col-50">
-							<s:label value="Danh mục" for="danhMuc"></s:label>
-							<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
-								listKey="idDanhMuc" cssClass="form-control" headerKey="-1"
-								headerValue="--- Chọn Danh Mục ---" 
-								value="dichVu.baiViet.danhMuc.idDanhMuc">
-							</s:select>
-						</s:div>
-						<s:div cssClass="div-col-50">
-							<s:label value="Loại hình dịch vụ" for="loaiHinh"></s:label>
-							<s:select name="loaiHinh" list="{ 'Từ thiện', 'Dịch vụ công', 'Dịch vụ tư'}"
-								 headerKey="" headerValue="--- Chọn loại hình ---" cssClass="form-control"
-								 value="dichVu.loaiHinhDichVu" >
-							</s:select>
-						</s:div>
-						<s:div cssClass="clear"></s:div>
-					</s:div>
+					<s:label value="Danh mục" for="danhMuc"></s:label>
+					<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
+							listKey="idDanhMuc" cssClass="form-control" headerKey="-1"
+							headerValue="--- Chọn Danh Mục ---" 
+							value="dichVu.baiViet.danhMuc.idDanhMuc">
+					</s:select>
 					<br>
 					<s:label value="Mô tả" for="moTa"></s:label>
 					<s:textarea name="moTa" cssClass="form-control" value="%{ dichVu.baiViet.moTa}"></s:textarea>
@@ -134,88 +103,4 @@
 		<s:div cssClass="clear"></s:div>
 	</s:div>
 </body>
-<script type="text/javascript">
-	/* 
-	$(function() {
-		$('.datepicker').datepicker({
-			format : "yyyy-mm-dd"
-		}).on('changeDate', function(ev) {
-			$(this).datepicker('hide');
-		});
-	}); */
-	$(document).ready(function() {
-		$("#formDichVu").validate({
-			rules : {
-				tenDichVu : {
-					required : true
-				},
-				moTa : {
-					required : true
-				},
-				danhMuc : {
-					required : true	
-				},
-				loaiHinh : {
-					required : true
-				},
-				noiDung : {
-					required : true
-				},
-				nhaCungCap : {
-					required : true
-				},
-				diaDiem : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : 5
-				},
-				ngayBatDau : "required",
-				ngayKetThuc : "required"
-			},
-			messages : {
-				tenDichVu : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				moTa : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				danhMuc : {
-					required : "Chưa chọn danh mục dịch vụ!"	
-				},
-				loaiHinh : {
-					required : "Chưa chọn loại hình dịch vụ!"
-				},
-				noiDung : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				nhaCungCap : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				diaDiem : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				dienThoai : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				email : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-					email : "Dữ liệu quá dài!"
-				},
-				ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"
-			},
-			submitHandler : function(form) {
-				form.submit();
-			}
-		});
-	});
-	function XoaPhanTu(){
-		$("#showError").remove();
-	}
-</script>
 </html>

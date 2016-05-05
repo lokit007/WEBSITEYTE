@@ -6,6 +6,12 @@ ul, li {
 	padding: 0px;
 	margin: 0px;
 }
+h4 {
+	border-bottom: 1px dotted rgba(128, 128, 128, 0.27);
+    margin-bottom: -2px;
+    font-style: italic;
+    font-weight: bold;
+}
 .clear {
 	clear: both;
 }
@@ -400,6 +406,8 @@ form#f-send-meg textarea {
     margin-top: 3px;
     border: 1px solid #31708f;
     padding: 5px;
+    max-height: 350px;
+    overflow-x: auto;
 }
 textarea#txtHoi, textarea.txtHoi {
     width: 100%;

@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bean.BinhLuan;
+import model.bean.DangKyDichVu;
 import model.bean.DanhMuc;
 import model.bean.DichVu;
 import model.bean.NhaCungCap;
@@ -45,16 +46,19 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	private HttpServletRequest servletRequest;
 	private DichVu dichVu;
 	private List<BinhLuan> listBinhLuan;
+	private List<DangKyDichVu> listDangKy;
 	// Load thông tin dịch vụ
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
-		BinhLuanBO binhLuanBO = new BinhLuanBO();
 		this.dichVu = dichVuBO.getDichVu(this.idDichVu+"", 0);
-		if(this.dichVu!=null)
+		if(this.dichVu!=null){
+			BinhLuanBO binhLuanBO = new BinhLuanBO();
 			this.listBinhLuan = binhLuanBO.getListBinhLuan(dichVu.getBaiViet().getIdBaiViet()+"");
+			this.listDangKy = dichVuBO.getDanhSachDangKy(this.dichVu.getIdDichVu());
+			binhLuanBO.closeConnect();
+		}
 		dichVuBO.closeConnect();
-		binhLuanBO.closeConnect();
 		if(this.dichVu==null) result = "that-bai";
 		return result;
 	}
@@ -147,7 +151,7 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		} else {
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 			NhaCungCap ncc = taiKhoanBO.getNhaCungCap(nhaCungCap);
-			if(dichVuBO.capNhatDichVu(idDichVu+"", tenDichVu, moTa, danhMuc+"", noiDung, 
+			if(dichVuBO.capNhatDichVu(idDichVu+"", tenDichVu, moTa, danhMuc+"", noiDung, hinhAnh,
 					ncc.getTaiKhoan().getIdTaiKhoan(), ncc.getTaiKhoan().getHoTen(), 
 					ncc.getTaiKhoan().getDienThoai(), ncc.getTaiKhoan().getEmail(),
 					ngayBatDau, ngayKetThuc))
@@ -155,6 +159,38 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 			else addActionError("Cập nhật dịch vụ không thành công.");
 		}
 		dichVuBO.closeConnect();
+		return result;
+	}
+	// Cấp phát dịch vụ
+	public String CapPhatDichVu(){
+		String result = "thanh-cong";
+		if(idDichVu>0){
+			DichVuBO dichVuBO = new DichVuBO();
+			if(!dichVuBO.capNhatTinhTrang(idDichVu+"", "Đăng bài")){
+				addActionError("Cấp phát dịch vụ không thành công!");
+				result = "that-bai";
+			}
+			dichVuBO.closeConnect();
+		} else {
+			addActionError("Cấp phát dịch vụ không thành công!");
+			result = "that-bai";
+		}
+		return result;
+	}
+	// Báo lỗi dịch vụ
+	public String BaoViPham(){
+		String result = "thanh-cong";
+		if(idDichVu>0){
+			DichVuBO dichVuBO = new DichVuBO();
+			if(!dichVuBO.capNhatTinhTrang(idDichVu+"", "Khóa bài đăng")){
+				addActionError("Báo vi phạm không thành công!");
+				result = "that-bai";
+			}
+			dichVuBO.closeConnect();
+		} else {
+			addActionError("Báo vi phạm không thành công!");
+			result = "that-bai";
+		}
 		return result;
 	}
 	
@@ -309,6 +345,12 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	}
 	public void setListNCC(List<NhaCungCap> listNCC) {
 		this.listNCC = listNCC;
+	}
+	public List<DangKyDichVu> getListDangKy() {
+		return listDangKy;
+	}
+	public void setListDangKy(List<DangKyDichVu> listDangKy) {
+		this.listDangKy = listDangKy;
 	}
 
 }

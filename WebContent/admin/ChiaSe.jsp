@@ -7,9 +7,10 @@
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
 <title>Admin - Quản lý dịch vụ y tế</title>
-<script src="../js/sorttable.js"></script>
-<script src="../js/menuPage.js"></script>
+<script src="../js/sorttable.js" type="text/javascript"></script>
+<script src="../js/menuPage.js" type="text/javascript"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="js/xulynghiepvu.js" type="text/javascript"></script>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -47,7 +48,7 @@
 						<td class="td-15">
 							<a href="chi-tiet-chia-se.action?idBaiViet=${ idBaiViet }" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
 							<a href="thong-tin-chia-se.action?idBaiViet=${ idBaiViet }" class="btn-update btn-thaotac"><i class="fa fa-pencil-square-o"></i></a>
-							<a href="#" onclick="XoaChiaSe('${ idBaiViet }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+							<a style="cursor: pointer;" onclick="XoaChiaSe('${ idBaiViet }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -59,31 +60,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	function ChuyenHuong(url){
-		window.location.href = url;
-	}
-	function XoaChiaSe(id) {
-		if (confirm("Bạn muốn xoá chia sẻ " + id + " này không???") == true) {
-			$.ajax({
-				url : "xoa-chiase.action",
-				type : "post",
-				data : {
-					idBaiViet : id
-				},
-				beforeSend : function(){
-				     $("#while-load").attr("style", "display: inline-block;");
-				},
-				success : function(result) {
-					window.location.reload(true);
-					$("#while-load").attr("style", "display: none;");
-				},
-				error : function(xhr, status, error) {
-					$("#loi").modal("show");
-					$("#while-load").attr("style", "display: none;");
-				}
-			});
-		}
-	}
-</script>
 </html>

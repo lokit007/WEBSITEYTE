@@ -11,7 +11,11 @@
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
 <script src="../ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="../css/datepicker.css">
-<script src="../js/bootstrap-datepicker.js"></script>
+<script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/xulynghiepvu.js" type="text/javascript"></script>
+<script src="js/loadlocaltion.js" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="js/validateform.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#ngayBatDau').datepicker({
@@ -27,64 +31,6 @@
 	});
 </script>
 <title>Đăng ký phát hành dịch vụ</title>
-<script>
-	var placeSearch, autocomplete;
-
-	function initAutocomplete() {
-		// Create the autocomplete object, restricting the search to geographical
-		// location types.
-		autocomplete = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */
-		(document.getElementById('diaChi')), {
-			types : [ 'geocode' ]
-		});
-		// fill data khi chọn
-		autocomplete.addListener('place_changed', fillInAddress);
-	}
-
-	function fillInAddress(){
-		var p = autocomplete.getPlace().geometry.location;
-	}
-	
-	function errorHandler(err) {
-		if (err.code == 1) {
-			alert("Error: Access is denied!");
-		} else if (err.code == 2) {
-			alert("Error: Position is unavailable!");
-		}
-	}
-	function getLocation() {
-		if (navigator.geolocation) {
-			// timeout at 60000 milliseconds (60 seconds)
-			var options = {
-				timeout : 60000
-			};
-			navigator.geolocation.getCurrentPosition(XemThu, errorHandler,
-					options);
-		} else {
-			alert("Sorry, browser does not support geolocation!");
-		}
-	}
-	function XemThu(position) {
-		$.ajax({
-			url : "https://maps.googleapis.com/maps/api/geocode/json",
-			type : "get",
-			dateType : "json",
-			data : {
-				latlng : position.coords.latitude + ','
-						+ position.coords.longitude,
-				sensor : false,
-				language : 'vi'
-			},
-			success : function(result, textStatus) {
-				$("#diaChi").val(result.results[0].formatted_address);
-			}
-		});
-	}
-</script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
-	async defer></script>
 </head>
 <body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
@@ -109,7 +55,7 @@
 						<s:div cssClass="div-col-50">
 							<s:label value="Danh mục" for="danhMuc"></s:label>
 							<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
-								listKey="idDanhMuc" cssClass="form-control" headerKey="-1"
+								listKey="idDanhMuc" cssClass="form-control" headerKey=""
 								headerValue="--- Chọn Danh Mục ---">
 							</s:select>
 						</s:div>
@@ -165,88 +111,4 @@
 		<s:div cssClass="clear"></s:div>
 	</s:div>
 </body>
-<script type="text/javascript">
-	/* 
-	$(function() {
-		$('.datepicker').datepicker({
-			format : "yyyy-mm-dd"
-		}).on('changeDate', function(ev) {
-			$(this).datepicker('hide');
-		});
-	}); */
-	$(document).ready(function() {
-		$("#formDichVu").validate({
-			rules : {
-				tenDichVu : {
-					required : true
-				},
-				moTa : {
-					required : true
-				},
-				danhMuc : {
-					required : true	
-				},
-				loaiHinh : {
-					required : true
-				},
-				noiDung : {
-					required : true
-				},
-				nhaCungCap : {
-					required : true
-				},
-				diaDiem : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : 5
-				},
-				ngayBatDau : "required",
-				ngayKetThuc : "required"
-			},
-			messages : {
-				tenDichVu : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				moTa : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				danhMuc : {
-					required : "Chưa chọn danh mục dịch vụ!"	
-				},
-				loaiHinh : {
-					required : "Chưa chọn loại hình dịch vụ!"
-				},
-				noiDung : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				nhaCungCap : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				diaDiem : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				dienThoai : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				email : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-					email : "Dữ liệu quá dài!"
-				},
-				ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"
-			},
-			submitHandler : function(form) {
-				form.submit();
-			}
-		});
-	});
-	function XoaPhanTu(){
-		$("#showError").remove();
-	}
-</script>
 </html>

@@ -7,12 +7,21 @@
 <html>
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<title>Admin - Quản lý danh mục y tế</title>
-<script src="../js/sorttable.js"></script>
-<script src="../js/menuPage.js"></script>
+
+<script src="../js/sorttable.js" type="text/javascript"></script>
+<script src="../js/menuPage.js" type="text/javascript"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="js/loadlocaltion.js" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete" async defer></script>
+
+<title>Admin - Quản lý danh mục y tế</title>
+<style type="text/css">
+	.pac-container {
+		z-index: 9999;
+	}
+</style>
 </head>
-<body>
+<body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
 	<label id="lb-title"><i class="fa fa-user-secret"></i> Ban quản trị hệ thống</label>
 	<button class="btn btn-success btn-xs" id="btn-them" onclick="ThemMoi();" ><i class="fa fa-plus-square"></i> Thêm mới</button>
@@ -67,53 +76,9 @@
 			<s:property value="menu" escape="false"/>
 		</div>
 	</div>
-	<!-- dialog thông báo lỗi -->
-		<div class="modal fade" id="loi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; margin-top: 15%;">
-			<div class="modal-dialog">
-				 <div class="modal-content" style=" width: 60%; margin-left: auto; margin-right: auto;">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				        <h4 class="modal-title" id="myModalLabel"><img alt="Lỗi" src="images/Logo.png" class="imgLoi"> Lỗi cơ sở dữ liệu !!!</h4>
-				      </div>
-				      <div class="modal-body">
-				          Lỗi cập nhật cơ sở dữ liệu! Vui lòng thực hiện thao tác khác.
-				      </div>
-				      <div class="modal-footer">
-				        <button data-dismiss="modal" class="btn btn-primary"> OK </button>
-				      </div>
-				 </div>
-			</div>
-		</div>
-		<!-- dialog cập nhật danh mục -->
-		<div class="modal fade" id="capnhat-dm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; margin-top: 10%;">
-			<div class="modal-dialog">
-				 <div class="modal-content" style=" width: 80%; margin-left: auto; margin-right: auto;">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Cập nhật danh mục <label id="id-dmx"></label></h4>
-				      </div>
-				      <div class="modal-body">
-				          <form action="capnhat-quantri.action" method="post" id="fcapnhat">
-				          		<input type="hidden" name="idDanhMuc" id="id-dm">
-				          		<label>Tên danh mục</label>
-				          		<input type="text" name="tenDanhMuc" id="tenDanhMuc" placeholder="Tên danh mục" class="form-control">
-				          		<br>
-				          		<label>Hiển thị trên : </label>
-				          		<s:checkboxlist name="hienThi" id="hienThi" list="{'Dịch vụ', 'Tư vấn', 'Chia sẻ'}" value="{'Dịch vụ', 'Chia sẻ'}"></s:checkboxlist>
-				          		<br>
-				          		<i>Chú ý : Tên danh mục y tế phải có ý nghĩa thực tiễn, 
-				          					ngắn gọn đầy đủ ý nghĩa trong y học.
-				          					Tên thường có độ dài từ 15 đến 40 ký tự.</i>
-				          		<hr>
-				          		<button data-dismiss="modal" class="btn btn-default btn-sm" style="float: right;">Hủy bỏ</button>
-				          		<button type="submit" name="btnSubmit" value="Cập nhật" class="btn btn-primary btn-sm" style="float: right; margin-right: 10px">Cập nhật</button>
-				          		<div style="clear: both;"></div>
-				          </form>
-				      </div>
-				 </div>
-			</div>
-		</div>
-		<!-- dialog thêm mới danh mục -->
+		<!-- dialog cập nhật quan trị -->
+		<div class="modal fade" id="capnhat-dm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; margin-top: 10%;"></div>
+		<!-- dialog thêm quản trị -->
 		<div class="modal fade" id="them-dm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; margin-top: 5%;">
 			<div class="modal-dialog">
 				 <div class="modal-content" style=" width: 80%; margin-left: auto; margin-right: auto;">
@@ -128,7 +93,8 @@
 				          		<br><label>Cá nhân/Tổ chức</label>
 				          		<input type="text" name="hoTen" class="form-control" placeholder="Xưng danh đầy đủ">
 				          		<br><label>Địa chỉ</label>
-				          		<input type="text" name="diaChi" class="form-control" placeholder="Địa chỉ liên hệ">
+				          		<input type="text" id="diaChi" name="diaChi" class="form-control" placeholder="Địa chỉ liên hệ">
+				          		<s:hidden id="location" name="location"></s:hidden>
 				          		<br>
 				          		<s:div cssClass="div-col-100">
 									<s:div cssClass="div-col-50">
@@ -153,182 +119,133 @@
 		<i class="fa fa-spinner fa-3x fa-pulse" id="while-load" style="margin-left: 50%; margin-top: -10%;"></i>
 </body>
 <script type="text/javascript">
-	function ThemMoi() {
-		$("#them-dm").modal("show");
-	}
-	function CapNhat(id) {
-		$.ajax({
-			url : "show-quantri.action",
-			type : "post",
-			data : {
-				idTaiKhoan : id
+$(document).ready(function() {
+	$("#fthem").validate({
+		rules : {
+			idTaiKhoan : {
+				required : true
 			},
-			beforeSend : function(){
-			     $("#while-load").attr("style", "display: inline-block;");
+			hoTen : {
+				required : true
 			},
-			success : function(result) {
-				$("#capnhat-dm").html(result);
-				$("#capnhat-dm").modal("show");
-				$("#while-load").attr("style", "display: none;");
+			diaChi : {
+				required : true
 			},
-			error : function(xhr, status, error) {
-				$("#loi").modal("show");
-				$("#while-load").attr("style", "display: none;");
+			dienThoai : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
 			}
-		});
-	}
-	function XoaTaiKhoan(id) {
-		if (confirm("Bạn muốn xoá tàik khoản " + id + " này không???") == true) {
+		},
+		messages : {
+			idTaiKhoan : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			hoTen : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			diaChi : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			dienThoai : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			email : {
+				required : "Bạn chưa nhập dữ liệu!",
+				email : "Không phải định dạng email!"
+			}
+		},
+		submitHandler : function(form) {
+			var postData = $(form).serializeArray();
+			var formURL = $(form).attr("action");
 			$.ajax({
-				url : "xoa-quantrivien.action",
-				type : "post",
-				data : {
-					idTaiKhoan : id
+				url : formURL,
+				type : "POST",
+				data : postData,
+				beforeSubmit : function() {
+					$("#loadWhile").attr("style", "display: inherit;");
 				},
-				beforeSend : function(){
-				     $("#while-load").attr("style", "display: inline-block;");
+				success : function(data) {
+					$('#them-dm').modal('hide');
+					$("#loadWhile").attr("style", "display: none;");
+					if (data.indexOf("thất bại") > -1) {
+						$("#loiDangKy").attr("style", "display: inherit;");
+					} else {
+						window.location.reload(true);
+						$("#loiDangKy").attr("style", "display: none;");
+						alert("Đăng ký dịch vụ thành công.");
+					}
 				},
-				success : function(result) {
-					window.location.reload(true);
-					$("#while-load").attr("style", "display: none;");
-				},
-				error : function(xhr, status, error) {
-					$("#loi").modal("show");
-					$("#while-load").attr("style", "display: none;");
+				error : function(jqXHR, textStatus, errorThrown) {
+					$("#loiDangKy").attr("style", "display: none;");
+					$('#them-dm').modal('hide');
+					alert("Lỗi");
 				}
 			});
 		}
-	}
-	
-	$(document).ready(function(){
-		$("#fthem").validate({
-			rules : {
-				idTaiKhoan : {
-					required : true
-				},
-				hoTen : {
-					required : true
-				},
-				diaChi : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : true
-				}
-			},
-			messages : {
-				idTaiKhoan : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				hoTen : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				diaChi : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				dienThoai : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				email : {
-					required : "Bạn chưa nhập dữ liệu!",
-					email : "Không phải định dạng email!"
-				}
-			},
-			submitHandler : function(form) {
-				var postData = $(form).serializeArray();
-			    var formURL = $(form).attr("action");
-			    $.ajax({
-				    url : formURL,
-			        type: "POST",
-			        data : postData,
-			        beforeSubmit : function (){
-			        	$("#loadWhile").attr("style", "display: inherit;");
-			        },
-			      	success:function(data, textStatus, jqXHR) 
-			        {
-			            if(data.indexOf("thất bại")>-1){
-			            	$("#loiDangKy").attr("style", "display: inherit;");
-				       } else {
-				    	    window.location.reload(true);
-			            	$("#loiDangKy").attr("style", "display: none;");
-			            	$('#them-dm').modal('hide');
-					      	alert("Đăng ký dịch vụ thành công.");
-			            }
-			        },
-			        error: function(jqXHR, textStatus, errorThrown) 
-			        {
-			        	$("#loiDangKy").attr("style", "display: none;");
-				       	$('#them-dm').modal('hide');
-			            alert("Lỗi");    
-			        }
-			   });
-			}
-		});
-		$("#fcapnhat").validate({
-			rules : {
-				hoTen : {
-					required : true
-				},
-				diaChi : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : true
-				}
-			},
-			messages : {
-				hoTen : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				diaChi : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				dienThoai : {
-					required : "Bạn chưa nhập dữ liệu!"
-				},
-				email : {
-					required : "Bạn chưa nhập dữ liệu!",
-					email : "Không phải định dạng email!"
-				}
-			},
-			submitHandler : function(form) {
-				var postData = $(form).serializeArray();
-			    var formURL = $(form).attr("action");
-			    $.ajax({
-				    url : formURL,
-			        type: "POST",
-			        data : postData,
-			        beforeSubmit : function (){
-			        	$("#loadWhile").attr("style", "display: inherit;");
-			        },
-			      	success:function(data, textStatus, jqXHR) 
-			        {
-			            if(data.indexOf("thất bại")>-1){
-			            	$("#loiDangKy").attr("style", "display: inherit;");
-				       } else {
-				    	    window.location.reload(true);
-			            	$("#loiDangKy").attr("style", "display: none;");
-			            	$('#them-dm').modal('hide');
-					      	alert("Đăng ký dịch vụ thành công.");
-			            }
-			        },
-			        error: function(jqXHR, textStatus, errorThrown) 
-			        {
-			        	$("#loiDangKy").attr("style", "display: none;");
-				       	$('#them-dm').modal('hide');
-			            alert("Lỗi");    
-			        }
-			   });
-			}
-		});
 	});
+	$("#fcapnhat").validate({
+		rules : {
+			hoTen : {
+				required : true
+			},
+			diaChi : {
+				required : true
+			},
+			dienThoai : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
+			}
+		},
+		messages : {
+			hoTen : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			diaChi : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			dienThoai : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			email : {
+				required : "Bạn chưa nhập dữ liệu!",
+				email : "Không phải định dạng email!"
+			}
+		},
+		submitHandler : function(form) {
+			var postData = $(form).serializeArray();
+			var formURL = $(form).attr("action");
+			$.ajax({
+				url : formURL,
+				type : "POST",
+				data : postData,
+				beforeSubmit : function() {
+					$("#loadWhile").attr("style", "display: inherit;");
+				},
+				success : function(data) {
+					if (data.indexOf("thất bại") > -1) {
+						$("#loiDangKy").attr("style", "display: inherit;");
+					} else {
+						window.location.reload(true);
+						$("#loiDangKy").attr("style", "display: none;");
+						$('#them-dm').modal('hide');
+						alert("Đăng ký dịch vụ thành công.");
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					$("#loiDangKy").attr("style", "display: none;");
+					$('#them-dm').modal('hide');
+					alert("Lỗi");
+				}
+			});
+		}
+	});
+});
 </script>
+<script src="js/thanhvienhethong.js" type="text/javascript"></script>
 </html>

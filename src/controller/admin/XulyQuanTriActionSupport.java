@@ -12,6 +12,7 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 	private String tinhTrang;
 	private String hoTen;
 	private String diaChi;
+	private String location;
 	private String dienThoai;
 	private String email;
 	private TaiKhoan taiKhoan;
@@ -38,7 +39,7 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 			result = "that-bai";
 		} else {
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
-			if(!taiKhoanBO.ThemTaiKhoan(idTaiKhoan, "12345678", hoTen, diaChi, dienThoai, email,"admin")){
+			if(!taiKhoanBO.ThemTaiKhoan(idTaiKhoan, "12345678", hoTen, diaChi, dienThoai, email,"admin", location)){
 				addActionError("Thêm mới tài khoản quản trị thất bại!");
 				result = "that-bai";
 			}
@@ -140,5 +141,14 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 	public void setTaiKhoan(TaiKhoan taiKhoan) {
 		this.taiKhoan = taiKhoan;
 	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
 	
 }

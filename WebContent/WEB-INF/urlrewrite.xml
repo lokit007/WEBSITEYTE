@@ -3,19 +3,20 @@
         "http://tuckey.org/res/dtds/urlrewrite2.6.dtd">
 
 <!--
-
     Configuration file for UrlRewriteFilter
     http://tuckey.org/urlrewrite/
-
 -->
 <urlrewrite>
-
     <rule>
-        <note>Esempio 1.1</note>
-        <from>/getdocument\.jsp\?id=(\d+)</from>
-        <to>/documents/index.jsp?id=$1</to>
+        <note>Admin Trang Chu</note>
+        <from>/admin/trang-chu.html</from>
+        <to>/admin/trang-chu.action</to>
     </rule>
-    
+    <rule>
+        <note>Admin Dang Nhap</note>
+        <from>/admin/dang-nhap.html</from>
+        <to>/admin/dang-nhap.action</to>
+    </rule>
     <rule>
         <note>Esempio 1.2</note>
         <from>/getdocument_2\.jsp\?id=(\d+)</from>

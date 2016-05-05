@@ -64,15 +64,16 @@
 			<s:if test="#session.admin.nhuCau">
 				<li <%= path.equals("/admin/NhuCau.jsp")?"class='active'":"" %>><a href="nhu-cau.action"><i class="fa fa-compass"></i> Nhu cầu y tế</a></li>
 			</s:if>
-			<li <%= path.equals("/admin/HoTro.jsp")?"class='active'":"" %>><a href="HoTro.jsp"><i class="fa fa-contao"></i> Quản lý quản cáo</a></li>
+			<li <%= path.equals("/admin/QuangCao.jsp")?"class='active'":"" %>><a href="quang-cao.action"><i class="fa fa-contao"></i> Quản lý quản cáo</a></li>
 			<s:if test="#session.admin.chiaSe">
 				<li <%= path.equals("/admin/ChiaSe.jsp")?"class='active'":"" %>><a href="chia-se.action"><i class="fa fa-share-alt"></i> Chia sẻ y tế</a></li>
 			</s:if>
 			<s:if test="#session.admin.taiKhoan.loaiTaiKhoan=='root'">
 				<li id="qltv" <%= path.equals("/admin/ThanhVienQuanTri.jsp")?"class='active'":
 								path.equals("/admin/ThanhVienNCC.jsp")?"class='active'":
-								path.equals("/admin/ThanhVienNguoiDung.jsp")?"class='active'":""%>>
-					<a href="#" data-toggle="dropdown"><i class="fa fa-users"></i> Quản lý thành viên</a>
+								path.equals("/admin/ThanhVienNguoiDung.jsp")?"class='active'":""%>
+					onclick="ShowSubMenu(1);" >
+					<a style="cursor: pointer;"><i class="fa fa-users"></i> Quản lý thành viên <i id="icon-caret" class="fa fa-caret-square-o-down" style="float: right; margin : 3px;" aria-hidden="true"></i></a>
 					<ul id="dataMenu">
 						<li <%= path.equals("/admin/ThanhVienQuanTri.jsp")?"class='active'":"" %>><a href="thanh-vien-quantri.action"><i class="fa fa-user-secret"></i> Thành viên quản trị</a></li>
 						<s:if test="#session.admin.nhaCungCap">
@@ -125,6 +126,17 @@
 					$(o).attr('onclick', 'show(1, this);');
 				}
 			}
+			function ShowSubMenu(e){
+				if(e == 1){
+					$('#dataMenu').css('display', 'inline');
+					$('#qltv').attr('onclick', 'ShowSubMenu(0);');
+					$('#icon-caret').attr('class', 'fa fa-caret-square-o-up');
+				} else {
+					$('#dataMenu').css('display', 'none');
+					$('#qltv').attr('onclick', 'ShowSubMenu(1);');
+					$('#icon-caret').attr('class', 'fa fa-caret-square-o-down');
+				}
+			}
 		</script>
 		<ul>
 			<li><a href="#" onclick="ShowView(1, this);" title="Danh sách dịch vụ cần xử lý"><i class="fa fa-heartbeat fa-2x"></i><span>1</span></a></li>
@@ -147,4 +159,25 @@
 		</s:div>
 	</div>
 
+<div class="modal fade bs-example-modal-sm" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body bg-success">
+      	<i class="fa fa-times" style="float: right; cursor: pointer;" title="Đóng" aria-hidden="true" data-dismiss="modal"></i>
+        <p id="messuccess"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body bg-danger">
+      	<i class="fa fa-times" style="float: right; cursor: pointer;" title="Đóng" aria-hidden="true" data-dismiss="modal"></i>
+        <p id="meserror"></p>
+      </div>
+    </div>
+  </div>
+</div>
 	

@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.tree-node ul {
+	border-left: 1px solid gray;
+	margin-left: 5px;
+	margin-top: -10px;
+	padding: 5px 0px 0px 10px;
+	list-style: none;
+}
+
+span.ic-chil {
+	margin-left: -10px;
+	width: 10px;
+}
+
+.tree-node, .tree-node label {
+	cursor: pointer;
+}
+div#test {
+    margin-top: 10px;
+    max-height: 560px;
+    overflow: auto;
+}
+div#test form {
+    margin: 10px;
+}
+#cke_1_contents, #cke_2_contents, #cke_3_contents {
+	height: 180px !important;
+}
+.i-delete:hover {
+    background-color: rgba(158, 158, 158, 0.59);
+    padding: 3px 5px;
+    border-radius: 10px;
+    color: red;
+    cursor: pointer;
+}
+.i-add:hover {
+    background-color: rgba(158, 158, 158, 0.59);
+    padding: 3px 5px;
+    border-radius: 10px;
+    color: blue;
+    cursor: pointer;
+}

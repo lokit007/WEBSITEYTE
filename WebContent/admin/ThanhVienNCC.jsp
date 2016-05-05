@@ -66,14 +66,14 @@
 						<td class="td-10"> <s:property value="taiKhoan.tinhTrang"/> </td>
 						<td class="td-20">
 							<s:if test="taiKhoan.tinhTrang=='TK mới'">
-								<a href="#" title="Báo cáo vi phạm" onclick="CapNhatNguoiDung('${ taiKhoan.idTaiKhoan }', 'Vi phạm');" class="btn-check btn-thaotac"><i class="fa fa-exclamation-triangle"></i></a>
+								<a style="cursor: pointer;" title="Báo cáo vi phạm" onclick="CapNhatNguoiDung('${ taiKhoan.idTaiKhoan }', 'Vi phạm');" class="btn-check btn-thaotac"><i class="fa fa-exclamation-triangle"></i></a>
 							</s:if>
 							<s:elseif test="taiKhoan.tinhTrang=='Vi phạm'">
-								<a href="#" title="Khôi phục tài khoản" onclick="CapNhatNguoiDung('${ taiKhoan.idTaiKhoan }', 'TK mới');" class="btn-check btn-thaotac"><i class="fa fa-reply"></i></a>
+								<a style="cursor: pointer;" title="Khôi phục tài khoản" onclick="CapNhatNguoiDung('${ taiKhoan.idTaiKhoan }', 'TK mới');" class="btn-check btn-thaotac"><i class="fa fa-reply"></i></a>
 							</s:elseif>										
 							<a href="chi-tiet-nhacungcap.action?idNhaCungCap=${ idNhaCungCap }" title="Chi tiết nhà cung cấp" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
 							<a href="thong-tin-nhacungcap.action?idNhaCungCap=${ idNhaCungCap }" title="Chỉnh sửa" class="btn-update btn-thaotac"><i class="fa fa-pencil-square-o"></i></a>
-							<a href="#" onclick="XoaNhaCungCap('${ idNhaCungCap }');" title="Xóa nhà cung cấp" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+							<a style="cursor: pointer;" onclick="XoaNhaCungCap('${ idNhaCungCap }');" title="Xóa nhà cung cấp" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</s:iterator>

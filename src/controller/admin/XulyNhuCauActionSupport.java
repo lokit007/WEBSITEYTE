@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bean.BinhLuan;
+import model.bean.DangKyDichVu;
 import model.bean.DanhMuc;
 import model.bean.DichVu;
 import model.bean.QuanTri;
@@ -23,8 +24,8 @@ import model.bo.ValidateBO;
 
 public class XulyNhuCauActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
-	private int idDichVu;
-	private String tenDichVu;
+	private int idNhuCau;
+	private String tenNhuCau;
 	private int danhMuc;
 	private List<DanhMuc> list = new ArrayList<DanhMuc>();
 	private String moTa;
@@ -42,30 +43,33 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	private String userImageContentType;
 	private String userImageFileName;
 	private HttpServletRequest servletRequest;
-	private DichVu dichVu;
+	private DichVu nhuCau;
 	private List<BinhLuan> listBinhLuan;
+	private List<DangKyDichVu> listBaoGia;
 	
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
-		BinhLuanBO binhLuanBO = new BinhLuanBO();
-		this.dichVu = dichVuBO.getDichVu(this.idDichVu+"", 0);
-		if(this.dichVu!=null)
-			this.listBinhLuan = binhLuanBO.getListBinhLuan(dichVu.getBaiViet().getIdBaiViet()+"");
+		this.nhuCau = dichVuBO.getDichVu(this.idNhuCau+"", 0);
+		if(this.nhuCau!=null){
+			BinhLuanBO binhLuanBO = new BinhLuanBO();
+			this.listBinhLuan = binhLuanBO.getListBinhLuan(nhuCau.getBaiViet().getIdBaiViet()+"");
+			this.listBaoGia = dichVuBO.getDanhSachDangKy(nhuCau.getIdDichVu());
+			binhLuanBO.closeConnect();
+		}
 		dichVuBO.closeConnect();
-		binhLuanBO.closeConnect();
-		if(this.dichVu==null) result = "that-bai";
+		if(this.nhuCau==null) result = "that-bai";
 		return result;
 	}
 
 	public String XoaNhuCau(){
 		String result = "thanh-cong";
-		if(idDichVu<1) {
+		if(idNhuCau<1) {
 			addActionError("Dịch vụ không tồn tại!");
 			result = "that-bai";
 		} else {
 			DichVuBO dichVuBO = new DichVuBO();
-			if(!dichVuBO.xoaDichVu(idDichVu+"")) {
+			if(!dichVuBO.xoaDichVu(idNhuCau+"")) {
 				addActionError("Xóa nhu cầu thất bại!");
 				result = "that-bai";
 			}
@@ -91,14 +95,13 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 				this.hinhAnh = "bridge.jpg";
 			}
 			DichVuBO dichVuBO = new DichVuBO();
-			if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
+			if(ValidateBO.CheckEmpty(tenNhuCau) || ValidateBO.CheckEmpty(moTa)
 					 || ValidateBO.CheckEmpty(danhMuc+"")
 					 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
 					 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
 				addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
-				result = "that-bai";
 			} else { 
-				if(dichVuBO.clientThemDichVu(tenDichVu, moTa, danhMuc, null, hinhAnh, admin.getTaiKhoan().getIdTaiKhoan(), 
+				if(dichVuBO.themDichVu(tenNhuCau, moTa, danhMuc, null, hinhAnh, admin.getTaiKhoan().getIdTaiKhoan(), 
 					nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc, "Nhu cầu", diaDiem))
 					result = "thanh-cong";
 				else addActionError("Đăng nhu cầu không thành công.");
@@ -111,13 +114,9 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	public String ThongTin(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
-		BinhLuanBO binhLuanBO = new BinhLuanBO();
-		this.dichVu = dichVuBO.getDichVu(this.idDichVu+"", 0);
-		if(this.dichVu!=null)
-			this.listBinhLuan = binhLuanBO.getListBinhLuan(dichVu.getBaiViet().getIdBaiViet()+"");
+		this.nhuCau = dichVuBO.getDichVu(this.idNhuCau+"", 0);
 		dichVuBO.closeConnect();
-		binhLuanBO.closeConnect();
-		if(this.dichVu==null) result = "that-bai";
+		if(this.nhuCau==null) result = "that-bai";
 		return result;
 	}
 	
@@ -134,14 +133,14 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		}
 		DichVuBO dichVuBO = new DichVuBO();
 		String result = "that-bai";
-		if(ValidateBO.CheckEmpty(tenDichVu) || ValidateBO.CheckEmpty(moTa)
+		if(ValidateBO.CheckEmpty(tenNhuCau) || ValidateBO.CheckEmpty(moTa)
 				 || ValidateBO.CheckEmpty(danhMuc+"")
 				 || ValidateBO.CheckEmpty(nhaCungCap) || ValidateBO.CheckEmpty(email)
 				 || ValidateBO.CheckEmpty(ngayBatDau) || ValidateBO.CheckEmpty(ngayKetThuc)){
 			addActionError("Bạn chưa nhập đầy đủ dữ liệu cần thiết!");
 			result = "that-bai";
-		} else if(dichVuBO.capNhatDichVu(idDichVu+"", tenDichVu, moTa, danhMuc+"", null, 
-				hinhAnh, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc))
+		} else if(dichVuBO.capNhatDichVu(idNhuCau+"", tenNhuCau, moTa, danhMuc+"", null, 
+				hinhAnh, null, nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc))
 			result = "thanh-cong";
 		else addActionError("Cập nhật dịch vụ không thành công.");
 		dichVuBO.closeConnect();
@@ -153,20 +152,20 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		this.servletRequest = req;
 	}
 	
-	public int getIdDichVu() {
-		return idDichVu;
+	public int getIdNhuCau() {
+		return idNhuCau;
 	}
 
-	public void setIdDichVu(int idDichVu) {
-		this.idDichVu = idDichVu;
+	public void setIdNhuCau(int idNhuCau) {
+		this.idNhuCau = idNhuCau;
 	}
 
-	public DichVu getDichVu() {
-		return dichVu;
+	public DichVu getNhuCau() {
+		return nhuCau;
 	}
 
-	public void setDichVu(DichVu dichVu) {
-		this.dichVu = dichVu;
+	public void setNhuCau(DichVu nhuCau) {
+		this.nhuCau = nhuCau;
 	}
 
 	public List<BinhLuan> getListBinhLuan() {
@@ -177,12 +176,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		this.listBinhLuan = listBinhLuan;
 	}
 
-	public String getTenDichVu() {
-		return tenDichVu;
+	public String getTenNhuCau() {
+		return tenNhuCau;
 	}
 
-	public void setTenDichVu(String tenDichVu) {
-		this.tenDichVu = tenDichVu;
+	public void setTenNhuCau(String tenNhuCau) {
+		this.tenNhuCau = tenNhuCau;
 	}
 
 	public int getDanhMuc() {
@@ -198,6 +197,14 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		this.list = danhMucBO.getListDanhMuc("Dịch vụ");
 		danhMucBO.closeConnect();
 		return list;
+	}
+
+	public List<DangKyDichVu> getListBaoGia() {
+		return listBaoGia;
+	}
+
+	public void setListBaoGia(List<DangKyDichVu> listBaoGia) {
+		this.listBaoGia = listBaoGia;
 	}
 
 	public void setList(List<DanhMuc> list) {

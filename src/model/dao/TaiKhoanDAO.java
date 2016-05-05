@@ -205,28 +205,29 @@ public class TaiKhoanDAO {
 		return null;
 	}
 
-	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
+	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh) {
-		String sql = "{call themNCC(?,?,?,?,?,?,?,?,?,?) }";
+		String sql = "{call themNCC(?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
 			CallableStatement cstm = db.getCallableStatement(sql);
 			//Cập nhật tham số đầu vào
 			cstm.setString(1, taiKhoan);
-			cstm.setString(2, "12345678");
+			cstm.setString(2, taiKhoan);
 			cstm.setString(3, hoTen);
 			cstm.setString(4, diaChi);
-			cstm.setString(5, dienThoai);
-			cstm.setString(6, email);
-			cstm.setString(7, gioiThieu);
-			cstm.setString(8, chungChi);
-			cstm.setString(9, hinhAnh);
+			cstm.setString(5, location);
+			cstm.setString(6, dienThoai);
+			cstm.setString(7, email);
+			cstm.setString(8, gioiThieu);
+			cstm.setString(9, chungChi);
+			cstm.setString(10, hinhAnh);
 			//Cập nhật tham số đầu ra
-			cstm.registerOutParameter(10, java.sql.Types.INTEGER);
+			cstm.registerOutParameter(11, java.sql.Types.INTEGER);
 			//Thực thi
 			cstm.executeUpdate();
 			//Lấy kết quả trả về
-			int result = cstm.getInt(10);
+			int result = cstm.getInt(11);
 			if(result > -1) {
 				return true;
 			}
@@ -236,35 +237,36 @@ public class TaiKhoanDAO {
 		return false;
 	}
 
-	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,
+	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
 			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
-		String sql = "{call themNCCHT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+		String sql = "{call themNCCHT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
 			CallableStatement cstm = db.getCallableStatement(sql);
 			//Cập nhật tham số đầu vào
 			cstm.setString(1, taiKhoan);
-			cstm.setString(2, "12345678");
+			cstm.setString(2, taiKhoan);
 			cstm.setString(3, hoTen);
 			cstm.setString(4, diaChi);
-			cstm.setString(5, dienThoai);
-			cstm.setString(6, email);
-			cstm.setString(7, gioiThieu);
-			cstm.setString(8, chungChi);
-			cstm.setString(9, hinhAnh);
-			cstm.setString(10, dienThoaiLH);
-			cstm.setString(11, emailLH);
-			cstm.setString(12, thoiGian);
-			cstm.setInt(13, danhMuc);
-			cstm.setString(14, nickYahoo);
-			cstm.setString(15, nickSkype);
+			cstm.setString(5, location);
+			cstm.setString(6, dienThoai);
+			cstm.setString(7, email);
+			cstm.setString(8, gioiThieu);
+			cstm.setString(9, chungChi);
+			cstm.setString(10, hinhAnh);
+			cstm.setString(11, dienThoaiLH);
+			cstm.setString(12, emailLH);
+			cstm.setString(13, thoiGian);
+			cstm.setInt(14, danhMuc);
+			cstm.setString(15, nickYahoo);
+			cstm.setString(16, nickSkype);
 			//Cập nhật tham số đầu ra
-			cstm.registerOutParameter(16, java.sql.Types.INTEGER);
+			cstm.registerOutParameter(17, java.sql.Types.INTEGER);
 			//Thực thi
 			cstm.executeUpdate();
 			//Lấy kết quả trả về
-			int result = cstm.getInt(16);
+			int result = cstm.getInt(17);
 			if(result > -1) {
 				return true;
 			}
@@ -348,7 +350,7 @@ public class TaiKhoanDAO {
 	}
 
 	public boolean ThemTaiKhoan(String idTaiKhoan, String matKhau, String hoTen, String diaChi, 
-			String dienThoai, String email,String loaiTaiKhoan) {
+			String dienThoai, String email,String loaiTaiKhoan, String location) {
 		String sql = "";
 		idTaiKhoan = FormatData.FormatInputData(idTaiKhoan);
 		matKhau = FormatData.FormatInputData(matKhau);
@@ -358,10 +360,10 @@ public class TaiKhoanDAO {
 		email = FormatData.FormatInputData(email);
 		if("admin".equals(loaiTaiKhoan)){
 			sql = "insert into TAIKHOAN values ('"+idTaiKhoan+"', '"+matKhau
-					+"', N'"+hoTen+"', N'"+diaChi+"', '"+dienThoai+"', '"+email+"', N'TK mới', GETDATE(), N'admin')";
+					+"', N'"+hoTen+"', N'"+diaChi+"', '"+dienThoai+"', '"+email+"', N'TK mới', GETDATE(), N'admin', '"+location+"')";
 		} else {
 			sql = "insert into TAIKHOAN values ('"+idTaiKhoan+"', '"+matKhau
-					+"', N'"+hoTen+"', N'"+diaChi+"', '"+dienThoai+"', '"+email+"', N'TK mới', GETDATE(), N'"+loaiTaiKhoan+"')";
+					+"', N'"+hoTen+"', N'"+diaChi+"', '"+dienThoai+"', '"+email+"', N'TK mới', GETDATE(), N'"+loaiTaiKhoan+"', '"+location+"')";
 		}
 		return db.updateData(sql);
 	}

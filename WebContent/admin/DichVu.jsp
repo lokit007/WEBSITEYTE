@@ -10,6 +10,7 @@
 <script src="../js/sorttable.js"></script>
 <script src="../js/menuPage.js"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="js/xulynghiepvu.js" type="text/javascript"></script>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -55,6 +56,9 @@
 							<s:if test="baiViet.tinhTrang=='Mới đăng'">
 								<img alt="Dịch vụ mới" src="images/new-icon.png">
 							</s:if>
+							<s:elseif test="baiViet.tinhTrang=='Vi phạm'">
+								<i class="fa fa-exclamation-triangle" style="color: #FFC107;" aria-hidden="true"></i>
+							</s:elseif>
 						</td>
 						<td class="td-15"> <s:property value="ngayBatDau"/> </td>
 						<td class="td-20"> <s:property value="baiViet.tenTacGia"/> </td>
@@ -62,7 +66,7 @@
 						<td class="td-15">
 							<a href="chi-tiet-dich-vu.action?idDichVu=${ idDichVu }" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
 							<a href="thong-tin-dich-vu.action?idDichVu=${ idDichVu }" class="btn-update btn-thaotac"><i class="fa fa-pencil-square-o"></i></a>
-							<a href="#" onclick="XoaDichVu('${ idDichVu }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+							<a style="cursor: pointer;" onclick="XoaDichVu('${ idDichVu }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -74,31 +78,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	function ChuyenHuong(url){
-		window.location.href = url;
-	}
-	function XoaDichVu(id) {
-		if (confirm("Bạn muốn xoá dịch vụ " + id + " này không???") == true) {
-			$.ajax({
-				url : "xoa-dichvu.action",
-				type : "post",
-				data : {
-					idDichVu : id
-				},
-				beforeSend : function(){
-				     $("#while-load").attr("style", "display: inline-block;");
-				},
-				success : function(result) {
-					window.location.reload(true);
-					$("#while-load").attr("style", "display: none;");
-				},
-				error : function(xhr, status, error) {
-					$("#loi").modal("show");
-					$("#while-load").attr("style", "display: none;");
-				}
-			});
-		}
-	}
-</script>
 </html>

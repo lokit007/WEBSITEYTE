@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.bean.BaiViet;
+import model.bean.DangKyDichVu;
 import model.bean.DanhMuc;
 import model.bean.DichVu;
+import model.bean.TaiKhoan;
 
 public class DichVuDAO {
 	DataBaseDAO db = new DataBaseDAO();
@@ -96,7 +98,7 @@ public class DichVuDAO {
 	}
 
 	public boolean capNhatDichVu(String idDichVu, String tenDichVu, String moTa, String danhMuc, String noiDung,
-			String hinhAnh, String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
+			String hinhAnh, String taiKhoan, String nhaCungCap, String dienThoai, String email, String ngayBatDau, String ngayKetThuc) {
 		String sql = "{call capNhatDichVu(?,?,?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
@@ -108,7 +110,7 @@ public class DichVuDAO {
 			cstm.setString(4, danhMuc);
 			cstm.setString(5, noiDung);
 			cstm.setString(6, hinhAnh);
-			cstm.setString(7, "Taikhoan002");
+			cstm.setString(7, taiKhoan);
 			cstm.setString(8, nhaCungCap);
 			cstm.setString(9, dienThoai);
 			cstm.setString(10, email);
@@ -124,14 +126,16 @@ public class DichVuDAO {
 				return true;
 			}
 		} catch (SQLException e) { 
+			System.out.println("Lỗi : " + e.toString());
 			return false;
 		}
+		System.out.println("Truy vấn");
 		return false;
 	}
 
 	public DichVu getDichVu(String id, int quyen) throws SQLException {
 		String sql = "select IdDichVu, IdNhaCungCap, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, DienThoaiLienHe, EmailLienHe, BAIVIET.IdBaiViet, TenBaiViet,"
-				+" TacGia, MoTa, NoiDung, NgayDang, HinhAnh, LuotXem, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU"
+				+" TacGia, MoTa, NoiDung, NgayDang, HinhAnh, LuotXem, BAIVIET.TinhTrang, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU"
 				+" inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet"
 				+" inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc"
 				+" inner join NHACUNGCAP on BAIVIET.TaiKhoan = NHACUNGCAP.TaiKhoan"
@@ -162,6 +166,7 @@ public class DichVuDAO {
 			baiViet.setNgayDang(sdf.format(rs.getTimestamp("NgayDang")));
 			baiViet.setAnhMoTa(rs.getString("HinhAnh"));
 			baiViet.setLuocXem(rs.getInt("LuotXem"));
+			baiViet.setTinhTrang(FormatData.FormatOutputData(rs.getString("TinhTrang")));
 			DanhMuc danhMuc = new DanhMuc();
 			danhMuc.setIdDanhMuc(rs.getInt("IdDanhMuc"));
 			danhMuc.setTenDanhMuc(FormatData.FormatOutputData(rs.getString("TenDanhMuc")));
@@ -480,7 +485,7 @@ public class DichVuDAO {
 				+ "ROW_NUMBER() OVER (ORDER BY DICHVU.IdDichVu desc) AS Row from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where TinhTrang like N'%' and LoaiHinhDichVu not like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
+				+ "where TinhTrang not like N'Khóa bài đăng' and LoaiHinhDichVu not like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
 				+ txtFind + "%' or EmailLienHe like '"+txtFind+"%' or TenBaiViet like N'%"
 				+ txtFind + "%' or MoTa like N'%"+txtFind+"%' or TacGia like N'%"+txtFind+"%') ";
 		System.out.println("Xem  : " + sql);
@@ -522,7 +527,7 @@ public class DichVuDAO {
 				+ "ROW_NUMBER() OVER (ORDER BY DICHVU.IdDichVu desc) AS Row from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where TinhTrang like N'%' and LoaiHinhDichVu like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
+				+ "where TinhTrang not like N'Khóa bài đăng' and LoaiHinhDichVu like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
 				+ txtFind + "%' or EmailLienHe like '"+txtFind+"%' or TenBaiViet like N'%"
 				+ txtFind + "%' or MoTa like N'%"+txtFind+"%' or TacGia like N'%"+txtFind+"%') ";
 		System.out.println("Xem  : " + sql);
@@ -563,7 +568,7 @@ public class DichVuDAO {
 				+ "ROW_NUMBER() OVER (ORDER BY DICHVU.IdDichVu desc) AS Row from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where TinhTrang like N'Mới đăng' and LoaiHinhDichVu not like N'Nhu cầu'";
+				+ "where (TinhTrang like N'Mới đăng' or TinhTrang like N'Vi phạm') and LoaiHinhDichVu not like N'Nhu cầu'";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -643,7 +648,6 @@ public class DichVuDAO {
 		return false;
 	}
 
-	
 	public List<DichVu> getDichVuDangKy(String idTaiKhoan) throws SQLException {
 		String sql = "select DICHVU.IdDichVu, IdDangKy, LoaiHinhDichVu, TenBaiViet, NgayDangKy, DANGKYDICHVU.TinhTrang from DICHVU "
 				+ "inner join BAIVIET on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
@@ -696,6 +700,32 @@ public class DichVuDAO {
 			baiViet.setDanhMuc(danhMuc);
 			dichVu.setBaiViet(baiViet);
 			list.add(dichVu);
+		}
+		return list;
+	}
+
+	public List<DangKyDichVu> getDanhSachDangKy(int idDichVu) throws SQLException {
+		String sql = "select IdDangKy, IdDichVu, NgayDangKy, TinNhan, DANGKYDICHVU.TinhTrang, "
+				+"TAIKHOAN.TaiKhoan, HoTen, DienThoai, Email from DANGKYDICHVU "
+				+"inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
+				+"where IdDichVu='"+idDichVu+"'";
+		ArrayList<DangKyDichVu> list = new ArrayList<DangKyDichVu>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		ResultSet rs = db.getResultSet(sql);
+		while(rs.next()){
+			DangKyDichVu dangKy = new DangKyDichVu();
+			dangKy.setIdDangKy(rs.getInt("IdDangKy"));
+			dangKy.setIdDichVu(rs.getInt("IdDichVu"));
+			dangKy.setNgayDangKy(sdf.format(rs.getTimestamp("NgayDangKy")));
+			dangKy.setTinNhan(FormatData.FormatOutputData(rs.getString("TinNhan")));
+			dangKy.setTinhTrang(rs.getString("TinhTrang"));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			taiKhoan.setDienThoai(FormatData.FormatOutputData(rs.getString("DienThoai")));
+			taiKhoan.setEmail(FormatData.FormatOutputData(rs.getString("Email")));
+			dangKy.setTaiKhoan(taiKhoan);
+			list.add(dangKy);
 		}
 		return list;
 	}
