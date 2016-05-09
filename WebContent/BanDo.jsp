@@ -56,18 +56,6 @@ div#text {
 	display: none;
 }
 </style>
-<script type="text/javascript">
-$(document).ready(function(){
-	$(window).scroll(function(){
-	    // Nếu cuộn được hơn 150px rồi
-	        if($(this).scrollTop()>100){
-		      	$("#div-content-right").attr("class", "fixmap");
-	        } else {
-	        	$("#div-content-right").removeAttr("class");
-	        }
-	    });
-});
-</script>
 <script>
 var origin_place_id = null;
 var destination_place_id = null;

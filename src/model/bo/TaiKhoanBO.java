@@ -55,15 +55,15 @@ public class TaiKhoanBO {
 	}
 
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
-			String gioiThieu, String chungChi, String hinhAnh) {
-		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi, hinhAnh);
+			String gioiThieu, String chungChi, String loaiNCC, String hinhAnh) {
+		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi, loaiNCC, hinhAnh);
 	}
 
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
-			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
+			String gioiThieu, String chungChi, String loaiNCC, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
 		return taiKhoanDAO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
-				hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype);
+				loaiNCC, hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype);
 	}
 
 	public boolean CapNhatNhaCungCap(String id, String taiKhoan, String hoTen, String diaChi, String dienThoai, String email,

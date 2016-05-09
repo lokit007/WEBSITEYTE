@@ -29,9 +29,9 @@ function XoaDichVu(id) {
 	}
 }
 // Hien thi thong bao
-function ShowMessage(model, mes){
-	$('#'+model).modal('show');
-	$('#mes'+model).html(mes);
+function ShowMessage(model, mes) {
+	$('#' + model).modal('show');
+	$('#mes' + model).html(mes);
 }
 // Xoa element co id
 function XoaPhanTu(id) {
@@ -167,6 +167,57 @@ function XoaChiaSe(id) {
 			},
 			error : function(xhr, status, error) {
 				ShowMessage('error', 'Lỗi hệ thông! Vui lòng quay lại sau.');
+				$("#while-load").attr("style", "display: none;");
+			}
+		});
+	}
+}
+// nha cung cap
+function XoaNhaCungCap(id) {
+	if (confirm("Bạn muốn xoá nhà cung cấp " + id + " này không???") == true) {
+		$.ajax({
+			url : "xoa-nhacungcap.action",
+			type : "post",
+			data : {
+				idNhaCungCap : id
+			},
+			beforeSend : function() {
+				$("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				window.location.reload(true);
+				$("#while-load").attr("style", "display: none;");
+			},
+			error : function(xhr, status, error) {
+				$("#loi").modal("show");
+				$("#while-load").attr("style", "display: none;");
+			}
+		});
+	}
+}
+function CapNhatNguoiDung(id, e) {
+	var hoi = "";
+	if (e == 'TK mới')
+		hoi = "Bạn muốn khôi phục lại tài khoản ";
+	else
+		hoi = "Bạn muốn khóa tài khoản ";
+	if (confirm(hoi + id + " này không???") == true) {
+		$.ajax({
+			url : "khoa-taikhoan.action",
+			type : "post",
+			data : {
+				idTaiKhoan : id,
+				tinhTrang : e
+			},
+			beforeSend : function() {
+				$("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				window.location.reload(true);
+				$("#while-load").attr("style", "display: none;");
+			},
+			error : function(xhr, status, error) {
+				$("#loi").modal("show");
 				$("#while-load").attr("style", "display: none;");
 			}
 		});

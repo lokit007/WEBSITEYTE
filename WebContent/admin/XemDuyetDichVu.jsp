@@ -28,7 +28,7 @@
 			<s:div cssClass="div-content-home">
 				<s:div id="div-info">
 					<img src="../images/${ dichVu.baiViet.anhMoTa}" >
-					<s:div cssClass="div-col-50">
+					<s:div>
 						<p>
 							<s:property value="dichVu.baiViet.moTa" />
 						</p>

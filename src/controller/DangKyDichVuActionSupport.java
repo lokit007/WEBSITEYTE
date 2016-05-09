@@ -23,10 +23,12 @@ public class DangKyDichVuActionSupport extends ActionSupport {
 			addActionError("Bạn chưa nhập đầy đủ dữ liệu!");
 		} else if(ValidateBO.ChekDangKy(idDichVu, email)){
 			addActionError("Bạn đã đăng ký dịch vụ này!");
+			ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Bạn đã đăng ký dịch vụ này rồi!");
 		} else {
 			DichVuBO dichVuBO = new DichVuBO();
 			if(!dichVuBO.dangKyDichVu(idDichVu, hoTen, email, dienThoai, tinNhan)){
 				addActionError("Không thể cập nhật cơ sở dữ liệu!");
+				ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Lỗi!Không thể cập nhật cơ sở dữ liệu.");
 			} else {
 				ServletContext context = ServletActionContext.getRequest().getServletContext();
 				final String host = context.getInitParameter("host");
@@ -36,9 +38,10 @@ public class DangKyDichVuActionSupport extends ActionSupport {
 				try {
 					EmailUtility.sendEmailThread("smtp.gmail.com", "587", user, pass, email, "Đăng ký dịch vụ",
 							"Đã đăng ký dịch vụ thành công. Vui lòng chờ xác nhận từ nhà cung cấp dịch vụ. Xin cám ơn!");
-		        } catch (Exception ex) {
+				} catch (Exception ex) {
 		        	System.out.println("Lỗi : " + ex.toString());
 		        }
+				ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Chúc mừng!Bạn đã đăng ký dịch vụ thành công. Vui lòng chờ xác nhận từ nhà cung cấp. Cám ơn!");
 			}
 			dichVuBO.closeConnect();
 		}
@@ -48,6 +51,7 @@ public class DangKyDichVuActionSupport extends ActionSupport {
 	public String CheckDangKy(){
 		if(ValidateBO.ChekDangKy(idDichVu, email)){
 			addActionError("Bạn đã đăng ký dịch vụ này!");
+			ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Bạn đã đăng ký dịch vụ này rồi!");
 		}
 		return "thanh-cong";
 	}

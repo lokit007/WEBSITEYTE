@@ -6,33 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<s:include value="files/ThuVienAdmin.jsp"></s:include>
-<script type="text/javascript" src="../js/jquery.MultiFile.js"></script>
-<script src="../js/jquery.validate.js" type="text/javascript"></script>
-<script src="../ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="../css/datepicker.css">
-<script src="../js/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#ngayBatDau').datepicker({
-			format : "dd-mm-yyyy",
-			autoclose : true,
-			todayBtn : true
-		});
-		$('#ngayKetThuc').datepicker({
-			format : "dd-mm-yyyy",
-			autoclose : true,
-			todayBtn : true
-		});
-	});
-</script>
+<s:include value="files/ThuVien.jsp"></s:include>
+<link rel="stylesheet" href="css/datepicker.css">
+<script src="js/jquery.MultiFile.js" type="text/javascript"></script>
+<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/validate-form.js" type="text/javascript"></script>
+
 <title>Đăng bài viết chia sẻ</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
-	<label id="lb-title"><i class="fa fa-share-alt"></i> Thêm mới bài viết chia sẻ</label>
-	<button class="btn btn-default btn-xs" id="btn-them" onclick="history.go(-1);" ><i class="fa fa-undo"></i> Quay lại</button>
 	<s:div id="div-content">
+		<!-- ajax load menubar -->
+		<s:div id="div-content-right">
 			<!-- bắt đầu nội dung hiển thị -->
 			<s:if test="hasActionErrors()">
 				<s:div id="showError">
@@ -41,6 +28,11 @@
 			    </s:div>
 			</s:if>
 			<s:div cssClass="div-content-home">
+				<s:div cssClass="div-content-home-title">
+					<s:a cssClass="lb-title-home">
+						<i class="fa fa-hand-o-right"></i> Đăng chia sẻ mới 
+					</s:a>
+				</s:div>
 				<form action="dang-chia-se.action" enctype="multipart/form-data"
 					method="post" id="formChiaSe">
 					<br>
@@ -63,7 +55,7 @@
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:label value="Tác giả"></s:label>
-					<s:textfield name="tacGia" cssClass="form-control"></s:textfield>
+					<s:textfield name="tacGia" cssClass="form-control" value="%{ #session.user.hoTen}"></s:textfield>
 					<br>
 					<br>
 					<s:submit value="Đăng bài viết chia sẻ"
@@ -72,8 +64,17 @@
 				</form>
 			</s:div>
 			<!-- kết thúc content -->
+		</s:div>
 		<s:div cssClass="clear"></s:div>
 	</s:div>
+	<s:div cssClass="div-quangcao">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+	</s:div>
+	<s:include value="files/Footer.jsp"></s:include>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {

@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import model.bean.DangKyDichVu;
 import model.bean.DichVu;
 import model.bean.TaiKhoan;
 import model.bo.DichVuBO;
@@ -23,6 +24,8 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 	private String email;
 	private List<DichVu> listDV;
 	private List<DichVu> listNC;
+	private List<DichVu> listDVDT;
+	private List<DangKyDichVu> listDKDV;
 	
 	public String execute(){
 		TaiKhoan user = (TaiKhoan)ServletActionContext.getRequest().getSession().getAttribute("user");
@@ -31,6 +34,10 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 			DichVuBO dichVuBO = new DichVuBO();
 			this.listDV = dichVuBO.getDichVuDangKy(idTaiKhoan);
 			this.listNC = dichVuBO.getNhuCauDang(idTaiKhoan);
+			if("Nhà cung cấp".equals(user.getLoaiTaiKhoan())){
+				this.listDVDT = dichVuBO.getDichVuDangTai(idTaiKhoan);
+				this.listDKDV = dichVuBO.getDanhSachDangKy(idTaiKhoan);
+			}
 			dichVuBO.closeConnect();
 			return "thanh-cong";
 		} else {
@@ -148,6 +155,22 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 
 	public void setListNC(List<DichVu> listNC) {
 		this.listNC = listNC;
+	}
+
+	public List<DichVu> getListDVDT() {
+		return listDVDT;
+	}
+
+	public void setListDVDT(List<DichVu> listDVDT) {
+		this.listDVDT = listDVDT;
+	}
+
+	public List<DangKyDichVu> getListDKDV() {
+		return listDKDV;
+	}
+
+	public void setListDKDV(List<DangKyDichVu> listDKDV) {
+		this.listDKDV = listDKDV;
 	}
 	
 }

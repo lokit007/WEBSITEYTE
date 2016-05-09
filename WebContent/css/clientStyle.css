@@ -1,4 +1,7 @@
-
+body {
+	font-family: 'Open Sans Condensed', sans-serif, Arial;
+    font-size: 12px;
+}
 a {
 	text-decoration: none !important;
 }
@@ -8,6 +11,12 @@ p {
 ul, li {
 	padding: 0px;
 	margin: 0px;
+}
+div#div-content {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 .clear {
 	clear: both;
@@ -44,6 +53,23 @@ label.lb-link-title {
 }
 .btn-delete {
     background-color: #FF5722;
+}
+.popover {
+    position: fixed !important;
+    bottom: 50px !important;
+    max-height: 200px;
+}
+i#thong-bao {
+    position: fixed;
+    bottom: 10px;
+    right: 17px;
+    padding: 8px;
+    background-color: darkseagreen;
+    border-radius: 50px;
+    font-size: 3em;
+}
+div#topcontrol {
+    right: 72px !important;
 }
 /* menu */
 div#div-header-logo {
@@ -85,6 +111,17 @@ div#div-header-menu ul li:HOVER, li.active {
 div#div-header-menu ul li a:HOVER, li.active a {
     color: white;
     font-weight: bold;
+}
+a#btn-dang-chiase {
+    background-color: green;
+    color: white;
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px;
 }
 /* form tìm kiếm */
 form#f-timkiem {
@@ -252,11 +289,11 @@ label.lb-link-active-title {
     height: 45%;
 }
 .div-content-home-main-tin {
-    width: 47%;
+    width: 45%;
     max-height: 145px;
     float: left;
     border-top: 1px solid #eee;
-    margin-right: 3%;
+    margin-right: 15px;
     display: inline-block;
     overflow: hidden;
     margin-bottom: 15px;
@@ -312,7 +349,7 @@ label.footer-title {
 /* menu hiệu ứng */
 div#tuychon {
     position: fixed;
-    right: -135px;
+    right: -9.5%;
     top: 40%;
     background-color: rgba(7, 248, 7, 0.53);
     padding: 5px;
@@ -356,13 +393,13 @@ div#div-info {
 }
 span.spdk {
     background-color: #E91E63;
-    padding: 5px 35px;
+    padding: 5px 10px;
     color: white;
     margin-right: 5px;
 }
 span.spct {
     background-color: #2196F3;
-    padding: 5px 32px;
+    padding: 5px 10px;
     color: white;
 }
 /* dang dich vu */
@@ -379,7 +416,7 @@ form#f-dangnhap {
     padding-right: 50%;
     background-image: url('../images/login.jpg');
     background-repeat: no-repeat;
-    background-position-x: 89%;
+    background-position-x: 100%;
     background-position-y: 25px;
 }
 div#info-taikhoan {
@@ -407,10 +444,11 @@ div#showError ul {
 }
 /* chi tiet dich vu */
 div#div-info img {
-    max-width: 40%;
+    max-width: 260px;
     max-height: 220px;
     float: left;
     margin-right: 2%;
+    width: 40%;
 }
 .div-col-50 span {
     font-size: 1.1em;

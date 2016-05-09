@@ -72,8 +72,22 @@
 					<s:label value="Giới thiệu nhà cung cấp"></s:label><span class="sp-quantrong"> * </span>
 					<s:textarea name="gioiThieu" cssClass="ckeditor"></s:textarea>
 					<br>
-					<s:label value="Chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
-					<s:textfield name="chungChi" cssClass="form-control"></s:textfield>
+					<s:div cssClass="div-col-100">
+						<s:div cssClass="div-col-50">
+							<s:label value="Chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
+							<s:select list="{'Chứng chỉ hành nghề khám bệnh, chữa bệnh', 'Chứng chỉ hành nghề dược', 'Văn bằng y tế'}"
+								headerValue="----- Chọn loại chứng chỉ hành nghê -----" headerKey=""
+								name="chungChi" cssClass="form-control"></s:select>
+						</s:div>
+						<s:div cssClass="div-col-50">
+							<s:label value="Loại nhà cung cấp"></s:label><span class="sp-quantrong"> * </span>
+							<s:select list="{'Bệnh viện', 'Trung tâm y tế', 'Trạm xá', 'Y tế tư nhân'}"
+								name="loaiNCC" headerKey="" headerValue="--- Chọn thể loại NCC ---"
+								cssClass="form-control"
+							></s:select>
+						</s:div>
+						<s:div cssClass="clear"></s:div>
+					</s:div>
 					<br>
 					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>

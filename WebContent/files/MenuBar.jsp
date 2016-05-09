@@ -3,6 +3,9 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <s:div id="div-content-left">
+	<s:if test="#session.user!=null">
+		<s:a href="dang-bai-viet.action" id="btn-dang-chiase">Đăng chia sẻ y tế</s:a>
+	</s:if>
 	<s:div cssClass="div-show">
 		<s:label cssClass="div-show-title" value="Bài viết được quan tâm"></s:label>
 		<s:div cssClass="div-show-content div-slide">

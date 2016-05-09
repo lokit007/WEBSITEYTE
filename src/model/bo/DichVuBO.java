@@ -55,6 +55,16 @@ public class DichVuBO {
 		}
 	}
 
+	public DichVu getNhuCau(String id, int quyen) {
+		try {
+			return dichVuDAO.getNhuCau(id, quyen);
+		} catch (SQLException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public boolean xoaDichVu(String id) {
 		return dichVuDAO.xoaDichVu(id);
 	}
@@ -224,6 +234,46 @@ public class DichVuBO {
 	public List<DangKyDichVu> getDanhSachDangKy(int idDichVu) {
 		try {
 			return dichVuDAO.getDanhSachDangKy(idDichVu);
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
+
+	public boolean CapNhatDichVuDangKy(String idKey, String chanState) {
+		return dichVuDAO.CapNhatDichVuDangKy(idKey, chanState);
+	}
+
+	public List<DichVu> getDichVuDangTai(String idTaiKhoan) {
+		try {
+			return dichVuDAO.getDichVuDangTai(idTaiKhoan);
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
+
+	public List<DangKyDichVu> getDanhSachDangKy(String idTaiKhoan) {
+		try {
+			return dichVuDAO.getDanhSachDangKy(idTaiKhoan);
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
+
+	public DangKyDichVu getDangKyDichVu(int idDangKy) {
+		try {
+			return dichVuDAO.getDangKyDichVu(idDangKy);
 		} catch (SQLException e) {
 			System.out.println("Loi 1 : " + e.toString());
 			return null;

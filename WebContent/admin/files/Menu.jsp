@@ -143,6 +143,18 @@
 			<li><a href="#" title="Danh sách nhu cầu cần xử lý"><i class="fa fa-contao fa-2x"></i><span>10</span></a></li>
 			<li><a href="#" title="Danh bài viết chia sẻ mới"><i class="fa fa-share-alt fa-2x"></i><span>110</span></a></li>
 			<li><a href="#" title="Nhà cung cấp mới"><i class="fa fa-users fa-2x"></i><span>10</span></a></li>
+			<li>
+				<div class="btn-group">
+					  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+					    Action <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#">Cá nhân</a></li>
+						    <li class="divider"></li>
+						    <li><a href="dang-xuat.action">Đăng xuất</a></li>
+					  </ul>
+				</div>
+			</li>
 		</ul>
 		<s:div cssClass="list-view" id="dataChange">
 			<table class="table sortable table-hover table-responsive">

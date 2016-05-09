@@ -41,6 +41,26 @@
 	<s:div cssClass="banquen">
 			BẢN QUYỀN THUỘC SỞ Y TẾ TỈNH THỪA THIÊN HUẾ - v.2016
 	</s:div>
+	<div class="modal fade bs-example-modal-sm" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body bg-success">
+	      	<i class="fa fa-times" style="float: right; cursor: pointer;" title="Đóng" aria-hidden="true" data-dismiss="modal"></i>
+	        <p id="messuccess"></p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade bs-example-modal-sm" id="error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body bg-danger">
+	      	<i class="fa fa-times" style="float: right; cursor: pointer;" title="Đóng" aria-hidden="true" data-dismiss="modal"></i>
+	        <p id="meserror"></p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<s:div id="tuychon">
 		<s:if test="#session.user==null">
 			<s:a href="dang-nhap.action"><i class="fa fa-user-plus fa-2x"></i> Đăng nhập/Đăng ký</s:a>
@@ -49,12 +69,39 @@
 		</s:if>
 		<s:else>
 			<s:a href="trang-ca-nhan.action"><i class="fa fa-user fa-2x"></i> Thông tin cá nhân</s:a>
-			<s:a href="dang-dich-vu-moi.action"><i class="fa fa-bell-slash-o fa-2x"></i> Thông báo</s:a>
 			<s:a href="dang-nhu-cau-moi.action"><i class="fa fa-paper-plane-o fa-2x"></i> Đăng nhu cầu thuê</s:a>
 			<s:a href="#email-select"><i class="fa fa-envelope-square fa-2x"></i> Đăng ký nhận mail</s:a>
 			<s:a href="dang-xuat.action"><i class="fa fa-sign-out fa-2x"></i> Đăng xuất hệ thống</s:a>
 		</s:else>
 	</s:div>
+	<i id="thong-bao" class="fa fa-bell-o btn-open-popover" aria-hidden="true"></i>
+	<div id="divContentHTML" style="display:none">
+		<s:if test="#session.ThongBao!=null">
+			<s:property value="%{ #session.ThongBao}"/>
+		</s:if>
+        <s:else>
+        	Không có thông báo nào cả!
+        </s:else>
+    </div>
+	<script type="text/javascript">
+			$(function () {
+		      	$("#thong-bao").popover({
+		            title: 'Thông báo',
+		            content: $('#divContentHTML').html(),
+		            placement: 'top',
+		            delay: { show: 500, hide: 100 },
+		            html: true
+		        });
+		      	/* $('#thong-bao').popover('show'); */
+		    });
+			$('body').on('click', function (e) {
+		        $('.btn-open-popover').each(function () {
+		          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+		            $(this).popover('hide');
+		          }
+		        });
+		      });
+	</script>
 	<div class="modal fade" id="dangNhapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 		    <div class="modal-content">

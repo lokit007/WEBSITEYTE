@@ -50,7 +50,7 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
-		this.nhuCau = dichVuBO.getDichVu(this.idNhuCau+"", 0);
+		this.nhuCau = dichVuBO.getNhuCau(this.idNhuCau+"", 0);
 		if(this.nhuCau!=null){
 			BinhLuanBO binhLuanBO = new BinhLuanBO();
 			this.listBinhLuan = binhLuanBO.getListBinhLuan(nhuCau.getBaiViet().getIdBaiViet()+"");
@@ -114,7 +114,7 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	public String ThongTin(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
-		this.nhuCau = dichVuBO.getDichVu(this.idNhuCau+"", 0);
+		this.nhuCau = dichVuBO.getNhuCau(this.idNhuCau+"", 0);
 		dichVuBO.closeConnect();
 		if(this.nhuCau==null) result = "that-bai";
 		return result;

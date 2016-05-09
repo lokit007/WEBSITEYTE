@@ -1,9 +1,11 @@
-package controller.admin;
+package controller;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bo.ChiaSeBO;
-import model.bo.TaiKhoanBO;
+import model.bo.DichVuBO;
 import model.bo.ValidateBO;
 
 public class CapNhatActionSupport extends ActionSupport {
@@ -16,6 +18,7 @@ public class CapNhatActionSupport extends ActionSupport {
 		String result = "that-bai";
 		if(ValidateBO.CheckEmpty(idKey)||ValidateBO.CheckEmpty(nameTable)||ValidateBO.CheckEmpty(chanState)){
 			addActionError("Bạn không có quyền hạn thực hiện chức năng này!");
+			System.out.println("Xem sao 1");
 		} else {
 			if("BAIVIET".equals(nameTable)){
 				ChiaSeBO chiaSeBO = new ChiaSeBO();
@@ -26,20 +29,33 @@ public class CapNhatActionSupport extends ActionSupport {
 					result = "thanh-cong";
 				}
 				chiaSeBO.closeConnect();
-			} else {
-				TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
-				System.out.println("Xem 2 : " + idKey + " - " + nameTable + " - " + chanState);
-				if(!taiKhoanBO.CapNhatTrangThai(idKey, chanState)){
+			} else if("DANGKYDICHVU".equals(nameTable)) {
+				DichVuBO dichVuBO = new DichVuBO();
+				if(!dichVuBO.CapNhatDichVuDangKy(idKey, chanState)){
+					System.out.println("Xem sao2");
+					addActionError("Cập nhật thất bại!");
+				} else {
+					System.out.println("Xem sao3");
+					result = "thanh-cong";
+				}
+				dichVuBO.closeConnect();
+			} else if("DICHVU".equals(nameTable)){
+				ServletActionContext.getRequest().getSession().setAttribute("selectTab", "tab3");
+				DichVuBO dichVuBO = new DichVuBO();
+				System.out.println("Xem 1 : " + idKey + " - " + nameTable + " - " + chanState);
+				if(!dichVuBO.capNhatTinhTrang(idKey, chanState)){
 					addActionError("Cập nhật thất bại!");
 				} else {
 					result = "thanh-cong";
 				}
-				taiKhoanBO.closeConnect();
+				dichVuBO.closeConnect();
+			} else {
+				System.out.println("Xem sao 4 : " + nameTable);
+				addActionError("Bạn không có quyền hạn thực hiện chức năng này!");
 			}
 		}
 		return result;
 	}
-
 	
 	public String getIdKey() {
 		return idKey;

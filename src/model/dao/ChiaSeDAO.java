@@ -121,6 +121,7 @@ public class ChiaSeDAO {
 				+"inner join DANHMUC on BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc "
 				+"left join DICHVU on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
 				+"where IdDichVu is null and BAIVIET.IdBaiViet = '"+idBaiViet+"'";
+		db.updateData("update BAIVIET set LuotXem=LuotXem+1 where TinhTrang like N'Đăng bài' and IdBaiViet='"+idBaiViet+"'");
 		ResultSet rs = db.getResultSet(sql);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		if(rs.next()){

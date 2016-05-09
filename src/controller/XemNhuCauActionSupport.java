@@ -19,7 +19,7 @@ public class XemNhuCauActionSupport extends ActionSupport {
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();
 		BinhLuanBO binhLuanBO = new BinhLuanBO();
-		this.nhuCau = dichVuBO.getDichVu(this.idNhuCau, 1);
+		this.nhuCau = dichVuBO.getNhuCau(this.idNhuCau, 1);
 		if(this.nhuCau!=null){
 			this.list = dichVuBO.getListNhuCau(nhuCau.getDienThoaiLienHe(), 
 					nhuCau.getBaiViet().getDanhMuc().getIdDanhMuc()+"", "0");

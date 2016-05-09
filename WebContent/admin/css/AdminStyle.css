@@ -1,4 +1,8 @@
 @CHARSET "UTF-8";
+body {
+	font-family: 'Open Sans Condensed', sans-serif, Arial;
+    font-size: 12px;
+}
 a {
 	text-decoration: none !important;
 }
@@ -135,6 +139,18 @@ li#qltv:hover #dataMenu {
 }
 /* kết thúc menu */
 /* menu state */
+ul.dropdown-menu li {
+    height: auto !important;
+    width: 100px !important;
+    margin: auto !important;
+    border: none !important;
+}
+ul.dropdown-menu {
+    height: auto;
+}
+.btn-group {
+    margin-top: -10px;
+}
 div#div-state {
     position: fixed;
     background-color: green;

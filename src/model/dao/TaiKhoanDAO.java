@@ -206,8 +206,8 @@ public class TaiKhoanDAO {
 	}
 
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
-			String gioiThieu, String chungChi, String hinhAnh) {
-		String sql = "{call themNCC(?,?,?,?,?,?,?,?,?,?,?) }";
+			String gioiThieu, String chungChi, String loaiNCC, String hinhAnh) {
+		String sql = "{call themNCC(?,?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
 			CallableStatement cstm = db.getCallableStatement(sql);
@@ -221,13 +221,14 @@ public class TaiKhoanDAO {
 			cstm.setString(7, email);
 			cstm.setString(8, gioiThieu);
 			cstm.setString(9, chungChi);
-			cstm.setString(10, hinhAnh);
+			cstm.setString(10, loaiNCC);
+			cstm.setString(11, hinhAnh);
 			//Cập nhật tham số đầu ra
-			cstm.registerOutParameter(11, java.sql.Types.INTEGER);
+			cstm.registerOutParameter(12, java.sql.Types.INTEGER);
 			//Thực thi
 			cstm.executeUpdate();
 			//Lấy kết quả trả về
-			int result = cstm.getInt(11);
+			int result = cstm.getInt(12);
 			if(result > -1) {
 				return true;
 			}
@@ -238,9 +239,9 @@ public class TaiKhoanDAO {
 	}
 
 	public boolean ThemNhaCungCap(String taiKhoan, String hoTen, String diaChi, String location, String dienThoai, String email,
-			String gioiThieu, String chungChi, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
+			String gioiThieu, String chungChi, String loaiNCC, String hinhAnh, String thoiGian, int danhMuc, String dienThoaiLH,
 			String emailLH, String nickYahoo, String nickSkype) {
-		String sql = "{call themNCCHT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+		String sql = "{call themNCCHT(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
 		try {
 			//Tạo đối tượng CallableStatement
 			CallableStatement cstm = db.getCallableStatement(sql);
@@ -254,19 +255,20 @@ public class TaiKhoanDAO {
 			cstm.setString(7, email);
 			cstm.setString(8, gioiThieu);
 			cstm.setString(9, chungChi);
-			cstm.setString(10, hinhAnh);
-			cstm.setString(11, dienThoaiLH);
-			cstm.setString(12, emailLH);
-			cstm.setString(13, thoiGian);
-			cstm.setInt(14, danhMuc);
-			cstm.setString(15, nickYahoo);
-			cstm.setString(16, nickSkype);
+			cstm.setString(10, loaiNCC);
+			cstm.setString(11, hinhAnh);
+			cstm.setString(12, dienThoaiLH);
+			cstm.setString(13, emailLH);
+			cstm.setString(14, thoiGian);
+			cstm.setInt(15, danhMuc);
+			cstm.setString(16, nickYahoo);
+			cstm.setString(17, nickSkype);
 			//Cập nhật tham số đầu ra
-			cstm.registerOutParameter(17, java.sql.Types.INTEGER);
+			cstm.registerOutParameter(18, java.sql.Types.INTEGER);
 			//Thực thi
 			cstm.executeUpdate();
 			//Lấy kết quả trả về
-			int result = cstm.getInt(17);
+			int result = cstm.getInt(18);
 			if(result > -1) {
 				return true;
 			}

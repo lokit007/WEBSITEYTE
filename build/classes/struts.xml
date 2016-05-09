@@ -88,7 +88,7 @@
 		<!-- dang ky -->
 		<action name="dang-ky-action" class="controller.DangNhapActionSupport" method="DangKyClient" >
 			<result name="input">DangNhap.jsp</result>
-			<result name="thanh-cong" type="redirect">CapNhatThongTin.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
 			<result name="that-bai">DangNhap.jsp</result>
 		</action>
 		<!-- dang xuat -->
@@ -110,6 +110,14 @@
 		<action name="bai-viet" class="controller.XemChiaSeActionSupport" >
 			<result name="thanh-cong">XemChiaSe.jsp</result>
 			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="dang-bai-viet" class="controller.DangChiaSeActionSupport" >
+			<result name="input">DangChiaSe.jsp</result>
+		</action>
+		<action name="dang-chia-se" class="controller.DangChiaSeActionSupport" method="DangChiaSe" >
+			<result name="input">DangChiaSe.jsp</result>
+			<result name="that-bai">DangChiaSe.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-chu.action</result>
 		</action>
 		<!-- lien he mail -->
 		<action name="gui-lien-he" class="controller.LienHeActionSupport">
@@ -149,12 +157,25 @@
 			<result name="that-bai" type="redirect">trang-chu.action</result>
 		</action>
 		<action name="dangky-ncc" class="controller.NhaCungCapActionSupport" method="DangKy">
-			<result name="thanh-cong">DangKyNhaCungCap.jsp</result>
+			<result name="thanh-cong" type="redirect">trang-ca-nhan.action</result>
 			<result name="that-bai">DangKyNhaCungCap.jsp</result>
 		</action>
 		<action name="ban-do" class="controller.BanDoActionSupport">
 			<result name="thanh-cong">BanDo.jsp</result>
 			<result name="that-bai">BanDo.jsp</result>
+		</action>
+		<action name="cap-nhat" class="controller.CapNhatActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="thong-tin-dang-ky-dich-vu" class="controller.XulyDangKyDichVuActionSupport">
+			<result name="thanh-cong">dataDangKyDichVu.jsp</result>
+		</action>
+		<action name="chap-nhan-dang-ky-dich-vu" class="controller.XulyDangKyDichVuActionSupport" method="ChapNhanDangKy">
+			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<action name="huy-dang-ky-dich-vu" class="controller.XulyDangKyDichVuActionSupport" method="HuyDangKy">
+			<result name="thanh-cong">Result.jsp</result>
 		</action>
 	</package>
 	<!-- trang admin -->
@@ -175,7 +196,9 @@
 			<result name="thanh-cong" type="redirect">trang-chu.action</result>
 			<result name="that-bai">DangNhap.jsp</result>
 		</action>
-		
+		<action name="dang-xuat" class="controller.admin.DangNhapActionSupport" method="DangXuatAdmin">
+			<result name="thanh-cong" type="redirect">dang-nhap.action</result>
+		</action>
 		<!-- danh muc -->
 		<action name="danh-muc" class="controller.admin.DanhMucActionSupport">
 			<result name="thanh-cong">DanhMuc.jsp</result>

@@ -32,6 +32,7 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 	private String email;
 	private String gioiThieu;
 	private String chungChi;
+	private String loaiNCC;
 	private boolean check;
 	private String thoiGian;
 	private int danhMuc;
@@ -56,10 +57,11 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 	
 	public String ChiTiet(){
 		if(ValidateBO.CheckEmpty(idNhaCungCap)){
-			addActionError("Tài khoản không tồn tại!");
+			addActionError("Nhà cung cấp không tồn tại trong hệ thống! Vui lòng chọn thao tác khác.");
 		} else {
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 			this.nhaCungCap = taiKhoanBO.getNhaCungCap(idNhaCungCap);
+			if(this.nhaCungCap==null) addActionError("Nhà cung cấp không tồn tại trong hệ thống! Vui lòng chọn thao tác khác.");
 			taiKhoanBO.closeConnect();
 		}
 		return "thanh-cong";
@@ -85,12 +87,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 			if(check){
 				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
-						hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype)){
+						loaiNCC, hinhAnh, thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype)){
 					result = "thanh-cong";
 				}
 			} else {
 				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, hoTen, diaChi, location, dienThoai, email, gioiThieu, chungChi,
-						hinhAnh)){
+						loaiNCC, hinhAnh)){
 					result = "thanh-cong";
 				}
 			}
@@ -219,6 +221,22 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 
 	public void setChungChi(String chungChi) {
 		this.chungChi = chungChi;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getLoaiNCC() {
+		return loaiNCC;
+	}
+
+	public void setLoaiNCC(String loaiNCC) {
+		this.loaiNCC = loaiNCC;
 	}
 
 	public boolean isCheck() {

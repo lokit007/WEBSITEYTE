@@ -41,7 +41,7 @@
 				<%=path.equals("/DangDichVu.jsp") ? "class='active'" : ""%>><s:a
 					href="dang-dich-vu-moi.action">Đăng ký dịch vụ</s:a></li>
 			<li <%=path.equals("/BanDo.jsp") ? "class='active'" : ""%>><s:a
-					href="BanDo.jsp">Bản đồ trung tâm y tế</s:a></li>
+					href="ban-do.action">Bản đồ trung tâm y tế</s:a></li>
 			<li>
 				<form action="dich-vu.action" id="f-timkiem">
 					<input class="ct-mail" type="text" name="txtFind" id="txtFind"

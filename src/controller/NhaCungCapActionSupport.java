@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import model.bean.DanhMuc;
 import model.bean.NhaCungCap;
+import model.bean.TaiKhoan;
 import model.bo.DanhMucBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
@@ -26,6 +27,7 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 	private String taiKhoan;
 	private String gioiThieu;
 	private String chungChi;
+	private String loaiNCC;
 	private boolean check;
 	private String thoiGian;
 	private int danhMuc;
@@ -85,8 +87,8 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 	public String DangKy(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
 		try {
-			File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
-			FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi
+			File fileToCreate = new File(this.hinhAnh, this.userImageFileName);
+			FileUtils.copyFile(this.userImage, fileToCreate);
 			this.hinhAnh = this.userImageFileName;
 		} catch (IOException e) {
 			this.hinhAnh = "bridge.jpg";
@@ -100,13 +102,15 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 		} else {
 			TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 			if(check){
-				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, "", "", "", "", gioiThieu, chungChi, hinhAnh, 
+				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, "", "", "", "", "", gioiThieu, chungChi, loaiNCC, hinhAnh, 
 						thoiGian, danhMuc, dienThoaiLH, emailLH, nickYahoo, nickSkype)){
 					result = "thanh-cong";
 				}
 			} else {
-				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, "", "", "", "", gioiThieu, chungChi, hinhAnh)){
+				if(taiKhoanBO.ThemNhaCungCap(taiKhoan, "", "", "", "", "", gioiThieu, chungChi, loaiNCC, hinhAnh)){
 					result = "thanh-cong";
+					TaiKhoan user = taiKhoanBO.getTaiKhoan(taiKhoan);
+					servletRequest.getSession().setAttribute("user", user);
 				}
 			}
 			taiKhoanBO.closeConnect();
@@ -259,5 +263,13 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 
 	public void setTaiKhoan(String taiKhoan) {
 		this.taiKhoan = taiKhoan;
+	}
+
+	public String getLoaiNCC() {
+		return loaiNCC;
+	}
+
+	public void setLoaiNCC(String loaiNCC) {
+		this.loaiNCC = loaiNCC;
 	}
 }

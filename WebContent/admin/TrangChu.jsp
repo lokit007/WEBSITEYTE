@@ -129,7 +129,7 @@
 						</s:else>
 						<td class="td-15"> <s:property value="baiViet.ngayDang"/> </td>
 						<td class="td-15">
-							<a href="chi-tiet-nhu-cau.action?idDichVu=${ idDichVu }" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
+							<a href="chi-tiet-nhu-cau.action?idNhuCau=${ idDichVu }" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
 							<a href="#" onclick="XoaNhuCau('${ idDichVu }');" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>

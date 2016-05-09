@@ -7,11 +7,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVien.jsp"></s:include>
-<script type="text/javascript" src="js/jquery.MultiFile.js"></script>
-<script src="js/jquery.validate.js" type="text/javascript"></script>
-<script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="css/datepicker.css">
-<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.MultiFile.js" type="text/javascript" ></script>
+<script src="js/jquery.validate.js" type="text/javascript"></script>
+<script src="ckeditor/ckeditor.js" type="text/javascript" ></script>
+<script src="js/bootstrap-datepicker.js" type="text/javascript" ></script>
+<script src="js/validate-form.js" type="text/javascript" ></script>
+<script src="admin/js/loadlocaltion.js" type="text/javascript" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete" async defer></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#ngayBatDau').datepicker({
@@ -27,59 +30,6 @@
 	});
 </script>
 <title>Đăng ký nhu cầu dịch vụ</title>
-<script>
-	var autocomplete;
-
-	function initAutocomplete() {
-		// Create the autocomplete object, restricting the search to geographical
-		// location types.
-		autocomplete = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */
-		(document.getElementById('diaDiem')), {
-			types : [ 'geocode' ]
-		});
-	}
-
-	function errorHandler(err) {
-		if (err.code == 1) {
-			alert("Error: Access is denied!");
-		} else if (err.code == 2) {
-			alert("Error: Position is unavailable!");
-		}
-	}
-	function getLocation() {
-		if (navigator.geolocation) {
-			// timeout at 60000 milliseconds (60 seconds)
-			var options = {
-				timeout : 60000
-			};
-			navigator.geolocation.getCurrentPosition(XemThu, errorHandler,
-					options);
-		} else {
-			alert("Sorry, browser does not support geolocation!");
-		}
-	}
-	function XemThu(position) {
-		$.ajax({
-			url : "https://maps.googleapis.com/maps/api/geocode/json",
-			type : "get",
-			dateType : "json",
-			data : {
-				latlng : position.coords.latitude + ','
-						+ position.coords.longitude,
-				sensor : false,
-				language : 'vi'
-			},
-			success : function(result, textStatus) {
-				if($("#diaDiem").val()=='')
-					$("#diaDiem").val(result.results[0].formatted_address);
-			}
-		});
-	}
-</script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete"
-	async defer></script>
 </head>
 <body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
@@ -90,7 +40,7 @@
 			<s:if test="hasActionErrors()">
 				<s:div id="showError">
 			    	<s:actionerror/>
-			    	<button class="btn btn-danger btn-xs" onclick="XoaPhanTu();" style="float: right; margin-top: 5px;">Ok</button>
+			    	<button class="btn btn-danger btn-xs" onclick="XoaPhanTu('showError');" style="float: right; margin-top: 5px;">Ok</button>
 			    </s:div>
 			</s:if>
 			<s:div cssClass="div-content-home">
@@ -101,43 +51,43 @@
 				</s:div>
 				<s:if test="#session.user!=null">
 				<form action="dang-nhu-cau.action" enctype="multipart/form-data"
-					method="post" id="formDichVu">
+					method="post" id="formNhuCau">
 					<br>
-					<s:label value="Tiêu đề" for="tenNhuCau"></s:label>
+					<s:label value="Tiêu đề"></s:label>
 					<s:textfield name="tenNhuCau" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Danh mục" for="danhMuc"></s:label>
+					<s:label value="Danh mục"></s:label>
 					<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
-						listKey="idDanhMuc" cssClass="form-control" headerKey="-1"
+						listKey="idDanhMuc" cssClass="form-control" headerKey=""
 						headerValue="--- Chọn Danh Mục ---">
 					</s:select>
 					<br>
-					<s:label value="Mô tả nhu cầu dịch vụ" for="moTa"></s:label>
+					<s:label value="Mô tả nhu cầu dịch vụ"></s:label>
 					<s:textarea name="moTa" cssClass="form-control" rows="5" ></s:textarea>
 					<br>
-					<s:label value="Hình ảnh" for="hinhAnh"></s:label>
+					<s:label value="Hình ảnh"></s:label>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
-					<s:label value="Cá nhân/tổ chức yêu cầu" for="nhaCungCap"></s:label>
+					<s:label value="Cá nhân/tổ chức yêu cầu"></s:label>
 					<s:textfield name="nhaCungCap" cssClass="form-control" value="%{ #session.user.hoTen}"></s:textfield>
 					<br>
-					<s:label value="Địa điểm mong muốn" for="diaDiem"></s:label>
+					<s:label value="Địa điểm mong muốn"></s:label>
 					<s:textfield id="diaDiem" name="diaDiem" cssClass="form-control" value="%{ #session.user.diaChi}"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Điện thoại" for="dienThoai"></s:label>
+							<s:label value="Điện thoại"></s:label>
 							<s:textfield name="dienThoai" cssClass="form-control" value="%{ #session.user.dienThoai}"></s:textfield>
 							<br>
-							<s:label value="Ngày bắt đầu đăng ký" for="ngayBatDau"></s:label>
+							<s:label value="Ngày bắt đầu đăng ký"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"
 								cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Email" for="email"></s:label>
+							<s:label value="Email"></s:label>
 							<s:textfield name="email" cssClass="form-control" value="%{ #session.user.email}"></s:textfield>
 							<br>
-							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
+							<s:label value="Ngày kết thúc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc"
 								cssClass="form-control"></s:textfield>
 						</s:div>
@@ -193,69 +143,6 @@
 	<s:include value="files/Footer.jsp"></s:include>
 </body>
 <script type="text/javascript">
-	/* 
-	$(function() {
-		$('.datepicker').datepicker({
-			format : "yyyy-mm-dd"
-		}).on('changeDate', function(ev) {
-			$(this).datepicker('hide');
-		});
-	}); */
-	$(document).ready(function() {
-		$("#formDichVu").validate({
-			rules : {
-				tenDichVu : {
-					required : true
-				},
-				moTa : {
-					required : true
-				},
-				danhMuc : "required",
-				noiDung : {
-					required : true
-				},
-				nhaCungCap : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : 5
-				},
-				ngayBatDau : "required",
-				ngayKetThuc : "required"
-			},
-			messages : {
-				tenDichVu : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				moTa : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				danhMuc : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				noiDung : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				nhaCungCap : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				dienThoai : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				email : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-					email : "Dữ liệu quá dài!"
-				},
-				ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"
-			},
-			submitHandler : function(form) {
-				form.submit();
-			}
-		});
-	});
 	function XoaPhanTu(){
 		$("#showError").remove();
 	}

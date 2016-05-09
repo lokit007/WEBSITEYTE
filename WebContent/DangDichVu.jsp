@@ -7,10 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVien.jsp"></s:include>
-<script type="text/javascript" src="js/jquery.MultiFile.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="css/datepicker.css">
-<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.MultiFile.js" type="text/javascript"></script>
+<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/validate-form.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#ngayBatDau').datepicker({
@@ -36,7 +37,7 @@
 			<s:if test="hasActionErrors()">
 				<s:div id="showError">
 			    	<s:actionerror/>
-			    	<button class="btn btn-danger btn-xs" onclick="XoaPhanTu();" style="float: right; margin-top: 5px;">Ok</button>
+			    	<button class="btn btn-danger btn-xs" onclick="XoaPhanTu('showError');" style="float: right; margin-top: 5px;">Ok</button>
 			    </s:div>
 			</s:if>
 			<s:div cssClass="div-content-home">
@@ -56,7 +57,7 @@
 						<s:div cssClass="div-col-50">
 							<s:label value="Danh mục" for="danhMuc"></s:label>
 							<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
-								listKey="idDanhMuc" cssClass="form-control" headerKey="-1"
+								listKey="idDanhMuc" cssClass="form-control" headerKey=""
 								headerValue="--- Chọn Danh Mục ---">
 							</s:select>
 						</s:div>
@@ -156,87 +157,8 @@
 	<s:include value="files/Footer.jsp"></s:include>
 </body>
 <script type="text/javascript">
-	/* 
-	$(function() {
-		$('.datepicker').datepicker({
-			format : "yyyy-mm-dd"
-		}).on('changeDate', function(ev) {
-			$(this).datepicker('hide');
-		});
-	}); */
-	$(document).ready(function() {
-		$("#formDichVu").validate({
-			rules : {
-				tenDichVu : {
-					required : true
-				},
-				moTa : {
-					required : true
-				},
-				danhMuc : {
-					required : true	
-				},
-				loaiHinh : {
-					required : true
-				},
-				noiDung : {
-					required : true
-				},
-				nhaCungCap : {
-					required : true
-				},
-				diaDiem : {
-					required : true
-				},
-				dienThoai : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : 5
-				},
-				ngayBatDau : "required",
-				ngayKetThuc : "required"
-			},
-			messages : {
-				tenDichVu : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				moTa : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				danhMuc : {
-					required : "Chưa chọn danh mục dịch vụ!"	
-				},
-				loaiHinh : {
-					required : "Chưa chọn loại hình dịch vụ!"
-				},
-				noiDung : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				nhaCungCap : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				diaDiem : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				dienThoai : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!"
-				},
-				email : {
-					required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-					email : "Dữ liệu quá dài!"
-				},
-				ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"
-			},
-			submitHandler : function(form) {
-				form.submit();
-			}
-		});
-	});
-	function XoaPhanTu(){
-		$("#showError").remove();
+	function XoaPhanTu(idelement){
+		$("#"+idelement).remove();
 	}
 </script>
 </html>

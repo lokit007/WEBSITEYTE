@@ -178,6 +178,52 @@ public class DichVuDAO {
 		}
 	}
 
+	public DichVu getNhuCau(String id, int quyen) throws SQLException {
+		String sql = "select IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, DienThoaiLienHe, EmailLienHe, BAIVIET.IdBaiViet, TenBaiViet,"
+				+" TaiKhoan, TacGia, MoTa, NoiDung, NgayDang, HinhAnh, LuotXem, BAIVIET.TinhTrang, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU"
+				+" inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet"
+				+" inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc"
+				+" where IdDichVu='" + id +"' ";
+		if(quyen==1) {
+			sql += "and TinhTrang like N'Đăng bài'";
+			db.updateData("update BAIVIET set LuotXem=LuotXem+1 where TinhTrang like N'Đăng bài' and IdBaiViet = (select top 1 IdBaiViet from DICHVU where IdDichVu='"+id+"')");
+		}
+		System.out.println("SQL : " + sql);
+		ResultSet rs = db.getResultSet(sql);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		if(rs.next()){
+			DichVu dichVu = new DichVu();
+			dichVu.setIdDichVu(rs.getInt("IdDichVu"));
+			dichVu.setLoaiHinhDichVu(rs.getString("LoaiHinhDichVu"));
+			dichVu.setNgayBatDau(sdf.format(rs.getTimestamp("ThoiGianBatDau")));
+			dichVu.setNgayKetThuc(sdf.format(rs.getTimestamp("ThoiGianKetThuc")));
+			dichVu.setDiaChiTrienKhai(FormatData.FormatOutputData(rs.getString("DiaDiemTrienKhai")));
+			dichVu.setDienThoaiLienHe(rs.getString("DienThoaiLienHe"));
+			dichVu.setEmailLienHe(rs.getString("EmailLienHe"));
+			BaiViet baiViet = new BaiViet(); 
+			baiViet.setIdBaiViet(rs.getInt("IdBaiViet"));
+			baiViet.setTenBaiViet(FormatData.FormatOutputData(rs.getString("TenBaiViet")));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			baiViet.setTaiKhoan(taiKhoan);
+			baiViet.setTenTacGia(FormatData.FormatOutputData(rs.getString("TacGia")));
+			baiViet.setMoTa(FormatData.FormatOutputData(rs.getString("MoTa")));
+			baiViet.setNoiDung(FormatData.FormatOutputData(rs.getString("NoiDung")));
+			baiViet.setNgayDang(sdf.format(rs.getTimestamp("NgayDang")));
+			baiViet.setAnhMoTa(rs.getString("HinhAnh"));
+			baiViet.setLuocXem(rs.getInt("LuotXem"));
+			baiViet.setTinhTrang(FormatData.FormatOutputData(rs.getString("TinhTrang")));
+			DanhMuc danhMuc = new DanhMuc();
+			danhMuc.setIdDanhMuc(rs.getInt("IdDanhMuc"));
+			danhMuc.setTenDanhMuc(FormatData.FormatOutputData(rs.getString("TenDanhMuc")));
+			baiViet.setDanhMuc(danhMuc);
+			dichVu.setBaiViet(baiViet);
+			return dichVu;
+		} else {
+			return null;
+		}
+	}
+	
 	public boolean xoaDichVu(String id) {
 		return db.updateData("delete from DichVu where IdDichVu='"+id+"'");
 	}
@@ -568,7 +614,8 @@ public class DichVuDAO {
 				+ "ROW_NUMBER() OVER (ORDER BY DICHVU.IdDichVu desc) AS Row from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where (TinhTrang like N'Mới đăng' or TinhTrang like N'Vi phạm') and LoaiHinhDichVu not like N'Nhu cầu'";
+				+ "where (TinhTrang like N'Mới đăng' or TinhTrang like N'Vi phạm' or TinhTrang like N'Hủy bài đăng') "
+				+ "and LoaiHinhDichVu not like N'Nhu cầu'";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -652,7 +699,7 @@ public class DichVuDAO {
 		String sql = "select DICHVU.IdDichVu, IdDangKy, LoaiHinhDichVu, TenBaiViet, NgayDangKy, DANGKYDICHVU.TinhTrang from DICHVU "
 				+ "inner join BAIVIET on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "inner join DANGKYDICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
-				+ "where DANGKYDICHVU.TaiKhoan='"+idTaiKhoan+"' and LoaiHinhDichVu not like 'Nhu cầu' "
+				+ "where TinhTrang not like N'Khóa bài đăng' and TinhTrang not like N'Hủy bài đăng' and DANGKYDICHVU.TaiKhoan='"+idTaiKhoan+"' and LoaiHinhDichVu not like 'Nhu cầu' "
 				+ "order by NgayDangKy desc";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
@@ -677,7 +724,7 @@ public class DichVuDAO {
 				+ "MoTa, NgayDang, HinhAnh, TinhTrang, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where TaiKhoan like '"+idTaiKhoan+"' and LoaiHinhDichVu like N'Nhu cầu' order by NgayDang desc";
+				+ "where TinhTrang not like N'Khóa bài đăng' and TinhTrang not like N'Hủy bài đăng' and TaiKhoan like '"+idTaiKhoan+"' and LoaiHinhDichVu like N'Nhu cầu' order by NgayDang desc";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -728,6 +775,100 @@ public class DichVuDAO {
 			list.add(dangKy);
 		}
 		return list;
+	}
+
+	public boolean CapNhatDichVuDangKy(String idKey, String chanState) {
+		String sql = "update DANGKYDICHVU set TinhTrang=N'"+chanState+"' where IdDangKy='"+idKey+"'";
+		return db.updateData(sql);
+	}
+
+	public List<DichVu> getDichVuDangTai(String idTaiKhoan) throws SQLException {
+		String sql = "select DICHVU.IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, "
+				+"BAIVIET.IdBaiViet, TenBaiViet, MoTa, NgayDang, HinhAnh, BAIVIET.TinhTrang, "
+				+"LuotXem, COUNT(IdDangKy) as LuocDangKy from DICHVU "
+				+"inner join BAIVIET on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
+				+"left join DANGKYDICHVU on DANGKYDICHVU.IdDichVu=DICHVU.IdDichVu "
+				+"where BAIVIET.TaiKhoan like '"+idTaiKhoan+"' and LoaiHinhDichVu not like N'Nhu cầu' "
+				+"and BAIVIET.TinhTrang not like N'Hủy bài đăng' and BAIVIET.TinhTrang not like N'Khóa bài đăng' "
+				+"group by DICHVU.IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, "
+				+"BAIVIET.IdBaiViet, TenBaiViet, MoTa, HinhAnh, NgayDang, BAIVIET.TinhTrang, "
+				+"LuotXem order by LuotXem desc, LuocDangKy desc";
+			System.out.println("SQL : " + sql);
+			ResultSet rs = db.getResultSet(sql);
+			ArrayList<DichVu> list = new ArrayList<DichVu>();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			while(rs.next()){
+				DichVu dichVu = new DichVu();
+				dichVu.setIdDichVu(rs.getInt("IdDichVu"));
+				dichVu.setLoaiHinhDichVu(rs.getString("LoaiHinhDichVu"));
+				dichVu.setNgayBatDau(sdf.format(rs.getTimestamp("ThoiGianBatDau")));
+				dichVu.setNgayKetThuc(sdf.format(rs.getTimestamp("ThoiGianKetThuc")));
+				BaiViet baiViet = new BaiViet(); 
+				baiViet.setTenBaiViet(FormatData.FormatOutputData(rs.getString("TenBaiViet")));
+				baiViet.setMoTa(FormatData.FormatOutputData(rs.getString("MoTa")));
+				baiViet.setNgayDang(sdf.format(rs.getTimestamp("NgayDang")));
+				baiViet.setAnhMoTa(rs.getString("HinhAnh"));
+				baiViet.setTinhTrang(FormatData.FormatOutputData(rs.getString("TinhTrang")));
+				baiViet.setLuocXem(rs.getInt("LuotXem"));
+				baiViet.setIdBaiViet(rs.getInt("LuocDangKy"));
+				dichVu.setBaiViet(baiViet);
+				list.add(dichVu);
+			}
+		return list;
+	}
+
+	public List<DangKyDichVu> getDanhSachDangKy(String idTaiKhoan) throws SQLException {
+		String sql = "select IdDangKy, DANGKYDICHVU.IdDichVu, NgayDangKy, TinNhan, DANGKYDICHVU.TinhTrang, "
+				+"TAIKHOAN.TaiKhoan, HoTen, DienThoai, Email from DANGKYDICHVU "
+				+"inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
+				+"inner join DICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
+				+"inner join BAIVIET on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
+				+"where BAIVIET.TaiKhoan='"+idTaiKhoan+"' and DANGKYDICHVU.TinhTrang like 'Đăng ký'";
+		ArrayList<DangKyDichVu> list = new ArrayList<DangKyDichVu>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		ResultSet rs = db.getResultSet(sql);
+		while(rs.next()){
+			DangKyDichVu dangKy = new DangKyDichVu();
+			dangKy.setIdDangKy(rs.getInt("IdDangKy"));
+			dangKy.setIdDichVu(rs.getInt("IdDichVu"));
+			dangKy.setNgayDangKy(sdf.format(rs.getTimestamp("NgayDangKy")));
+			dangKy.setTinNhan(FormatData.FormatOutputData(rs.getString("TinNhan")));
+			dangKy.setTinhTrang(rs.getString("TinhTrang"));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			taiKhoan.setDienThoai(FormatData.FormatOutputData(rs.getString("DienThoai")));
+			taiKhoan.setEmail(FormatData.FormatOutputData(rs.getString("Email")));
+			dangKy.setTaiKhoan(taiKhoan);
+			list.add(dangKy);
+		}
+		return list;
+	}
+
+	public DangKyDichVu getDangKyDichVu(int idDangKy) throws SQLException {
+		String sql = "select IdDangKy, DANGKYDICHVU.IdDichVu, NgayDangKy, TinNhan, DANGKYDICHVU.TinhTrang, "
+				+"TAIKHOAN.TaiKhoan, HoTen, DienThoai, Email from DANGKYDICHVU "
+				+"inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
+				+"inner join DICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
+				+"where IdDangKy='"+idDangKy+"'";
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		ResultSet rs = db.getResultSet(sql);
+		if(rs.next()){
+			DangKyDichVu dangKy = new DangKyDichVu();
+			dangKy.setIdDangKy(rs.getInt("IdDangKy"));
+			dangKy.setIdDichVu(rs.getInt("IdDichVu"));
+			dangKy.setNgayDangKy(sdf.format(rs.getTimestamp("NgayDangKy")));
+			dangKy.setTinNhan(FormatData.FormatOutputData(rs.getString("TinNhan")));
+			dangKy.setTinhTrang(rs.getString("TinhTrang"));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			taiKhoan.setDienThoai(FormatData.FormatOutputData(rs.getString("DienThoai")));
+			taiKhoan.setEmail(FormatData.FormatOutputData(rs.getString("Email")));
+			dangKy.setTaiKhoan(taiKhoan);
+			return dangKy;
+		}
+		return null;
 	}
 
 }

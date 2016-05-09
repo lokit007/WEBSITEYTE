@@ -9,6 +9,7 @@
 <s:include value="files/ThuVien.jsp"></s:include>
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 <script src="js/add-binhluan.js" type="text/javascript"></script>
+<script src="js/xuly-nghiepvu.js" type="text/javascript"></script>
 <title>Dịch vụ y tế</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
 				</s:div>
 				<s:div id="div-info">
 					<img src="images/${ dichVu.baiViet.anhMoTa}" >
-					<s:div cssClass="div-col-50">
+					<s:div>
 						<p>
 							<s:property value="dichVu.baiViet.moTa" />
 						</p>
@@ -129,12 +130,7 @@
 		</s:div>
 		<s:div cssClass="clear"></s:div>
 	</s:div>
-	<script type="text/javascript">
-				function ShowTraLoi(e) {
-					$(e).parent().append("<div class='div-traloi'><form action=''><textarea class='txtHoi' placeholder='Trả Lời của bạn'></textarea><div class='btn-binhluan'><input type='submit' value='Trả lời'></div></form></div>");
-					$(e).removeAttr("onclick");
-				}
-	</script>
+	
 	<s:div cssClass="div-quangcao">
 		<img src="http://placehold.it/234x60">
 		<img src="http://placehold.it/234x60">
@@ -243,188 +239,4 @@
 	  </div>
 	</div>
 </body>
-
-<script type="text/javascript">
-	function HienThi(){
-		$(".anView").attr('style', 'display: inherit;');
-		$("#btn-dangky").attr('style', 'display: none;');
-	}
-	function DangKy(){
-		$.ajax({
-			url : "check-dangky-dv.action",
-	        type: "POST",
-	        data : {
-	        	idDichVu : $("#idDichVuDK").val(),
-	        	email : $("#emailDK").val()
-	        },
-	        beforeSubmit : function (){
-	        	$("#loadWhile").attr("style", "display: inherit;");
-	        },
-	        success:function(data, textStatus, jqXHR) 
-	        {
-	        	$("#loadWhile").attr("style", "display: none;");
-	            if(data.indexOf("thất bại")>-1){
-	            	alert("Bạn đã đăng ký dịch vụ này!");
-	            } else {
-	            	$('#myModal').modal('show');
-	            }
-	        }
-		});
-	}
-	function XoaPhanTu(){
-		$("#showError").remove();
-	}
-	$(document).ready(function() {
-		/* form đăng ký dịch vụ */
-		$("#f-dangky-dichvu").validate({
-			rules : {
-				hoTen : "required",
-				dienThoai : {
-					required : true,
-					digits : true
-				},
-				email : {
-					required : true,
-					email : true
-				}
-			},
-			messages : {
-				hoTen : "Nhập họ tên/tổ chức!",
-				dienThoai : {
-					required : "Nhập điện thoại liên hệ!",
-					digits : "Số điện thoại không đúng!"
-				},
-				email : {
-					required : "Nhập email liên hệ!",
-					email : "Không đúng định dạng email!"
-				}
-			},
-			submitHandler : function(form) {
-					var postData = $(form).serializeArray();
-				    var formURL = $(form).attr("action");
-				    $.ajax({
-				        url : formURL,
-				        type: "POST",
-				        data : postData,
-				        beforeSubmit : function (){
-				        	$("#loadWhile").attr("style", "display: inherit;");
-				        },
-				        success:function(data, textStatus, jqXHR) 
-				        {
-				            if(data.indexOf("thất bại")>-1){
-				            	$("#loiDangKy").attr("style", "display: inherit;");
-				            } else {
-				            	$("#loiDangKy").attr("style", "display: none;");
-				            	$('#myModal').modal('hide');
-				            	alert("Đăng ký dịch vụ thành công.");
-				            }
-				        },
-				        error: function(jqXHR, textStatus, errorThrown) 
-				        {
-				        	$("#loiDangKy").attr("style", "display: none;");
-				        	$('#myModal').modal('hide');
-				            alert("Lỗi");    
-				        }
-				   });
-			}
-		});
-		/* form lien he */
-		$("#f-lienhe-mail").validate({
-			rules : {
-				tieuDe : {
-					required : true
-				},
-				noiDung : {
-					required : true
-				}
-			},
-			messages : {
-				tieuDe : "Bạn chưa nhập tiêu đề!",
-				noiDung : {
-					required : "Bạn chưa nhập nội dung!",
-				}
-			},
-			submitHandler : function(form) {
-					var postData = $(form).serializeArray();
-				    var formURL = $(form).attr("action");
-				    $.ajax({
-				        url : formURL,
-				        type: "POST",
-				        data : postData,
-				        beforeSubmit : function (){
-				        	$("#loadWhile").attr("style", "display: inherit;");
-				        },
-				        success:function(data, textStatus, jqXHR) 
-				        {
-				            if(data.indexOf("thất bại")>-1){
-				            	$("#loilienhe").attr("style", "display: inherit;");
-				            } else {
-				            	$("#loilienhe").attr("style", "display: none;");
-				            	$('#formLienHe').modal('hide');
-				            	alert("Đã gửi đến nhà cung cấp.");
-				            }
-				        },
-				        error: function(jqXHR, textStatus, errorThrown) 
-				        {
-				        	$("#loiDangKy").attr("style", "display: none;");
-				        	$('#formLienHe').modal('hide');
-				            alert("Lỗi");    
-				        }
-				   });
-			}
-		});
-		/* form báo lỗi */
-		$("#f-dichvu-span").validate({
-			rules : {
-				hoTen : "required",
-				vanDe : {
-					required : true
-				},
-				email : {
-					required : true,
-					email : true
-				}
-			},
-			messages : {
-				hoTen : "Nhập họ tên/tổ chức!",
-				vanDe : {
-					required : "Chưa chọn báo lỗi!"
-				},
-				email : {
-					required : "Nhập email liên hệ!",
-					email : "Không đúng định dạng email!"
-				}
-			},
-			submitHandler : function(form) {
-					var postData = $(form).serializeArray();
-				    var formURL = $(form).attr("action");
-				    $.ajax({
-				        url : formURL,
-				        type: "POST",
-				        data : postData,
-				        beforeSubmit : function (){
-				        	$("#loadWhile").attr("style", "display: inherit;");
-				        },
-				        success:function(data, textStatus, jqXHR) 
-				        {
-				        	$("#loadWhile").attr("style", "display: none;");
-				        	$('#baospan').modal('hide');
-				            if(data.indexOf("thất bại")>-1){
-				            	alert("Lỗi xử lý dữ liệu trên server!");
-				            } else {
-				            	alert("Báo span dịch vụ thành công.");
-				            	$("#btn-vipham").removeAttr("onclick");
-				            	$("#btn-dangky").remove();
-				            }
-				        },
-				        error: function(jqXHR, textStatus, errorThrown) 
-				        {
-				        	$('#baospan').modal('hide');
-				            alert("Lỗi");    
-				        }
-				   });
-			}
-		});
-	});
-</script>
 </html>

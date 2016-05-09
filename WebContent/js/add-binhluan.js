@@ -4,17 +4,13 @@ function ShowTraLoi(ma, bang, e) {
 			$("#dangNhapModal").modal("show");
 		}
 	} else {
-		$(e)
-				.parent()
-				.append(
-						"<div class='div-traloi'><textarea class='txtHoi' placeholder='Trả Lời của bạn'></textarea><div class='btn-binhluan'><input type='submit' value='Trả lời' onclick=\"traLoi('"
-								+ ma
-								+ "', '"
-								+ bang
-								+ "', this);\"></div></div>");
+		$(e).parent().append(
+			"<div class='div-traloi'><textarea class='txtHoi' placeholder='Trả Lời của bạn'></textarea><div class='btn-binhluan'><input type='submit' value='Trả lời' onclick=\"traLoi('"
+			+ ma + "', '" + bang + "', this);\"></div></div>");
 		$(e).removeAttr("onclick");
 	}
 }
+
 function traLoi(ma, bang, e) {
 	if ($("#login").val() == "") {
 		if (confirm("Bạn chưa đăng nhập hệ thống! Hãy đăng nhập để có nhiều quyền lợi hơn") == true) {
@@ -35,15 +31,9 @@ function traLoi(ma, bang, e) {
 						$("#loadmore").attr("style", "display: inherit;");
 					},
 					success : function(data, textStatus, jqXHR) {
-						$(xoa)
-								.parent()
-								.append(
-										data
-												.replace("list-binhluan-item",
-														"div-traloi")
-												.replace(
-														"<button type=\"button\" class=\"btn btn-link\" onclick=\"ShowTraLoi(this);\">Trả lời</button>",
-														""));
+						$(xoa).parent().append(
+								data.replace("list-binhluan-item","div-traloi")
+									.replace("<button type=\"button\" class=\"btn btn-link\" onclick=\"ShowTraLoi(this);\">Trả lời</button>",""));
 						$(xoa).remove();
 					},
 					error : function(jqXHR, textStatus, errorThrown) {

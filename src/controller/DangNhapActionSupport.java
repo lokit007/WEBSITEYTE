@@ -3,13 +3,16 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bean.TaiKhoan;
+import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
 public class DangNhapActionSupport extends ActionSupport implements ServletRequestAware {
@@ -72,12 +75,25 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				TaiKhoan user = new TaiKhoan(this.taiKhoan, this.matKhau, this.hoTen, this.diaChi
 						, this.dienThoai, this.email, "TK mới", sdf.format(new Date()), location);
+				user.setLoaiTaiKhoan("Người dùng");
 				if(ValidateBO.CheckAccountExist(user)){
+					ServletContext context = ServletActionContext.getRequest().getServletContext();
+					final String host = context.getInitParameter("host");
+					final String port = context.getInitParameter("port");
+					final String userroot = context.getInitParameter("user");
+					final String pass = context.getInitParameter("pass");
+					try {
+						String noiDungMail = "Chào "+hoTen+"!\nChúc mừng bạn đã đăng ký tài khoản thành viên thành công!\n Thông tin tài khoản :"
+								+ "\n Tài khoản : " + taiKhoan + "\n Mật khẩu : " + matKhau + "\n Cám ơn bạn đã quan tâm.\nThân ái!\nSở Y Tế Huế";
+						EmailUtility.sendEmailThread("smtp.gmail.com", "587", userroot, pass, email, "CỔNG THÔNG TIN DỊCH VỤ Y TẾ CỘNG ĐỒNG - ĐK thành viên",noiDungMail);
+					} catch (Exception ex) {
+			        	System.out.println("Lỗi : " + ex.toString());
+			        }
+					ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Chúc mừng!Bạn đã đăng ký thành viên thành công. Vui lòng cập nhật thông tin để được trải nghiệm nhiều hơn!");
 					request.getSession().setAttribute("user", user);
-					request.getSession().setAttribute("login", true);
+					request.getSession().setAttribute("login", "true");
 					return "thanh-cong";
 				} else {
-					addActionError("Đăng ký không thành công!");
 					addActionError("Lỗi cập kết nối cơ sở dữ liệu server!");
 					return "that-bai";
 				}
