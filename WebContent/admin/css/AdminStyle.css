@@ -16,6 +16,9 @@ h4 {
     font-style: italic;
     font-weight: bold;
 }
+.link {
+    cursor: pointer;
+}
 .clear {
 	clear: both;
 }
@@ -61,6 +64,15 @@ div.sussec {
     border-bottom: 1px solid lightgray;
     padding: 5px;
     background-color: lawngreen;
+}
+a.item {
+    display: block;
+    border-bottom: 1px dashed lightgray;
+}
+label.lb-item {
+    display: block;
+    margin-top: 5px;
+    border-bottom: 1px solid lightgray;
 }
 /* dang nhap */
 form#f-dangnhap {
@@ -161,12 +173,9 @@ div#div-state {
 div#div-state ul {
     list-style: none;
     margin: 0px;
-    padding-right: 20px;
 }
 div#div-state ul li {
     display: inline-block;
-    width: 35px;
-    height: 30px;
     background-color: white;
     border-radius: 15px;
     margin-right: 20px;

@@ -105,71 +105,8 @@
 				class="sluong"> <s:property value="#session.counter.getOnline()"/> </span></span>
 		</s:div>
 	</div>
-	<div id="div-state">
-		<button id="icon-menu" onclick="show(1);">Menu</button>
-		<script type="text/javascript">
-			function show(e){
-				if(e == 1){
-					$('#div-menu').css('display', 'inline');
-					$('#icon-menu').attr('onclick', 'show(0);');
-				} else {
-					$('#div-menu').css('display', 'none');
-					$('#icon-menu').attr('onclick', 'show(1);')
-				}
-			}
-			function ShowView(e, o){
-				if(e == 1){
-					$('#dataChange').css('display', 'inline');
-					$(o).attr('onclick', 'show(0, this);');
-				} else {
-					$('#dataChange').css('display', 'none');
-					$(o).attr('onclick', 'show(1, this);');
-				}
-			}
-			function ShowSubMenu(e){
-				if(e == 1){
-					$('#dataMenu').css('display', 'inline');
-					$('#qltv').attr('onclick', 'ShowSubMenu(0);');
-					$('#icon-caret').attr('class', 'fa fa-caret-square-o-up');
-				} else {
-					$('#dataMenu').css('display', 'none');
-					$('#qltv').attr('onclick', 'ShowSubMenu(1);');
-					$('#icon-caret').attr('class', 'fa fa-caret-square-o-down');
-				}
-			}
-		</script>
-		<ul>
-			<li><a href="#" onclick="ShowView(1, this);" title="Danh sách dịch vụ cần xử lý"><i class="fa fa-heartbeat fa-2x"></i><span>1</span></a></li>
-			<li><a href="#" title="Danh sách nhu cầu cần xử lý"><i class="fa fa-contao fa-2x"></i><span>10</span></a></li>
-			<li><a href="#" title="Danh bài viết chia sẻ mới"><i class="fa fa-share-alt fa-2x"></i><span>110</span></a></li>
-			<li><a href="#" title="Nhà cung cấp mới"><i class="fa fa-users fa-2x"></i><span>10</span></a></li>
-			<li>
-				<div class="btn-group">
-					  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-					    Action <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Cá nhân</a></li>
-						    <li class="divider"></li>
-						    <li><a href="dang-xuat.action">Đăng xuất</a></li>
-					  </ul>
-				</div>
-			</li>
-		</ul>
-		<s:div cssClass="list-view" id="dataChange">
-			<table class="table sortable table-hover table-responsive">
-				<thead>
-					<tr>
-						<th class="tieude">
-							tên dịch vụ mới
-						</th>
-						<th>Nhà cung cấp</th>
-						<th>chi tiết</th>
-					</tr>
-				</thead>
-			</table>
-		</s:div>
-	</div>
+	<div id="div-state"></div>
+	<script type="text/javascript" src="js/menustate.js"></script>
 
 <div class="modal fade bs-example-modal-sm" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

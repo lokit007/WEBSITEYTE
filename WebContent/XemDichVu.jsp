@@ -130,14 +130,6 @@
 		</s:div>
 		<s:div cssClass="clear"></s:div>
 	</s:div>
-	
-	<s:div cssClass="div-quangcao">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-	</s:div>
 	<s:include value="files/Footer.jsp"></s:include>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">

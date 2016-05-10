@@ -42,6 +42,7 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 				||admin.getTaiKhoan().getLoaiTaiKhoan().equals("root")
 				||admin.getTaiKhoan().getLoaiTaiKhoan().equals("Nhà cung cấp")) {
 			request.getSession().setAttribute("admin", admin);
+			request.getSession().setAttribute("user", admin.getTaiKhoan());
 			request.getSession().setAttribute("login", "true");
 		} else {
 			addActionError("Tài khoản hoặc mật khẩu không chính xác!");
@@ -52,8 +53,8 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 	
 	public String  DangXuatAdmin() {
 		this.request.getSession().removeAttribute("admin");
+		this.request.getSession().removeAttribute("user");
 		this.request.getSession().removeAttribute("login");
-		this.request.getSession().invalidate();
 		return "thanh-cong";
 	}
 	

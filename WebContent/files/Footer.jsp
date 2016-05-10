@@ -1,15 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
+<script src="js/footer.js" type="text/javascript"></script>
+
+	<s:if test="#session.TaiNguyen==null">
+		<script type="text/javascript">
+			InitDataHeThong();
+		</script>
+	</s:if>
+
+	<s:div cssClass="div-quangcao-last">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+		<img src="http://placehold.it/234x60">
+	</s:div>
+	
+	<script type="text/javascript">
+	$(function animate() {
+			$(".div-quangcao-last img:first").each(function() {
+				/* héng chạy không mược nơi kiểu cà giật á */
+				$(this).delay(5000);
+				$(this).animate({
+					marginLeft : -$(this).outerWidth(true),
+                    opacity: "hide"
+				}, 2000, function() {
+					$(this).insertAfter(".div-quangcao-last img:last");
+					$(this).fadeIn();
+					$(this).css({
+						'margin-left' : '0px'
+					});
+					setTimeout(function() {
+						animate()
+					}, 2000);
+				});
+			});
+		});
+	</script>
+	
 	<s:div id="div-footer">
 		<s:label id="footer-title" cssClass="footer-title" value="WESITE DỊCH VỤ Y TẾ CỘNG ĐỒNG"></s:label>
 		<s:div cssClass="div-footer-item">
 			<s:label cssClass="footer-title" value="Liên Hệ"></s:label>
 			<span>Sở y tế Thừa Thiên Huế - Cổng Dịch vụ y tế cộng đồng</span>
-			<span>Địa chỉ : 28 Lê Lợi - Thành phố Huế - Tỉnh Thừa Thiên Huế</span>
-			<span>Phonel : 054.3822015</span>
-			<span>Fax : 054.3832021</span>
-			<span>Email : syt@thuathienhue.gov.vn</span>
+			<span>Địa chỉ : <s:property value="#session.TaiNguyen.diaChi"/> </span>
+			<span>Phonel : <s:property value="#session.TaiNguyen.dienThoai"/> </span>
+			<span>Fax : <s:property value="#session.TaiNguyen.fax"/> </span>
+			<span>Email : <s:property value="#session.TaiNguyen.email"/> </span>
 		</s:div>
 		<s:div cssClass="div-footer-item">
 			<s:label cssClass="footer-title" value="Liên Kết"></s:label>
@@ -39,7 +83,7 @@
 		<s:div cssClass="clear"></s:div>
 	</s:div>
 	<s:div cssClass="banquen">
-			BẢN QUYỀN THUỘC SỞ Y TẾ TỈNH THỪA THIÊN HUẾ - v.2016
+			<s:property value="#session.TaiNguyen.banQuyen"/>
 	</s:div>
 	<div class="modal fade bs-example-modal-sm" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -83,25 +127,6 @@
         	Không có thông báo nào cả!
         </s:else>
     </div>
-	<script type="text/javascript">
-			$(function () {
-		      	$("#thong-bao").popover({
-		            title: 'Thông báo',
-		            content: $('#divContentHTML').html(),
-		            placement: 'top',
-		            delay: { show: 500, hide: 100 },
-		            html: true
-		        });
-		      	/* $('#thong-bao').popover('show'); */
-		    });
-			$('body').on('click', function (e) {
-		        $('.btn-open-popover').each(function () {
-		          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-		            $(this).popover('hide');
-		          }
-		        });
-		      });
-	</script>
 	<div class="modal fade" id="dangNhapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -123,89 +148,3 @@
 		    </div>
 	  </div>
 	</div>
-	
-	<script type="text/javascript">
-		$("#fm-dangnhap").validate({
-			rules : {
-				taiKhoan : {
-					required : true
-				},
-				matKhau : {
-					required : true
-				}
-			},
-			messages : {
-				taiKhoan : {
-					required : "Chưa nhập tài khoản!"
-				},
-				matKhau : {
-					required : "Chưa nhập mật khẩu!"
-				}
-			},
-			submitHandler : function(form) {
-					var postData = $(form).serializeArray();
-				    var formURL = $(form).attr("action");
-				    $.ajax({
-				        url : formURL,
-				        type: "POST",
-				        data : postData,
-				        beforeSubmit : function (){
-				        	$("#loadWhile").attr("style", "display: inherit;");
-				        },
-				        success:function(data, textStatus, jqXHR) 
-				        {
-				            if(data.indexOf("thất bại")>-1){
-				            	$('#dangNhapModal').modal('hide');
-				            	alert("Lỗi xử lý dữ liệu trên server!");
-				            } else {
-				            	$('#dangNhapModal').modal('hide');
-				            	window.location.reload(true);
-				            	$('#login').val("true");
-				            }
-				        },
-				        error: function(jqXHR, textStatus, errorThrown) 
-				        {
-				        	$('#dangNhapModal').modal('hide');
-				            alert("Lỗi");    
-				        }
-				   });
-			}
-		});
-		
-		$("#nhanEMail").validate({
-			rules : {
-				email : {
-					required : true,
-					email : true
-				}
-			},
-			messages : {
-				email : {
-					required : "Chưa nhập email!",
-					email : "Không phải email"
-				}
-			},
-			submitHandler : function(form) {
-					var postData = $(form).serializeArray();
-				    var formURL = $(form).attr("action");
-				    $.ajax({
-				        url : formURL,
-				        type: "POST",
-				        data : postData,
-				        success:function(data, textStatus, jqXHR) 
-				        {
-				            if(data.indexOf("thất bại")>-1){
-				            	$("#email-select").after("Lỗi đăng ký nhận mail!");
-				            } else {
-				            	$("#email-select").after("Đăng ký nhận mail thành công!");
-				            }
-				        },
-				        error: function(jqXHR, textStatus, errorThrown) 
-				        {
-				            alert("Lỗi");    
-				        }
-				   });
-			}
-		});
-	</script>
-	

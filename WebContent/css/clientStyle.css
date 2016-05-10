@@ -18,6 +18,10 @@ div#div-content {
     margin-right: auto;
     width: 100%;
 }
+.div-quangcao-last {
+    max-width: 99%;
+    overflow: hidden;
+}
 .clear {
 	clear: both;
 }
@@ -70,6 +74,10 @@ i#thong-bao {
 }
 div#topcontrol {
     right: 72px !important;
+}
+.div-show-content.div-slide {
+    max-height: 300px;
+    overflow: hidden;
 }
 /* menu */
 div#div-header-logo {
@@ -618,6 +626,7 @@ span#bl-nhan {
 	}
 	.div-quangcao-last {
 	    text-align: center;
+	    display: inline-flex;
 	}
 	.div-quangcao-last img {
 	    width: 48%;
@@ -679,6 +688,7 @@ span#bl-nhan {
 	.div-quangcao-last {
 	    text-align: center;
 	    margin: 5px;
+	    display: inline-flex;
 	}
 	.div-quangcao-last img {
 	    margin-top: 5px;
@@ -716,6 +726,7 @@ span#bl-nhan {
 	.div-quangcao-last {
 	    text-align: center;
 	    margin: 5px;
+	    display: inline-flex;
 	}
 	.div-quangcao-last img {
 	    margin-bottom: 5px;

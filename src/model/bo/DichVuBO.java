@@ -282,5 +282,29 @@ public class DichVuBO {
 			return null;
 		}
 	}
+
+	public List<DangKyDichVu> getDanhSachDangKy() {
+		try {
+			return dichVuDAO.getDanhSachDangKy();
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
+
+	public List<DangKyDichVu> getDanhSachBaoGia() {
+		try {
+			return dichVuDAO.getDanhSachBaoGia();
+		} catch (SQLException e) {
+			System.out.println("Loi 1 : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Loi 2 : " + e.toString());
+			return null;
+		}
+	}
 	
 }

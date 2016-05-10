@@ -55,13 +55,6 @@
 		</s:div>
 		<s:div cssClass="clear"></s:div>
 	</s:div>
-	<s:div cssClass="div-quangcao">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-	</s:div>
 	<s:include value="files/Footer.jsp"></s:include>
 </body>
 <script type="text/javascript">

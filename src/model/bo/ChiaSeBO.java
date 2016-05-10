@@ -96,4 +96,16 @@ public class ChiaSeBO {
 		return chiaSeDAO.CapNhatTrangThai(idKey, chanState);
 	}
 
+	public List<BaiViet> getListChiaSe() {
+		try {
+			return chiaSeDAO.getListChiaSe();
+		} catch (SQLException e) {
+			System.out.println("Lỗi : " + e.toString());
+			return null;
+		} catch (Exception e) {
+			System.out.println("Lỗi : " + e.toString());
+			return null;
+		}
+	}
+
 }

@@ -42,28 +42,28 @@
 					<fieldset>
 			  			<legend>Thông tin cá nhân</legend>
 			  			<s:hidden name="idTaiKhoan" value="%{ #session.user.idTaiKhoan}"></s:hidden>
-			  			<s:label value="Cá nhân/Tổ chức : " for="hoTen"></s:label><span class="sp-quantrong"> * </span>
+			  			<s:label value="Cá nhân/Tổ chức : "></s:label><span class="sp-quantrong"> * </span>
 				  		<s:textfield name="hoTen" value="%{ #session.user.hoTen}" cssClass="form-control"></s:textfield>
-				  		<br><s:label value="Địa chỉ : " for="diaChi"></s:label><span class="sp-quantrong"> * </span>
+				  		<br><s:label value="Địa chỉ : "></s:label><span class="sp-quantrong"> * </span>
 				  		<s:textfield name="diaChi" value="%{ #session.user.diaChi}" cssClass="form-control"></s:textfield>
 				  		<s:div cssClass="div-col-100">
 					  		<s:div cssClass="div-col-50">
-						  		<br><s:label value="Điện thoại liên hệ : " for="dienThoai"></s:label><span class="sp-quantrong"> * </span>
+						  		<br><s:label value="Điện thoại liên hệ : "></s:label><span class="sp-quantrong"> * </span>
 						  		<s:textfield name="dienThoai" value="%{ #session.user.dienThoai}" cssClass="form-control"></s:textfield>
 					  		</s:div>
 					  		<s:div cssClass="div-col-50">
-						  		<br><s:label value="Email : " for="email"></s:label><span class="sp-quantrong"> * </span>
+						  		<br><s:label value="Email : "></s:label><span class="sp-quantrong"> * </span>
 						  		<s:textfield name="email" value="%{ #session.user.email}" cssClass="form-control"></s:textfield>
 					  		</s:div>
 					  		<s:div cssClass="clear"></s:div>
 				  		</s:div>
 				  		<s:div cssClass="div-col-100">
 					  		<s:div cssClass="div-col-50">
-						  		<br><s:label value="Mật khẩu mới : " for="matKhauMoi"></s:label>
+						  		<br><s:label value="Mật khẩu mới : "></s:label>
 						  		<s:textfield id="matKhauMoi" name="matKhauMoi" cssClass="form-control"></s:textfield>
 					  		</s:div>
 					  		<s:div cssClass="div-col-50">
-						  		<br><s:label value="Xác nhận mật khẩu mới : " for="matKhauXacNhan"></s:label>
+						  		<br><s:label value="Xác nhận mật khẩu mới : "></s:label>
 						  		<s:textfield name="matKhauXacNhan" cssClass="form-control"></s:textfield>
 					  		</s:div>
 					  		<s:div cssClass="clear"></s:div>
@@ -110,8 +110,10 @@
 									<td class="td-15"> <s:property value="ngayBatDau"/> </td>
 									<td class="td-15"> <s:property value="baiViet.tinhTrang"/> </td>
 									<td class="td-15">
-										<a href="chi-tiet-dich-vu.action?idDichVu=${ idDichVu }" title="Thông tin dịch vụ" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
-										<a style="cursor: pointer;" onclick="CapNhatTrangThai('${ idNhaCungCap }', 'DANGKYDICHVU', 'Hủy bỏ');" title="Hủy đăng ký dịch vụ này" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+										<s:if test="baiViet.tinhTrang!='Hủy bỏ'">
+											<a href="chi-tiet-dich-vu.action?idDichVu=${ idDichVu }" title="Thông tin dịch vụ" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
+											<a style="cursor: pointer;" onclick="CapNhatTrangThai('${ idNhaCungCap }', 'DANGKYDICHVU', 'Hủy bỏ');" title="Hủy đăng ký dịch vụ này" class="btn-delete btn-thaotac"><i class="fa fa-times"></i></a>
+										</s:if>
 									</td>
 								</tr>
 							</s:iterator>
@@ -147,7 +149,7 @@
 										</s:if>
 									</td>
 									<td class="td-15"> <s:property value="baiViet.ngayDang"/> </td>
-									<td>Có 10 báo giá</td>
+									<td>Có <s:property value="baiViet.luocXem"/> báo giá</td>
 									<td class="td-15">
 										<s:if test="baiViet.tinhTrang=='Đăng bài'">
 											<a href="chi-tiet-nhu-cau.action?idNhuCau=${ idDichVu }" title="Chi tiết nhu cầu đăng" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
@@ -238,13 +240,6 @@
 			<!-- kết thúc content -->
 		</s:div>
 		<s:div cssClass="clear"></s:div>
-	</s:div>
-	<s:div cssClass="div-quangcao">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
 	</s:div>
 	<s:include value="files/Footer.jsp"></s:include>
 	<div class="modal fade" id="xacnhan-dv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

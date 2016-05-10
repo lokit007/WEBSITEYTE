@@ -93,4 +93,13 @@ public class BinhLuanDAO {
 		traLoiDAO.closeConnect();
 		return list;
 	}
+
+	public boolean XoaBinhLuan(String id, String nameTable) {
+		String sql = "";
+		if(nameTable.equals("CAUHOI"))
+			sql = "delete from BINHLUAN where IdBinhLuan='"+id+"'";
+		else
+			sql = "delete from TRALOI where IdTraLoi='"+id+"'";
+		return db.updateData(sql);
+	}
 }

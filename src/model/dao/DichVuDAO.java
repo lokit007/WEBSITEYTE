@@ -483,7 +483,9 @@ public class DichVuDAO {
 	}
 
 	public List<DichVu> getListDichVu(String theLoai) throws SQLException {
-		String sql = "select top 10 IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, DienThoaiLienHe, EmailLienHe, TenBaiViet, "
+		int soLuong = 4;
+		if(theLoai.equals("Từ thiện")||theLoai.equals("Dịch vụ tư")) soLuong = 5;
+		String sql = "select top "+soLuong+" IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, DienThoaiLienHe, EmailLienHe, TenBaiViet, "
 				+ "TacGia, MoTa, NoiDung, NgayDang, HinhAnh, LuotXem, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
@@ -699,7 +701,8 @@ public class DichVuDAO {
 		String sql = "select DICHVU.IdDichVu, IdDangKy, LoaiHinhDichVu, TenBaiViet, NgayDangKy, DANGKYDICHVU.TinhTrang from DICHVU "
 				+ "inner join BAIVIET on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "inner join DANGKYDICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
-				+ "where TinhTrang not like N'Khóa bài đăng' and TinhTrang not like N'Hủy bài đăng' and DANGKYDICHVU.TaiKhoan='"+idTaiKhoan+"' and LoaiHinhDichVu not like 'Nhu cầu' "
+				+ "where BAIVIET.TinhTrang not like N'Khóa bài đăng' and BAIVIET.TinhTrang not like N'Hủy bài đăng' "
+				+ "and DANGKYDICHVU.TaiKhoan='"+idTaiKhoan+"' and LoaiHinhDichVu not like 'Nhu cầu' "
 				+ "order by NgayDangKy desc";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
@@ -720,11 +723,13 @@ public class DichVuDAO {
 	}
 
 	public List<DichVu> getNhuCauDang(String idTaiKhoan) throws SQLException {
-		String sql = "select IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, BAIVIET.IdBaiViet, TenBaiViet, "
-				+ "MoTa, NgayDang, HinhAnh, TinhTrang, BAIVIET.IdDanhMuc, TenDanhMuc from DICHVU "
+		String sql = "select IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, DiaDiemTrienKhai, BAIVIET.IdBaiViet, "
+				+ "TenBaiViet, MoTa, NgayDang, HinhAnh, TinhTrang, BAIVIET.IdDanhMuc, TenDanhMuc, "
+				+ "(select COUNT(*) from DANGKYDICHVU where IdDichVu=DICHVU.IdDichVu) as SoLuongDangKy from DICHVU "
 				+ "inner join BAIVIET on BAIVIET.IdBaiViet = DICHVU.IdBaiViet "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
-				+ "where TinhTrang not like N'Khóa bài đăng' and TinhTrang not like N'Hủy bài đăng' and TaiKhoan like '"+idTaiKhoan+"' and LoaiHinhDichVu like N'Nhu cầu' order by NgayDang desc";
+				+ "where TinhTrang not like N'Khóa bài đăng' and TinhTrang not like N'Hủy bài đăng' "
+				+ "and TaiKhoan like '"+idTaiKhoan+"' and LoaiHinhDichVu like N'Nhu cầu' order by NgayDang desc";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -744,6 +749,7 @@ public class DichVuDAO {
 			DanhMuc danhMuc = new DanhMuc();
 			danhMuc.setIdDanhMuc(rs.getInt("IdDanhMuc"));
 			danhMuc.setTenDanhMuc(FormatData.FormatOutputData(rs.getString("TenDanhMuc")));
+			baiViet.setLuocXem(rs.getInt("SoLuongDangKy"));
 			baiViet.setDanhMuc(danhMuc);
 			dichVu.setBaiViet(baiViet);
 			list.add(dichVu);
@@ -823,7 +829,7 @@ public class DichVuDAO {
 				+"inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
 				+"inner join DICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
 				+"inner join BAIVIET on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
-				+"where BAIVIET.TaiKhoan='"+idTaiKhoan+"' and DANGKYDICHVU.TinhTrang like 'Đăng ký'";
+				+"where BAIVIET.TaiKhoan='"+idTaiKhoan+"' and DANGKYDICHVU.TinhTrang like N'Đăng ký'";
 		ArrayList<DangKyDichVu> list = new ArrayList<DangKyDichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		ResultSet rs = db.getResultSet(sql);
@@ -869,6 +875,62 @@ public class DichVuDAO {
 			return dangKy;
 		}
 		return null;
+	}
+
+	public List<DangKyDichVu> getDanhSachDangKy() throws SQLException {
+		String sql = "select IdDangKy, DANGKYDICHVU.IdDichVu, NgayDangKy, TinNhan, DANGKYDICHVU.TinhTrang, "
+				+ "TAIKHOAN.TaiKhoan, HoTen, DienThoai, Email from DANGKYDICHVU "
+				+ "inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
+				+ "inner join DICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
+				+ "where DANGKYDICHVU.TinhTrang like N'Đăng ký' "
+				+ "and LoaiHinhDichVu not like N'Nhu cầu'";
+		ArrayList<DangKyDichVu> list = new ArrayList<DangKyDichVu>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		ResultSet rs = db.getResultSet(sql);
+		while(rs.next()){
+			DangKyDichVu dangKy = new DangKyDichVu();
+			dangKy.setIdDangKy(rs.getInt("IdDangKy"));
+			dangKy.setIdDichVu(rs.getInt("IdDichVu"));
+			dangKy.setNgayDangKy(sdf.format(rs.getTimestamp("NgayDangKy")));
+			dangKy.setTinNhan(FormatData.FormatOutputData(rs.getString("TinNhan")));
+			dangKy.setTinhTrang(rs.getString("TinhTrang"));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			taiKhoan.setDienThoai(FormatData.FormatOutputData(rs.getString("DienThoai")));
+			taiKhoan.setEmail(FormatData.FormatOutputData(rs.getString("Email")));
+			dangKy.setTaiKhoan(taiKhoan);
+			list.add(dangKy);
+		}
+		return list;
+	}
+
+	public List<DangKyDichVu> getDanhSachBaoGia() throws SQLException {
+		String sql = "select IdDangKy, DANGKYDICHVU.IdDichVu, NgayDangKy, TinNhan, DANGKYDICHVU.TinhTrang, "
+				+ "TAIKHOAN.TaiKhoan, HoTen, DienThoai, Email from DANGKYDICHVU "
+				+ "inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
+				+ "inner join DICHVU on DICHVU.IdDichVu=DANGKYDICHVU.IdDichVu "
+				+ "where DANGKYDICHVU.TinhTrang like N'Đăng ký' "
+				+ "and LoaiHinhDichVu like N'Nhu cầu'";
+		ArrayList<DangKyDichVu> list = new ArrayList<DangKyDichVu>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		ResultSet rs = db.getResultSet(sql);
+		while(rs.next()){
+			DangKyDichVu dangKy = new DangKyDichVu();
+			dangKy.setIdDangKy(rs.getInt("IdDangKy"));
+			dangKy.setIdDichVu(rs.getInt("IdDichVu"));
+			dangKy.setNgayDangKy(sdf.format(rs.getTimestamp("NgayDangKy")));
+			dangKy.setTinNhan(FormatData.FormatOutputData(rs.getString("TinNhan")));
+			dangKy.setTinhTrang(rs.getString("TinhTrang"));
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setIdTaiKhoan(FormatData.FormatOutputData(rs.getString("TaiKhoan")));
+			taiKhoan.setHoTen(FormatData.FormatOutputData(rs.getString("HoTen")));
+			taiKhoan.setDienThoai(FormatData.FormatOutputData(rs.getString("DienThoai")));
+			taiKhoan.setEmail(FormatData.FormatOutputData(rs.getString("Email")));
+			dangKy.setTaiKhoan(taiKhoan);
+			list.add(dangKy);
+		}
+		return list;
 	}
 
 }

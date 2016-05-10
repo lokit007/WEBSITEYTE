@@ -10,6 +10,7 @@
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
 <script src="../js/add-binhluan.js" type="text/javascript"></script>
 <script src="js/xulynghiepvu.js" type="text/javascript"></script>
+<script src="js/thanhvienhethong.js" type="text/javascript"></script>
 <title>Dịch vụ y tế</title>
 <script type="text/javascript">
 	function ShowTraLoi(e) {
@@ -40,6 +41,9 @@
 							<s:if test="dichVu.baiViet.tinhTrang=='Mới đăng'">
 								<button id="btn-dangky" class="btn btn-primary" onclick="CapPhepDichVu(${ dichVu.idDichVu});">Cấp phép phát hành</button>
 							</s:if>
+							<s:if test="dichVu.baiViet.tinhTrang=='Vi phạm'">
+								<button id="btn-dangky" class="btn btn-primary" onclick="CapPhepDichVu(${ dichVu.idDichVu});">Dịch vụ đảm bảo</button>
+							</s:if>
 							<button id="btn-info" class="btn btn-info" onclick="ChuyenHuong('chi-tiet-nhacungcap.action?idNhaCungCap=${ dichVu.idNhaCungCap}');">Chi tiết nhà cung cấp</button>
 							<button id="btn-info" class="btn btn-warning" onclick="DichVuViPham(${ dichVu.idDichVu});">Dịch vụ không đảm bảo</button>
 						</s:div>
@@ -60,8 +64,8 @@
 							<s:iterator value="listBinhLuan">
 								<s:div cssClass="list-binhluan-item">
 									<s:label value="%{ taiKhoan.hoTen}"></s:label>
-									<s:a href="#" title="Xóa hỏi đáp" cssStyle="float: right;"><i class="fa fa-times"></i></s:a>
-									<s:a href="#" title="Khóa tài khoản này" cssStyle="float: right; margin-right: 10px;"><i class="fa fa-lock"></i></s:a>
+									<i class="fa fa-times" onclick="XoaCauHoi('${ id }', this);" title="Xóa hỏi đáp" style="float: right; cursor: pointer;"></i>
+									<i class="fa fa-lock" onclick="CapNhatNguoiDung('${ taiKhoan.idTaiKhoan }', 'Khóa tài khoản');" title="Khóa tài khoản này" style="float: right; margin-right: 10px; cursor: pointer;"></i>
 									<br> <s:property value="noiDung"/>
 									<br>
 									<span> <s:property value="ngayDang"/> </span>
@@ -88,8 +92,7 @@
 						<s:div cssClass="list-binhluan">
 							<s:iterator value="listDangKy">
 								<s:div cssClass="list-binhluan-item">
-									<s:a href="#" title="Xóa yêu cầu này" cssStyle="float: right;">
-										<i class="fa fa-times" aria-hidden="true"></i></s:a>
+									<i onclick="HuyDangKy('${ idDangKy }');" title="Hủy đăng ký này" style="float: right; cursor: pointer;" class="fa fa-times" aria-hidden="true"></i>
 									<s:label value="%{ taiKhoan.hoTen}"></s:label> 
 									[<i><s:property value="ngayDangKy"/></i>]
 									<s:if test="tinhTrang=='Đăng ký'">

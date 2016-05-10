@@ -5,6 +5,9 @@
 <struts>
 	<constant name="struts.ui.theme" value="simple" />
 	<package name="default" extends="struts-default">
+		<action name="init-data-hethong" class="controller.InitDataHeThong" >
+			<result name="thanh-cong">Result.jsp</result>
+		</action>
 		<!-- trang chu -->
 		<action name="trang-chu" class="controller.TrangChuActionSupport">
 			<result name="thanh-cong">TrangChu.jsp</result>
@@ -185,7 +188,9 @@
 			<result name="thanh-cong">TrangChu.jsp</result>
 			<result name="dang-nhap" type="redirect">dang-nhap.action</result>
 		</action>
-		
+		<action name="data-state" class="controller.admin.CapNhatTrangThaiActionSupport">
+			<result name="thanh-cong">dataTrangThai.jsp</result>
+		</action>
 		<!-- dang nhap -->
 		<action name="dang-nhap" class="controller.admin.DangNhapActionSupport" >
 			<result name="input">DangNhap.jsp</result>
@@ -219,7 +224,7 @@
 			<result name="thanh-cong" type="redirect">danh-muc.action</result>
 			<result name="that-bai">DanhMuc.jsp</result>
 		</action>
-		
+
 		<!-- dich vu -->
 		<action name="dich-vu" class="controller.admin.DichVuActionSupport">
 			<result name="thanh-cong">DichVu.jsp</result>
@@ -478,6 +483,19 @@
 		<action name="xoa-khachhang" class="controller.admin.XulyQuangCaoActionSupport" method="XoaKhachHang">
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
+		</action>
+		<!-- trang cá nhân -->
+		<action name="trang-ca-nhan" class="controller.admin.TrangCaNhanActionSupport">
+			<result name="thanh-cong">ThongTinCaNhan.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="capnhat-canhan" class="controller.admin.TrangCaNhanActionSupport" method="CapNhatThongTin">
+			<result name="thanh-cong" type="redirect">trang-ca-nhan.action</result>
+			<result name="that-bai" type="redirect">dang-xuat.action</result>
+		</action>
+		<!-- hoi dap -->
+		<action name="xoa-cau-hoi" class="controller.admin.XulyHoiDapActionSupport">
+			<result name="thanh-cong">Result.jsp</result>
 		</action>
 	</package>
 </struts>

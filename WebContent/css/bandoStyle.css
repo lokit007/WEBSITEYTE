@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+div#text {
+	width: 25%;
+	float: left;
+}
+
+#map {
+	float: right;
+	height: 500px;
+	width: 74%;
+	border: 1px solid #333;
+	margin-top: 0.6em;
+}
+
+.fixmap {
+	position: fixed;
+	top: 40px;
+}
+
+.controls {
+	margin-top: 5px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input, #destination-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 200px;
+}
+
+#origin-input:focus, #destination-input:focus {
+	border-color: #4d90fe;
+}
+
+.hide {
+	display: none;
+}
+
+.tree-node ul {
+	border-left: 1px solid gray;
+	margin-left: 5px;
+	margin-top: -10px;
+	padding: 5px 0px 0px 10px;
+	list-style: none;
+}
+
+span.ic-chil {
+	margin-left: -10px;
+	width: 10px;
+}
+
+.tree-node, .tree-node label {
+	cursor: pointer;
+}

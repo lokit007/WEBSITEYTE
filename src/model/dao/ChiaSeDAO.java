@@ -52,7 +52,7 @@ public class ChiaSeDAO {
 	}
 
 	public List<BaiViet> getListMoiChiaSe() throws SQLException {
-		String sql = "select top 10 BAIVIET.IdBaiViet, TenBaiViet, MoTa, NoiDung, HinhAnh, "
+		String sql = "select top 4 BAIVIET.IdBaiViet, TenBaiViet, MoTa, NoiDung, HinhAnh, "
 				+ "NgayDang, TinhTrang, LuotXem, TacGia, DANHMUC.IdDanhMuc, TenDanhMuc from BAIVIET "
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc "
 				+ "left join DICHVU on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
@@ -228,6 +228,36 @@ public class ChiaSeDAO {
 
 	public boolean CapNhatTrangThai(String idKey, String chanState) {
 		return db.updateData("update BAIVIET set TinhTrang=N'"+chanState+"' where IdBaiViet='"+idKey+"'");
+	}
+
+	public List<BaiViet> getListChiaSe() throws SQLException {
+		String sql = "select BAIVIET.IdBaiViet, TenBaiViet, MoTa, NoiDung, HinhAnh, "
+				+ "NgayDang, TinhTrang, LuotXem, TacGia, DANHMUC.IdDanhMuc, TenDanhMuc from BAIVIET "
+				+ "inner join DANHMUC on BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc "
+				+ "left join DICHVU on BAIVIET.IdBaiViet=DICHVU.IdBaiViet "
+				+ "where TinhTrang not like N'Đăng bài' and TinhTrang not like N'Khóa bài đăng' "
+				+ "and IdDichVu is null order by NgayDang desc";
+		ResultSet rs = db.getResultSet(sql);
+		ArrayList<BaiViet> list = new ArrayList<BaiViet>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		while(rs.next()){
+			BaiViet baiViet = new BaiViet(); 
+			baiViet.setIdBaiViet(rs.getInt("IdBaiViet"));
+			baiViet.setTenBaiViet(FormatData.FormatOutputData(rs.getString("TenBaiViet")));
+			baiViet.setMoTa(FormatData.FormatOutputData(rs.getString("MoTa")));
+			baiViet.setNoiDung(FormatData.FormatOutputData(rs.getString("NoiDung")));
+			baiViet.setAnhMoTa(rs.getString("HinhAnh"));
+			baiViet.setNgayDang(sdf.format(rs.getTimestamp("NgayDang")));
+			baiViet.setTinhTrang(rs.getString("TinhTrang"));
+			baiViet.setLuocXem(rs.getInt("LuotXem"));
+			baiViet.setTenTacGia(FormatData.FormatOutputData(rs.getString("TacGia")));
+			DanhMuc danhMuc = new DanhMuc();
+			danhMuc.setIdDanhMuc(rs.getInt("IdDanhMuc"));
+			danhMuc.setTenDanhMuc(FormatData.FormatOutputData(rs.getString("TenDanhMuc")));
+			baiViet.setDanhMuc(danhMuc);
+			list.add(baiViet);
+		}
+		return list;
 	}
 
 }

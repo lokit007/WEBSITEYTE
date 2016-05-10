@@ -3,6 +3,7 @@ package controller.admin;
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bo.ChiaSeBO;
+import model.bo.DichVuBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
@@ -19,16 +20,22 @@ public class CapNhatActionSupport extends ActionSupport {
 		} else {
 			if("BAIVIET".equals(nameTable)){
 				ChiaSeBO chiaSeBO = new ChiaSeBO();
-				System.out.println("Xem 1 : " + idKey + " - " + nameTable + " - " + chanState);
 				if(!chiaSeBO.CapNhatTrangThai(idKey, chanState)){
 					addActionError("Cập nhật thất bại!");
 				} else {
 					result = "thanh-cong";
 				}
 				chiaSeBO.closeConnect();
-			} else {
+			} else if("DANGKYDICHVU".equals(nameTable)){
+				DichVuBO dichVuBO = new DichVuBO();
+				if(!dichVuBO.CapNhatDichVuDangKy(idKey, chanState)){
+					addActionError("Cập nhật thất bại!");
+				} else {
+					result = "thanh-cong";
+				}
+				dichVuBO.closeConnect();
+			} else{
 				TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
-				System.out.println("Xem 2 : " + idKey + " - " + nameTable + " - " + chanState);
 				if(!taiKhoanBO.CapNhatTrangThai(idKey, chanState)){
 					addActionError("Cập nhật thất bại!");
 				} else {

@@ -12,23 +12,6 @@
 <link rel="stylesheet" href="css/clientStyle.css">
 <script type="text/javascript">
 	//Slide notify in homepage
-	$(function animate() {
-		$(".div-slide .div-show-content-item:first").each(function() {
-			$(this).delay(5000);
-			$(this).animate({
-				color : 'gray'
-			}, 2000, function() {
-				$(this).insertAfter(".div-slide .div-show-content-item:last");
-				$(this).fadeIn();
-				$(this).css({
-					color : 'none'
-				});
-				setTimeout(function() {
-					animate()
-				}, 2000);
-			});
-		});
-	});
 	$(document).ready(function(){
 		$(window).scroll(function(){
 		    // Nếu cuộn được hơn 150px rồi
@@ -71,11 +54,4 @@
 		$("#dangNhapModal").modal("show");
 	}
 </script>
-<style type="text/css">
-.div-show-content-item {
-	transition: all 2s 0.5s ease-in-out;
-	-moz-transition: all 2s 0.5s ease-in-out;
-	-webkit-transition: all 2s 0.5s ease-in-out;
-}
-</style>
 <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>

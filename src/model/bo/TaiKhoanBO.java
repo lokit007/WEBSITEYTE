@@ -131,4 +131,14 @@ public class TaiKhoanBO {
 		}
 	}
 
+	public List<NhaCungCap> getListNCC() {
+		try {
+			return taiKhoanDAO.getListNCC();
+		} catch (SQLException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }

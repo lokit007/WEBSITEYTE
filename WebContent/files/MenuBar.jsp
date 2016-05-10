@@ -20,6 +20,27 @@
 			</s:iterator>			
 		</s:div>
 	</s:div>
+	<script type="text/javascript">
+	$(function animate() {
+			$(".div-slide .div-show-content-item:first").each(function() {
+				/* héng chạy không mược nơi kiểu cà giật á */
+				$(this).delay(5000);
+				$(this).animate({
+					marginTop : -$(this).outerHeight(true),
+                    opacity: "hide"
+				}, 2000, function() {
+					$(this).insertAfter(".div-slide .div-show-content-item:last");
+					$(this).fadeIn();
+					$(this).css({
+						'margin-top' : '0px'
+					});
+					setTimeout(function() {
+						animate()
+					}, 2000);
+				});
+			});
+		});
+	</script>
 	<s:div cssClass="div-quangcao">
 		<img src="http://placehold.it/300x250">
 	</s:div>
@@ -79,19 +100,19 @@
 	<s:div cssClass="div-show">
 		<s:label cssClass="div-show-title" value="Liên kết khác"></s:label>
 		<s:div cssClass="div-show-content" cssStyle="text-align: center;">
-			<s:a href="#" cssClass="link-lienket">
+			<s:a href="http://www.thuathienhue.gov.vn/vi-vn/" cssClass="link-lienket">
 				<img src="images/cong-thong-tin-bo-y-te.jpg">
 			</s:a>
-			<s:a href="#" cssClass="link-lienket">
+			<s:a href="https://hny.vn/sarus/dhis-web-commons/security/login.action;jsessionid=FB2F47F364C5DA12EA38059B7F67586A" cssClass="link-lienket">
 				<img src="images/icon_kcb_byt(1).png">
 			</s:a>
-			<s:a href="#" cssClass="link-lienket">
+			<s:a href="https://hny.vn/sarus/dhis-web-commons/security/login.action?failed=true" cssClass="link-lienket">
 				<img src="images/icon_ktbv_ byt(1).png">
 			</s:a>
-			<s:a href="#" cssClass="link-lienket">
+			<s:a href="http://www.dav.gov.vn/" cssClass="link-lienket">
 				<img src="images/cuc-quan-ly-duoc.jpg">
 			</s:a>
-			<s:a href="#" cssClass="link-lienket">
+			<s:a href="http://kcb.vn/" cssClass="link-lienket">
 				<img src="images/cuc-kham-chua-benh.jpg">
 			</s:a>
 		</s:div>
@@ -99,15 +120,11 @@
 	<s:div cssClass="div-show">
 		<s:label cssClass="div-show-title" value="Thông tin ngoài lề"></s:label>
 		<s:div cssClass="div-show-content" id="load-60">
-			<img
-				src="http://banners.wunderground.com/banner/gizmotimetemp_both/ 
-						language/www/global/stations/48852.gif"
+			<img src="http://banners.wunderground.com/banner/gizmotimetemp_both/language/www/global/stations/48852.gif"
 				alt="Du bao thoi tiet - Co do Hue"
 				title="Dự báo thời tiết - Cố đô Huế" height="41" width="100%">
-			<span class="luocxem"><i class="fa fa-globe"></i> Lược truy
-				cập <span class="sluong"> <s:property value="#session.counter.view"/> </span></span>
-			<span class="luocxem"><i class="fa fa-users"></i> Online <span
-				class="sluong"> <s:property value="#session.counter.getOnline()"/> </span></span>
+			<span class="luocxem"><i class="fa fa-globe"></i> Lược truy cập <span class="sluong"> <s:property value="#session.counter.view"/> </span></span>
+			<span class="luocxem"><i class="fa fa-users"></i> Online <span class="sluong"> <s:property value="#session.counter.getOnline()"/> </span></span>
 		</s:div>
 	</s:div>
 </s:div>

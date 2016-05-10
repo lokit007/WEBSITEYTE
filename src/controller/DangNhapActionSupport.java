@@ -107,7 +107,6 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 	public String  DangXuatClient() {
 		this.request.getSession().removeAttribute("user");
 		this.request.getSession().removeAttribute("login");
-		this.request.getSession().invalidate();
 		return "thanh-cong";
 	}
 	

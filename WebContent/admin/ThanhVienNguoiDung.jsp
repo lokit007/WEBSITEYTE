@@ -8,9 +8,10 @@
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
 <title>Admin - Quản lý danh mục y tế</title>
-<script src="../js/sorttable.js"></script>
-<script src="../js/menuPage.js"></script>
+<script src="../js/sorttable.js" type="text/javascript"></script>
+<script src="../js/menuPage.js" type="text/javascript"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="js/thanhvienhethong.js" type="text/javascript"></script>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -147,32 +148,4 @@
 		</div>	
 		<i class="fa fa-spinner fa-3x fa-pulse" id="while-load" style="display: ; margin-left: 50%; margin-top: -10%;"></i>
 </body>
-<script type="text/javascript">
-	function CapNhatNguoiDung(id, e) {
-		var hoi = "";
-		if(e=='TK mới') hoi = "Bạn muốn khôi phục lại tài khoản ";
-		else hoi = "Bạn muốn khóa tài khoản ";
-		if (confirm(hoi + id + " này không???") == true) {
-			$.ajax({
-				url : "khoa-taikhoan.action",
-				type : "post",
-				data : {
-					idTaiKhoan : id,
-					tinhTrang : e
-				},
-				beforeSend : function(){
-				     $("#while-load").attr("style", "display: inline-block;");
-				},
-				success : function(result) {
-					window.location.reload(true);
-					$("#while-load").attr("style", "display: none;");
-				},
-				error : function(xhr, status, error) {
-					$("#loi").modal("show");
-					$("#while-load").attr("style", "display: none;");
-				}
-			});
-		}
-	}
-</script>
 </html>

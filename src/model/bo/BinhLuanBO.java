@@ -40,4 +40,8 @@ public class BinhLuanBO {
 		}
 	}
 
+	public boolean XoaBinhLuan(String id, String nameTable) {
+		return binhLuanDAO.XoaBinhLuan(id, nameTable);
+	}
+
 }

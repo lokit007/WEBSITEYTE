@@ -35,7 +35,7 @@
 						<span>Ngày đăng : <s:property value="baiViet.ngayDang"/> </span>
 						<br><span>Tác giả : <s:property value="baiViet.tenTacGia"/></span>
 						<s:div id="btn-xuly">
-						<s:if test="baiViet.tinhTrang=='Mới đăng'">
+						<s:if test="baiViet.tinhTrang=='Mới đăng' or baiViet.tinhTrang=='Vi phạm'">
 							<button id="btn-dangky" class="btn btn-primary" onclick="CapPhepPhatHanh('${ baiViet.idBaiViet}', 'BAIVIET', 'Đăng bài', 'Đã đăng tải chia sẻ thành công!', 'Lỗi cập nhật cơ sở dữ liệu! Vui lòng thao tác lại sau.');" >Cho phép đăng</button>
 						</s:if>
 							<button id="btn-info" class="btn btn-warning" onclick="CapPhepPhatHanh('${ baiViet.idBaiViet}', 'BAIVIET', 'Khóa bài đăng', 'Khóa bài đăng thành công!', 'Lỗi cập nhật cơ sở dữ liệu! Vui lòng thử lại sau.');">Xử lý vi phạm</button>

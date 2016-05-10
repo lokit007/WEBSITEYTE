@@ -44,3 +44,29 @@ function XoaTaiKhoan(id) {
 		});
 	}
 }
+function CapNhatNguoiDung(id, e) {
+	var hoi = "";
+	if(e=='TK mới') hoi = "Bạn muốn khôi phục lại tài khoản ";
+	else hoi = "Bạn muốn khóa tài khoản ";
+	if (confirm(hoi + id + " này không???") == true) {
+		$.ajax({
+			url : "khoa-taikhoan.action",
+			type : "post",
+			data : {
+				idTaiKhoan : id,
+				tinhTrang : e
+			},
+			beforeSend : function(){
+			     $("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				window.location.reload(true);
+				$("#while-load").attr("style", "display: none;");
+			},
+			error : function(xhr, status, error) {
+				$("#loi").modal("show");
+				$("#while-load").attr("style", "display: none;");
+			}
+		});
+	}
+}

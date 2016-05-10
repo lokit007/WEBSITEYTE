@@ -223,3 +223,48 @@ function CapNhatNguoiDung(id, e) {
 		});
 	}
 }
+
+function XoaCauHoi(id, e){
+	$.ajax({
+		url : "xoa-cau-hoi.action",
+		type : "post",
+		data : {
+			id : id,
+			nameTable : 'CAUHOI'
+		},
+		beforeSend : function() {
+			$("#while-load").attr("style", "display: inline-block;");
+		},
+		success : function(result) {
+			window.location.reload(true);
+		},
+		error : function(xhr, status, error) {
+			$("#while-load").attr("style", "display: none;");
+		}
+	});
+}
+
+function HuyDangKy(id){
+	if (confirm("Bạn có muốn hủy đăng ký " + id + " này không???") == true) {
+		$.ajax({
+			url : "cap-nhat.action",
+			type : "post",
+			data : {
+				idKey : id,
+				nameTable : "DANGKYDICHVU",
+				chanState : "Hủy bỏ"
+			},
+			beforeSend : function() {
+				$("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				window.location.reload(true);
+			},
+			error : function(xhr, status, error) {
+				$("#while-load").attr("style", "display: none;");
+			}
+		});
+	}
+}
+
+
