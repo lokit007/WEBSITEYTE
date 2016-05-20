@@ -20,7 +20,7 @@ public class TrangChuActionSupport extends ActionSupport {
 		TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 		this.listDV = dichVuBO.getDichVuDangKy();
 		this.listNC = dichVuBO.getNhuCauDangKy();
-		this.listNCC = taiKhoanBO.getNCCMoi();
+		this.listNCC = taiKhoanBO.getListNCC();
 		dichVuBO.closeConnect();
 		taiKhoanBO.closeConnect();
 		return "thanh-cong";

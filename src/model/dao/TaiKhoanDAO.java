@@ -92,7 +92,6 @@ public class TaiKhoanDAO {
 				return user;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 		return null;
@@ -395,7 +394,6 @@ public class TaiKhoanDAO {
 				return user;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 		return null;

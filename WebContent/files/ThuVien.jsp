@@ -53,5 +53,99 @@
 		$("#"+e).modal("hide");
 		$("#dangNhapModal").modal("show");
 	}
+	// Hien thi thong bao
+	function ShowMessage(model, mes) {
+		$('#' + model).modal('show');
+		$('#mes' + model).html(mes);
+	}
+	$(document).ready(function() {
+		$("#fm-dangnhap").validate({
+			rules : {
+				taiKhoan : {
+					required : true
+				},
+				matKhau : {
+					required : true
+				}
+			},
+			messages : {
+				taiKhoan : {
+					required : "Chưa nhập tài khoản"
+				},
+				matKhau : {
+					required : "Chưa nhập mật khẩu"
+				}
+			},
+			submitHandler : function(form) {
+				var postData = $(form).serializeArray();
+			    var formURL = $(form).attr("action");
+			    $.ajax({
+			        url : formURL,
+			        type: "POST",
+			        data : postData,
+			        beforeSubmit : function (){
+			        	$("#loadWhile").attr("style", "display: inherit;");
+			        },
+			        success:function(data, textStatus, jqXHR) 
+			        {
+			            if(data.indexOf("thất bại")>-1){
+			            	$("#loiDangNhap").remove();
+			            	$("#fm-dangnhap").prepend("<p class='bg-danger' id='loiDangNhap'>Tài khoản hoặc mật khẩu không chính xác! Vui lòng đăng nhập lại.</p>");
+			            } else {
+			            	window.location.reload(true);
+			            }
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) 
+			        {
+			        	$("#loiDangKy").attr("style", "display: none;");
+			        	$('#dangNhapModal').modal('hide');
+			        	ShowMessage('error', 'Lỗi hệ thông! Vui lòng quay lại sau.');   
+			        }
+			   });
+			}
+		});
+	});
+	$(document).ready(function() {
+		$("#nhanEMail").validate({
+			rules : {
+				email : {
+					required : true,
+					email : true
+				}
+			},
+			messages : {
+				email : {
+					required : "Chưa nhập email!",
+					email : "Mail không đúng"
+				}
+			},
+			submitHandler : function(form) {
+				var postData = $(form).serializeArray();
+			    var formURL = $(form).attr("action");
+			    $.ajax({
+			        url : formURL,
+			        type: "POST",
+			        data : postData,
+			        beforeSubmit : function (){
+			        	$("#loadWhile").attr("style", "display: inherit;");
+			        },
+			        success:function(data, textStatus, jqXHR) 
+			        {
+			        	$("#loadWhile").attr("style", "display: none;");
+			            if(data.indexOf("thất bại")>-1){
+			            	ShowMessage('error', 'Đăng ký nhận mail thất bại!');
+			            } else {
+			            	ShowMessage('success', 'Đăng ký nhận mail thành công.');
+			            }
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) 
+			        {
+			        	$("#loadWhile").attr("style", "display: none;");
+			        	ShowMessage('error', 'Lỗi hệ thông! Vui lòng quay lại sau.');
+			        }
+			   });
+			}
+		});
+	});
 </script>
 <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>

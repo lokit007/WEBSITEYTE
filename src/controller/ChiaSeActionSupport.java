@@ -9,6 +9,21 @@ import model.bean.DanhMuc;
 import model.bo.ChiaSeBO;
 import model.bo.DanhMucBO;
 
+/**
+ * ChiaSeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 04-01-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 04-01-2016        	NhanHV          Create
+ */
+
 public class ChiaSeActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
@@ -18,11 +33,17 @@ public class ChiaSeActionSupport extends ActionSupport {
 	private List<DanhMuc> danhMuc;
 	private List<BaiViet> list;
 	
+	/**
+	 * Lấy danh sách bài viết chia sẻ
+	 * @param nội dung tìm kiếm, lĩnh vực tìm, bắt đầu từ vị trí
+	 * @return String result
+	 */
+	
 	public String execute(){
 		ChiaSeBO baiVietBO = new ChiaSeBO();
 		DanhMucBO danhMucBO = new DanhMucBO();
 		list = baiVietBO.getListChiaSe(txtFind, idDanhMuc, viTri);
-		danhMuc = danhMucBO.getListDanhMucDichVu();
+		danhMuc = danhMucBO.getListDanhMuc("Chia sẻ");
 		danhMucBO.closeConnect();
 		baiVietBO.closeConnect();
 		return "thanh-cong";

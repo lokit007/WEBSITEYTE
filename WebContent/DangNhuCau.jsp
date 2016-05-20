@@ -120,13 +120,13 @@
 						</p>
 					</fieldset>
 					<br>
-					<s:submit value="Đăng dịch vụ miễn phí"
+					<s:submit value="Đăng nhu cầu dịch vụ miễn phí"
 						cssClass="btn btn-primary form-control"></s:submit>
 				</form>
 				</s:if>
 				<s:else>
 					<br>
-					Hãy <s:a href="dang-nhap.action"> đăng nhập hoặc đăng ký </s:a> tài khoản thành viên để thực hiện chức năng này. Cám ơn!
+					Hãy <label style="cursor: pointer;" onclick="$('#dangNhapModal').modal('show');"> đăng nhập </label> tài khoản thành viên để thực hiện chức năng này. Cám ơn!
 				</s:else>
 			</s:div>
 			<!-- kết thúc content -->

@@ -54,7 +54,7 @@
 		<a href="../trang-chu.action" target="blank" title="Đến trang Client - Dịch vụ y tế cộng đồng">
 			<img alt="Đến trang client" src="../images/logo-yte.png" id="img-logo"></a>
 		<ul> 
-			<li class="#path.indexOf('danh-muc')>-1" <%= path.equals("/admin/TrangChu.jsp")?"class='active'":"" %>><a href="trang-chu.action"><i class="fa fa-home"></i> Trang chủ </a></li>
+			<li <%= path.equals("/admin/TrangChu.jsp")?"class='active'":"" %>><a href="trang-chu.action"><i class="fa fa-home"></i> Trang chủ </a></li>
 			<s:if test="#session.admin.danhMuc">
 				<li <%= path.equals("/admin/DanhMuc.jsp")?"class='active'":"" %>><a href="danh-muc.action"><i class="fa fa-briefcase"></i> Danh mục dịch vụ </a></li>
 			</s:if>
@@ -64,7 +64,7 @@
 			<s:if test="#session.admin.nhuCau">
 				<li <%= path.equals("/admin/NhuCau.jsp")?"class='active'":"" %>><a href="nhu-cau.action"><i class="fa fa-compass"></i> Nhu cầu y tế</a></li>
 			</s:if>
-			<li <%= path.equals("/admin/QuangCao.jsp")?"class='active'":"" %>><a href="quang-cao.action"><i class="fa fa-contao"></i> Quản lý quản cáo</a></li>
+			<li <%= path.equals("/admin/QuangCao.jsp")?"class='active'":"" %>><a href="quang-cao.action"><i class="fa fa-contao"></i> Quản lý quảng cáo</a></li>
 			<s:if test="#session.admin.chiaSe">
 				<li <%= path.equals("/admin/ChiaSe.jsp")?"class='active'":"" %>><a href="chia-se.action"><i class="fa fa-share-alt"></i> Chia sẻ y tế</a></li>
 			</s:if>

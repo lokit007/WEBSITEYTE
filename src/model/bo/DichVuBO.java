@@ -87,10 +87,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDichVuHot();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -99,10 +97,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListDichVu(txtFind, idDanhMuc, viTri);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -111,10 +107,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getNhuCauMoi();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -123,10 +117,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListNhuCau(txtFind, idDanhMuc, viTri);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -135,10 +127,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListDichVuMoi();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -147,10 +137,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListDichVu(theLoai);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -163,10 +151,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListDichVu(txtFind, page);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -175,10 +161,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getListNhuCau(txtFind, page);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -187,10 +171,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDichVuDangKy();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -199,10 +181,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getNhuCauDangKy();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -211,10 +191,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDichVuDangKy(idTaiKhoan);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -223,10 +201,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getNhuCauDang(idTaiKhoan);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -235,10 +211,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDanhSachDangKy(idDichVu);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -251,10 +225,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDichVuDangTai(idTaiKhoan);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -263,10 +235,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDanhSachDangKy(idTaiKhoan);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -275,10 +245,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDangKyDichVu(idDangKy);
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -287,10 +255,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDanhSachDangKy();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}
@@ -299,10 +265,8 @@ public class DichVuBO {
 		try {
 			return dichVuDAO.getDanhSachBaoGia();
 		} catch (SQLException e) {
-			System.out.println("Loi 1 : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Loi 2 : " + e.toString());
 			return null;
 		}
 	}

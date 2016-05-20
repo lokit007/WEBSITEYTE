@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -107,6 +108,64 @@ public class QuangCaoDAO {
 
 	public boolean XoaKhachHang(int idKhachHang) {
 		return db.updateData("delete from KHACHHANGQUANGCAO where IdKhachHang='"+idKhachHang+"'");
+	}
+
+	public boolean DangKyQuangCao(String viTri, String logoQuangBa, String linkQuangBa,String hoTen, String diaChi, String email) {
+		String sql = "{call themQuangCao(?,?,?,?,?,?,?) }";
+		try {
+			CallableStatement cstm = db.getCallableStatement(sql);
+			cstm.setString(1, viTri);
+			cstm.setString(2, logoQuangBa);
+			cstm.setString(3, linkQuangBa);
+			cstm.setString(4, hoTen);
+			cstm.setString(5, email);
+			cstm.setString(6, diaChi);
+			cstm.registerOutParameter(7, java.sql.Types.INTEGER);
+			cstm.executeUpdate(); 
+			int result = cstm.getInt(7);
+			if(result > -1) {
+				return true;
+			}
+		} catch (SQLException e) { 
+			return false;
+		}
+		return false;
+	}
+
+	public List<QuangCao> getDanhSachDangKy(int page) throws SQLException {
+		String sql = "select IdQuangCao, LogoQuangCao, LinkLienKet, ThoiGianBatDau, ThoiGianKetThuc, "
+				+ "ChiPhiQuangCao, TinhTrang, VITRIQUANGCAO.ViTri, VITRIQUANGCAO.GiaDangTai, IdKhachHang, "
+				+ "TenKhachHang, DiaChiLienHe, EmailLienHe from QUANGCAO "
+				+ "inner join KHACHHANGQUANGCAO on KHACHHANGQUANGCAO.IdKhachHang=QUANGCAO.KhachHang "
+				+ "inner join VITRIQUANGCAO on VITRIQUANGCAO.ViTri=QUANGCAO.ViTri "
+				+ "where TinhTrang=0 order by ThoiGianBatDau desc";
+		ResultSet rs = db.getResultSet(sql);
+		ArrayList<QuangCao> list = new ArrayList<QuangCao>();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		while(rs.next()){
+			QuangCao quangCao = new QuangCao();
+			quangCao.setIdQuangCao(rs.getInt("IdQuangCao"));
+			quangCao.setLogoQuangBa(FormatData.FormatOutputData(rs.getString("LogoQuangCao")));
+			quangCao.setLinkQuangBa(FormatData.FormatOutputData(rs.getString("LinkLienKet")));
+			quangCao.setNgayBatDau(sdf.format(rs.getTimestamp("ThoiGianBatDau")));
+			quangCao.setNgayKetThuc(sdf.format(rs.getTimestamp("ThoiGianKetThuc")));
+			quangCao.setChiPhiQuangCao(rs.getFloat("ChiPhiQuangCao"));
+			quangCao.setTinhTrang(rs.getInt("TinhTrang"));
+			ViTriQuangCao viTri = new ViTriQuangCao(FormatData.FormatOutputData(rs.getString("ViTri")), rs.getFloat("GiaDangTai"));
+			quangCao.setViTri(viTri);
+			KhachHang khachHang = new KhachHang();
+			khachHang.setIdKhachHang(rs.getInt("IdKhachHang"));
+			khachHang.setTenKhachHang(FormatData.FormatOutputData(rs.getString("TenKhachHang")));
+			khachHang.setDiaChi(FormatData.FormatOutputData(rs.getString("DiaChiLienHe")));
+			khachHang.setEmail(FormatData.FormatOutputData(rs.getString("EmailLienHe")));
+			quangCao.setKhachHang(khachHang);
+			list.add(quangCao);
+		}
+		return list;
+	}
+
+	public boolean CapNhatQuangCao(int idQuangCao, String tinhTrang) {
+		return db.updateData("update QUANGCAO set TinhTrang='"+tinhTrang+"' where IdQuangCao='"+idQuangCao+"'");
 	}
 
 }

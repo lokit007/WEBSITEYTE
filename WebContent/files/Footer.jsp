@@ -11,16 +11,13 @@
 	</s:if>
 
 	<s:div cssClass="div-quangcao-last">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
-		<img src="http://placehold.it/234x60">
+		<s:iterator value="%{ #session.QuangCao}">
+			<s:if test="viTri.tenViTri=='FooterBar'">
+				<img onclick="window.location.href='${ linkQuangBa}';" 
+					src="images/${ logoQuangBa }" title="Click để xem chi tiết" 
+					style="cursor: pointer;" >
+			</s:if>
+		</s:iterator>
 	</s:div>
 	
 	<script type="text/javascript">
@@ -83,7 +80,7 @@
 		<s:div cssClass="clear"></s:div>
 	</s:div>
 	<s:div cssClass="banquen">
-			<s:property value="#session.TaiNguyen.banQuyen"/>
+		<s:property value="#session.TaiNguyen.banQuyen"/>
 	</s:div>
 	<div class="modal fade bs-example-modal-sm" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -113,12 +110,29 @@
 		</s:if>
 		<s:else>
 			<s:a href="trang-ca-nhan.action"><i class="fa fa-user fa-2x"></i> Thông tin cá nhân</s:a>
-			<s:a href="dang-nhu-cau-moi.action"><i class="fa fa-paper-plane-o fa-2x"></i> Đăng nhu cầu thuê</s:a>
 			<s:a href="#email-select"><i class="fa fa-envelope-square fa-2x"></i> Đăng ký nhận mail</s:a>
 			<s:a href="dang-xuat.action"><i class="fa fa-sign-out fa-2x"></i> Đăng xuất hệ thống</s:a>
 		</s:else>
 	</s:div>
-	<i id="thong-bao" class="fa fa-bell-o btn-open-popover" aria-hidden="true"></i>
+	<s:if test="#session.ThongBao==null">
+		<i id="thong-bao" class="fa fa-bell-slash-o btn-open-popover" aria-hidden="true"></i>
+	</s:if>
+	<s:else>
+		<i id="thong-bao" class="fa fa-bell-o btn-open-popover" aria-hidden="true"></i>
+	</s:else>
+	<%-- <span id="dem-tb">2</span>
+	<style>
+		span#dem-tb {
+		    position: fixed;
+		    bottom: 45px;
+		    right: 10px;
+		    background-color: red;
+		    padding: 2px 8px;
+		    border-radius: 10px;
+		    color: white;
+		    font-weight: bold;
+		}
+	</style> --%>
 	<div id="divContentHTML" style="display:none">
 		<s:if test="#session.ThongBao!=null">
 			<s:property value="%{ #session.ThongBao}"/>
@@ -136,9 +150,9 @@
 			      </div>
 			      <form action="dang-nhap-action.action" id="fm-dangnhap" method="post">
 			      <div class="modal-body">
-			      		<br><s:label value="Tài khoản : " for="taiKhoan"></s:label>
+			      		<br><s:label value="Tài khoản : "></s:label>
 				  		<s:textfield name="taiKhoan" cssClass="form-control"></s:textfield>
-				  		<br><s:label value="Mật khẩu : " for="matKhau"></s:label>
+				  		<br><s:label value="Mật khẩu : "></s:label>
 				  		<s:password name="matKhau" cssClass="form-control"></s:password>
 			      </div>
 			      <div class="modal-footer">

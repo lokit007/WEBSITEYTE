@@ -31,7 +31,6 @@ public class NhuCauActionSupport extends ActionSupport {
 
 	public String LoadThem(){
 		DichVuBO dichVuBO = new DichVuBO();
-		System.out.println("Xem : " + txtFind + " - " + idDanhMuc + " - " + viTri);
 		list = dichVuBO.getListNhuCau(txtFind, idDanhMuc, viTri);
 		dichVuBO.closeConnect();
 		return "thanh-cong";

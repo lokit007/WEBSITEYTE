@@ -44,13 +44,8 @@ public class DataBaseDAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		if (con != null) {
-			System.out.println("Connection is established !");
-		} else
-			System.out.println("Connection isn't established !");
 		try {
 			stm = con.createStatement();
-			System.out.println("Statement is established !");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,7 +76,6 @@ public class DataBaseDAO {
 		try {
 			return stm.executeQuery(sql);
 		} catch (Exception e) {
-			System.out.println("Lỗi truy vấn : " + sql);
 			return null;
 		}
 	}
@@ -96,7 +90,6 @@ public class DataBaseDAO {
 		try {
 			return stm.executeUpdate(sql) != 0;
 		} catch (Exception e) {
-			System.out.println("Execute update error!");
 			return false;
 		}
 	}
@@ -141,6 +134,12 @@ public class DataBaseDAO {
 		return menu; 
 	}
 
+	/**
+	 * Đếm số bảng ghi
+	 * @param sql
+	 * @return int số bảng ghi
+	 */
+	
 	private int countRecord(String sql){
 		ResultSet rs = getResultSet("select count(*) from ( "+sql+" ) as tableCount");
 		try {
@@ -185,35 +184,4 @@ public class DataBaseDAO {
 		this.record = record;
 	}
 
-	public static void main(String[] args) {
-		DataBaseDAO db = new DataBaseDAO();
-		try {
-			CallableStatement cal = db.getCallableStatement("{call capNhatDichVu(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-			//Cập nhật tham số đầu vào
-			cal.setString(1, "1");
-			cal.setString(2, "Dịch vụ mới");
-			cal.setString(3, "Mô tả");
-			cal.setString(4, "1");
-			cal.setString(5, "Nội dung");
-			cal.setString(6, "Hình");
-			cal.setString(7, "Taikhoan02");
-			cal.setString(8, "Cung cấp");
-			cal.setString(9, "012");
-			cal.setString(10, "email");
-			cal.setString(11, "2016-02-10");
-			cal.setString(12, "2016-02-15");
-			//Cập nhật tham số đầu ra
-			cal.registerOutParameter(13, java.sql.Types.INTEGER);
-			//Thực thi
-			cal.executeUpdate();
-			//Lấy kết quả trả về
-			int result = cal.getInt(13);
-			if(result > -1) {
-				System.out.println("Cập nhật thành công");
-			}
-			System.out.println("Cập nhật thất bại");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 }

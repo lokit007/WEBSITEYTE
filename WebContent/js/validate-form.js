@@ -188,3 +188,50 @@ $(document).ready(function() {
 	});
 });
 
+//dang ký quan cao
+$(document).ready(function() {
+	$("#formQuangCao").validate({
+		rules : {
+			userImage : {
+				required : true
+			},
+			linkQuangBa : {
+				required : true,
+				url : true
+			},
+			hoTen : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : 5
+			},
+			diaChi : {
+				required : true
+			}
+		},
+		messages : {
+			userImage : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			linkQuangBa : {
+				required : "Bạn chưa nhập dữ liệu!",
+				url : true
+			},
+			hoTen : {
+				required : "Bạn chưa nhập dữ liệu!"
+			},
+			email : {
+				required : "Bạn chưa nhập dữ liệu!",
+				email : 5
+			},
+			diaChi : {
+				required : "Bạn chưa nhập dữ liệu!"
+			}
+		},
+		submitHandler : function(form) {
+			form.submit();
+		}
+	});
+});
+

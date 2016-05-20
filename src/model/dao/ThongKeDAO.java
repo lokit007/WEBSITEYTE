@@ -22,17 +22,17 @@ public class ThongKeDAO {
 		String sql = "select * from ( select DANHMUC.IdDanhMuc, TenDanhMuc, "
 				+ "(select COUNT(*) from BAIVIET inner join DICHVU on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "where BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc and LoaiHinhDichVu like N'Từ thiện' "
-				+ "and NgayDang between '2016-04-10' and '2016-04-22') as SoDVTT, "
+				+ "and NgayDang between '2016-04-10' and '2016-07-22') as SoDVTT, "
 				+ "(select COUNT(*) from BAIVIET inner join DICHVU on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "where BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc and LoaiHinhDichVu like N'Dịch vụ công' "
-				+ "and NgayDang between '2016-04-10' and '2016-04-22') as SoDVC, "
+				+ "and NgayDang between '2016-04-10' and '2016-07-22') as SoDVC, "
 				+ "(select COUNT(*) from BAIVIET left join DICHVU on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "where BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc and LoaiHinhDichVu like N'Dịch vụ tư' "
-				+ "and NgayDang between '2016-04-10' and '2016-04-22') as SoDVTN, "
+				+ "and NgayDang between '2016-04-10' and '2016-07-22') as SoDVTN, "
 				+ "(select COUNT(*) from BAIVIET left join DICHVU on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
 				+ "where BAIVIET.IdDanhMuc=DANHMUC.IdDanhMuc and LoaiHinhDichVu like N'Nhu cầu' "
-				+ "and NgayDang between '2016-04-10' and '2016-04-22') as SoNCDV "
-				+ "from DANHMUC) as tam where SoDVTT>0 or SoDVC>0 or SoDVTN>0 or SoNCDV>0;";
+				+ "and NgayDang between '2016-04-10' and '2016-07-22') as SoNCDV "
+				+ "from DANHMUC) as tam where SoDVTT>0 or SoDVC>0 or SoDVTN>0 or SoNCDV>0";
 		ArrayList<ThongKeDanhMuc> list = new ArrayList<ThongKeDanhMuc>();
 		ResultSet rs = db.getResultSet(sql);
 		while(rs.next()){
@@ -51,7 +51,7 @@ public class ThongKeDAO {
 	public List<ThongKeBaiViet> getThongKeBaiViet() throws SQLException {
 		String sql = "select top 10 BAIVIET.IdBaiViet, TenBaiViet, HinhAnh, LuotXem from BAIVIET "
 				+ "inner join DICHVU on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
-				+ "where LoaiHinhDichVu not like N'Nhu cầu' and NgayDang between '2016-04-10' and '2016-04-22' "
+				+ "where LoaiHinhDichVu not like N'Nhu cầu' and NgayDang between '2016-04-10' and '2016-07-22' "
 				+ "order by LuotXem desc;"; 
 		ArrayList<ThongKeBaiViet> list = new ArrayList<ThongKeBaiViet>();
 		ResultSet rs = db.getResultSet(sql);
@@ -69,7 +69,7 @@ public class ThongKeDAO {
 	public HashMap<String, Integer> getThongKeDichVu() throws SQLException {
 		String sql = "select LoaiHinhDichVu, COUNT(IdDichVu) as SoLuong from DICHVU "
 				+ "inner join BAIVIET on DICHVU.IdBaiViet=BAIVIET.IdBaiViet "
-				+ "where NgayDang between '2016-04-10' and '2016-04-22' "
+				+ "where NgayDang between '2016-04-10' and '2016-07-22' "
 				+ "group by LoaiHinhDichVu;";
 		HashMap<String, Integer> maps = new HashMap<String, Integer>();
 		ResultSet rs = db.getResultSet(sql);

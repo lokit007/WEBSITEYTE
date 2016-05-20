@@ -40,13 +40,6 @@ div#test form {
 #cke_1_contents, #cke_2_contents, #cke_3_contents {
 	height: 180px !important;
 }
-.i-delete:hover {
-    background-color: rgba(158, 158, 158, 0.59);
-    padding: 3px 5px;
-    border-radius: 10px;
-    color: red;
-    cursor: pointer;
-}
 .i-add:hover {
     background-color: rgba(158, 158, 158, 0.59);
     padding: 3px 5px;
@@ -97,8 +90,7 @@ div#test form {
 								<td><s:property value="viTri.tenViTri"/></td>
 								<td><s:property value="ngayKetThuc"/></td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-								<a href="chi-tiet-nhacungcap.action?idNhaCungCap=${ idNhaCungCap }" title="Chi tiết nhà cung cấp" class="btn-check btn-thaotac"><i class="fa fa-check"></i></a>
-									<i class="fa fa-trash-o i-delete" onclick="XoaQuangCao('${ idQuangCao}');" aria-hidden="true" title="Xóa qquảng cáo này"> Xóa </i>
+									<i class="fa fa-trash-o i-delete" onclick="CapNhatQuangCao('${ idQuangCao}', '2', '1');" aria-hidden="true" title="Gỡ bỏ quảng cáo này"> Gỡ bỏ </i>
 								</td>
 							</tr>
 						</s:iterator>
@@ -126,7 +118,7 @@ div#test form {
 								<td><s:property value="viTri.tenViTri"/></td>
 								<td><s:property value="ngayBatDau"/></td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-									<i class="fa fa-trash-o i-delete" onclick="XoaQuangCao('${ idQuangCao}');" aria-hidden="true" title="Xóa liên kết"> Xóa </i>
+									<i class="fa fa-check-circle-o" onclick="CapNhatQuangCao('${ idQuangCao}', '1', '2');" aria-hidden="true" title="Hiển thị quảng cáo này"> Hiển thị </i>
 								</td>
 							</tr>
 						</s:iterator>
@@ -134,7 +126,36 @@ div#test form {
 					</table>
   				</s:div>
 			</s:div>
-			<s:div id="three" label="Khách hàng" theme="ajax">
+			<s:div id="three" label="Các đăng ký mới" theme="ajax">
+   				<s:div>
+  					<table class="table sortable table-hover table-responsive">
+						<thead>
+							<tr>
+								<th>Khách hàng</th>
+								<th>Địa chỉ quảng bá</th>
+								<th>Vị trí hiển thị</th>
+								<th>Ngày đăng ký</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						<s:iterator value="listDangKy">
+							<tr>
+								<td><s:property value="khachHang.tenKhachHang"/></td>
+								<td><s:property value="linkQuangBa"/></td>
+								<td><s:property value="viTri.tenViTri"/></td>
+								<td><s:property value="ngayBatDau"/></td>
+								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
+									<i class="fa fa-check-circle-o" onclick="CapNhatQuangCao('${ idQuangCao}', '2', '3');" aria-hidden="true" title="Chấp nhận đăng ký"> </i>
+									<i class="fa fa-trash-o i-delete" onclick="XoaQuangCao('${ idQuangCao}');" aria-hidden="true" title="Xóa đăng ký"> </i>
+								</td>
+							</tr>
+						</s:iterator>
+						</tbody>
+					</table>
+  				</s:div>
+			</s:div>
+			<s:div id="for" label="Khách hàng" theme="ajax">
 				<s:div>
 					<table class="table sortable table-hover table-responsive">
 						<thead>
@@ -181,7 +202,7 @@ div#test form {
 								<td>5000 VND</td>
 								<td>Hiển thị 1 quảng cáo nào đó trên TopMenu</td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-									<i class="fa fa-trash-o i-delete" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
+									<i class="fa fa-pencil-square-o" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
 								</td>
 							</tr>
 							<tr>
@@ -190,7 +211,7 @@ div#test form {
 								<td>3000 VND</td>
 								<td>Hiển thị 1 quảng cáo nào đó trên phần nội dung của trang web</td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-									<i class="fa fa-trash-o i-delete" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
+									<i class="fa fa-pencil-square-o" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
 								</td>
 							</tr>
 							<tr>
@@ -199,7 +220,7 @@ div#test form {
 								<td>5000 VND</td>
 								<td>Hiển thị 1 quảng cáo nào đó trên MenuBar</td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-									<i class="fa fa-trash-o i-delete" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
+									<i class="fa fa-pencil-square-o" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
 								</td>
 							</tr>
 							<tr>
@@ -208,7 +229,7 @@ div#test form {
 								<td>5000 VND</td>
 								<td>Hiển thị danh sách slide quảng cáo phía dưới nội dung trang web</td>
 								<td style="width: 180px; text-align: center; word-spacing: 5px; ">
-									<i class="fa fa-trash-o i-delete" onclick="XoaKhachHang('${ idKhachHang}');" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
+									<i class="fa fa-pencil-square-o" aria-hidden="true" title="Xóa liên kết"> Cập nhật giá </i>
 								</td>
 							</tr>
 						</tbody>
@@ -301,6 +322,36 @@ function XoaQuangCao(id){
 			}
 		});
 	}
+}
+function CapNhatQuangCao(id, state, tab){
+		$.ajax({
+			url : "capnhat-quangcao.action",
+			type : "post",
+			data : {
+				idQuangCao : id,
+				linkQuangCao : state,
+				viTri : tab
+			},
+			beforeSend : function(){
+			     $("#while-load").attr("style", "display: inline-block;");
+			},
+			success : function(result) {
+				$("#while-load").attr("style", "display: none;");
+				if(result.indexOf("thất bại")>-1){
+	            	/* alert("Lỗi ràng buột cơ sở dữ liệu! Vui lòng kiểm tra lại sau!"); */
+	            	$("#result").html("Lỗi ràng buột cơ sở dữ liệu! Vui lòng kiểm tra lại sau!");
+	            	$("#result").attr("class", "error");
+	            } else {
+	            	window.location.reload(true);
+	            }
+			},
+			error : function(xhr, status, error) {
+				/* alert("Lỗi trang! Vui long thực hiện lại thao tác sau khi refresh trang."); */
+				$("#while-load").attr("style", "display: none;");
+				$("#result").html("Lỗi trang! Vui long thực hiện lại thao tác sau khi refresh trang.");
+            	$("#result").attr("class", "error");
+			}
+		});
 }
 function XoaKhachHang(id){
 	if (confirm("Xóa khách hàng sẽ ảnh hưởng đến độ chính xác của việc thống kê doanh thu quảng cáo!\n"

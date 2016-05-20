@@ -20,10 +20,8 @@ public class BinhLuanBO {
 		try {
 			return binhLuanDAO.getBinhLuan(table, id, noiDung);
 		} catch (SQLException e) {
-			System.out.println("Lỗi BL : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi BL : " + e.toString());
 			return null;
 		}
 	}
@@ -32,10 +30,8 @@ public class BinhLuanBO {
 		try {
 			return binhLuanDAO.getListBinhLuan(id);
 		} catch (SQLException e) {
-			System.out.println("Lỗi list BL : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi list BL : " + e.toString());
 			return null;
 		}
 	}

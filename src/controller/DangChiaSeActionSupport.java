@@ -18,6 +18,21 @@ import model.bo.ChiaSeBO;
 import model.bo.DanhMucBO;
 import model.bo.ValidateBO;
 
+/**
+ * DangChiaSeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 04-01-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 04-01-2016        	NhanHV          Create
+ */
+
 public class DangChiaSeActionSupport extends ActionSupport implements ServletRequestAware  {
 	private static final long serialVersionUID = 1L;
 	private String tenBaiViet;
@@ -27,21 +42,27 @@ public class DangChiaSeActionSupport extends ActionSupport implements ServletReq
 	private String noiDung;
 	private String hinhAnh;
 	private String tacGia;
-	// Nhận data file upload
 	private File userImage;
 	private String userImageContentType;
 	private String userImageFileName;
 	private HttpServletRequest servletRequest;
+	
+	/**
+	 * Hiển thị trang nhập dữ liệu bài viết mới
+	 * @param 
+	 * @return String result
+	 */
 	
 	@Override
 	public String execute() throws Exception {
 		return "input";
 	}
 
-	@Override
-	public void setServletRequest(HttpServletRequest req) {
-		this.servletRequest = req;
-	}
+	/**
+	 * Cập nhật dữ liệu bài viết mới lên server
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String DangChiaSe(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
@@ -67,7 +88,7 @@ public class DangChiaSeActionSupport extends ActionSupport implements ServletReq
 			result = "thanh-cong";
 		} else {
 			addActionError("Đăng chia sẻ không thành công.");
-			servletRequest.getSession().setAttribute("ThongBao", "Lỗi!Đăng chia sẻ không thành công!");
+			servletRequest.getSession().setAttribute("ThongBao", "Lỗi! Đăng chia sẻ không thành công!");
 		}
 		chiaSeBO.closeConnect();
 		return result;
@@ -160,4 +181,8 @@ public class DangChiaSeActionSupport extends ActionSupport implements ServletReq
 		return servletRequest;
 	}
 	
+	@Override
+	public void setServletRequest(HttpServletRequest req) {
+		this.servletRequest = req;
+	}
 }

@@ -42,7 +42,15 @@
 		});
 	</script>
 	<s:div cssClass="div-quangcao">
-		<img src="http://placehold.it/300x250">
+		<s:if test="#session.MenuBar!=null">
+			<s:set name="menuBar" value="%{ #session.MenuBar}"></s:set>
+			<img onclick="window.location.href='${ menuBar.linkQuangBa}';" 
+				src="images/${ menuBar.logoQuangBa }" title="Click để xem chi tiết" 
+				style="cursor: pointer;" >
+		</s:if>
+		<s:else>
+			<img onclick="window.location.href='dang-ky-quang-cao.action';" src="http://placehold.it/300x250" title="Liên hệ quảng cáo" style="cursor: pointer;">
+		</s:else>
 	</s:div>
 	<s:div cssClass="div-show">
 		<s:label cssClass="div-show-title" value="Dịch vụ mới nhất"></s:label>

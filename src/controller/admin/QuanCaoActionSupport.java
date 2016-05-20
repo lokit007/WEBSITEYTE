@@ -14,6 +14,7 @@ public class QuanCaoActionSupport extends ActionSupport {
 	private List<QuangCao> listHT;
 	private List<QuangCao> listCho;
 	private List<KhachHang> listKH;
+	private List<QuangCao> listDangKy;
 	
 	private int page;
 	
@@ -22,6 +23,7 @@ public class QuanCaoActionSupport extends ActionSupport {
 		QuangCaoBO quangCaoBO = new QuangCaoBO();
 		this.listHT = quangCaoBO.getDanhSachHienThi();
 		this.listCho = quangCaoBO.getDanhSachCho(page);
+		this.listDangKy = quangCaoBO.getDanhSachDangKy(page);
 		this.listKH = quangCaoBO.getDanhSachKhachHang(page);
 		quangCaoBO.closeConnect();
 		return result;
@@ -49,6 +51,14 @@ public class QuanCaoActionSupport extends ActionSupport {
 
 	public void setListKH(List<KhachHang> listKH) {
 		this.listKH = listKH;
+	}
+
+	public List<QuangCao> getListDangKy() {
+		return listDangKy;
+	}
+
+	public void setListDangKy(List<QuangCao> listDangKy) {
+		this.listDangKy = listDangKy;
 	}
 	
 }

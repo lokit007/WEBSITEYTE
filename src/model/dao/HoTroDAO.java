@@ -67,7 +67,6 @@ public class HoTroDAO {
 				+ "inner join TAIKHOAN on NHACUNGCAP.TaiKhoan=TAIKHOAN.TaiKhoan "
 				+ "where TenDanhMuc like N'%"+txtFind+"%' or HoTen like N'%"+txtFind
 				+ "%' or ThoiGianHoTro like N'%"+txtFind+"%' or EmailLienHe like '"+txtFind+"%'";
-		System.out.println("SQl : " +sql);
 		db.setRecord(10);
 		db.createMenu("ho-tro.action?txtFind="+txtFind, page, sql);
 		ArrayList<HoTroOnline> list = new ArrayList<HoTroOnline>();

@@ -19,6 +19,28 @@ public class XulyQuangCaoActionSupport extends ActionSupport {
 	private String diaChi;
 	private String email;
 	
+	public String CapNhatQuangCao(){
+		String result = "thanh-cong";
+		if("1".equals(viTri))
+			ServletActionContext.getRequest().getSession().setAttribute("selectTab", "one");
+		else if("2".equals(viTri))
+			ServletActionContext.getRequest().getSession().setAttribute("selectTab", "two");
+		else
+			ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
+		if(idQuangCao>0){
+			QuangCaoBO quangCaoBO = new QuangCaoBO();
+			if(!quangCaoBO.CapNhatQuangCao(idQuangCao, linkQuangCao)){
+				addActionError("Lỗi ràng buột csdl!");
+				result = "that-bai";
+			}
+			quangCaoBO.closeConnect();
+		} else {
+			addActionError("Quảng cáo không tồn tại!");
+			result = "that-bai";
+		}
+		return result;
+	}
+	
 	public String XoaQuangCao(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "one");
 		String result = "thanh-cong";

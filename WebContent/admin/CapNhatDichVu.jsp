@@ -30,7 +30,7 @@
 		});
 	});
 </script>
-<title>Đăng ký phát hành dịch vụ</title>
+<title>Cập nhật dịch vụ</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

@@ -53,4 +53,23 @@ public class QuangCaoBO {
 		return quangCaoDAO.XoaKhachHang(idKhachHang);
 	}
 
+	public boolean DangKyQuangCao(String viTri, String logoQuangBa, String linkQuangBa, String hoTen, String diaChi,
+			String email) {
+		return quangCaoDAO.DangKyQuangCao(viTri, logoQuangBa, linkQuangBa, hoTen, diaChi, email);
+	}
+
+	public List<QuangCao> getDanhSachDangKy(int page) {
+		try {
+			return quangCaoDAO.getDanhSachDangKy(page);
+		} catch (SQLException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public boolean CapNhatQuangCao(int idQuangCao, String tinhTrang) {
+		return quangCaoDAO.CapNhatQuangCao(idQuangCao, tinhTrang);
+	}
+
 }

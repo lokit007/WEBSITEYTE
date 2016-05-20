@@ -5,6 +5,7 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.bean.BinhLuan;
+import model.bean.DangKyDichVu;
 import model.bean.DichVu;
 import model.bo.BinhLuanBO;
 import model.bo.DichVuBO;
@@ -15,6 +16,7 @@ public class XemNhuCauActionSupport extends ActionSupport {
 	private DichVu nhuCau;
 	private List<DichVu> list;
 	private List<BinhLuan> listBinhLuan;
+	private List<DangKyDichVu> listDangKy;
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();
@@ -24,6 +26,7 @@ public class XemNhuCauActionSupport extends ActionSupport {
 			this.list = dichVuBO.getListNhuCau(nhuCau.getDienThoaiLienHe(), 
 					nhuCau.getBaiViet().getDanhMuc().getIdDanhMuc()+"", "0");
 			this.listBinhLuan = binhLuanBO.getListBinhLuan(nhuCau.getBaiViet().getIdBaiViet()+"");
+			this.listDangKy = dichVuBO.getDanhSachDangKy(this.nhuCau.getIdDichVu());
 		}
 		dichVuBO.closeConnect();
 		binhLuanBO.closeConnect();
@@ -61,6 +64,14 @@ public class XemNhuCauActionSupport extends ActionSupport {
 
 	public void setListBinhLuan(List<BinhLuan> listBinhLuan) {
 		this.listBinhLuan = listBinhLuan;
+	}
+
+	public List<DangKyDichVu> getListDangKy() {
+		return listDangKy;
+	}
+
+	public void setListDangKy(List<DangKyDichVu> listDangKy) {
+		this.listDangKy = listDangKy;
 	}
 	
 }

@@ -83,9 +83,9 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 					final String userroot = context.getInitParameter("user");
 					final String pass = context.getInitParameter("pass");
 					try {
-						String noiDungMail = "Chào "+hoTen+"!\nChúc mừng bạn đã đăng ký tài khoản thành viên thành công!\n Thông tin tài khoản :"
-								+ "\n Tài khoản : " + taiKhoan + "\n Mật khẩu : " + matKhau + "\n Cám ơn bạn đã quan tâm.\nThân ái!\nSở Y Tế Huế";
-						EmailUtility.sendEmailThread("smtp.gmail.com", "587", userroot, pass, email, "CỔNG THÔNG TIN DỊCH VỤ Y TẾ CỘNG ĐỒNG - ĐK thành viên",noiDungMail);
+						String html = "Chào <b>"+hoTen+"</b>!<br>Chúc mừng bạn đã đăng ký tài khoản thành viên thành công!<br>Thông tin tài khoản của bạn là :"
+								+ "<br>Tài khoản : " + taiKhoan + "<br> Mật khẩu : " + matKhau + "<br> Cám ơn bạn đã quan tâm.<br>Thân ái!<br><br>Sở Y Tế Huế";
+						EmailUtility.sendEmailThread(host, port, userroot, pass, email, "CỔNG THÔNG TIN DỊCH VỤ Y TẾ CỘNG ĐỒNG - Sở Y Tế Huế", html);
 					} catch (Exception ex) {
 			        	System.out.println("Lỗi : " + ex.toString());
 			        }

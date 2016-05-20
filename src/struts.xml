@@ -4,7 +4,9 @@
 
 <struts>
 	<constant name="struts.ui.theme" value="simple" />
+	<!-- cau hinh client -->
 	<package name="default" extends="struts-default">
+		<!-- khoi tao he thong client -->
 		<action name="init-data-hethong" class="controller.InitDataHeThong" >
 			<result name="thanh-cong">Result.jsp</result>
 		</action>
@@ -179,6 +181,15 @@
 		</action>
 		<action name="huy-dang-ky-dich-vu" class="controller.XulyDangKyDichVuActionSupport" method="HuyDangKy">
 			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<!-- quang cao -->
+		<action name="dang-ky-quang-cao" class="controller.QuangCaoActionSupport">
+			<result name="input">DangKyQuangCao.jsp</result>
+		</action>
+		<action name="dangky-quangcao" class="controller.QuangCaoActionSupport" method="DangKyQuangCao">
+			<result name="input">DangKyQuangCao.jsp</result>
+			<result name="that-bai">DangKyQuangCao.jsp</result>
+			<result name="thanh-cong" type="redirect">dang-ky-quang-cao.action</result>
 		</action>
 	</package>
 	<!-- trang admin -->
@@ -472,18 +483,6 @@
 			<result name="thanh-cong">ThongKe.jsp</result>
 			<result name="that-bai" type="redirect">trang-chu.action</result>
 		</action>
-		<action name="quang-cao" class="controller.admin.QuanCaoActionSupport">
-			<result name="thanh-cong">QuangCao.jsp</result>
-			<result name="that-bai" type="redirect">trang-chu.action</result>
-		</action>
-		<action name="xoa-quangcao" class="controller.admin.XulyQuangCaoActionSupport" method="XoaQuangCao">
-			<result name="thanh-cong">Result.jsp</result>
-			<result name="that-bai">Result.jsp</result>
-		</action>
-		<action name="xoa-khachhang" class="controller.admin.XulyQuangCaoActionSupport" method="XoaKhachHang">
-			<result name="thanh-cong">Result.jsp</result>
-			<result name="that-bai">Result.jsp</result>
-		</action>
 		<!-- trang cá nhân -->
 		<action name="trang-ca-nhan" class="controller.admin.TrangCaNhanActionSupport">
 			<result name="thanh-cong">ThongTinCaNhan.jsp</result>
@@ -496,6 +495,23 @@
 		<!-- hoi dap -->
 		<action name="xoa-cau-hoi" class="controller.admin.XulyHoiDapActionSupport">
 			<result name="thanh-cong">Result.jsp</result>
+		</action>
+		<!-- quang cao -->
+		<action name="quang-cao" class="controller.admin.QuanCaoActionSupport">
+			<result name="thanh-cong">QuangCao.jsp</result>
+			<result name="that-bai" type="redirect">trang-chu.action</result>
+		</action>
+		<action name="xoa-quangcao" class="controller.admin.XulyQuangCaoActionSupport" method="XoaQuangCao">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="xoa-khachhang" class="controller.admin.XulyQuangCaoActionSupport" method="XoaKhachHang">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
+		</action>
+		<action name="capnhat-quangcao" class="controller.admin.XulyQuangCaoActionSupport" method="CapNhatQuangCao">
+			<result name="thanh-cong">Result.jsp</result>
+			<result name="that-bai">Result.jsp</result>
 		</action>
 	</package>
 </struts>

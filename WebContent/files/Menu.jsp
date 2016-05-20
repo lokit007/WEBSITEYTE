@@ -9,7 +9,15 @@
 		<s:a href="trang-chu.action" title="Dịch vụ y tế cộng đồng">
 		<img alt="Dịch vụ y tế cộng đồng" src="images/logo-yte.png"
 			id="img-logo"></s:a>
-		<img src="http://placehold.it/350x100" style="float: right; margin: 10px;" >
+		<s:if test="#session.TopMenu!=null">
+			<s:set name="topMenu" value="%{ #session.TopMenu}"></s:set>
+			<img onclick="window.location.href='${ topMenu.linkQuangBa}';" 
+				src="images/${ topMenu.logoQuangBa }" title="Click để xem chi tiết" 
+				style="float: right; margin: 10px; cursor: pointer; max-height: 100px;" >
+		</s:if>
+		<s:else>
+			<img onclick="window.location.href='dang-ky-quang-cao.action';" src="http://placehold.it/350x100" title="Liên hệ quảng cáo" style="float: right; margin: 10px; cursor: pointer;" >
+		</s:else>
 		<s:div cssClass="clear"></s:div>
 	</s:div>
 	<%
@@ -51,7 +59,10 @@
 					</button>
 				</form>
 			</li>
-			<s:div cssClass="clear"></s:div>
+			<s:div cssClass="clear">
+				<img src="images/DangNhuCau.gif" onclick="window.location.href='dang-nhu-cau-moi.action';"
+					style="height: 30px; margin-top: 8px; width: 160px; border: 2px solid goldenrod; cursor: pointer;" />
+			</s:div>
 		</ul>
 	</s:div>
 </s:div>

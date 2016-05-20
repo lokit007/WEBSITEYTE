@@ -67,7 +67,6 @@ public class BinhLuanDAO {
 					+"inner join TAIKHOAN on BINHLUAN.TaiKhoan=TAIKHOAN.TaiKhoan "
 					+"where IdBaiViet like '"+id+"' order by NgayBinhLuan desc";
 		ResultSet rs = db.getResultSet(sql);
-		System.out.println("SQl : " + sql);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm"); 
 		ArrayList<BinhLuan> list = new ArrayList<BinhLuan>();
 		TraLoiDAO traLoiDAO = new TraLoiDAO();

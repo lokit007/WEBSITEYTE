@@ -40,21 +40,23 @@ public class XulyDangKyDichVuActionSupport extends ActionSupport {
 				final String user = context.getInitParameter("user");
 				final String pass = context.getInitParameter("pass");
 				try {
-					String noiDung = "Dịch vụ bạn đăng ký đã được phê duyệt từ nhà cung cấp. Chúc bạn tận hưởng được dịch vụ tốt nhất. Nếu có vấn mắt xin hãy phản hồi cho hệ thống ngay khi có thể. Xin cám ơn!";
-					noiDung += "\nTin nhắn từ nhà cung cấp : " + tinNhan;
-					EmailUtility.sendEmailThread("smtp.gmail.com", "587", user, pass, emailBenhNhan, "Xác nhận đăng ký dịch vụ",
-							noiDung);
+					String html = "<p>Chào bạn,<br><b>Dịch vụ bạn đăng ký đã được phê duyệt từ nhà cung cấp</b>.<br>"
+							+ "<br>Tin nhắn từ nhà cung cấp : " + tinNhan
+							+ "<br>Chúc bạn tận hưởng được dịch vụ tốt nhất.<br>Nếu có vấn mắt xin hãy phản hồi cho hệ thống ngay khi có thể."
+							+ "<br>Một lần nữa xin cám ơn!<br> Thân ái,<br><br>Cổng thông tin dịch vụ y tế cộng đồng - Sở Y Tế Huế</p>";;
+					
+					EmailUtility.sendEmailThread(host, port, user, pass, emailBenhNhan, "Xác nhận đăng ký dịch vụ từ nhà cung cấp", html);
 				} catch (Exception ex) {
 		        	System.out.println("Lỗi : " + ex.toString());
 		        }
 			} else {
 				addActionError("Cập nhật dữ liệu thất bại!");
-				ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Lỗi!Không thể cập nhật cơ sở dữ liệu.");
+				ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Lỗi! Không thể cập nhật cơ sở dữ liệu.");
 			}
 			dichVuBO.closeConnect();
 		} else {
 			addActionError("Cập nhật dữ liệu thất bại!");
-			ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Lỗi!Không thể cập nhật cơ sở dữ liệu.");
+			ServletActionContext.getRequest().getSession().setAttribute("ThongBao", "Lỗi! Không thể cập nhật cơ sở dữ liệu.");
 		}
 		return result;
 	}
@@ -73,7 +75,7 @@ public class XulyDangKyDichVuActionSupport extends ActionSupport {
 				final String pass = context.getInitParameter("pass");
 				try {
 					String noiDung = "Rất tiết! Chúng tôi không thể cung cấp dịch theo yêu cầu của bạn được. Hân hạnh đón tiếp bại với các dịch dịch vụ khác của chúng tôi.Chúc bạn luôn khỏe mạnh, an lành.";
-					EmailUtility.sendEmailThread("smtp.gmail.com", "587", user, pass, emailBenhNhan, "Hủy bỏ đăng ký dịch vụ",
+					EmailUtility.sendEmailThread(host, port, user, pass, emailBenhNhan, "Hủy bỏ đăng ký dịch vụ",
 							noiDung);
 				} catch (Exception ex) {
 		        	System.out.println("Lỗi : " + ex.toString());

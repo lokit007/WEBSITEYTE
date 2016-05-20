@@ -83,12 +83,12 @@
 	</listener>
 	<context-param>
 		<param-name>host</param-name>
-		<param-value>localhost</param-value>
+		<param-value>smtp.gmail.com</param-value>
 		<!-- <param-value>mail.jpvn.net</param-value> -->
 	</context-param>
 	<context-param>
 		<param-name>port</param-name>
-		<param-value>8080</param-value>
+		<param-value>587</param-value>
 		<!-- <param-value>25</param-value> -->
 	</context-param>
 	<context-param>

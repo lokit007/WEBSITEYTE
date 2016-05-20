@@ -75,7 +75,15 @@
 			</s:div>
 			</s:if>
 			<s:div cssClass="div-quangcao">
-				<img src="http://placehold.it/970x90">
+				<s:if test="#session.Content!=null">
+					<s:set name="content" value="%{ #session.Content}"></s:set>
+					<img onclick="window.location.href='${ content.linkQuangBa}';" 
+						src="images/${ content.logoQuangBa }" title="Click để xem chi tiết" 
+						style="float: right; margin: 10px; cursor: pointer; max-height: 100px;" >
+				</s:if>
+				<s:else>
+					<img onclick="window.location.href='dang-ky-quang-cao.action';" title="Liên hệ quảng cáo" style="cursor: pointer;" src="http://placehold.it/970x90">
+				</s:else>
 			</s:div>
 			<s:div cssClass="div-content-home">
 				<s:tabbedPanel id="tabContainer" selectedTab="%{ #session.selectTab}">

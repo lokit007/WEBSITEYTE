@@ -22,10 +22,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getListQuanTam();
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}
@@ -34,10 +32,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getListMoiChiaSe();
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}
@@ -46,10 +42,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getListChiaSe(txtFind, idDanhMuc, viTri);
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}
@@ -58,10 +52,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getChiaSe(idBaiViet);
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}
@@ -70,10 +62,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getListChiaSe(txtFind, page);
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}
@@ -100,10 +90,8 @@ public class ChiaSeBO {
 		try {
 			return chiaSeDAO.getListChiaSe();
 		} catch (SQLException e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		} catch (Exception e) {
-			System.out.println("Lỗi : " + e.toString());
 			return null;
 		}
 	}

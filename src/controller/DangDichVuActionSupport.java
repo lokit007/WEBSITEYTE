@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,6 +18,7 @@ import model.bean.DanhMuc;
 import model.bean.TaiKhoan;
 import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
+import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
 public class DangDichVuActionSupport extends ActionSupport implements ServletRequestAware {
@@ -72,10 +75,27 @@ public class DangDichVuActionSupport extends ActionSupport implements ServletReq
 		} else if(dichVuBO.clientThemDichVu(tenDichVu, moTa, danhMuc, noiDung, hinhAnh, user.getIdTaiKhoan(), 
 				nhaCungCap, dienThoai, email, ngayBatDau, ngayKetThuc, loaiHinh, diaDiem)){
 			servletRequest.getSession().setAttribute("ThongBao", "Đăng dịch vụ thành công!");
+			ServletContext context = ServletActionContext.getRequest().getServletContext();
+			final String host = context.getInitParameter("host");
+			final String port = context.getInitParameter("port");
+			final String userMail = context.getInitParameter("user");
+			final String pass = context.getInitParameter("pass");
+			try {
+				// Gửi nhà cung cấp dịch vụ
+				String html = "<p>Chào "+nhaCungCap+",<br>Chúc mừng bạn đã đăng tải dịch vụ y tế "
+						+ "<b>thành công</b>.<br>Vui lòng chờ xét duyệt từ hệ thống. "
+						+ "Nếu đủ điêu kiện và quy định của hệ thống thì dịch vụ của bạn sẽ được đăng tải "
+						+ "và quảng bá trên hệ thống thông tin Dịch vu y tế cộng đồng."
+						+ "<br><b>Một lần nữa chúc bạn nhận được nhiều đăng ký dịch vụ từ người dùng.</b><br><br>Thân<br> "
+						+ "Công thông tin Dịch vụ y tế - Huế.</p>";
+				EmailUtility.sendEmailThread(host, port, userMail, pass, email, "Đăng ký cấp phát dịch vụ thành công", html);
+			} catch (Exception ex) {
+	        	System.out.println("Lỗi : " + ex.toString());
+	        }
 			result = "thanh-cong";
 		} else {
 			addActionError("Đăng dịch vụ không thành công.");
-			servletRequest.getSession().setAttribute("ThongBao", "Lỗi!Đăng dịch vụ không thành công!");
+			servletRequest.getSession().setAttribute("ThongBao", "Lỗi! Đăng dịch vụ không thành công!");
 		}
 		dichVuBO.closeConnect();
 		return result;

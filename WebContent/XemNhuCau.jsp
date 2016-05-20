@@ -43,7 +43,15 @@
 				</s:div>
 			</s:div>
 			<s:div cssClass="div-quangcao">
-				<img src="http://placehold.it/970x90">
+				<s:if test="#session.Content!=null">
+					<s:set name="content" value="%{ #session.Content}"></s:set>
+					<img onclick="window.location.href='${ content.linkQuangBa}';" 
+						src="images/${ content.logoQuangBa }" title="Click để xem chi tiết" 
+						style="float: right; margin: 10px; cursor: pointer; max-height: 100px;" >
+				</s:if>
+				<s:else>
+					<img onclick="window.location.href='dang-ky-quang-cao.action';" title="Liên hệ quảng cáo" style="cursor: pointer;" src="http://placehold.it/970x90">
+				</s:else>
 			</s:div>
 			<s:div cssClass="div-content-home">
 				<s:div cssClass="div-content-home-main">
@@ -117,6 +125,34 @@
 						</s:div>
 					</s:div>
 				</s:div>
+				<s:if test="nhuCau.baiViet.taiKhoan.idTaiKhoan==#session.user.idTaiKhoan and listDangKy.size()>0">
+					<br>
+					<s:div cssClass="div-content-home">
+						<s:div cssClass="div-content-home-main">
+							<span id="bl-nhan">Danh sách đã báo giá [<s:property value="listDangKy.size()"/>] </span>
+							<s:div cssClass="f-binhluan">
+								<s:div cssClass="list-binhluan">
+									<s:iterator value="listDangKy">
+									<s:if test="tinhTrang!='Hủy bỏ'">
+										<s:div cssClass="list-binhluan-item">
+											<i onclick="CapNhatTrangThai('${ idDangKy }', 'DANGKYDICHVU', 'Hủy bỏ');" title="Từ chối/Hủy báo giá này" style="float: right; cursor: pointer;" class="fa fa-times" aria-hidden="true"></i>
+											<s:if test="tinhTrang=='Đăng ký'">
+											<i onclick="CapNhatTrangThai('${ idDangKy }', 'DANGKYDICHVU', 'Chấp nhận');" title="Chấp nhận báo giá này" style="margin-right: 10px; float: right; cursor: pointer;" class="fa fa-check" aria-hidden="true"></i>
+											</s:if>
+											<s:label value="%{ taiKhoan.hoTen}"></s:label> 
+											[<i><s:property value="ngayDangKy"/></i>]
+											<s:if test="tinhTrang=='Đăng ký'">
+												<img alt="Dịch vụ mới" src="admin/images/new-icon.png">
+											</s:if>
+											<br>Tin nhắn : <s:property value="tinNhan"/>
+										</s:div>
+									</s:if>
+									</s:iterator>
+								</s:div>
+							</s:div>
+						</s:div>
+					</s:div>
+				</s:if>
 			</s:div>
 			<s:div cssClass="div-content-home">
 				<s:div cssClass="div-content-home-title">
@@ -176,7 +212,7 @@
 			      </s:if>
 			      <s:else>
 			      	<div class="modal-body">
-						Bạn cần <label style="cursor: pointer;" onclick="showLogin('formLienHe');">đăng nhập tài khoản NHÀ CUNG CẤP</label> để thực hiện chức năng này. Cám ơn!
+						Bạn cần <label style="cursor: pointer;" onclick="$('#myModal').modal('hide'); showLogin('formLienHe');">đăng nhập tài khoản NHÀ CUNG CẤP</label> để thực hiện chức năng này. Cám ơn!
 				  	</div>
 				  </s:else>
 		    </div>
@@ -199,7 +235,7 @@
 						<br><br>
 						<s:div id="loilienhe" cssStyle="display: none;">Liên hệ thất bại!</s:div>
 						<form action="gui-lien-he.action" id="f-lienhe-mail" method="post">
-							<s:hidden name="urlPage" value="chi-tiet-nhu-cau.action?idNhuCau=%{ idNhuCau}"></s:hidden>
+							<s:hidden name="urlPage" value="http://localhost:8080/WEBSITEYTE/chi-tiet-nhu-cau.action?idNhuCau=%{ idNhuCau}"></s:hidden>
 							<s:hidden name="email" value="%{ nhuCau.emailLienHe }"></s:hidden>
 							<input name="tieuDe" type="text" placeholder="Tiêu đề ..." class="form-control">
 							<br><textarea name="noiDung" rows="3" placeholder="Nội dung liên hệ ..." class="form-control"></textarea>
@@ -209,7 +245,7 @@
 					</s:div>	
 					</s:if>
 					<s:else>
-						Bạn cần <label style="cursor: pointer;" onclick="showLogin('formLienHe');">đăng nhập tài khoản NHÀ CUNG CẤP</label> để thực hiện chức năng này. Cám ơn!
+						Bạn cần <label style="cursor: pointer;" onclick="$('#myModal').modal('hide'); showLogin('formLienHe');">đăng nhập tài khoản NHÀ CUNG CẤP</label> để thực hiện chức năng này. Cám ơn!
 					</s:else>
 			      </div>
 		    </div>

@@ -30,7 +30,8 @@ public class LienHeActionSupport extends ActionSupport {
 			final String user = context.getInitParameter("user");
 			final String pass = context.getInitParameter("pass");
 			try {
-				EmailUtility.sendEmailThread("smtp.gmail.com", "587", user, pass, email, tieuDe, noiDung + "<br>" + urlPage);
+				String html = noiDung + "<br> <a href='"+urlPage+"'>Click vào đây để xem chi tiết.</a>";
+				EmailUtility.sendEmailThread(host, port, user, pass, email, tieuDe, html);
 	        } catch (Exception ex) {
 	        	System.out.println("Lỗi : " + ex.toString());
 	        }

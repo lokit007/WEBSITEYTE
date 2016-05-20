@@ -81,7 +81,6 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	// Đăng dịch vụ mới
 	public String DangDichVu(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
-		System.out.println("Xem : " + hinhAnh);
 		try {
 			File fileToCreate = new File(this.hinhAnh, this.userImageFileName); //tạo file mới trên server
 			FileUtils.copyFile(this.userImage, fileToCreate); //sao chep hinh anh trong file moi

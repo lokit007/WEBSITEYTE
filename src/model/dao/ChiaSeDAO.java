@@ -222,7 +222,6 @@ public class ChiaSeDAO {
 		String sql = "update BAIVIET set TenBaiViet=N'"+tenBaiViet+"', MoTa=N'"+moTa
 				+"', IdDanhMuc='"+danhMuc+"', NoiDung=N'"+noiDung+"', HinhAnh='"+hinhAnh
 				+"', TacGia=N'"+tacGia+"' where IdBaiViet='"+idBaiViet+"' and TinhTrang like N'Mới đăng'";
-		System.out.println("SQL : " + sql);
 		return db.updateData(sql);
 	}
 

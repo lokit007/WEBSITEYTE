@@ -79,6 +79,25 @@ div#topcontrol {
     max-height: 300px;
     overflow: hidden;
 }
+.div-content-home-main-item:hover {
+    background-color: rgba(158, 158, 158, 0.22);
+}
+div#thongtin-vitri {
+    margin-top: 5px;
+    font-style: italic;
+    padding: 0px 5px;
+}
+div#banggia {
+    max-width: 350px;
+}
+i.fa:hover {
+    background-color: lightgray;
+    padding: 1px 3px;
+}
+p#loiDangNhap {
+    padding: 5px 10px;
+    margin-bottom: -25px;
+}
 /* menu */
 div#div-header-logo {
     width: 1000px;
@@ -193,7 +212,6 @@ span.ngay-thanh {
     margin: 0px !important;
 }
 .skype {
-    width: 120px;
     float: left;
 }
 span.name-tuvan {

@@ -83,6 +83,20 @@ form#f-dangnhap {
     margin: auto;
     margin-top: 5%;
 }
+.fa-check-circle-o:hover, .fa-pencil-square-o:hover {
+    color: blue;
+    background-color: rgba(158, 158, 158, 0.59);
+    padding: 3px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.i-delete:hover {
+    background-color: rgba(158, 158, 158, 0.59);
+    padding: 3px 5px;
+    border-radius: 5px;
+    color: red;
+    cursor: pointer;
+}
 /* format style */
 body {
     margin-top: 0px;

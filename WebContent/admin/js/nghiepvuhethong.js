@@ -41,7 +41,6 @@ function CapNhatQuyenHan(id, col, o) {
 		success : function(result) {
 			$("#while-load").attr("style", "display: none;");
 			if (result.indexOf("thất bại") > -1) {
-				alert("Xin lỗi! Không thể xóa quản trị viên này.");
 				window.location.reload(true);
 			}
 		},
@@ -64,7 +63,7 @@ function XoaQuanTriVien(id) {
 			success : function(result) {
 				$("#while-load").attr("style", "display: none;");
 				if (result.indexOf("thất bại") > -1) {
-					alert("Xin lỗi! Không thể xóa quản trị viên này.");
+					ShowMessage('error', 'Xin lỗi! Không thể xóa quản trị viên này.');
 				} else {
 					window.location.reload(true);
 				}
@@ -89,7 +88,7 @@ function XoaLienKet(id) {
 			success : function(result) {
 				$("#while-load").attr("style", "display: none;");
 				if (result.indexOf("thất bại") > -1) {
-					alert("Lỗi! Không xóa được liên kết!");
+					ShowMessage('error', 'Lỗi! Không xóa được liên kết!');
 				} else {
 					window.location.reload(true);
 				}
@@ -151,15 +150,15 @@ $(document)
 																jqXHR) {
 															if (data
 																	.indexOf("thất bại") > -1) {
-																alert("Cập nhật thông tin thất bại.");
+																ShowMessage('error', 'Cập nhật thông tin thất bại.');
 															} else {
-																alert("Cập nhật thành công.");
+																ShowMessage('success', 'Cập nhật thành công.');
 															}
 														},
 														error : function(jqXHR,
 																textStatus,
 																errorThrown) {
-															alert("Lỗi cập nhật thông tin hệ thống.");
+															ShowMessage('error', 'Lỗi cập nhật thông tin hệ thống.');
 														}
 													});
 										}
@@ -182,10 +181,10 @@ $(document)
 											},
 											success : function(data) {
 												if (data.indexOf("thất bại") > -1) {
-													alert("Cập nhật nội quy thất bại.");
+													ShowMessage('error', 'Cập nhật nội quy thất bại.');
 													location.reload(true);
 												} else {
-													alert("Cập nhật thành công.");
+													ShowMessage('success', 'Cập nhật thành công.');
 												}
 											}
 										});
@@ -210,9 +209,9 @@ function AjaxUpdateData(idForm, url, megOk, MegEr) {
 			data : form.serialize(),
 			success : function(data) {
 				if (data.indexOf("thất bại") > -1) {
-					alert(MegEr);
+					ShowMessage('error', MegEr);
 				} else {
-					alert(megOk);
+					ShowMessage('success', megOk);
 					location.reload(true);
 				}
 			}

@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Đăng ký phát hành dịch vụ</title>
+<title>Cập nhật nhà cung cấp</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -117,7 +117,7 @@
 						</s:div>
 					</fieldset>
 					<br><br>
-					<s:submit value="Thêm nhà cung cấp mới"
+					<s:submit value="Cập nhật"
 						cssClass="btn btn-primary form-control"></s:submit>
 					<br>
 				</form>

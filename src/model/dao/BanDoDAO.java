@@ -22,7 +22,6 @@ public class BanDoDAO {
 				+ "inner join TAIKHOAN on NHACUNGCAP.TaiKhoan=TAIKHOAN.TaiKhoan "
 				+ "where LoaiNhaCungCap like '%"+loai+"%'";
 		ResultSet rs = db.getResultSet(sql);
-		System.out.println(sql);
 		ArrayList<NhaCungCap> list = new ArrayList<NhaCungCap>();
 		while(rs.next()){
 			NhaCungCap ncc = new NhaCungCap();

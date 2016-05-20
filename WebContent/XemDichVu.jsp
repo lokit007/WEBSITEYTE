@@ -51,7 +51,15 @@
 				</s:div>
 			</s:div>
 			<s:div cssClass="div-quangcao">
-				<img src="http://placehold.it/970x90">
+				<s:if test="#session.Content!=null">
+					<s:set name="content" value="%{ #session.Content}"></s:set>
+					<img onclick="window.location.href='${ content.linkQuangBa}';" 
+						src="images/${ content.logoQuangBa }" title="Click để xem chi tiết" 
+						style="float: right; margin: 10px; cursor: pointer; max-height: 100px;" >
+				</s:if>
+				<s:else>
+					<img onclick="window.location.href='dang-ky-quang-cao.action';" title="Liên hệ quảng cáo" style="cursor: pointer;" src="http://placehold.it/970x90">
+				</s:else>
 			</s:div>
 			<s:div cssClass="div-content-home">
 				<s:div cssClass="div-content-home-main">
@@ -147,7 +155,7 @@
 					       		<br><s:label>Email liên hệ <span class="sp-quantrong">*</span> </s:label>
 					       		<s:textfield id="emailDK" cssClass="form-control" name="email" value="%{ #session.user.email }"></s:textfield>
 					       		<br><s:label>Điện thoại <span class="sp-quantrong">*</span> </s:label>
-					       		<s:textfield cssClass="form-control" name="dienThoai" value="%{ #session.user.dienThoai }"></s:textfield>
+					       		<s:textfield cssClass="form-control" name="dienThoai" maxlength="11" value="%{ #session.user.dienThoai }"></s:textfield>
 					       		<br><s:label>Lời nhắn đến nhà cung cấp</s:label>
 					       		<s:textarea cssClass="form-control" name="tinNhan" cssStyle="height: 80px;"></s:textarea>
 					      </div>

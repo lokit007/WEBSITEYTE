@@ -126,10 +126,8 @@ public class DichVuDAO {
 				return true;
 			}
 		} catch (SQLException e) { 
-			System.out.println("Lỗi : " + e.toString());
 			return false;
 		}
-		System.out.println("Truy vấn");
 		return false;
 	}
 
@@ -144,7 +142,6 @@ public class DichVuDAO {
 			sql += "and TinhTrang like N'Đăng bài'";
 			db.updateData("update BAIVIET set LuotXem=LuotXem+1 where TinhTrang like N'Đăng bài' and IdBaiViet = (select top 1 IdBaiViet from DICHVU where IdDichVu='"+id+"')");
 		}
-		System.out.println("SQL : " + sql);
 		ResultSet rs = db.getResultSet(sql);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		if(rs.next()){
@@ -188,7 +185,6 @@ public class DichVuDAO {
 			sql += "and TinhTrang like N'Đăng bài'";
 			db.updateData("update BAIVIET set LuotXem=LuotXem+1 where TinhTrang like N'Đăng bài' and IdBaiViet = (select top 1 IdBaiViet from DICHVU where IdDichVu='"+id+"')");
 		}
-		System.out.println("SQL : " + sql);
 		ResultSet rs = db.getResultSet(sql);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		if(rs.next()){
@@ -266,10 +262,8 @@ public class DichVuDAO {
 				return true;
 			}
 		} catch (SQLException e) { 
-			System.out.println("Thất bại tại đây!" + e.toString());
 			return false;
 		}
-		System.out.println("Thất bại tại đây 1!");
 		return false;
 	}
 
@@ -299,7 +293,6 @@ public class DichVuDAO {
 				return true;
 			}
 		} catch (SQLException e) { 
-			System.out.println("Đăng ký thất bại 1 : " + e.toString());
 			return false;
 		}
 		return false;
@@ -422,7 +415,6 @@ public class DichVuDAO {
 				+ "' or EmailLienHe like '"+txtFind+"' or TenBaiViet like N'%"+txtFind
 				+ "%' or MoTa like N'%"+txtFind+"%')) as tam where Row > " + vitri;
 		ResultSet rs = db.getResultSet(sql);
-		System.out.println("SQL : " + sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		while(rs.next()){
@@ -455,7 +447,6 @@ public class DichVuDAO {
 			+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
 			+ "where LoaiHinhDichVu not like N'Nhu cầu' and TinhTrang like N'Đăng bài' "
 			+ "order by NgayDang desc";
-		System.out.println("SQL : " + sql);
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<DichVu> list = new ArrayList<DichVu>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -491,7 +482,6 @@ public class DichVuDAO {
 				+ "inner join DANHMUC on BAIVIET.IdDanhMuc = DANHMUC.IdDanhMuc "
 				+ "where LoaiHinhDichVu like N'"+theLoai+"' and TinhTrang like N'Đăng bài' "
 				+ "order by NgayDang desc";
-			System.out.println("SQL : " + sql);
 			ResultSet rs = db.getResultSet(sql);
 			ArrayList<DichVu> list = new ArrayList<DichVu>();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -536,7 +526,6 @@ public class DichVuDAO {
 				+ "where TinhTrang not like N'Khóa bài đăng' and LoaiHinhDichVu not like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
 				+ txtFind + "%' or EmailLienHe like '"+txtFind+"%' or TenBaiViet like N'%"
 				+ txtFind + "%' or MoTa like N'%"+txtFind+"%' or TacGia like N'%"+txtFind+"%') ";
-		System.out.println("Xem  : " + sql);
 		db.setRecord(10); 
 		db.createMenu("dich-vu.action?txtFind="+txtFind, page, sql);
 		ResultSet rs = db.getResultSet("select * from ( "+sql+" ) as tam where Row between "
@@ -578,7 +567,6 @@ public class DichVuDAO {
 				+ "where TinhTrang not like N'Khóa bài đăng' and LoaiHinhDichVu like N'Nhu cầu' and (DiaDiemTrienKhai like N'%"
 				+ txtFind + "%' or EmailLienHe like '"+txtFind+"%' or TenBaiViet like N'%"
 				+ txtFind + "%' or MoTa like N'%"+txtFind+"%' or TacGia like N'%"+txtFind+"%') ";
-		System.out.println("Xem  : " + sql);
 		db.setRecord(10); 
 		db.createMenu("dich-vu.action?txtFind="+txtFind, page, sql);
 		ResultSet rs = db.getResultSet("select * from ( "+sql+" ) as tam where Row between "
@@ -684,11 +672,9 @@ public class DichVuDAO {
 		String sql = "select * from DANGKYDICHVU "
 				+"inner join TAIKHOAN on TAIKHOAN.TaiKhoan=DANGKYDICHVU.TaiKhoan "
 				+"where IdDichVu='"+idDichVu+"' and Email='"+email+"'";
-		System.out.println("SQL : " + sql);
 		ResultSet rs = db.getResultSet(sql);
 		try {
 			if(rs.next()){
-				System.out.println("có đăng ký");
 				return true;
 			}
 		} catch (SQLException e) {
@@ -799,7 +785,6 @@ public class DichVuDAO {
 				+"group by DICHVU.IdDichVu, LoaiHinhDichVu, ThoiGianBatDau, ThoiGianKetThuc, "
 				+"BAIVIET.IdBaiViet, TenBaiViet, MoTa, HinhAnh, NgayDang, BAIVIET.TinhTrang, "
 				+"LuotXem order by LuotXem desc, LuocDangKy desc";
-			System.out.println("SQL : " + sql);
 			ResultSet rs = db.getResultSet(sql);
 			ArrayList<DichVu> list = new ArrayList<DichVu>();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

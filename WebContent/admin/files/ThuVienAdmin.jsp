@@ -9,3 +9,11 @@
 <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../font-awesome-4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/AdminStyle.css">
+
+<script type="text/javascript">
+	//Hien thi thong bao
+	function ShowMessage(model, mes) {
+		$('#' + model).modal('show');
+		$('#mes' + model).html(mes);
+	}
+</script>

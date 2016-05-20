@@ -162,12 +162,6 @@
 		<i class="fa fa-plus-square"></i> Thêm mới
 	</button>
 	<div id="div-content">
-		<form class="f-timkiem" action="dich-vu.action" method="get">
-			<label for="txtFind">Tìm kiếm : </label> <input type="text"
-				id="txtFind" name="txtFind" placeholder="Nội dung cần tìm ..."
-				value="<%=request.getParameter("txtFind") == null ? "" : FormatData.toUTF8(request.getParameter("txtFind"))%>">
-			<button>Lọc dữ liệu</button>
-		</form>
 		<s:tabbedPanel id="test" selectedTab="%{ #session.selectTab}">
 			<s:div id="one" label="Danh Mục Dịch Vụ" theme="ajax">
 				<div id="chart_div_1" style="width: 100%; height: 480px;"></div>

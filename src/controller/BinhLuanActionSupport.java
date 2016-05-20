@@ -9,12 +9,33 @@ import model.bean.TaiKhoan;
 import model.bo.BinhLuanBO;
 import model.bo.ValidateBO;
 
+/**
+ * BinhLuanActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 04-01-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 04-01-2016        	NhanHV          Create
+ */
+
 public class BinhLuanActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String noiDung;
 	private String table;
 	private BinhLuan binhLuan;
+	
+	/**
+	 * Cập nhật nội dung bình luận, trả lời vào data
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(ValidateBO.CheckEmpty(id)||ValidateBO.CheckEmpty(noiDung)){
