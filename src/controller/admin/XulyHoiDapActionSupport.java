@@ -4,10 +4,31 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import model.bo.BinhLuanBO;
 
+/**
+ * XulyHoiDapActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class XulyHoiDapActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nameTable;
+	
+	/**
+	 * Xóa bình luận
+	 * @param id bình luận
+	 * @return String result
+	 */
 	
 	public String execute(){
 		BinhLuanBO binhLuanBO = new BinhLuanBO();

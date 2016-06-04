@@ -14,7 +14,7 @@
 <script src="../js/star-rating.min.js" type="text/javascript"></script>
 <script src="js/xulynghiepvu.js" type="text/javascript"></script>
 
-<title>Admin - Quản lý danh mục y tế</title>
+<title>Admin-Chi tiết nhà cung cấp</title>
 <style type="text/css">
 	.rating-xs {
 	    font-size: 1.1em;
@@ -81,7 +81,7 @@
 						<i class="fa fa-exclamation-triangle"></i>
 						Báo cáo vi phạm</button>
 				</s:if>
-				<s:elseif test="nhaCungCap.taiKhoan.tinhTrang=='Vi phạm'">
+				<s:elseif test="nhaCungCap.taiKhoan.tinhTrang=='Vi phạm' or nhaCungCap.taiKhoan.tinhTrang=='Đăng ký'">
 					<button id="btn-dangky" class="btn btn-sm btn-primary" onclick="CapNhatNguoiDung('${ nhaCungCap.taiKhoan.idTaiKhoan }', 'TK mới');">
 						<i class="fa fa-check-circle-o"></i>
 						Đảm bảo yêu cầu</button>
@@ -149,7 +149,7 @@
 	}
 	function CapNhatNguoiDung(id, e) {
 		var hoi = "";
-		if(e=='TK mới') hoi = "Bạn muốn khôi phục lại tài khoản ";
+		if(e=='TK mới') hoi = "Bạn muốn cấp phát hoạt động tài khoản ";
 		else hoi = "Bạn muốn khóa tài khoản ";
 		if (confirm(hoi + id + " này không???") == true) {
 			$.ajax({

@@ -8,15 +8,34 @@ import model.bean.KhachHang;
 import model.bean.QuangCao;
 import model.bo.QuangCaoBO;
 
+/**
+ * QuanCaoActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 08-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 08-05-2016        	NhanHV          Create
+ */
+
 public class QuanCaoActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	
 	private List<QuangCao> listHT;
 	private List<QuangCao> listCho;
 	private List<KhachHang> listKH;
 	private List<QuangCao> listDangKy;
-	
 	private int page;
+	
+	/**
+	 * Lấy danh sách quảng cáo trên hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		String result = "thanh-cong";

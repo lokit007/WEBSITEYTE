@@ -49,6 +49,38 @@
 			$(e).attr("onclick","showSearch(this, 1);");
 		}
 	}
+	function ShowMenu(b){
+		if(b==1){
+			$("#menu-data").attr("style", "display: inherit;");
+			$("#f-timkiem").attr("style", "display: none;");
+			$("#f-timkiem-mb").attr("style", "display: none;");
+			$("#icon-menu").attr("onclick","ShowMenu(0);");
+			$("#icon-search").attr("onclick","ShowMenu(4);");
+			$("#icon-search").attr("class","fa fa-search");
+			$("#icon-menu").attr("class","fa fa-bars fa-rotate-90");
+		} else if(b==0) {
+			$("#menu-data").attr("style", "display: none;");
+			$("#f-timkiem-mb").attr("style", "display: none;");
+			$("#icon-menu").attr("onclick","ShowMenu(1);");
+			$("#icon-search").attr("onclick","ShowMenu(4);");
+			$("#icon-search").attr("class","fa fa-search");
+			$("#icon-menu").attr("class","fa fa-bars");
+		} else if(b==4) {
+			$("#menu-data").attr("style", "display: none;");
+			$("#f-timkiem-mb").attr("style", "display: inherit;");
+			$("#icon-search").attr("onclick","ShowMenu(3);");
+			$("#icon-menu").attr("onclick","ShowMenu(1);");
+			$("#icon-search").attr("class","fa fa-times");
+			$("#icon-menu").attr("class","fa fa-bars");
+		} else {
+			$("#menu-data").attr("style", "display: none;");
+			$("#f-timkiem-mb").attr("style", "display: none;");
+			$("#icon-search").attr("onclick","ShowMenu(4);");
+			$("#icon-menu").attr("onclick","ShowMenu(1);");
+			$("#icon-search").attr("class","fa fa-search");
+			$("#icon-menu").attr("class","fa fa-bars");
+		}
+	}
 	function showLogin(e){
 		$("#"+e).modal("hide");
 		$("#dangNhapModal").modal("show");

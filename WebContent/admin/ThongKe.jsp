@@ -7,10 +7,12 @@
 <html>
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<title>Admin - Thống kê báo cáo</title>
+<title>Admin-Thống kê báo cáo</title>
+<link rel="stylesheet" href="../css/datepicker.css">
 <script src="../js/sorttable.js"></script>
 <script src="../js/menuPage.js"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -151,17 +153,37 @@
 		chart.draw(data1, options);
 	}
 </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#tuNgay').datepicker({
+			format : "dd-mm-yyyy",
+			autoclose : true,
+			todayBtn : true
+		});
+		$('#denNgay').datepicker({
+			format : "dd-mm-yyyy",
+			autoclose : true,
+			todayBtn : true
+		});
+	});
+</script>
 <sx:head />
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
-	<label id="lb-title"><i class="fa fa-bar-chart"></i> Thống kê
-		báo cáo</label>
-	<button class="btn btn-success btn-xs" id="btn-them"
-		onclick="ChuyenHuong('dang-dich-vu-moi.action');">
-		<i class="fa fa-plus-square"></i> Thêm mới
-	</button>
+	<label id="lb-title"><i class="fa fa-bar-chart"></i> Thống kê báo cáo</label>
 	<div id="div-content">
+		<fieldset>
+			<legend>Thiết lập thống kê</legend>
+			<form action="thong-ke.action" method="post" style="text-align: center;">
+				<s:label value="Từ ngày "></s:label>
+				<s:textfield name="tuNgay" id="tuNgay"></s:textfield>
+				<s:label value="đến ngày "></s:label>
+				<s:textfield name="denNgay" id="denNgay"></s:textfield>
+				<button type="submit">Thống kê</button>
+			</form>
+		</fieldset>
+		<br>
 		<s:tabbedPanel id="test" selectedTab="%{ #session.selectTab}">
 			<s:div id="one" label="Danh Mục Dịch Vụ" theme="ajax">
 				<div id="chart_div_1" style="width: 100%; height: 480px;"></div>

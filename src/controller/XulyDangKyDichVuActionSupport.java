@@ -11,6 +11,21 @@ import model.bo.DichVuBO;
 import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
+/**
+ * XulyDangKyDichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class XulyDangKyDichVuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private int idDangKy;
@@ -18,6 +33,12 @@ public class XulyDangKyDichVuActionSupport extends ActionSupport {
 	private String emailNhaCungCap;
 	private String tinNhan;
 	private DangKyDichVu dangKyDichVu;
+	
+	/**
+	 * Xem thông tin đăng ký dịch vụ
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String execute(){
 		String result = "thanh-cong";
@@ -27,6 +48,12 @@ public class XulyDangKyDichVuActionSupport extends ActionSupport {
 		return result;
 	}
 
+	/**
+	 * Nhà cung cấp chấp nhận đăng ký từ bệnh nhân
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String ChapNhanDangKy(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "tab4");
 		String result = "thanh-cong";
@@ -60,6 +87,12 @@ public class XulyDangKyDichVuActionSupport extends ActionSupport {
 		}
 		return result;
 	}
+	
+	/**
+	 * Hủy đăng ký dịch vụ
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String HuyDangKy(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "tab4");

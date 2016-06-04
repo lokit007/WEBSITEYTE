@@ -11,6 +11,21 @@ import model.bo.ChiaSeBO;
 import model.bo.DichVuBO;
 import model.bo.HoTroBO;
 
+/**
+ * BanDoActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 28-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 28-04-2016        	NhanHV          Create
+ */
+
 public class TrangChuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	//MenuBar
@@ -23,6 +38,12 @@ public class TrangChuActionSupport extends ActionSupport {
 	private List<DichVu> listDVTN;
 	private List<DichVu> listNCDV;
 	private List<BaiViet> listCSYT;
+	
+	/**
+	 * Khởi tạo dữ liệu trên màn hình trang chủ
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();
@@ -37,6 +58,12 @@ public class TrangChuActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Khởi tạo giá trị trên thanh MenuBar
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String LoadMenuBar(){
 		DichVuBO dichVuBO = new DichVuBO();
 		HoTroBO hoTroBO = new HoTroBO();

@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Đăng ký phát hành dịch vụ</title>
+<title>Admin-Thêm quản trị hệ thống</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

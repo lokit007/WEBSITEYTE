@@ -30,7 +30,7 @@
 		});
 	});
 </script>
-<title>Đăng ký phát hành dịch vụ</title>
+<title>Admin-Đăng dịch vụ</title>
 </head>
 <body onload="getLocation();">
 	<s:include value="files/Menu.jsp"></s:include>
@@ -48,19 +48,19 @@
 				<form action="dang-dich-vu.action" enctype="multipart/form-data"
 					method="post" id="formDichVu">
 					<br>
-					<s:label value="Tên dịch vụ" for="tenDichVu"></s:label>
+					<s:label value="Tên dịch vụ"></s:label>
 					<s:textfield name="tenDichVu" cssClass="form-control"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Danh mục" for="danhMuc"></s:label>
+							<s:label value="Danh mục"></s:label>
 							<s:select name="danhMuc" list="list" listValue="tenDanhMuc"
 								listKey="idDanhMuc" cssClass="form-control" headerKey=""
 								headerValue="--- Chọn Danh Mục ---">
 							</s:select>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Loại hình dịch vụ" for="loaiHinh"></s:label>
+							<s:label value="Loại hình dịch vụ"></s:label>
 							<s:select name="loaiHinh" list="{ 'Từ thiện', 'Dịch vụ công', 'Dịch vụ tư'}"
 								 headerKey="" headerValue="--- Chọn loại hình ---" cssClass="form-control" >
 							</s:select>
@@ -68,33 +68,33 @@
 						<s:div cssClass="clear"></s:div>
 					</s:div>
 					<br>
-					<s:label value="Mô tả" for="moTa"></s:label>
+					<s:label value="Mô tả"></s:label>
 					<s:textarea name="moTa" cssClass="form-control"></s:textarea>
 					<br>
-					<s:label value="Nội dung" for="noiDung"></s:label>
+					<s:label value="Nội dung"></s:label>
 					<s:textarea name="noiDung" cssClass="ckeditor"></s:textarea>
 					<br>
-					<s:label value="Hình ảnh" for="hinhAnh"></s:label>
+					<s:label value="Hình ảnh"></s:label>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
-					<s:label value="Nhà cung cấp" for="nhaCungCap"></s:label>
+					<s:label value="Nhà cung cấp"></s:label>
 					<%-- <s:textfield name="nhaCungCap" cssClass="form-control"></s:textfield> --%>
 					<s:select list="listNCC" name="nhaCungCap" cssClass="form-control"
 						listKey="idNhaCungCap" listValue="taiKhoan.hoTen"
 						headerKey="" headerValue="--- Chọn nhà cung cấp dịch vụ ---"
 					></s:select>
 					<br>
-					<s:label value="Địa điểm triển khai dịch vụ" for="diaDiem"></s:label>
+					<s:label value="Địa điểm triển khai dịch vụ"></s:label>
 					<s:textfield id="diaChi" name="diaDiem" cssClass="form-control"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Ngày bắt đầu" for="ngayBatDau"></s:label>
+							<s:label value="Ngày bắt đầu"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"
 								cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Ngày kết thúc" for="ngayKetThuc"></s:label>
+							<s:label value="Ngày kết thúc"></s:label>
 							<s:textfield name="ngayKetThuc" id="ngayKetThuc"
 								cssClass="form-control"></s:textfield>
 						</s:div>

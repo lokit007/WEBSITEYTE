@@ -11,7 +11,7 @@
 <script src="../js/add-binhluan.js" type="text/javascript"></script>
 <script src="js/xulynghiepvu.js" type="text/javascript"></script>
 <script src="js/thanhvienhethong.js" type="text/javascript"></script>
-<title>Dịch vụ y tế</title>
+<title>Admin-Chi tiết nhu cầu y tế</title>
 <script type="text/javascript">
 	function ShowTraLoi(e) {
 		$(e).parent().append("<div class='div-traloi'><form action=''><textarea class='txtHoi' placeholder='Trả Lời của bạn'></textarea><div class='btn-binhluan'><input type='submit' value='Trả lời'></div></form></div>");

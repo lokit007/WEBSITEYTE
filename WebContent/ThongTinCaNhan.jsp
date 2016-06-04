@@ -12,7 +12,7 @@
 <script src="js/star-rating.min.js" type="text/javascript"></script>
 <script src="js/validate-form.js" type="text/javascript"></script>
 <script src="js/xuly-nghiepvu.js" type="text/javascript"></script>
-<title>Dịch vụ y tế</title>
+<title>Trang cá nhân</title>
 
 </head>
 <body>
@@ -49,7 +49,7 @@
 				  		<s:div cssClass="div-col-100">
 					  		<s:div cssClass="div-col-50">
 						  		<br><s:label value="Điện thoại liên hệ : "></s:label><span class="sp-quantrong"> * </span>
-						  		<s:textfield name="dienThoai" value="%{ #session.user.dienThoai}" cssClass="form-control"></s:textfield>
+						  		<s:textfield name="dienThoai" maxlength="11" value="%{ #session.user.dienThoai}" cssClass="form-control"></s:textfield>
 					  		</s:div>
 					  		<s:div cssClass="div-col-50">
 						  		<br><s:label value="Email : "></s:label><span class="sp-quantrong"> * </span>

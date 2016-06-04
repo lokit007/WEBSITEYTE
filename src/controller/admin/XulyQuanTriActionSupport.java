@@ -6,6 +6,21 @@ import model.bean.TaiKhoan;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyQuanTriActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 25-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 25-04-2016        	NhanHV          Create
+ */
+
 public class XulyQuanTriActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String idTaiKhoan;
@@ -16,6 +31,12 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 	private String dienThoai;
 	private String email;
 	private TaiKhoan taiKhoan;
+	
+	/**
+	 * Cập nhật trạng thái người dùng
+	 * @param id người dùng, trạng thái cập nhật
+	 * @return String result
+	 */
 	
 	public String XulyNguoiDung(){
 		if(ValidateBO.CheckEmpty(idTaiKhoan)||ValidateBO.CheckEmpty(tinhTrang)){
@@ -30,6 +51,12 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Thêm quản trị viên
+	 * @param thông tin quản trị viên
+	 * @return String result
+	 */
+	
 	public String ThemQuanTri(){
 		String result = "thanh-cong";
 		if(ValidateBO.CheckEmpty(idTaiKhoan)||ValidateBO.CheckEmpty(hoTen)
@@ -48,12 +75,24 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 		return result;
 	}
 	
+	/**
+	 * Xem thông tin quản trị viên
+	 * @param id quảng trị viên
+	 * @return String result
+	 */
+	
 	public String ThongTinQuanTri(){
 		TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
 		this.taiKhoan = taiKhoanBO.getTaiKhoan(idTaiKhoan);
 		taiKhoanBO.closeConnect();
 		return "thanh-cong";
 	}
+	
+	/**
+	 * Cập nhật thông tin quản trị
+	 * @param thông tin cập nhật
+	 * @return String result
+	 */
 	
 	public String CapNhatQuanTri(){
 		String result = "thanh-cong";
@@ -72,6 +111,12 @@ public class XulyQuanTriActionSupport extends ActionSupport {
 		}
 		return result;
 	}
+	
+	/**
+	 * Xóa quản trị viên
+	 * @param id quản trị cần xóa
+	 * @return String result
+	 */
 	
 	public String XoaQuanTri(){
 		if(ValidateBO.CheckEmpty(idTaiKhoan)){

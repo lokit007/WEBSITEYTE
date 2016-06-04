@@ -5,16 +5,19 @@
 
 <ul>
 	<s:if test="#session.admin.dichVu">
-		<li id="dichvu" class="btn-open-popover link"><a title="Danh sách dịch vụ cần xử lý"><i class="fa fa-heartbeat fa-2x"></i><span><s:property value="listDichVu.size()+listDangKyDichVu.size()"/> </span></a></li>
+		<li id="dichvu" class="btn-open-popover link"><a title="Danh sách dịch vụ cần xử lý"><i class="fa fa-heartbeat fa-2x"></i><s:if test="listDichVu.size()>0 or listDangKyDichVu.size()>0"><span><s:property value="listDichVu.size()+listDangKyDichVu.size()"/> </span></s:if></a></li>
 	</s:if>
 	<s:if test="#session.admin.nhuCau">
-		<li id="nhucau" class="btn-open-popover link"><a title="Danh sách nhu cầu cần xử lý"><i class="fa fa-contao fa-2x"></i><span><s:property value="listNhuCau.size()+listBaoGiaNhuCau.size()"/></span></a></li>
+		<li id="nhucau" class="btn-open-popover link"><a title="Danh sách nhu cầu cần xử lý"><i class="fa fa-compass fa-2x"></i><s:if test="listNhuCau.size()>0 or listBaoGiaNhuCau.size()>0"><span><s:property value="listNhuCau.size()+listBaoGiaNhuCau.size()"/></span></s:if></a></li>
 	</s:if>
 	<s:if test="#session.admin.chiaSe">
-		<li id="chiase" class="btn-open-popover link"><a title="Danh bài viết chia sẻ mới"><i class="fa fa-share-alt fa-2x"></i><span><s:property value="listChiaSe.size()"/></span></a></li>
+		<li id="chiase" class="btn-open-popover link"><a title="Danh bài viết chia sẻ mới"><i class="fa fa-share-alt fa-2x"></i><s:if test="listChiaSe.size()>0"><span><s:property value="listChiaSe.size()"/></span></s:if></a></li>
 	</s:if>
 	<s:if test="#session.admin.nhaCungCap">
-		<li id="nhacungcap" class="btn-open-popover link"><a title="Nhà cung cấp mới"><i class="fa fa-users fa-2x"></i><span><s:property value="listNhaCungCap.size()"/></span></a></li>
+		<li id="nhacungcap" class="btn-open-popover link"><a title="Nhà cung cấp mới"><i class="fa fa-users fa-2x"></i><s:if test="listNhaCungCap.size()>0"><span><s:property value="listNhaCungCap.size()"/></span></s:if></a></li>
+	</s:if>
+	<s:if test="#session.admin.quangCao">
+		<li id="quangcao" onclick="window.location.href='quang-cao.action'" class="link"><a title="Quảng cáo xử lý"><i class="fa fa-contao fa-2x"></i><s:if test="listQuangCao.size()>0"><span><s:property value="listQuangCao.size()"/></span></s:if></a></li>
 	</s:if>
 	<li>
 		<div class="btn-group">

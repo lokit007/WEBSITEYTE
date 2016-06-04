@@ -8,12 +8,32 @@ import model.bean.BaiViet;
 import model.bo.ChiaSeBO;
 import model.bo.ValidateBO;
 
+/**
+ * XemChiaSeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 27-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 27-04-2016        	NhanHV          Create
+ */
+
 public class XemChiaSeActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	
 	private BaiViet baiViet;
 	private List<BaiViet> list;
 	private String idBaiViet;
+	
+	/**
+	 * Lấy thông tin bài viết chia sẻ cần xem
+	 * @param id bài viết
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(ValidateBO.CheckEmpty(this.idBaiViet)) return "that-bai";

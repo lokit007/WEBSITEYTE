@@ -71,7 +71,7 @@ public class TaiKhoanDAO {
 
 	public TaiKhoan getTaiKhoan(String taiKhoan, String matKhau) {
 		taiKhoan = FormatData.FormatInputData(taiKhoan);
-		matKhau = FormatData.FormatInputData(matKhau);
+		matKhau = FormatData.FormatMD5(matKhau);
 		String sql = "select TAIKHOAN.TaiKhoan, MatKhau, HoTen, DiaChi, "
 				+ "DienThoai, Email, TinhTrang, NgayThamGia, LoaiTaiKhoan from TAIKHOAN "
 				+ "where TAIKHOAN.TaiKhoan like '"+taiKhoan+"' and MatKhau like '"+matKhau+"' ";
@@ -125,7 +125,7 @@ public class TaiKhoanDAO {
 
 	public boolean themTaiKhoan(TaiKhoan user) {
 		String sql = "insert into TAIKHOAN values ('"+FormatData.FormatInputData(user.getIdTaiKhoan())
-			+"', '"+FormatData.FormatInputData(user.getMatKhau())
+			+"', '"+FormatData.FormatMD5(user.getMatKhau())
 			+"', N'"+FormatData.FormatInputData(user.getHoTen())
 			+"', N'"+FormatData.FormatInputData(user.getDiaChi())
 			+"', '"+FormatData.FormatInputData(user.getDienThoai())
@@ -212,7 +212,7 @@ public class TaiKhoanDAO {
 			CallableStatement cstm = db.getCallableStatement(sql);
 			//Cập nhật tham số đầu vào
 			cstm.setString(1, taiKhoan);
-			cstm.setString(2, taiKhoan);
+			cstm.setString(2, FormatData.FormatMD5(taiKhoan));
 			cstm.setString(3, hoTen);
 			cstm.setString(4, diaChi);
 			cstm.setString(5, location);
@@ -246,7 +246,7 @@ public class TaiKhoanDAO {
 			CallableStatement cstm = db.getCallableStatement(sql);
 			//Cập nhật tham số đầu vào
 			cstm.setString(1, taiKhoan);
-			cstm.setString(2, taiKhoan);
+			cstm.setString(2, FormatData.FormatMD5(taiKhoan));
 			cstm.setString(3, hoTen);
 			cstm.setString(4, diaChi);
 			cstm.setString(5, location);
@@ -354,7 +354,7 @@ public class TaiKhoanDAO {
 			String dienThoai, String email,String loaiTaiKhoan, String location) {
 		String sql = "";
 		idTaiKhoan = FormatData.FormatInputData(idTaiKhoan);
-		matKhau = FormatData.FormatInputData(matKhau);
+		matKhau = FormatData.FormatMD5(matKhau);
 		hoTen = FormatData.FormatInputData(hoTen);
 		diaChi = FormatData.FormatInputData(diaChi);
 		dienThoai = FormatData.FormatInputData(dienThoai);
@@ -445,7 +445,7 @@ public class TaiKhoanDAO {
 		diaChi = FormatData.FormatInputData(diaChi);
 		email = FormatData.FormatInputData(email);
 		dienThoai = FormatData.FormatInputData(dienThoai);
-		matKhau = FormatData.FormatInputData(matKhau);
+		matKhau = FormatData.FormatMD5(matKhau);
 		String sql = "update TAIKHOAN set HoTen=N'"+hoTen+"', DiaChi=N'"+diaChi+"', DienThoai='"+dienThoai
 				+"', Email='"+email+"', MatKhau='"+matKhau+"' where TaiKhoan='"+idTaiKhoan+"'";
 		return db.updateData(sql);

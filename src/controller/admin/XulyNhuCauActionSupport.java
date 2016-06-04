@@ -22,6 +22,21 @@ import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyNhuCauActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 20-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 20-04-2016        	NhanHV          Create
+ */
+
 public class XulyNhuCauActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private int idNhuCau;
@@ -47,6 +62,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 	private List<BinhLuan> listBinhLuan;
 	private List<DangKyDichVu> listBaoGia;
 	
+	/**
+	 * Xem thông tin chi tiết nhu cầu
+	 * @param id nhu cầu
+	 * @return String result
+	 */
+	
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -62,6 +83,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 
+	/**
+	 * Xóa nhu cầu
+	 * @param id nhu cầu
+	 * @return String result
+	 */
+	
 	public String XoaNhuCau(){
 		String result = "thanh-cong";
 		if(idNhuCau<1) {
@@ -77,6 +104,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		}
 		return result;
 	}
+	
+	/**
+	 * Đăng nhu cầu mới
+	 * @param thông tin nhu cầu
+	 * @return String result
+	 */
 	
 	public String DangNhuCau(){
 		String result = "that-bai";
@@ -111,6 +144,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 	
+	/**
+	 * Thông tin nhu cầu
+	 * @param id nhu cầu
+	 * @return String result
+	 */
+	
 	public String ThongTin(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -119,6 +158,12 @@ public class XulyNhuCauActionSupport extends ActionSupport implements ServletReq
 		if(this.nhuCau==null) result = "that-bai";
 		return result;
 	}
+	
+	/**
+	 * Cập nhật nhu cầu
+	 * @param thông tin cập nhật
+	 * @return String result
+	 */
 	
 	public String CapNhatNhuCau(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");

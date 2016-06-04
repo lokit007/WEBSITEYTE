@@ -16,4 +16,16 @@
 		$('#' + model).modal('show');
 		$('#mes' + model).html(mes);
 	}
+	//Hien thi menu
+	function ShowMenu(e){
+		if(e==1){
+			$("#icon-menu").attr("class", "fa fa-bars fa-rotate-90");
+			$("#icon-menu").attr("onclick", "ShowMenu(0);");
+			$("#div-menu").attr("style", "display: inherit;");
+		} else {
+			$("#icon-menu").attr("class", "fa fa-bars");
+			$("#icon-menu").attr("onclick", "ShowMenu(1);");
+			$("#div-menu").attr("style", "display: none;");
+		}
+	}
 </script>

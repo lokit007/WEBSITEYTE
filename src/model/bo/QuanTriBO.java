@@ -36,8 +36,8 @@ public class QuanTriBO {
 	}
 
 	public boolean CapQuyenQuanTri(String taiKhoan, boolean danhMuc, boolean dichVu, boolean nhuCau, boolean chiaSe,
-			boolean nhaCungCap, boolean taiNguyen, boolean thongKe) {
-		return quanTriDAO.CapQuyenQuanTri(taiKhoan, danhMuc, dichVu, nhuCau, chiaSe, nhaCungCap, taiNguyen, thongKe);
+			boolean nhaCungCap, boolean taiNguyen, boolean thongKe, boolean quangCao) {
+		return quanTriDAO.CapQuyenQuanTri(taiKhoan, danhMuc, dichVu, nhuCau, chiaSe, nhaCungCap, taiNguyen, thongKe, quangCao);
 	}
 
 	public boolean HuyQuyenQuanTri(String taiKhoan) {

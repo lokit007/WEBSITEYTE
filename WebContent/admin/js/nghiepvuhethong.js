@@ -108,7 +108,8 @@ $(document)
 									{
 										rules : {
 											dienThoai : {
-												digits : true
+												digits : true,
+												minlength : 10
 											},
 											fax : {
 												digits : true
@@ -119,7 +120,8 @@ $(document)
 										},
 										messages : {
 											dienThoai : {
-												digits : "Không phải là số điện thoại!"
+												digits : "Không phải là số điện thoại!",
+												minlength : "Không phải là số điện thoại!"
 											},
 											fax : {
 												digits : "Không phải là số fax!"

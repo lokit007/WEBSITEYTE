@@ -7,6 +7,21 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bean.HoTroOnline;
 import model.bo.HoTroBO;
 
+/**
+ * LienHeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class LienHeActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String txtFind;
@@ -14,6 +29,12 @@ public class LienHeActionSupport extends ActionSupport {
 	private String menu;
 	private List<HoTroOnline> list;
 	private int idHoTro;
+	
+	/**
+	 * Danh sách hổ trợ trên hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(page<1) page = 1;
@@ -24,6 +45,12 @@ public class LienHeActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Ngừng hổ trợ trực tiếp
+	 * @param
+	 * @return String result
+	 */
+	
 	public String DungHoTro(){
 		if(idHoTro<1){
 			addActionError("Xóa danh mục "+idHoTro+" thất bại!");

@@ -15,36 +15,36 @@ public class ThongKeBO {
 	public void closeConnect() {
 		thongKeDAO.closeConnect();
 	}
-	public List<ThongKeDanhMuc> getThongKeDanhMuc() {
+	public List<ThongKeDanhMuc> getThongKeDanhMuc(String tuNgay, String denNgay) {
 		try {
-			return thongKeDAO.getThongKeDanhMuc();
+			return thongKeDAO.getThongKeDanhMuc(tuNgay, denNgay);
 		} catch (SQLException e) {
 			return null;
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	public List<ThongKeBaiViet> getThongKeBaiViet() {
+	public List<ThongKeBaiViet> getThongKeBaiViet(String tuNgay, String denNgay) {
 		try {
-			return thongKeDAO.getThongKeBaiViet();
+			return thongKeDAO.getThongKeBaiViet(tuNgay, denNgay);
 		} catch (SQLException e) {
 			return null;
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	public HashMap<String, Integer> getThongKeDichVu() {
+	public HashMap<String, Integer> getThongKeDichVu(String tuNgay, String denNgay) {
 		try {
-			return thongKeDAO.getThongKeDichVu();
+			return thongKeDAO.getThongKeDichVu(tuNgay, denNgay);
 		} catch (SQLException e) {
 			return null;
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	public List<ThongKeTaiKhoan> getThongKeTaiKhoan() {
+	public List<ThongKeTaiKhoan> getThongKeTaiKhoan(String tuNgay, String denNgay) {
 		try {
-			return thongKeDAO.getThongKeTaiKhoan();
+			return thongKeDAO.getThongKeTaiKhoan(tuNgay, denNgay);
 		} catch (SQLException e) {
 			return null;
 		} catch (Exception e) {

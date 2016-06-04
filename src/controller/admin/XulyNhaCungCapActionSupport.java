@@ -20,6 +20,21 @@ import model.bo.DanhMucBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyNhaCungCapActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 05-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 05-05-2016        	NhanHV          Create
+ */
+
 public class XulyNhaCungCapActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private String idNhaCungCap;
@@ -55,6 +70,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		this.servletRequest = arg0;
 	}
 	
+	/**
+	 * Xem thông tin chi tiết nhà cung cấp
+	 * @param id nhà cung cấp
+	 * @return String result
+	 */
+	
 	public String ChiTiet(){
 		if(ValidateBO.CheckEmpty(idNhaCungCap)){
 			addActionError("Nhà cung cấp không tồn tại trong hệ thống! Vui lòng chọn thao tác khác.");
@@ -67,6 +88,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		return "thanh-cong";
 	}
 
+	/**
+	 * Thêm nhà cung cấp mới
+	 * @param thông tin nhà cung cấp
+	 * @return String result
+	 */
+	
 	public String ThemNhaCungCap(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
 		try {
@@ -101,6 +128,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		return result;
 	}
 	
+	/**
+	 * Lấy thông tin nhà cung cấp
+	 * @param id nhà cung cấp
+	 * @return String result
+	 */
+	
 	public String ChiTietNCC(){
 		if(ValidateBO.CheckEmpty(idNhaCungCap)){
 			addActionError("Tài khoản không tồn tại!");
@@ -111,6 +144,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		}
 		return "thanh-cong";
 	}
+	
+	/**
+	 * Cập nhật thông tin nhà cung cấp
+	 * @param thông tin nhà cung cấp
+	 * @return String result
+	 */
 	
 	public String CapNhatNhaCungCap(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
@@ -146,6 +185,12 @@ public class XulyNhaCungCapActionSupport extends ActionSupport implements Servle
 		return result;
 	}
 
+	/**
+	 * Xóa nhà cung cấp
+	 * @param id nhà cung cấp
+	 * @return String result
+	 */
+	
 	public String XoaNhaCungCap(){
 		if(ValidateBO.CheckEmpty(idNhaCungCap)){
 			addActionError("Nhà cung cấp không tồn tại");

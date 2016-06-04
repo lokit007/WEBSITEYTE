@@ -6,9 +6,23 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import model.bo.QuangCaoBO;
 
+/**
+ * XulyQuangCaoActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 08-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 08-05-2016        	NhanHV          Create
+ */
+
 public class XulyQuangCaoActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
 	private int idQuangCao;
 	private String linkQuangCao;
 	private String logoQuangCao;
@@ -18,6 +32,12 @@ public class XulyQuangCaoActionSupport extends ActionSupport {
 	private String tenKhachHang;
 	private String diaChi;
 	private String email;
+	
+	/**
+	 * Cập nhật trạng thái quảng cáo
+	 * @param id quảng cáo, trạng thái cập nhật
+	 * @return String result
+	 */
 	
 	public String CapNhatQuangCao(){
 		String result = "thanh-cong";
@@ -41,6 +61,12 @@ public class XulyQuangCaoActionSupport extends ActionSupport {
 		return result;
 	}
 	
+	/**
+	 * Xóa quảng cáo
+	 * @param id quảng cáo
+	 * @return String result
+	 */
+	
 	public String XoaQuangCao(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "one");
 		String result = "thanh-cong";
@@ -58,6 +84,12 @@ public class XulyQuangCaoActionSupport extends ActionSupport {
 		return result;
 	}
 
+	/**
+	 * Xóa khách hàng
+	 * @param id khách hàng
+	 * @return String result
+	 */
+	
 	public String XoaKhachHang(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
 		String result = "thanh-cong";

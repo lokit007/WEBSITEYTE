@@ -9,6 +9,21 @@ import model.bean.NhaCungCap;
 import model.bo.TaiKhoanBO;
 import model.dao.FormatData;
 
+/**
+ * ThanhVienActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 10-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 10-05-2016        	NhanHV          Create
+ */
+
 public class ThanhVienActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String txtFind;
@@ -21,6 +36,12 @@ public class ThanhVienActionSupport extends ActionSupport {
 		return NhaCungCap();
 	}
 
+	/**
+	 * Danh sách quản trị viên hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String QuanTriVien(){
 		if(page<1) page = 1;
 		TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
@@ -30,6 +51,12 @@ public class ThanhVienActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 	
+	/**
+	 * Danh sách nhà cung cấp của hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String NhaCungCap(){
 		if(page<1) page = 1;
 		TaiKhoanBO taiKhoanBO = new TaiKhoanBO();
@@ -38,6 +65,12 @@ public class ThanhVienActionSupport extends ActionSupport {
 		taiKhoanBO.closeConnect();
 		return "thanh-cong";
 	}
+	
+	/**
+	 * Danh sách người dùng hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String NguoiDung(){
 		if(page<1) page = 1;

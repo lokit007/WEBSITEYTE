@@ -9,6 +9,21 @@ import model.bean.DichVu;
 import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
 
+/**
+ * NhuCauActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 24-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 24-04-2016        	NhanHV          Create
+ */
+
 public class NhuCauActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<DichVu> listMoi;
@@ -18,6 +33,12 @@ public class NhuCauActionSupport extends ActionSupport {
 	private String idDanhMuc;
 	private String viTri = "0";
 
+	/**
+	 * Lấy danh sách các nhu cầu đăng tải trên hệ thống
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();
 		DanhMucBO danhMucBO = new DanhMucBO();
@@ -29,6 +50,12 @@ public class NhuCauActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Xem thêm các nhu cầu khác có trong hệ thống
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String LoadThem(){
 		DichVuBO dichVuBO = new DichVuBO();
 		list = dichVuBO.getListNhuCau(txtFind, idDanhMuc, viTri);

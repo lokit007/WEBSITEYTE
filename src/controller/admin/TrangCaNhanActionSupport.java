@@ -8,6 +8,21 @@ import model.bean.QuanTri;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * TrangCaNhanActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 12-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 12-04-2016        	NhanHV          Create
+ */
+
 public class TrangCaNhanActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String matKhauXacNhan;
@@ -17,6 +32,12 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 	private String diaChi;
 	private String dienThoai;
 	private String email;
+	
+	/**
+	 * Lấy thông tin quản trị viên
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		QuanTri admin = (QuanTri)ServletActionContext.getRequest().getSession().getAttribute("admin");
@@ -29,6 +50,12 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 		}
 	}
 
+	/**
+	 * Cập nhật thông tin quản trị viên
+	 * @param
+	 * @return String result
+	 */
+	
 	public String CapNhatThongTin(){
 		String result = "thanh-cong";
 		QuanTri admin = (QuanTri)ServletActionContext.getRequest().getSession().getAttribute("admin");

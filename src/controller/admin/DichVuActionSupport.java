@@ -8,12 +8,33 @@ import model.bean.DichVu;
 import model.bo.DichVuBO;
 import model.dao.FormatData;
 
+/**
+ * DichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class DichVuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String txtFind;
 	private int page;
 	private String menu;
 	private List<DichVu> list;
+	
+	/**
+	 * Hiển thị danh sách các dịch vụ trong hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(page<1) page = 1;

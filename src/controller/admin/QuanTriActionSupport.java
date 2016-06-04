@@ -6,6 +6,21 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import model.bo.QuanTriBO;
 
+/**
+ * QuanTriActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 28-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 28-04-2016        	NhanHV          Create
+ */
+
 public class QuanTriActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String taiKhoan;
@@ -18,13 +33,20 @@ public class QuanTriActionSupport extends ActionSupport {
 	private boolean nhaCungCap;
 	private boolean taiNguyen;
 	private boolean thongKe;
+	private boolean quangCao;
+	
+	/**
+	 * Thêm quản trị viên hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "four");
 		String result = "thanh-cong";
-		if(!"".equals(taiKhoan)&&(danhMuc||dichVu||nhuCau||chiaSe||nhaCungCap||taiNguyen||thongKe)){
+		if(!"".equals(taiKhoan)&&(danhMuc||dichVu||nhuCau||chiaSe||nhaCungCap||taiNguyen||thongKe||quangCao)){
 			QuanTriBO quanTriBO = new QuanTriBO();
-			if(!quanTriBO.CapQuyenQuanTri(taiKhoan, danhMuc, dichVu, nhuCau, chiaSe, nhaCungCap, taiNguyen, thongKe)){
+			if(!quanTriBO.CapQuyenQuanTri(taiKhoan, danhMuc, dichVu, nhuCau, chiaSe, nhaCungCap, taiNguyen, thongKe, quangCao)){
 				result = "that-bai";
 				addActionError("Thêm quyền quản trị thất bại!");
 			}
@@ -36,6 +58,12 @@ public class QuanTriActionSupport extends ActionSupport {
 		return result;
 	}
 
+	/**
+	 * Hủy quyền quản trị viên
+	 * @param
+	 * @return String result
+	 */
+	
 	public String HuyQuyenQuanTri(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "four");
 		String result = "thanh-cong";
@@ -52,6 +80,12 @@ public class QuanTriActionSupport extends ActionSupport {
 		}
 		return result;
 	}
+	
+	/**
+	 * Cập nhật quyền quản lý của quản trị
+	 * @param
+	 * @return String result
+	 */
 	
 	public String CapNhatQuyenHan(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "four");
@@ -148,6 +182,14 @@ public class QuanTriActionSupport extends ActionSupport {
 
 	public void setThongKe(boolean thongKe) {
 		this.thongKe = thongKe;
+	}
+
+	public boolean isQuangCao() {
+		return quangCao;
+	}
+
+	public void setQuangCao(boolean quangCao) {
+		this.quangCao = quangCao;
 	}
 	
 }

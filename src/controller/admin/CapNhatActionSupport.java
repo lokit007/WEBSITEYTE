@@ -7,11 +7,32 @@ import model.bo.DichVuBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * CapNhatActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 28-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 28-04-2016        	NhanHV          Create
+ */
+
 public class CapNhatActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String idKey;
 	private String nameTable;
 	private String chanState;
+	
+	/**
+	 * Cập nhật trạng thái các bài viết, đăg ký...
+	 * @param bảng, id dòng, trạng thái cần cập nhật
+	 * @return String result
+	 */
 	
 	public String execute(){
 		String result = "that-bai";

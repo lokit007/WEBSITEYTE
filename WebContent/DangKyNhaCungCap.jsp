@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVien.jsp"></s:include>
-<title>Dịch vụ y tế</title>
+<title>Chuyển đồi nhà cung cấp</title>
 <script type="text/javascript" src="js/jquery.MultiFile.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="css/datepicker.css">
@@ -43,10 +43,10 @@
 				<form action="dangky-ncc.action" enctype="multipart/form-data"
 					method="post" id="formThemNCC">
 					<br>
-					<s:label value="Tài khoản" for="taiKhoan"></s:label>
+					<s:label value="Tài khoản"></s:label>
 					<s:textfield name="taiKhoan" value="%{ #session.user.idTaiKhoan}" readonly="true" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Giới thiệu nhà cung cấp" for="gioiThieu"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Giới thiệu nhà cung cấp"></s:label><span class="sp-quantrong"> * </span>
 					<s:textarea name="gioiThieu" cssClass="ckeditor"></s:textarea>
 					<br>
 					<!-- 
@@ -78,7 +78,7 @@
 						<s:div cssClass="clear"></s:div>
 					</s:div>
 					<br>
-					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề" for="userImage"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:checkbox id="check" name="check" onclick="Xuly(1);"></s:checkbox> <label>Đăng ký hổ trợ online cho bệnh nhân</label>
@@ -86,13 +86,13 @@
 						<legend>Đăng ký hổ trợ online</legend>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Thời gian hổ trợ" for="thoiGian"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Thời gian hổ trợ"></s:label><span class="sp-quantrong"> * </span>
 								<s:select name="thoiGian" list="{ 'Trong giờ hành chính', 'Ngoài giờ hành chính', 'Thứ 7, chủ nhật hằng tuần', 'Liên hệ mọi lúc'}"
 									 headerKey="" headerValue="--- Chọn Thời Gian Phù Hợp ---" cssClass="form-control" >
 								</s:select>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Danh mục tư vấn" for="danhMuc"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Danh mục tư vấn"></s:label><span class="sp-quantrong"> * </span>
 								<s:select name="danhMuc" list="{ 1, 2, 3}"
 									 headerKey="" headerValue="--- Chọn Danh Mục ---" cssClass="form-control" >
 								</s:select>
@@ -101,22 +101,22 @@
 						</s:div>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Điện thoại" for="dienThoaiLH"></s:label><span class="sp-quantrong"> * </span>
-								<s:textfield id="dienThoaiLH" value="%{ #session.user.dienThoai}" name="dienThoaiLH" cssClass="form-control"></s:textfield>
+								<s:label value="Điện thoại"></s:label><span class="sp-quantrong"> * </span>
+								<s:textfield id="dienThoaiLH" maxlength="11" value="%{ #session.user.dienThoai}" name="dienThoaiLH" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Email" for="emailLH"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Email"></s:label><span class="sp-quantrong"> * </span>
 								<s:textfield id="emailLH" value="%{ #session.user.email}" name="emailLH" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="clear"></s:div>
 						</s:div>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Nick yahoo chat" for="nickYahoo"></s:label>
+								<s:label value="Nick yahoo chat"></s:label>
 								<s:textfield name="nickYahoo" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Nick skype chat" for="nickSkype"></s:label>
+								<s:label value="Nick skype chat"></s:label>
 								<s:textfield name="nickSkype" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="clear"></s:div>

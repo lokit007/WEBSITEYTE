@@ -15,9 +15,23 @@ import model.bean.TaiNguyen;
 import model.bo.HeThongBO;
 import model.bo.QuanTriBO;
 
+/**
+ * HeThongActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 28-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 28-04-2016        	NhanHV          Create
+ */
+
 public class HeThongActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
-
 	private HttpServletRequest request;
 	private TaiNguyen taiNguyen;
 	private String tenHeThong;
@@ -43,6 +57,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		this.request = req;
 	}
 
+	/**
+	 * Lấy thông tin hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String execute(){
 		String result = "thanh-cong";
 		this.taiNguyen = (TaiNguyen)request.getSession().getAttribute("TaiNguyen");
@@ -61,6 +81,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		quanTriBO.closeConnect();
 		return result;
 	}
+	
+	/**
+	 * Cập nhật thông tin hệ thống
+	 * @param thông tin hệ thống
+	 * @return String result
+	 */
 	
 	public String CapNhatThongTin(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "one");
@@ -82,6 +108,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		return result;
 	}
 	
+	/**
+	 * Cập nhật nội quy hệ thống
+	 * @param thông tin nội quy
+	 * @return String result
+	 */
+	
 	public String CapNhatNoiQuy(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "two");
 		String result = "thanh-cong";
@@ -98,6 +130,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		return result;
 	}
 	
+	/**
+	 * Thêm liên kết mới
+	 * @param thông tin liên kết
+	 * @return String result
+	 */
+	
 	public String ThemLienKet(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
 		String result = "thanh-cong";
@@ -112,6 +150,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		}
 		return result;
 	}
+	
+	/**
+	 * Cập nhật liên kêt của hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String CapNhatLienKet(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
@@ -128,6 +172,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		return result;
 	}
 	
+	/**
+	 * Xóa liên kết trên hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String XoaLienKet(){
 		ServletActionContext.getRequest().getSession().setAttribute("selectTab", "three");
 		String result = "thanh-cong";
@@ -142,6 +192,12 @@ public class HeThongActionSupport extends ActionSupport implements ServletReques
 		}
 		return result;
 	}
+	
+	/**
+	 * Lấy danh sách quản trị hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String PhanQuyenQuanTri(){
 		String result = "thanh-cong";

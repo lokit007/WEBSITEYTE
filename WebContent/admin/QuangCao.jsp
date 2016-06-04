@@ -11,7 +11,7 @@
 <script src="../js/jquery.validate.js" type="text/javascript"></script>
 <script src="../ckeditor/ckeditor.js"></script>
 <script src="../js/sorttable.js"></script>
-<title>Admin - Trang Quản Trị</title>
+<title>Admin-Quảng cáo hệ thống</title>
 <style type="text/css">
 .tree-node ul {
 	border-left: 1px solid gray;

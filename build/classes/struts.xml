@@ -479,6 +479,7 @@
 			<result name="thanh-cong">Result.jsp</result>
 			<result name="that-bai">Result.jsp</result>
 		</action>
+		<!-- thống kê -->
 		<action name="thong-ke" class="controller.admin.ThongKeBaoCaoActionSupport">
 			<result name="thanh-cong">ThongKe.jsp</result>
 			<result name="that-bai" type="redirect">trang-chu.action</result>

@@ -13,6 +13,21 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bo.QuangCaoBO;
 import model.bo.ValidateBO;
 
+/**
+ * QuangCaoActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 08-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 08-05-2016        	NhanHV          Create
+ */
+
 public class QuangCaoActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private String viTri;
@@ -27,14 +42,11 @@ public class QuangCaoActionSupport extends ActionSupport implements ServletReque
 	private String userImageFileName;
 	private HttpServletRequest servletRequest;
 	
-	@Override
-	public void setServletRequest(HttpServletRequest req) {
-		this.servletRequest = req;
-	}
-
-	public String execute(){
-		return "input";
-	}
+	/**
+	 * Đăng ký mới một quảng cáo từ người dùng
+	 * @param
+	 * @return
+	 */
 	
 	public String DangKyQuangCao(){
 		String result = "thanh-cong";
@@ -140,4 +152,12 @@ public class QuangCaoActionSupport extends ActionSupport implements ServletReque
 		return servletRequest;
 	}
 	
+	@Override
+	public void setServletRequest(HttpServletRequest req) {
+		this.servletRequest = req;
+	}
+
+	public String execute(){
+		return "input";
+	}
 }

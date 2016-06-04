@@ -20,7 +20,7 @@ public class QuanTriDAO {
 	public List<QuanTri> getDanhSachQuanTri() throws SQLException {
 		String sql = "select QUANTRI.TaiKhoan, MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, "
 				+ "NgayThamGia, LoaiTaiKhoan, Location, DanhMuc, DichVu, NhuCau, ChiaSe, NhaCungCap, "
-				+ "TaiNguyen, ThongKe from QUANTRI inner join TAIKHOAN on QUANTRI.TaiKhoan=TAIKHOAN.TaiKhoan";
+				+ "TaiNguyen, ThongKe, QuangCao from QUANTRI inner join TAIKHOAN on QUANTRI.TaiKhoan=TAIKHOAN.TaiKhoan";
 		ResultSet rs = db.getResultSet(sql);
 		ArrayList<QuanTri> list = new ArrayList<QuanTri>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -43,6 +43,7 @@ public class QuanTriDAO {
 			quanTri.setNhaCungCap(rs.getBoolean("NhaCungCap"));
 			quanTri.setTaiNguyen(rs.getBoolean("TaiNguyen"));
 			quanTri.setThongKe(rs.getBoolean("ThongKe"));
+			quanTri.setQuangCao(rs.getBoolean("QuangCao"));
 			list.add(quanTri);
 		}
 		return list;
@@ -73,10 +74,10 @@ public class QuanTriDAO {
 	}
 
 	public boolean CapQuyenQuanTri(String taiKhoan, boolean danhMuc, boolean dichVu, boolean nhuCau, boolean chiaSe,
-			boolean nhaCungCap, boolean taiNguyen, boolean thongKe) {
+			boolean nhaCungCap, boolean taiNguyen, boolean thongKe, boolean quangCao) {
 		taiKhoan = FormatData.FormatInputData(taiKhoan);
 		String sql = "insert into QUANTRI values ('"+taiKhoan+"', '"+danhMuc+"', '"+dichVu+"', '"+nhuCau
-				+"', '"+chiaSe+"', '"+nhaCungCap+"', '"+taiNguyen+"', '"+thongKe+"')";
+				+"', '"+chiaSe+"', '"+nhaCungCap+"', '"+taiNguyen+"', '"+thongKe+"', '"+quangCao+"')";
 		return db.updateData(sql);
 	}
 
@@ -94,10 +95,10 @@ public class QuanTriDAO {
 
 	public QuanTri getQuanTri(String taiKhoan, String matKhau) throws SQLException {
 		taiKhoan = FormatData.FormatInputData(taiKhoan);
-		matKhau = FormatData.FormatInputData(matKhau);
+		matKhau = FormatData.FormatMD5(matKhau);
 		String sql = "select QUANTRI.TaiKhoan, MatKhau, HoTen, DiaChi, DienThoai, Email, TinhTrang, "
 				+ "NgayThamGia, LoaiTaiKhoan, Location, DanhMuc, DichVu, NhuCau, ChiaSe, NhaCungCap, "
-				+ "TaiNguyen, ThongKe from QUANTRI inner join TAIKHOAN on QUANTRI.TaiKhoan=TAIKHOAN.TaiKhoan "
+				+ "TaiNguyen, ThongKe, QuangCao from QUANTRI inner join TAIKHOAN on QUANTRI.TaiKhoan=TAIKHOAN.TaiKhoan "
 				+ "where TAIKHOAN.TaiKhoan like '"+taiKhoan+"' and MatKhau like '"+matKhau+"' ";
 		ResultSet rs = db.getResultSet(sql);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -121,6 +122,7 @@ public class QuanTriDAO {
 			quanTri.setNhaCungCap(rs.getBoolean("NhaCungCap"));
 			quanTri.setTaiNguyen(rs.getBoolean("TaiNguyen"));
 			quanTri.setThongKe(rs.getBoolean("ThongKe"));
+			quanTri.setQuangCao(rs.getBoolean("QuangCao"));
 			return quanTri;
 		}
 		return null;

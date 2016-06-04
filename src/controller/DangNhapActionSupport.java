@@ -15,6 +15,21 @@ import model.bean.TaiKhoan;
 import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
+/**
+ * DangNhapActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 10-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 10-04-2016        	NhanHV          Create
+ */
+
 public class DangNhapActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private HttpServletRequest request;
@@ -27,11 +42,23 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 	private String dienThoai;
 	private String email;
 	
+	/**
+	 * Kiểm tra người dùng có đăng nhập hệ thống hay không
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String execute(){
 		if(this.request.getSession().getAttribute("user")==null)
 			return "input";
 		else return "login-ok";
 	}
+	
+	/**
+	 * Đăng nhập thành viên hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String DangNhapClient(){
 		if(ValidateBO.CheckEmpty(this.taiKhoan)||ValidateBO.CheckEmpty(this.matKhau)){
@@ -49,6 +76,12 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 		return "thanh-cong";
 	}
 	
+	/**
+	 * Đăng nhập thành viên hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String DangNhapModal(){
 		if(ValidateBO.CheckEmpty(this.taiKhoan)||ValidateBO.CheckEmpty(this.matKhau)){
 			addActionError("Xin vui lòng nhập đầy đủ thông tin!");
@@ -62,6 +95,12 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 		}
 		return "thanh-cong";
 	}
+	
+	/**
+	 * Đăng ký thành viên hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String DangKyClient(){
 		if(ValidateBO.CheckEmpty(this.taiKhoan)||ValidateBO.CheckEmpty(this.matKhau)
@@ -103,6 +142,12 @@ public class DangNhapActionSupport extends ActionSupport implements ServletReque
 			}
 		}
 	}
+	
+	/**
+	 * Đăng xuất khỏi hệ thống
+	 * @param
+	 * @return String result
+	 */
 	
 	public String  DangXuatClient() {
 		this.request.getSession().removeAttribute("user");

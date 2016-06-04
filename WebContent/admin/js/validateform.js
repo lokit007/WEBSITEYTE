@@ -24,11 +24,13 @@ $(document).ready(function() {
 				required : true
 			},
 			dienThoai : {
-				required : true
+				required : true,
+				minlength : 10,
+				digits : true
 			},
 			email : {
 				required : true,
-				email : 5
+				email : true
 			},
 			ngayBatDau : "required",
 			ngayKetThuc : "required"
@@ -56,11 +58,13 @@ $(document).ready(function() {
 				required : "Chưa nhập đầy đủ thông tin dịch vụ!"
 			},
 			dienThoai : {
-				required : "Chưa nhập đầy đủ thông tin dịch vụ!"
+				required : "Chưa nhập đầy đủ thông tin dịch vụ!",
+				minlength : "Không phải số điện thoại!",
+				digits : "Không phải số điện thoại!"
 			},
 			email : {
 				required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				email : "Dữ liệu quá dài!"
+				email : "Không phải định dạng email!"
 			},
 			ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
 			ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"
@@ -90,11 +94,13 @@ $(document).ready(function() {
 				required : true
 			},
 			dienThoai : {
-				required : true
+				required : true,
+				minlength : 10,
+				digits : true
 			},
 			email : {
 				required : true,
-				email : 5
+				email : true
 			},
 			ngayBatDau : "required",
 			ngayKetThuc : "required"
@@ -116,11 +122,13 @@ $(document).ready(function() {
 				required : "Chưa nhập đầy đủ thông tin dịch vụ!"
 			},
 			dienThoai : {
-				required : "Chưa nhập đầy đủ thông tin dịch vụ!"
+				required : "Chưa nhập đầy đủ thông tin dịch vụ!",
+				minlength : "Không phải số điện thoại!",
+				digits : "Không phải số điện thoại!"
 			},
 			email : {
 				required : "Chưa nhập đầy đủ thông tin dịch vụ!",
-				email : "Dữ liệu quá dài!"
+				email : "Không phải định dạng email!"
 			},
 			ngayBatDau : "Chưa nhập đầy đủ thông tin dịch vụ!",
 			ngayKetThuc : "Chưa nhập đầy đủ thông tin dịch vụ!"

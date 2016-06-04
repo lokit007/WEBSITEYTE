@@ -10,6 +10,21 @@ import model.bean.DichVu;
 import model.bo.BinhLuanBO;
 import model.bo.DichVuBO;
 
+/**
+ * XemNhuCauActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 24-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 24-04-2016        	NhanHV          Create
+ */
+
 public class XemNhuCauActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String idNhuCau;
@@ -17,6 +32,12 @@ public class XemNhuCauActionSupport extends ActionSupport {
 	private List<DichVu> list;
 	private List<BinhLuan> listBinhLuan;
 	private List<DangKyDichVu> listDangKy;
+	
+	/**
+	 * Lấy thông tin nhu cầu cần xem chi tiết
+	 * @param id nhu cầu cần xem
+	 * @return String result
+	 */
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();

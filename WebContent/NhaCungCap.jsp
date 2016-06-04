@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVien.jsp"></s:include>
 <script src="js/jquery.validate.js" type="text/javascript"></script>
-<title>Dịch vụ y tế</title>
+<title>Thông tin nhà cung cấp</title>
 <link rel="stylesheet" href="css/star-rating.min.css">
 <script src="js/star-rating.min.js"></script>
 </head>

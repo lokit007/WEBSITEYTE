@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Cập nhật nhà cung cấp</title>
+<title>Admin-Cập nhật nhà cung cấp</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>
@@ -45,34 +45,34 @@
 					method="post" id="formThemNCC">
 					<s:hidden name="idNhaCungCap" value="%{ nhaCungCap.idNhaCungCap}"></s:hidden>
 					<br>
-					<s:label value="Tài khoản" for="taiKhoan"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Tài khoản"></s:label><span class="sp-quantrong"> * </span>
 					<s:textfield name="taiKhoan" value="%{ nhaCungCap.taiKhoan.idTaiKhoan}" readonly="true" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Tổ chức/Cá nhân" for="hoTen"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Tổ chức/Cá nhân"></s:label><span class="sp-quantrong"> * </span>
 					<s:textfield name="hoTen" value="%{ nhaCungCap.taiKhoan.hoTen}" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Địa chỉ" for="diaChi"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Địa chỉ"></s:label><span class="sp-quantrong"> * </span>
 					<s:textfield name="diaChi" value="%{ nhaCungCap.taiKhoan.diaChi}" cssClass="form-control"></s:textfield>
 					<br>
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
-							<s:label value="Điện thoại" for="dienThoai"></s:label><span class="sp-quantrong"> * </span>
-							<s:textfield name="dienThoai" value="%{ nhaCungCap.taiKhoan.dienThoai}" onchange="ChanDienThoai(this);" cssClass="form-control"></s:textfield>
+							<s:label value="Điện thoại"></s:label><span class="sp-quantrong"> * </span>
+							<s:textfield name="dienThoai" maxlength="11" value="%{ nhaCungCap.taiKhoan.dienThoai}" onchange="ChanDienThoai(this);" cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
-							<s:label value="Email" for="email"></s:label><span class="sp-quantrong"> * </span>
+							<s:label value="Email"></s:label><span class="sp-quantrong"> * </span>
 							<s:textfield name="email" value="%{ nhaCungCap.taiKhoan.email}" onchange="ChanEmail(this);" cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="clear"></s:div>
 					</s:div>
 					<br>
-					<s:label value="Giới thiệu nhà cung cấp" for="gioiThieu"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Giới thiệu nhà cung cấp"></s:label><span class="sp-quantrong"> * </span>
 					<s:textarea name="gioiThieu" value="%{ nhaCungCap.gioiThieu}" cssClass="ckeditor"></s:textarea>
 					<br>
-					<s:label value="Chứng chỉ hành nghề" for="chungChi"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
 					<s:textfield name="chungChi" value="%{ nhaCungCap.chungChi}" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề" for="userImage"></s:label><span class="sp-quantrong"> * </span>
+					<s:label value="Ảnh chụp 2 mặt chứng chỉ hành nghề"></s:label><span class="sp-quantrong"> * </span>
 					<s:file name="userImage" cssClass="multi with-preview"></s:file>
 					<br>
 					<s:checkbox id="check" name="check" onclick="Xuly(1);" label="Đăng ký hổ trợ online cho bệnh nhân"></s:checkbox>
@@ -80,13 +80,13 @@
 						<legend>Đăng ký hổ trợ online</legend>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Thời gian hổ trợ" for="thoiGian"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Thời gian hổ trợ"></s:label><span class="sp-quantrong"> * </span>
 								<s:select name="thoiGian" list="{ 'Trong giờ hành chính', 'Ngoài giờ hành chính', 'Thứ 7, chủ nhật hằng tuần', 'Liên hệ mọi lúc'}"
 									 headerKey="" headerValue="--- Chọn Thời Gian Phù Hợp ---" cssClass="form-control" >
 								</s:select>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Danh mục tư vấn" for="danhMuc"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Danh mục tư vấn"></s:label><span class="sp-quantrong"> * </span>
 								<s:select name="danhMuc" list="{ 1, 2, 3}"
 									 headerKey="" headerValue="--- Chọn Danh Mục ---" cssClass="form-control" >
 								</s:select>
@@ -95,22 +95,22 @@
 						</s:div>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Điện thoại" for="dienThoaiLH"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Điện thoại"></s:label><span class="sp-quantrong"> * </span>
 								<s:textfield id="dienThoaiLH" name="dienThoaiLH" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Email" for="emailLH"></s:label><span class="sp-quantrong"> * </span>
+								<s:label value="Email"></s:label><span class="sp-quantrong"> * </span>
 								<s:textfield id="emailLH" name="emailLH" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="clear"></s:div>
 						</s:div>
 						<s:div cssClass="div-col-100">
 							<s:div cssClass="div-col-50">
-								<s:label value="Nick yahoo chat" for="nickYahoo"></s:label>
+								<s:label value="Nick yahoo chat"></s:label>
 								<s:textfield name="nickYahoo" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="div-col-50">
-								<s:label value="Nick skype chat" for="nickSkype"></s:label>
+								<s:label value="Nick skype chat"></s:label>
 								<s:textfield name="nickSkype" cssClass="form-control"></s:textfield>
 							</s:div>
 							<s:div cssClass="clear"></s:div>

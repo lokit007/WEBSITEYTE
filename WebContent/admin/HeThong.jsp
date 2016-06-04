@@ -13,7 +13,7 @@
 <script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
 <script src="../js/sorttable.js" type="text/javascript"></script>
 <script src="js/nghiepvuhethong.js" type="text/javascript"></script>
-<title>Admin - Trang Quản Trị</title>
+<title>Admin-Quản lý thông tin hệ thống</title>
 <sx:head />
 </head>
 <body>
@@ -33,7 +33,7 @@
   					<br><s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
 		  					<s:label value="Điện thoại"></s:label>
-		  					<s:textfield name="dienThoai" cssClass="form-control" value="%{ taiNguyen.dienThoai}"></s:textfield>
+		  					<s:textfield name="dienThoai" maxlength="11" cssClass="form-control" value="%{ taiNguyen.dienThoai}"></s:textfield>
 		  				</s:div>
 		  				<s:div cssClass="div-col-50">
 		  					<s:label value="Email"></s:label>
@@ -134,6 +134,7 @@
 								<th title="Quản lý nhà cung cấp"><i class="fa fa-user-md"></i></th>
 								<th title="Quản lý tài nguyên hệ thống"><i class="fa fa-database"></i></th>
 								<th title="Thống kê báo cáo"><i class="fa fa-bar-chart"></i></th>
+								<th title="Quảng cáo trên hệ thống"><i class="fa fa-contao"></i></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -148,13 +149,14 @@
 								<td><s:checkbox name="nhaCungCap" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'NhaCungCap', this);" value="%{ nhaCungCap}" title="Cho phép/Ngừng quản lý nhà cung cấp"></s:checkbox></td>
 								<td><s:checkbox name="taiNguyen" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'TaiNguyen', this);" value="%{ taiNguyen}" title="Cho phép/Ngừng quản lý tài nguyên hệ thống"></s:checkbox></td>
 								<td><s:checkbox name="thongke" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'ThongKe', this);" value="%{ thongKe}" title="Cho phép/Ngừng quản lý thông kê báo cáo"></s:checkbox></td>
+								<td><s:checkbox name="quangCao" onchange="CapNhatQuyenHan('%{ taiKhoan.idTaiKhoan}', 'QuangCao', this);" value="%{ quangCao}" title="Cho phép/Ngừng quản lý quảng cáo"></s:checkbox></td>
 								<td style="cursor: pointer; width: 40px; text-align: center;">
 									<i class="fa fa-trash-o i-delete" aria-hidden="true" onclick="XoaQuanTriVien('${ taiKhoan.idTaiKhoan}')"></i>
 								</td>
 							</tr>
 						</s:iterator>
 							<tr id="row-add">
-								<td colspan="9"><i class="fa fa-pencil" style="cursor: pointer;" aria-hidden="true" onclick="ThemQuanTri(1);"> Thêm quản lý hệ thống</i></td>
+								<td colspan="10"><i class="fa fa-pencil" style="cursor: pointer;" aria-hidden="true" onclick="ThemQuanTri(1);"> Thêm quản lý hệ thống</i></td>
 							</tr>
 							<form id="f-add-quantri">
 							<tr id="row-action-add" style="display: none;">
@@ -171,6 +173,7 @@
 								<td><s:checkbox name="nhaCungCap" value="false" title="Cho phép/Ngừng quản lý nhà cung cấp"></s:checkbox></td>
 								<td><s:checkbox name="taiNguyen" value="false" title="Cho phép/Ngừng quản lý tài nguyên hệ thống"></s:checkbox></td>
 								<td><s:checkbox name="thongKe" value="false" title="Cho phép/Ngừng quản lý thông kê báo cáo"></s:checkbox></td>
+								<td><s:checkbox name="quangCao" value="false" title="Cho phép/Ngừng quản lý quảng cáo"></s:checkbox></td>
 								<td style="width: 55px; text-align: center;">
 									<i class="fa fa-share-square-o i-add" aria-hidden="true" title="Cập nhật" onclick="$('#f-add-quantri').submit();"></i>
 									<i class="fa fa-trash-o i-delete" aria-hidden="true" title="Hủy" onclick="ThemQuanTri(0);"></i>

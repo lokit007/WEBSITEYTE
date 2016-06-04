@@ -10,7 +10,7 @@
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 <script src="js/add-binhluan.js" type="text/javascript"></script>
 <script src="js/xuly-nghiepvu.js" type="text/javascript"></script>
-<title>Dịch vụ y tế</title>
+<title>Thông tin dịch vụ y tế</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

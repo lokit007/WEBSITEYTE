@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Đăng ký phát hành dịch vụ</title>
+<title>Đăng ký quảng cáo</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

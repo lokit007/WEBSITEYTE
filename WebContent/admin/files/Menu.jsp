@@ -42,15 +42,19 @@
 		window.location.href = "trang-chu.action";
 	</script>
 </s:elseif>
+<s:elseif test="#path.indexOf('quang-cao')>-1 and !#session.admin.quangcao">
+	<script type="text/javascript">
+		window.location.href = "trang-chu.action";
+	</script>
+</s:elseif>
 
 <%
 	String path = request.getServletPath();
 %>
-
-<%-- <s:if test="#path=='/WEBSITEYTE/admin/thong-ke.action'">
-	ádsadsad
-</s:if> --%>
-<div id="div-menu">
+	<div id="div-menu-mb">
+		<i id="icon-menu" onclick="ShowMenu(1);" class="fa fa-bars" aria-hidden="true"></i> Trang quản trị - Website Dịch vụ y tế cộng đồng
+	</div>
+	<div id="div-menu">
 		<a href="../trang-chu.action" target="blank" title="Đến trang Client - Dịch vụ y tế cộng đồng">
 			<img alt="Đến trang client" src="../images/logo-yte.png" id="img-logo"></a>
 		<ul> 
@@ -59,25 +63,39 @@
 				<li <%= path.equals("/admin/DanhMuc.jsp")?"class='active'":"" %>><a href="danh-muc.action"><i class="fa fa-briefcase"></i> Danh mục dịch vụ </a></li>
 			</s:if>
 			<s:if test="#session.admin.dichVu">
-				<li <%= path.equals("/admin/DichVu.jsp")?"class='active'":"" %>><a href="dich-vu.action"><i class="fa fa-heartbeat"></i> Dịch vụ y tế</a></li>
+				<li <%= path.equals("/admin/DichVu.jsp")?"class='active'"
+						: path.equals("/admin/DangDichVu.jsp")?"class='active'" 
+						: path.equals("/admin/CapNhatDichVu.jsp")?"class='active'" 
+						: path.equals("/admin/XemDuyetDichVu.jsp")?"class='active'" : "" %>><a href="dich-vu.action"><i class="fa fa-heartbeat"></i> Dịch vụ y tế</a></li>
 			</s:if>
 			<s:if test="#session.admin.nhuCau">
-				<li <%= path.equals("/admin/NhuCau.jsp")?"class='active'":"" %>><a href="nhu-cau.action"><i class="fa fa-compass"></i> Nhu cầu y tế</a></li>
+				<li <%= path.equals("/admin/NhuCau.jsp")?"class='active'"
+						: path.equals("/admin/DangNhuCau.jsp")?"class='active'" 
+						: path.equals("/admin/CapNhatNhuCau.jsp")?"class='active'" 
+						: path.equals("/admin/XemDuyetNhuCau.jsp")?"class='active'" : "" %>><a href="nhu-cau.action"><i class="fa fa-compass"></i> Nhu cầu y tế</a></li>
 			</s:if>
-			<li <%= path.equals("/admin/QuangCao.jsp")?"class='active'":"" %>><a href="quang-cao.action"><i class="fa fa-contao"></i> Quản lý quảng cáo</a></li>
+			<s:if test="#session.admin.quangCao">
+				<li <%= path.equals("/admin/QuangCao.jsp")?"class='active'":"" %>><a href="quang-cao.action"><i class="fa fa-contao"></i> Quản lý quảng cáo</a></li>
+			</s:if>
 			<s:if test="#session.admin.chiaSe">
-				<li <%= path.equals("/admin/ChiaSe.jsp")?"class='active'":"" %>><a href="chia-se.action"><i class="fa fa-share-alt"></i> Chia sẻ y tế</a></li>
+				<li <%= path.equals("/admin/ChiaSe.jsp")?"class='active'"
+						: path.equals("/admin/DangChiaSe.jsp")?"class='active'" 
+						: path.equals("/admin/CapNhatChiaSe.jsp")?"class='active'" 
+						: path.equals("/admin/XemDuyetChiaSe.jsp")?"class='active'" : "" %>><a href="chia-se.action"><i class="fa fa-share-alt"></i> Chia sẻ y tế</a></li>
 			</s:if>
 			<s:if test="#session.admin.taiKhoan.loaiTaiKhoan=='root'">
 				<li id="qltv" <%= path.equals("/admin/ThanhVienQuanTri.jsp")?"class='active'":
 								path.equals("/admin/ThanhVienNCC.jsp")?"class='active'":
 								path.equals("/admin/ThanhVienNguoiDung.jsp")?"class='active'":""%>
-					onclick="ShowSubMenu(1);" >
+					onclick="ShowSubMenu(0);" >
 					<a style="cursor: pointer;"><i class="fa fa-users"></i> Quản lý thành viên <i id="icon-caret" class="fa fa-caret-square-o-down" style="float: right; margin : 3px;" aria-hidden="true"></i></a>
 					<ul id="dataMenu">
 						<li <%= path.equals("/admin/ThanhVienQuanTri.jsp")?"class='active'":"" %>><a href="thanh-vien-quantri.action"><i class="fa fa-user-secret"></i> Thành viên quản trị</a></li>
 						<s:if test="#session.admin.nhaCungCap">
-							<li <%= path.equals("/admin/ThanhVienNCC.jsp")?"class='active'":"" %>><a href="thanh-vien-nhacungcap.action"><i class="fa fa-user-md"></i> Nhà cung cấp</a></li>
+							<li <%= path.equals("/admin/ThanhVienNCC.jsp")?"class='active'"
+									: path.equals("/admin/ThemNhaCungCap.jsp")?"class='active'"
+									: path.equals("/admin/CapNhatNhaCungCap.jsp")?"class='active'"
+									: path.equals("/admin/XemDuyetNCC.jsp")?"class='active'" : "" %>><a href="thanh-vien-nhacungcap.action"><i class="fa fa-user-md"></i> Nhà cung cấp</a></li>
 						</s:if>
 						<li <%= path.equals("/admin/ThanhVienNguoiDung.jsp")?"class='active'":"" %>><a href="thanh-vien-nguoidung.action"><i class="fa fa-user"></i> Người dùng thường</a></li>
 					</ul>

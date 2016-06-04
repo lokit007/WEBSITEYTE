@@ -14,6 +14,21 @@ import model.bo.HeThongBO;
 import model.bo.QuangCaoBO;
 import model.bo.ValidateBO;
 
+/**
+ * BanDoActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 04-05-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 04-05-2016        	NhanHV          Create
+ */
+
 public class InitDataHeThong extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private TaiNguyen heThong;
@@ -21,6 +36,12 @@ public class InitDataHeThong extends ActionSupport {
 	private QuangCao topMenu;
 	private QuangCao menuBar;
 	private QuangCao content;
+	
+	/**
+	 * Khởi tạo tài nguyên hệ thống sử dụng cho trang client
+	 * @param 
+	 * @return String result
+	 */
 	
 	@SuppressWarnings("unchecked")
 	public String execute(){
@@ -48,6 +69,12 @@ public class InitDataHeThong extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Lọc các quảng cáo đơn theo vị trí xác định
+	 * @param vị trí lọc
+	 * @return Quảng các đơn cần lọc
+	 */
+	
 	public QuangCao getQuangCao(String vitri){
 		if(ValidateBO.CheckEmpty(vitri)) vitri = "TopMenu";
 		for(int i=0; this.listQuangCao!=null && i<this.listQuangCao.size(); i++){

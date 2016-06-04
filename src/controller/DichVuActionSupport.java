@@ -9,15 +9,35 @@ import model.bean.DichVu;
 import model.bo.DanhMucBO;
 import model.bo.DichVuBO;
 
+/**
+ * DichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 14-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 14-04-2016        	NhanHV          Create
+ */
+
 public class DichVuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
 	private List<DichVu> listHot;
 	private List<DichVu> list;
 	private List<DanhMuc> danhMuc;
 	private String txtFind;
 	private String idDanhMuc;
 	private String viTri = "0";
+	
+	/**
+	 * Hiển thị danh sách các dịch vụ trên hệ thống
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();
@@ -30,6 +50,12 @@ public class DichVuActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Lấy thêm dánh sách dịch vụ trong hệ thống
+	 * @param 
+	 * @return String result
+	 */
+	
 	public String LoadThem(){
 		DichVuBO dichVuBO = new DichVuBO();
 		list = dichVuBO.getListDichVu(txtFind, idDanhMuc, viTri);

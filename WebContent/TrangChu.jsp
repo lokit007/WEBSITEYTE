@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:include value="files/ThuVien.jsp"></s:include>
-<title>Trang chủ</title>
+<title>Trang chủ - Website Dịch vụ y tế cộng đồng</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

@@ -9,6 +9,7 @@ public class QuanTri {
 	private boolean nhaCungCap = false;
 	private boolean taiNguyen = false;
 	private boolean thongKe = false;
+	private boolean quangCao = false;
 	
 	public TaiKhoan getTaiKhoan() {
 		return taiKhoan;
@@ -58,4 +59,11 @@ public class QuanTri {
 	public void setThongKe(boolean thongKe) {
 		this.thongKe = thongKe;
 	}
+	public boolean isQuangCao() {
+		return quangCao;
+	}
+	public void setQuangCao(boolean quangCao) {
+		this.quangCao = quangCao;
+	}
+	
 }

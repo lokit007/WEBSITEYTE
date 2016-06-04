@@ -11,11 +11,32 @@ import model.bean.TaiKhoan;
 import model.bo.DichVuBO;
 import model.bo.EmailUtility;
 
+/**
+ * DangKyNhuCauActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 24-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 24-04-2016        	NhanHV          Create
+ */
+
 public class DangKyNhuCauActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String giaDichVu;
 	private String tinNhan;
 	private String idNhuCau;
+	
+	/**
+	 * Cập nhật các báo giá mới từ nhà cung cấp
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		TaiKhoan userLogin = (TaiKhoan)ServletActionContext.getRequest().getSession().getAttribute("user");

@@ -13,6 +13,21 @@ import model.bo.DichVuBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * TrangCaNhanActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class TrangCaNhanActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String matKhauXacNhan;
@@ -26,6 +41,12 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 	private List<DichVu> listNC;
 	private List<DichVu> listDVDT;
 	private List<DangKyDichVu> listDKDV;
+	
+	/**
+	 * Lấy thông tin tài khoản thành viên đã đăng nhập
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		TaiKhoan user = (TaiKhoan)ServletActionContext.getRequest().getSession().getAttribute("user");
@@ -46,6 +67,12 @@ public class TrangCaNhanActionSupport extends ActionSupport {
 		}
 	}
 
+	/**
+	 * Cập nhật thông tin thành viên
+	 * @param
+	 * @return String result
+	 */
+	
 	public String CapNhatThongTin(){
 		String result = "thanh-cong";
 		TaiKhoan user = (TaiKhoan)ServletActionContext.getRequest().getSession().getAttribute("user");

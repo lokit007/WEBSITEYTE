@@ -11,6 +11,21 @@ import model.bo.DichVuBO;
 import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
+/**
+ * DangKyDichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 14-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 14-04-2016        	NhanHV          Create
+ */
+
 public class DangKyDichVuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String idDichVu;
@@ -18,6 +33,12 @@ public class DangKyDichVuActionSupport extends ActionSupport {
 	private String email;
 	private String dienThoai;
 	private String tinNhan;
+	
+	/**
+	 * Cập nhật đăng ký dịch vụ mới từ người dùng
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(ValidateBO.CheckEmpty(hoTen) || ValidateBO.CheckEmpty(email) || ValidateBO.CheckEmpty(dienThoai)){
@@ -61,6 +82,12 @@ public class DangKyDichVuActionSupport extends ActionSupport {
 		return "thanh-cong";
 	}
 
+	/**
+	 * Kiểm tra người dùng đã đăng ký dịch vụ chưa?
+	 * @param
+	 * @return String result
+	 */
+	
 	public String CheckDangKy(){
 		if(ValidateBO.ChekDangKy(idDichVu, email)){
 			addActionError("Bạn đã đăng ký dịch vụ này!");

@@ -7,7 +7,7 @@
 <html>
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<title>Admin - Quản lý danh mục y tế</title>
+<title>Admin-Quản lý người dùng hệ thống</title>
 <script src="../js/sorttable.js" type="text/javascript"></script>
 <script src="../js/menuPage.js" type="text/javascript"></script>
 <script src="../js/jquery.validate.js" type="text/javascript"></script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<title>Admin - Thông tin cá nhân</title>
+<title>Admin-Trang cá nhân</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

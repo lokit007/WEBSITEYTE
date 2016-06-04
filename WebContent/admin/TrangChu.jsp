@@ -5,7 +5,7 @@
 <html>
 <head>
 <s:include value="files/ThuVienAdmin.jsp"></s:include>
-<title>Admin - Trang Quản Trị</title>
+<title>Admin-Trang quản trị hệ thống website Dịch vụ y tế cộng đồng</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

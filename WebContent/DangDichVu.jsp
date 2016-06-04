@@ -88,7 +88,7 @@
 					<s:div cssClass="div-col-100">
 						<s:div cssClass="div-col-50">
 							<s:label value="Điện thoại"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control" value="%{ #session.user.dienThoai}"></s:textfield>
+							<s:textfield name="dienThoai" maxlength="11" cssClass="form-control" value="%{ #session.user.dienThoai}"></s:textfield>
 							<br>
 							<s:label value="Ngày bắt đầu"></s:label>
 							<s:textfield name="ngayBatDau" id="ngayBatDau"

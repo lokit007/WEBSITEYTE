@@ -13,14 +13,14 @@ import model.bo.ValidateBO;
  *
  * Version 1.0
  *
- * Date: 04-01-2016
+ * Date: 15-04-2016
  *
  * Copyright 
  *
  * Modification Logs:
  * DATE                 AUTHOR          DESCRIPTION
  * -----------------------------------------------------------------------
- * 04-01-2016        	NhanHV          Create
+ * 15-04-2016        	NhanHV          Create
  */
 
 public class CapNhatActionSupport extends ActionSupport {

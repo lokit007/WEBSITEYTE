@@ -137,24 +137,40 @@ button#icon-menu {
     float: left;
     margin: 7px;
 }
-ul#dataMenu {
-    display: none;
-}
 li#qltv:hover #dataMenu {
     display: inherit;
 }
 /* màn hình <1024 */
 @media all and (max-width: 1023px){
+	div#div-menu-mb {
+	    display: inherit;
+	}
 	div#div-menu {
 	    display: none;
 	    margin-top: 35px;
+	    z-index: 9;
+	    width: 350px;
 	}
 	button#icon-menu {
 		display: inline;
 	}
+	div#div-menu-mb {
+	    position: fixed;
+	    z-index: 999;
+	    padding: 5px;
+	    font-size: 1.3em;
+	    font-weight: bold;
+	    color: white;
+	}
+	i#icon-menu {
+	    margin: 0px 5px;
+	}
 }
 /* màn hình >=1024 */
 @media all and (min-width: 1024px){
+	div#div-menu-mb {
+	    display: none;
+	}
 	div#div-menu {
 	    display: inline;
 	    margin-top: 0px;

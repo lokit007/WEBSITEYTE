@@ -9,12 +9,32 @@ import model.bean.DichVu;
 import model.bo.BinhLuanBO;
 import model.bo.DichVuBO;
 
+/**
+ * XemDichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 14-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 14-04-2016        	NhanHV          Create
+ */
+
 public class XemDichVuActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
 	private String idDichVu;
 	private DichVu dichVu;
 	private List<BinhLuan> listBinhLuan;
+	
+	/**
+	 * Lấy thông tin dịch vụ yêu cầu xem chi tiết
+	 * @param id dịch vụ
+	 * @return String result
+	 */
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();

@@ -14,7 +14,7 @@
 <script src="js/loadlocaltion.js" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDanVTriVyYbvbkp7c8RPD7O1SOuKo8aK4&libraries=places&callback=initAutocomplete" async defer></script>
 
-<title>Admin - Quản lý danh mục y tế</title>
+<title>Admin-Quản lý thành viên quản trị</title>
 <style type="text/css">
 	.pac-container {
 		z-index: 9999;

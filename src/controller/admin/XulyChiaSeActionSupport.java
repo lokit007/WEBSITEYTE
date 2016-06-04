@@ -21,6 +21,21 @@ import model.bo.ChiaSeBO;
 import model.bo.DanhMucBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyChiaSeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 20-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 20-04-2016        	NhanHV          Create
+ */
+
 public class XulyChiaSeActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private int idBaiViet;
@@ -39,6 +54,12 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 	private BaiViet baiViet;
 	private List<BinhLuan> listBinhLuan;
 	
+	/**
+	 * Lấy thông tin bài viết chia sẻ
+	 * @param id bài viết
+	 * @return String result
+	 */
+	
 	public String execute(){
 		String result = "thanh-cong";
 		ChiaSeBO baiVietBO = new ChiaSeBO();
@@ -53,6 +74,12 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 
+	/**
+	 * Xóa bài viết khỏi hệ thống
+	 * @param id bài viết
+	 * @return String result
+	 */
+	
 	public String XoaBaiViet(){
 		String result = "thanh-cong";
 		if(idBaiViet<1) {
@@ -68,6 +95,12 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 		}
 		return result;
 	}
+	
+	/**
+	 * Thêm bài viết chia sẻ mới vào hệ thống
+	 * @param thông tin bài viết mới
+	 * @return String result
+	 */
 	
 	public String DangBaiViet(){
 		String result = "that-bai";
@@ -99,6 +132,12 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 	
+	/**
+	 * Lấy thông tin bài viết chia sẻ
+	 * @param id bài viết
+	 * @return String result
+	 */
+	
 	public String ThongTin(){
 		String result = "thanh-cong";
 		ChiaSeBO baiVietBO = new ChiaSeBO();
@@ -111,6 +150,12 @@ public class XulyChiaSeActionSupport extends ActionSupport implements ServletReq
 		if(this.baiViet==null) result = "that-bai";
 		return result;
 	}
+	
+	/**
+	 * Cập nhật thông tin bài viết chia sẻ
+	 * @param thông tin bài viết
+	 * @return String result
+	 */
 	
 	public String CapNhatBaiViet(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");

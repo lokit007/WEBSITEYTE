@@ -13,14 +13,14 @@ import model.bo.BanDoBO;
  *
  * Version 1.0
  *
- * Date: 04-01-2016
+ * Date: 05-05-2016
  *
  * Copyright 
  *
  * Modification Logs:
  * DATE                 AUTHOR          DESCRIPTION
  * -----------------------------------------------------------------------
- * 04-01-2016        	NhanHV          Create
+ * 05-05-2016       	NhanHV          Create
  */
 
 public class BanDoActionSupport extends ActionSupport {

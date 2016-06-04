@@ -25,25 +25,30 @@
 	%>
 	<s:div id="div-header-menu">
 		<div id="menu-mob">
-		  	<i class="fa fa-bars"></i> Trang chủ <i class="fa fa-search" id="icon-search"></i>
+		  	<i id="icon-menu" class="fa fa-bars" onclick="ShowMenu(1);"></i> Dịch vụ y tế cộng đồng <i class="fa fa-search" id="icon-search" onclick="ShowMenu(4);"></i>
 		</div>
-		<ul>
-			<li <%=path.equals("/TrangChu.jsp") ? "class='active'" : ""%>><s:a
+		<form action="dich-vu.action" id="f-timkiem-mb" style="display: none;">
+			<input class="ct-mail" type="text" name="txtFind" id="txtFind" placeholder="Tìm kiếm ...">
+			<button class="ct-mail" type="submit"><i class="fa fa-search"></i></button>
+		</form>
+		<ul id="menu-data">
+			<li <%= path.equals("/TrangChu.jsp") ? "class='active'" : ""%>><s:a
 					href="trang-chu.action">
 					<i class="fa fa-home"></i> TRANG CHỦ</s:a></li>
 			<li
-				<%=path.equals("/DichVu.jsp") ? "class='active'"
-							: path.equals("/XemDichVu.jsp") ? "class='active'" : ""%>>
+				<%= path.equals("/DichVu.jsp") ? "class='active'"
+					: path.equals("/XemDichVu.jsp") ? "class='active'" : ""%>>
 				<s:a href="dich-vu.action">Dịch vụ y tế</s:a>
 			</li>
 			<li
-				<%=path.equals("/NhuCau.jsp") ? "class='active'"
-							: path.equals("/XemNhuCau.jsp") ? "class='active'"
-							: path.equals("/DangNhuCau.jsp") ? "class='active'" : ""%>><s:a
+				<%= path.equals("/NhuCau.jsp") ? "class='active'"
+					: path.equals("/XemNhuCau.jsp") ? "class='active'"
+					: path.equals("/DangNhuCau.jsp") ? "class='active'" : ""%>><s:a
 					href="nhu-cau.action">Nhu cầu dịch vụ</s:a></li>
 			<li
-				<%=path.equals("/ChiaSe.jsp") ? "class='active'"
-							: path.equals("/XemChiaSe.jsp") ? "class='active'" : ""%>><s:a
+				<%= path.equals("/ChiaSe.jsp") ? "class='active'"
+					: path.equals("/XemChiaSe.jsp") ? "class='active'"
+					: path.equals("/DangChiaSe.jsp") ? "class='active'" : ""%>><s:a
 					href="chia-se.action">Kiến thức y tế</s:a></li>
 			<li
 				<%=path.equals("/DangDichVu.jsp") ? "class='active'" : ""%>><s:a

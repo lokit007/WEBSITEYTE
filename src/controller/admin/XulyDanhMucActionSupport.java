@@ -9,12 +9,33 @@ import model.bean.DanhMuc;
 import model.bo.DanhMucBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyDanhMucActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 13-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 13-04-2016        	NhanHV          Create
+ */
+
 public class XulyDanhMucActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private int idDanhMuc;
 	private String tenDanhMuc;
 	private List<String> hienThi;
 	private DanhMuc danhMuc;
+	
+	/**
+	 * Thêm danh mục mới
+	 * @param thông tin danh mục
+	 * @return String result
+	 */
 	
 	public String themDanhMuc(){
 		String hthi = "";
@@ -39,6 +60,12 @@ public class XulyDanhMucActionSupport extends ActionSupport {
 		return result;
 	}
 
+	/**
+	 * Lấy thông tin danh mục trên hệ thống
+	 * @param id danh mục
+	 * @return String result
+	 */
+	
 	public String showDanhMuc(){
 		if(idDanhMuc<1)
 			addActionError("Danh mục không tồn tại!");
@@ -56,6 +83,12 @@ public class XulyDanhMucActionSupport extends ActionSupport {
 		}
 		return "thanh-cong";
 	}
+	
+	/**
+	 * Cập nhật thông tin danh mục
+	 * @param id danh mục
+	 * @return String result
+	 */
 	
 	public String capNhatDanhMuc(){
 		String hthi = "";
@@ -79,6 +112,12 @@ public class XulyDanhMucActionSupport extends ActionSupport {
 		}
 		return result;
 	}
+	
+	/**
+	 * Xóa danh mục khỏi hệ thống
+	 * @param id danh mục
+	 * @return String result
+	 */
 	
 	public String xoaDanhMuc(){
 		if(idDanhMuc<1){

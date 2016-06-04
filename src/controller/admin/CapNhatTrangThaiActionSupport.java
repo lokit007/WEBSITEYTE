@@ -12,6 +12,21 @@ import model.bo.ChiaSeBO;
 import model.bo.DichVuBO;
 import model.bo.TaiKhoanBO;
 
+/**
+ * CapNhatTrangThaiActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 28-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 28-04-2016        	NhanHV          Create
+ */
+
 public class CapNhatTrangThaiActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<DichVu> listDichVu;
@@ -20,6 +35,12 @@ public class CapNhatTrangThaiActionSupport extends ActionSupport {
 	private List<DangKyDichVu> listBaoGiaNhuCau;
 	private List<BaiViet> listChiaSe;
 	private List<NhaCungCap> listNhaCungCap;
+	
+	/**
+	 * Cập nhật thông tin trên thanh trạng thái
+	 * @param
+	 * @return String result
+	 */
 	
 	public String execute(){
 		DichVuBO dichVuBO = new DichVuBO();

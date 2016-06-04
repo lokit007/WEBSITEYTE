@@ -5,10 +5,31 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyTaiKhoanActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 27-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 27-04-2016        	NhanHV          Create
+ */
+
 public class XulyTaiKhoanActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String idTaiKhoan;
 	private String tinhTrang;
+	
+	/**
+	 * Cập nhật trạng thái người dùng
+	 * @param id người dùng, trạng thái cập nhật
+	 * @return String result
+	 */
 	
 	public String XulyNguoiDung(){
 		if(ValidateBO.CheckEmpty(idTaiKhoan)||ValidateBO.CheckEmpty(tinhTrang)){

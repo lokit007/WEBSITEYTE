@@ -21,6 +21,21 @@ import model.bo.DichVuBO;
 import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
+/**
+ * DangNhuCauActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 24-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 24-04-2016        	NhanHV          Create
+ */
+
 public class DangNhuCauActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private String tenNhuCau;
@@ -40,15 +55,11 @@ public class DangNhuCauActionSupport extends ActionSupport implements ServletReq
 	private String userImageFileName;
 	private HttpServletRequest servletRequest;
 	
-	@Override
-	public String execute() throws Exception {
-		return "input";
-	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest req) {
-		this.servletRequest = req;
-	}
+	/**
+	 * Đăng ký nhu cầu y tế lên hệ thống
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String DangNhuCau(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
@@ -207,5 +218,15 @@ public class DangNhuCauActionSupport extends ActionSupport implements ServletReq
 
 	public void setUserImageFileName(String userImageFileName) {
 		this.userImageFileName = userImageFileName;
+	}
+	
+	@Override
+	public String execute() throws Exception {
+		return "input";
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest req) {
+		this.servletRequest = req;
 	}
 }

@@ -19,6 +19,21 @@ import model.bo.DanhMucBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * NhaCungCapActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class NhaCungCapActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private String idNhaCungCap;
@@ -43,10 +58,11 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 	private String userImageFileName;
 	private HttpServletRequest servletRequest;
 	
-	@Override
-	public void setServletRequest(HttpServletRequest arg0) {
-		this.servletRequest = arg0;
-	}
+	/**
+	 * Lấy thông tin nhà cung cấp muốn xem chi tiết
+	 * @param id nhà cung cấp
+	 * @return String result
+	 */
 	
 	public String execute(){
 		String result = "thanh-cong";
@@ -65,6 +81,12 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 
+	/**
+	 * Cập nhật đánh giá về nhà cung cấp lên hệ thống
+	 * @param id dịch vụ, đánh giá
+	 * @return String result
+	 */
+	
 	public String DanhGia(){
 		String result = "thanh-cong";
 		if(!"".equals(this.idNhaCungCap)){
@@ -78,11 +100,23 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 		return result;
 	}
 	
+	/**
+	 * Hiển thị trang đăng ký nhà cung cấp trên hệ thống
+	 * @param
+	 * @return String result
+	 */
+	
 	public String ShowDangKy(){
 		if(servletRequest.getSession().getAttribute("user")==null)
 			return "that-bai";
 		else return "thanh-cong";
 	}
+	
+	/**
+	 * Cập nhật dữ liệu nhà cung cấp lên hệ thống
+	 * @param thông tin nhà cung cấp
+	 * @return String result
+	 */
 	
 	public String DangKy(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
@@ -271,5 +305,10 @@ public class NhaCungCapActionSupport extends ActionSupport implements ServletReq
 
 	public void setLoaiNCC(String loaiNCC) {
 		this.loaiNCC = loaiNCC;
+	}
+	
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		this.servletRequest = arg0;
 	}
 }

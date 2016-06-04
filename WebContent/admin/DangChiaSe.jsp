@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Đăng bài viết chia sẻ</title>
+<title>Admin-Đăng bài viết chia sẻ</title>
 </head>
 <body>
 	<s:include value="files/Menu.jsp"></s:include>

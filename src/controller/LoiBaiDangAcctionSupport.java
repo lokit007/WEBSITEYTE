@@ -5,15 +5,35 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.bo.LoiBaiDangBO;
 import model.bo.ValidateBO;
 
+/**
+ * LoiBaiDangAcctionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 25-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 25-04-2016        	NhanHV          Create
+ */
+
 public class LoiBaiDangAcctionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	
 	private String idKey;
 	private String nameTable;
 	private String hoTen;
 	private String email;
 	private String vanDe;
 	private String tinNhan;
+	
+	/**
+	 * Cập nhật thông tin báo lỗi của người dùng
+	 * @param thông tin báo lỗi
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(ValidateBO.CheckEmpty(nameTable) || ValidateBO.CheckEmpty(hoTen)

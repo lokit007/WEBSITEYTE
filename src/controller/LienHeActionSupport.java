@@ -12,6 +12,21 @@ import model.bean.HoTroOnline;
 import model.bo.EmailUtility;
 import model.bo.ValidateBO;
 
+/**
+ * LienHeActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 04-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 04-04-2016        	NhanHV          Create
+ */
+
 public class LienHeActionSupport extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<HoTroOnline> list;
@@ -19,6 +34,12 @@ public class LienHeActionSupport extends ActionSupport {
 	private String noiDung;
 	private String urlPage;
 	private String email;
+	
+	/**
+	 * Gửi liên hệ đến email người dùng
+	 * @param 
+	 * @return String result
+	 */
 	
 	public String execute(){
 		if(ValidateBO.CheckEmpty(tieuDe)||ValidateBO.CheckEmpty(noiDung)||ValidateBO.CheckEmpty(email)){

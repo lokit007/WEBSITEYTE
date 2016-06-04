@@ -24,6 +24,21 @@ import model.bo.DichVuBO;
 import model.bo.TaiKhoanBO;
 import model.bo.ValidateBO;
 
+/**
+ * XulyDichVuActionSupport.java
+ *
+ * Version 1.0
+ *
+ * Date: 17-04-2016
+ *
+ * Copyright 
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 17-04-2016        	NhanHV          Create
+ */
+
 public class XulyDichVuActionSupport extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private int idDichVu;
@@ -47,7 +62,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 	private DichVu dichVu;
 	private List<BinhLuan> listBinhLuan;
 	private List<DangKyDichVu> listDangKy;
-	// Load thông tin dịch vụ
+
+	/**
+	 * Lấy thông tin dịch vụ cần xem
+	 * @param id dịch vụ
+	 * @return String result
+	 */
+	
 	public String execute(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -62,7 +83,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		if(this.dichVu==null) result = "that-bai";
 		return result;
 	}
-	// Xóa dịch vụ
+
+	/**
+	 * Xóa dịch vụ đăng tải
+	 * @param id dịch vụ
+	 * @return String result
+	 */
+	
 	public String XoaDichVu(){
 		String result = "thanh-cong";
 		if(idDichVu<1) {
@@ -78,7 +105,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		}
 		return result;
 	}
-	// Đăng dịch vụ mới
+
+	/**
+	 * Đăng dịch vụ mới
+	 * @param thông tin dịch vụ mới
+	 * @return String result
+	 */
+	
 	public String DangDichVu(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
 		try {
@@ -114,7 +147,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		dichVuBO.closeConnect();
 		return result;
 	}
-	// Thông tin dịch vụ
+
+	/**
+	 * Lấy thông tin dịch vị đăng
+	 * @param id dịch vụ
+	 * @return String result
+	 */
+	
 	public String ThongTin(){
 		String result = "thanh-cong";
 		DichVuBO dichVuBO = new DichVuBO();
@@ -127,7 +166,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		if(this.dichVu==null) result = "that-bai";
 		return result;
 	}
-	// Cập nhật dịch vụ
+
+	/**
+	 * Cập nhật thông tin dịch vụ
+	 * @param thông tin dịch vụ cập nhật
+	 * @return String result
+	 */
+	
 	public String CapNhatDichVu(){
 		this.hinhAnh = servletRequest.getSession().getServletContext().getRealPath("/").concat("images");
 		try {
@@ -160,7 +205,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		dichVuBO.closeConnect();
 		return result;
 	}
-	// Cấp phát dịch vụ
+	
+	/**
+	 * Đăng dịch vụ lên hệ thống
+	 * @param id dịch vụ
+	 * @return String result
+	 */
+	
 	public String CapPhatDichVu(){
 		String result = "thanh-cong";
 		if(idDichVu>0){
@@ -176,7 +227,13 @@ public class XulyDichVuActionSupport extends ActionSupport implements ServletReq
 		}
 		return result;
 	}
-	// Báo lỗi dịch vụ
+
+	/**
+	 * Báo vi phạm dịch vụ
+	 * @param id dịch vụ
+	 * @return String result
+	 */
+	
 	public String BaoViPham(){
 		String result = "thanh-cong";
 		if(idDichVu>0){

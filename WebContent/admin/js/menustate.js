@@ -37,15 +37,6 @@ $('body').on('click', function(e) {
 	});
 });
 
-function show(e){
-	if(e == 1){
-		$('#div-menu').css('display', 'inline');
-		$('#icon-menu').attr('onclick', 'show(0);');
-	} else {
-		$('#div-menu').css('display', 'none');
-		$('#icon-menu').attr('onclick', 'show(1);')
-	}
-}
 function ShowView(e, o){
 	if(e == 1){
 		$('#dataChange').css('display', 'inline');

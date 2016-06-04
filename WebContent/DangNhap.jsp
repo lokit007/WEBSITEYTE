@@ -26,7 +26,7 @@
 		});
 	});
 </script>
-<title>Đăng nhập tài khoản</title>
+<title>Đăng nhập hệ thống</title>
 <script>
 	var placeSearch, autocomplete;
 
@@ -109,10 +109,10 @@
 				</s:div>
 				<form action="dangnhap-action.action" method="post" id="f-dangnhap">
 					<br>
-					<s:label value="Tài khoản : " for="taiKhoan"></s:label>
+					<s:label value="Tài khoản : "></s:label>
 					<s:textfield name="taiKhoan" cssClass="form-control"></s:textfield>
 					<br>
-					<s:label value="Mật khẩu : " for="matKhau"></s:label>
+					<s:label value="Mật khẩu : "></s:label>
 					<s:password name="matKhau" cssClass="form-control"></s:password>
 					<br>
 					<button onclick="HienThi();" type="button" id="btn-dangky">Đăng
@@ -139,13 +139,13 @@
 					class="anView" style="display: none;">
 					<s:div id="info-taikhoan">
 						<br>
-						<s:label value="Tài khoản : " for="taiKhoan"></s:label>
+						<s:label value="Tài khoản : "></s:label>
 						<s:textfield name="taiKhoan" cssClass="form-control"></s:textfield>
 						<br>
-						<s:label value="Mật khẩu : " for="matKhau"></s:label>
+						<s:label value="Mật khẩu : "></s:label>
 						<s:password name="matKhau" cssClass="form-control"></s:password>
 						<br>
-						<s:label value="Nhập lại mật khẩu : " for="matKhauLai"></s:label>
+						<s:label value="Nhập lại mật khẩu : "></s:label>
 						<s:password name="matKhauLai" cssClass="form-control"></s:password>
 						<br>
 						<img src="http://placehold.it/300x100">
@@ -182,21 +182,21 @@
 					<br>
 					<fieldset>
 						<legend>Thông tin cá nhân</legend>
-						<s:label value="Cá nhân/Tổ chức : " for="hoTen"></s:label>
+						<s:label value="Cá nhân/Tổ chức : "></s:label>
 						<s:textfield name="hoTen" cssClass="form-control"></s:textfield>
 						<br>
-						<s:label value="Địa chỉ : " for="diaChi"></s:label>
+						<s:label value="Địa chỉ : "></s:label>
 						<s:textfield id="diaChi" name="diaChi" cssClass="form-control"></s:textfield>
 						<s:hidden id="location" name="location"></s:hidden>
 						<s:div cssClass="clear"></s:div>
 						<s:div cssClass="div-col-50">
 							<br>
-							<s:label value="Điện thoại liên hệ : " for="dienThoai"></s:label>
-							<s:textfield name="dienThoai" cssClass="form-control"></s:textfield>
+							<s:label value="Điện thoại liên hệ : "></s:label>
+							<s:textfield name="dienThoai" maxlength="11" cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="div-col-50">
 							<br>
-							<s:label value="Email : " for="email"></s:label>
+							<s:label value="Email : "></s:label>
 							<s:textfield name="email" cssClass="form-control"></s:textfield>
 						</s:div>
 						<s:div cssClass="clear"></s:div>
